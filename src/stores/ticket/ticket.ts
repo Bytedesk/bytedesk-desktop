@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 22:45:44
+ * @LastEditTime: 2025-02-05 13:17:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -19,7 +19,19 @@ import moment from 'moment';
 import { useAgentStore } from '@/stores/service/agent';
 import { useWorkgroupStore } from '@/stores/service/workgroup';
 import { useOrgStore } from '@/stores/core/organization';
-import { TICKET_FILTER_LAST_MONTH, TICKET_FILTER_LAST_WEEK, TICKET_FILTER_MY_TEAM, TICKET_FILTER_MY_TICKETS, TICKET_FILTER_PRIORITY_ALL, TICKET_FILTER_STATUS_ALL, TICKET_FILTER_THIS_MONTH, TICKET_FILTER_THIS_WEEK, TICKET_FILTER_TODAY, TICKET_FILTER_UNASSIGNED, TICKET_FILTER_YESTERDAY } from '@/utils/constants';
+import { 
+  TICKET_FILTER_LAST_MONTH, 
+  TICKET_FILTER_LAST_WEEK, 
+  TICKET_FILTER_MY_WORKGROUP, 
+  TICKET_FILTER_MY_TICKETS, 
+  TICKET_FILTER_PRIORITY_ALL, 
+  TICKET_FILTER_STATUS_ALL, 
+  TICKET_FILTER_THIS_MONTH, 
+  TICKET_FILTER_THIS_WEEK, 
+  TICKET_FILTER_TODAY,
+  TICKET_FILTER_UNASSIGNED, 
+  TICKET_FILTER_YESTERDAY 
+} from '@/utils/constants';
 
 interface TicketState {
   // 工单列表
@@ -102,9 +114,9 @@ export const useTicketStore = create<TicketState>((set, get) => {
           params.assigneeUid = agentInfo?.uid;
         }
         if (state.filters.assignment === TICKET_FILTER_UNASSIGNED) {
-          // params.assigned = false;
+          params.assigneeUid = 'unassigned';
         }
-        if (state.filters.assignment === TICKET_FILTER_MY_TEAM) {
+        if (state.filters.assignment === TICKET_FILTER_MY_WORKGROUP) {
           params.workgroupUid = workgroupInfo?.uid;
         }
 
@@ -131,7 +143,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
 
         // 添加搜索条件
         if (state.searchText) {
-          // params.keyword = state.searchText;
+          params.searchText = state.searchText;
         }
 
         console.log('Load tickets params:', params);

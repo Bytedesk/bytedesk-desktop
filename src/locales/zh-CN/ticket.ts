@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 21:56:50
+ * @LastEditTime: 2025-02-05 13:16:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -88,7 +88,7 @@ export default {
   'ticket.filter.all.assignment': '全部分配',
   'ticket.filter.my.tickets': '我的工单',
   'ticket.filter.unassigned': '未分配',
-  'ticket.filter.my.team': '我的团队',
+  'ticket.filter.my.workgroup': '我的技能组',
   // 
   'ticket.filter.all.time': '全部时间',
   'ticket.filter.today': '今天',
@@ -107,4 +107,7 @@ export default {
   'ticket.message.send.error': '发送消息失败',
   'ticket.form.thread': '关联会话',
   'ticket.form.thread.placeholder': '选择关联会话',
+  // 
+  'ticket.form.createdAt': '创建时间',
+  'ticket.form.updatedAt': '更新时间',
 } 

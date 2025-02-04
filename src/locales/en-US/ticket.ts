@@ -90,7 +90,7 @@ export default {
    'ticket.filter.all.assignment': 'All Assignment',
    'ticket.filter.my.tickets': 'My Tickets',
    'ticket.filter.unassigned': 'Unassigned',
-   'ticket.filter.my.team': 'My Team',
+   'ticket.filter.my.workgroup': 'My Workgroup',
    // 
    'ticket.filter.all.time': 'All Time',
    'ticket.filter.today': 'Today',
@@ -105,4 +105,7 @@ export default {
    'ticket.conversation.input.placeholder': 'Type your message...',
    'ticket.details.title': 'Ticket Details',
    'ticket.details.empty': 'Select a ticket to view details',
+   // 
+   'ticket.form.createdAt': 'Created At',
+   'ticket.form.updatedAt': 'Updated At',
 } 

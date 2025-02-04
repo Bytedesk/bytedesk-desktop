@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-23 16:51:18
+ * @LastEditTime: 2025-02-05 13:19:44
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -573,7 +573,7 @@ export const TICKET_FILTER_TIME_ALL = 'time_all';
 // 
 export const TICKET_FILTER_MY_TICKETS = 'MY_TICKETS';
 export const TICKET_FILTER_UNASSIGNED = 'UNASSIGNED';
-export const TICKET_FILTER_MY_TEAM = 'MY_TEAM';
+export const TICKET_FILTER_MY_WORKGROUP = 'MY_WORKGROUP';
 
 // 
 export const TICKET_FILTER_TODAY = 'TODAY';
