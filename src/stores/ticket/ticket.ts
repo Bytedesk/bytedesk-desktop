@@ -37,6 +37,12 @@ interface TicketState {
     pageSize: number;
     total: number;
   };
+  filters: {
+    status?: string;
+    priority?: string;
+    assignment?: string;
+    time?: string;
+  };
 
   // Actions
   setCurrentTicket: (ticket?: TICKET.TicketResponse) => void;
@@ -44,6 +50,8 @@ interface TicketState {
   setSearchText: (text: string) => void;
   loadTickets: (orgUid: string) => Promise<void>;
   refreshTickets: () => Promise<void>;
+  setFilter: (key: string, value: string) => void;
+  clearFilters: () => void;
 }
 
 export const useTicketStore = create<TicketState>((set, get) => {
@@ -64,6 +72,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
       pageSize: 100,
       total: 0,
     },
+    filters: {},
 
     // Actions
     setCurrentTicket: (ticket) => set({ currentTicket: ticket }),
@@ -187,5 +196,14 @@ export const useTicketStore = create<TicketState>((set, get) => {
         get().loadTickets(currentOrg.uid);
       }
     },
+
+    setFilter: (key, value) => set((state) => ({
+      filters: {
+        ...state.filters,
+        [key]: value
+      }
+    })),
+
+    clearFilters: () => set({ filters: {} }),
   };
 }); 
