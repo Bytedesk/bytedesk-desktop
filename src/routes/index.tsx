@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 10:29:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:39:38
+ * @LastEditTime: 2025-02-04 18:13:23
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -45,7 +45,6 @@ import MemberProfile from "@/pages/Dashboard/Setting/Profile/MemberProfile";
 import Enlarge from "@/components/Enlarge";
 import Ticket from "@/pages/Vip/Ticket";
 import LeaveMsg from "@/pages/Vip/LeaveMsg";
-import Visitor from "@/pages/Dashboard/Visitor";
 import Monitor from "@/pages/Vip/Monitor";
 // import Template from "@/pages/Dashboard/Robot/Template";
 import LlmModel from "@/pages/Dashboard/Setting/LlmModel";
@@ -114,10 +113,6 @@ const routes = [
       {
         path: "/leavemsg",
         element: <LeaveMsg />,
-      },
-      {
-        path: "/visitor",
-        element: <Visitor />,
       },
       {
         path: "/notebase",

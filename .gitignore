@@ -132,7 +132,6 @@ dist
 # Vip/
 *.yml
 .env
-.env.dev
 .env.build
 build/
 cicd/

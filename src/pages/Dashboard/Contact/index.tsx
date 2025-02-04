@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 23:32:54
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-24 11:48:53
+ * @LastEditTime: 2025-02-04 18:14:07
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -14,10 +14,6 @@
  */
 import { Layout } from "antd";
 import React from "react";
-// import Detail from "./back/Detail";
-// import MemberList from "./back/MemberList";
-// import emitter from "@/utils/events";
-// import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";

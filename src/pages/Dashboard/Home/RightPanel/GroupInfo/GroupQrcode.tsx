@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-09-24 10:41:21
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-24 11:15:39
+ * @LastEditTime: 2025-02-04 18:25:11
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -12,32 +12,32 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved. 
  */
-
-import { Button, QRCode } from "antd";
+import { QRCode } from "antd";
 // 
 type GroupProps = {
   group: GROUP.GroupResponse;
 };
 // 
 const GroupQrcode = ({ group }: GroupProps) => {
+  console.log("group", group);
 
-  const downloadQRCode = () => {
-    console.log("downloadQRCode");
-    const canvas = document
-      .getElementById("myqrcode")
-      ?.querySelector<HTMLCanvasElement>("canvas");
-    if (canvas) {
-      const url = canvas.toDataURL();
-      const a = document.createElement("a");
-      a.download = "profile.png";
-      a.href = url;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      console.log("canvas is null");
-    }
-  };
+  // const downloadQRCode = () => {
+  //   console.log("downloadQRCode");
+  //   const canvas = document
+  //     .getElementById("myqrcode")
+  //     ?.querySelector<HTMLCanvasElement>("canvas");
+  //   if (canvas) {
+  //     const url = canvas.toDataURL();
+  //     const a = document.createElement("a");
+  //     a.download = "profile.png";
+  //     a.href = url;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //   } else {
+  //     console.log("canvas is null");
+  //   }
+  // };
   
   return (
     <div style={{ textAlign: "center" }}>
@@ -47,13 +47,13 @@ const GroupQrcode = ({ group }: GroupProps) => {
         value="https://www.weiyuai.cn/"
         icon="./logo.png"
       />
-      <Button
+      {/* <Button
         type="primary"
         onClick={downloadQRCode}
         style={{ marginTop: "10px" }}
       >
         下载二维码
-      </Button>
+      </Button> */}
     </div>
   );
 };
