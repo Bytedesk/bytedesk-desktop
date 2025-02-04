@@ -24,7 +24,7 @@
 - [English](./README.md)
 - [中文](./README.zh.md)
 
-![chat](./images/desktop/chat_zh.png) 
+![chat](./images/desktop/chat_zh.png)
 ![ticket](./images/desktop/ticket_zh.png)
 
 ## 介绍
