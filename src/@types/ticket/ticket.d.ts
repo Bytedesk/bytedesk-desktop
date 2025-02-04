@@ -28,10 +28,13 @@ declare namespace TICKET {
     pageSize?: number;
     //
     uid?: string;
+    //
     title: string; 
     description: string;
+    //
     status: TicketStatus;
     priority: TicketPriority;
+    //
     threadTopic?: string;
     categoryUid: string;
     assigneeUid?: string;
