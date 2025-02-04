@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 10:29:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 11:49:56
+ * @LastEditTime: 2025-02-04 13:41:07
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -281,7 +281,7 @@ if (IS_ELECTRON) {
   // 方便/agent/robot页面左侧分类列表中使用锚点定位，所以才切换到createBrowserRouter
  router = createBrowserRouter(routes,
     {
-      basename: "/agent/",
+      basename: "/agent",
       future: {
         v7_normalizeFormMethod: true,
         v7_relativeSplatPath: true,
