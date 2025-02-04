@@ -37,8 +37,10 @@ declare namespace TICKET {
     //
     threadTopic?: string;
     categoryUid: string;
+    //
     assigneeUid?: string;
     reporterUid?: string;
+    //
     orgUid?: string;
   };
   //
