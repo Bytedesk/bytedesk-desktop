@@ -15,7 +15,7 @@
 //
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
-import AI from "./AI";
+import AI from "../../../Vip/Home/RightPanel/AI";
 import CustomerInfo from "../../../Vip/Home/RightPanel/CustomerInfo";
 import QuickReply from "../../../Vip/Home/RightPanel/QuickReply";
 import { useIntl } from "react-intl";

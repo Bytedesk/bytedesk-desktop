@@ -138,5 +138,6 @@ build/
 cicd/
 config/
 dist/
+dist-electron/
 release/
 back/
