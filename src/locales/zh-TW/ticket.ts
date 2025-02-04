@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 14:20:18
+ * @LastEditTime: 2025-02-05 15:03:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -126,4 +126,5 @@ export default {
   'ticket.reporter': '報告人',
   // 工單類型
   'ticket.type': '類型',
+  'ticket.category': '分類',
 } 
