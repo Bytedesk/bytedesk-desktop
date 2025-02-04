@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 10:29:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 13:41:07
+ * @LastEditTime: 2025-02-04 16:39:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -51,7 +51,6 @@ import Monitor from "@/pages/Vip/Monitor";
 import LlmModel from "@/pages/Dashboard/Setting/LlmModel";
 // import { basename } from "path";
 import { IS_ELECTRON } from "@/utils/constants";
-import Queue from "@/pages/Vip/Queue";
 import Robot from "@/pages/Dashboard/Robot";
 import Certification from "@/pages/Dashboard/Setting/Certification";
 import AgentTab from "@/pages/Dashboard/Setting/Profile/agent";
@@ -107,10 +106,6 @@ const routes = [
       {
         path: "/robot",
         element: <Robot />,
-      },
-      {
-        path: "/queue",
-        element: <Queue />,
       },
       {
         path: "/ticket",

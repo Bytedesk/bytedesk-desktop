@@ -40,8 +40,15 @@ export default {
   'chat.right.ai': 'Copilot',
   'chat.right.ticket': 'Ticket',
   'chat.right.llm': 'LLM',
-  'chat.right.group': 'Group',
-  'chat.right.member': 'Member',
+  'chat.right.group': 'Group Info',
+  'chat.right.member': 'Member Info',
   'chat.right.docview': 'Doc View',
+  // Group Info Panel
+  'chat.group.notice': 'Notice',
+  'chat.group.members': 'Members',
+  'chat.group.admins': 'Admins',
+  'chat.group.robots': 'Robots',
+  'chat.group.qrcode': 'QR Code',
+  'chat.group.uid.error': 'Group ID error',
   // ... 其他聊天相关文案
 } 

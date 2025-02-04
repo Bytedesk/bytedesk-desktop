@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2023-08-26 16:06:55
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:33:17
+ * @LastEditTime: 2025-02-04 16:46:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -30,6 +30,7 @@ import ticket from './zh-TW/ticket';
 import contact from './zh-TW/contact';
 import group from './zh-TW/group';
 import robot from './zh-TW/robot'
+import autoreply from './zh-TW/autoreply';
 
 export default {
   ...app,
@@ -49,5 +50,6 @@ export default {
   ...desktop,
   ...contact,
   ...group,
-  ...robot
+  ...robot,
+  ...autoreply,
 }

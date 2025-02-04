@@ -64,13 +64,13 @@ export default {
   'chat.navbar.kbase': '知识库',
   // Right Panel Tabs
   'chat.right.quickreply': '快捷回复',
-  'chat.right.userinfo': '用户信息',
-  'chat.right.ai': 'Copilot',
+  'chat.right.userinfo': '访客信息',
+  'chat.right.ai': 'AI助手',
   'chat.right.ticket': '工单',
-  'chat.right.llm': 'LLM',
-  'chat.right.group': '群组',
-  'chat.right.member': '成员',
-  'chat.right.docview': '文档',
+  'chat.right.llm': '大模型',
+  'chat.right.group': '群组信息',
+  'chat.right.member': '成员信息',
+  'chat.right.docview': '文档查看',
 
   // 文件上传
   'chat.upload.size.limit': '文件大小不能超过 {size}',
@@ -89,5 +89,13 @@ export default {
   'chat.webrtc.failed': '通话失败',
   'chat.webrtc.accept': '接受',
   'chat.webrtc.reject': '拒绝',
-  'chat.webrtc.hangup': '挂断'
+  'chat.webrtc.hangup': '挂断',
+
+  // 群组信息面板
+  'chat.group.notice': '群公告',
+  'chat.group.members': '群成员',
+  'chat.group.admins': '管理员',
+  'chat.group.robots': '机器人',
+  'chat.group.qrcode': '二维码',
+  'chat.group.uid.error': '群组ID错误',
 } 

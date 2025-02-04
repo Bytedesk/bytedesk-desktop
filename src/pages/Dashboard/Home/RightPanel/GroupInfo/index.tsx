@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:23:56
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-04 19:11:34
+ * @LastEditTime: 2025-02-04 16:36:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -24,36 +24,38 @@ import GroupMembers from "./GroupMembers";
 import GroupAdmins from "./GroupAdmins";
 import GroupRobots from "./GroupRobots";
 import GroupQrcode from "./GroupQrcode";
+import { useIntl } from "react-intl";
 
 // 聊天对象-群组资料
 // TODO: 群成员超过100人，分页加载
 const GroupInfo = () => {
+  const intl = useIntl();
   const currentThread = useThreadStore((state) => state.currentThread);
   const [group, setGroup] = useState<GROUP.GroupResponse>()
   const items: CollapseProps["items"] = [
     {
       key: "notice",
-      label: "群公告",
+      label: intl.formatMessage({ id: "chat.group.notice" }),
       children: <GroupNotice group={group}/>,
     },
     {
       key: "members",
-      label: "群成员",
+      label: intl.formatMessage({ id: "chat.group.members" }),
       children: <GroupMembers group={group}/>,
     },
     {
       key: "admins",
-      label: "管理员",
+      label: intl.formatMessage({ id: "chat.group.admins" }),
       children: <GroupAdmins group={group}/>,
     },
     {
       key: "robots",
-      label: "机器人",
+      label: intl.formatMessage({ id: "chat.group.robots" }),
       children: <GroupRobots group={group}/>,
     },
     {
       key: "qrcode",
-      label: "二维码",
+      label: intl.formatMessage({ id: "chat.group.qrcode" }),
       children: <GroupQrcode group={group}/>,
     },
   ];
@@ -62,7 +64,7 @@ const GroupInfo = () => {
     // 同事群组会话：org/group/{group_uid}
     const groupUid = currentThread?.topic.split("/")[2] || ''
     if (groupUid === '') {
-      message.warning('groupUid error')
+      message.warning(intl.formatMessage({ id: "chat.group.uid.error" }));
     }
     const group: GROUP.HttpRequest = {
       uid: groupUid

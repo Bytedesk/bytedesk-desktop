@@ -1,15 +1,17 @@
 import { create } from 'zustand';
 
-interface RightPanelState {
+interface RightPanelStore {
   activeKey: string;
-  setActiveKey: (key: string) => void;
   defaultKey: string;
+  setActiveKey: (key: string) => void;
   setDefaultKey: (key: string) => void;
+  resetActiveKey: () => void;
 }
 
-export const useRightPanelStore = create<RightPanelState>((set) => ({
+export const useRightPanelStore = create<RightPanelStore>((set) => ({
   activeKey: 'quickreply',
-  setActiveKey: (key: string) => set({ activeKey: key }),
   defaultKey: 'quickreply',
+  setActiveKey: (key: string) => set({ activeKey: key }),
   setDefaultKey: (key: string) => set({ defaultKey: key }),
+  resetActiveKey: () => set({ activeKey: 'quickreply' }),
 })); 

@@ -95,12 +95,20 @@ export default {
   'chat.navbar.kbase': '知識庫',
 
   // 右側面板
-  'chat.right.quickreply': '快捷回復',
+  'chat.right.quickreply': '快捷回覆',
   'chat.right.userinfo': '訪客信息',
-  'chat.right.ai': '智能助手',
+  'chat.right.ai': 'AI助手',
   'chat.right.ticket': '工單',
   'chat.right.llm': '大模型',
-  'chat.right.group': '群組',
-  'chat.right.member': '成員',
-  'chat.right.docview': '文檔預覽'
+  'chat.right.docview': '文檔查看',
+  'chat.right.group': '群組信息',
+  'chat.right.member': '成員信息',
+
+  // 群組信息面板
+  'chat.group.notice': '群公告',
+  'chat.group.members': '群成員',
+  'chat.group.admins': '管理員',
+  'chat.group.robots': '機器人',
+  'chat.group.qrcode': '二維碼',
+  'chat.group.uid.error': '群組ID錯誤',
 } 

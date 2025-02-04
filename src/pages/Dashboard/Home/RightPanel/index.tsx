@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:17:03
+ * @LastEditTime: 2025-02-04 16:33:18
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -38,6 +38,23 @@ const RightPanel = () => {
   const { activeKey, setActiveKey, defaultKey, setDefaultKey } = useRightPanelStore();
   const [tabItems, setTabItems] = useState([]);
 
+  // 监听会话变化,设置默认tab
+  useEffect(() => {
+    if (isCustomerServiceThread(currentThread)) {
+      setActiveKey("quickreply");
+      setDefaultKey("quickreply");
+    } else if (isRobotThread(currentThread)) {
+      setActiveKey("llm");
+      setDefaultKey("llm"); 
+    } else if (isGroupThread(currentThread)) {
+      setActiveKey("group");
+      setDefaultKey("group");
+    } else if (isMemberThread(currentThread)) {
+      setActiveKey("member");
+      setDefaultKey("member");
+    }
+  }, [currentThread]);
+
   // 监听语言变化和当前会话变化
   useEffect(() => {
     const itemsCs = [
@@ -50,11 +67,6 @@ const RightPanel = () => {
         key: "userinfo",
         label: intl.formatMessage({ id: "chat.right.userinfo" }),
         children: <CustomerInfo />,
-      },
-      {
-        key: "ai",
-        label: intl.formatMessage({ id: "chat.right.ai" }),
-        children: <AI />,
       },
     ];
 
@@ -78,7 +90,6 @@ const RightPanel = () => {
         });
       }
       setTabItems(itemsCs);
-      setDefaultKey('quickreply');
     } else if (isRobotThread(currentThread)) {
       const itemsRobot = [
         {
@@ -102,7 +113,6 @@ const RightPanel = () => {
         });
       }
       setTabItems(itemsRobot);
-      setDefaultKey('llm');
     } else if (isGroupThread(currentThread)) {
       setTabItems([
         {
@@ -114,7 +124,6 @@ const RightPanel = () => {
           children: <GroupInfo />,
         },
       ]);
-      setDefaultKey('group');
     } else if (isMemberThread(currentThread)) {
       setTabItems([
         {
@@ -126,17 +135,15 @@ const RightPanel = () => {
           children: <MemberInfo />,
         },
       ]);
-      setDefaultKey('member');
     } else {
       setTabItems([]);
     }
-  }, [currentThread, intl, locale]); // 添加 locale 作为依赖
+  }, [currentThread, intl, locale]);
 
   const onChange = (key: string) => {
     setActiveKey(key);
   };
 
-  // 
   return (
     <>
       <Tabs
