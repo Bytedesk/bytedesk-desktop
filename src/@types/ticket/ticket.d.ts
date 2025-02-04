@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 10:32:51
+ * @LastEditTime: 2025-02-05 12:54:01
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -82,9 +82,9 @@ declare namespace TICKET {
     threadTopic: string;
     categoryUid: string;
     //
-    workgroup: WORKGROUP.WorkgroupResponse;
-    assignee: AGENT.AgentResponse;
-    reporter: USER.UserSimple;
+    workgroup?: WORKGROUP.WorkgroupResponse;
+    assignee?: AGENT.AgentResponse;
+    reporter?: USER.UserSimple;
     //
     createdAt: string;
     updatedAt: string;
