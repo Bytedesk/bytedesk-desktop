@@ -563,3 +563,22 @@ export const TICKET_STATUS_REOPENED = 'REOPENED';
 export const TICKET_STATUS_RESOLVED = 'RESOLVED';
 export const TICKET_STATUS_CLOSED = 'CLOSED';
 export const TICKET_STATUS_CANCELLED = 'CANCELLED';
+
+// 
+export const TICKET_FILTER_STATUS_ALL = 'status_all';
+export const TICKET_FILTER_PRIORITY_ALL = 'priority_all';
+export const TICKET_FILTER_ASSIGNMENT_ALL = 'assignment_all';
+export const TICKET_FILTER_TIME_ALL = 'time_all';
+
+// 
+export const TICKET_FILTER_MY_TICKETS = 'MY_TICKETS';
+export const TICKET_FILTER_UNASSIGNED = 'UNASSIGNED';
+export const TICKET_FILTER_MY_TEAM = 'MY_TEAM';
+
+// 
+export const TICKET_FILTER_TODAY = 'TODAY';
+export const TICKET_FILTER_YESTERDAY = 'YESTERDAY';
+export const TICKET_FILTER_THIS_WEEK = 'THIS_WEEK';
+export const TICKET_FILTER_LAST_WEEK = 'LAST_WEEK';
+export const TICKET_FILTER_THIS_MONTH = 'THIS_MONTH';
+export const TICKET_FILTER_LAST_MONTH = 'LAST_MONTH';
