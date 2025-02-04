@@ -49,7 +49,7 @@ import useElectronApi from "@/hooks/useElectronApi";
 import BottomLeftMenu from "./FootBar/BottomLeftMenu";
 import { useIntl } from "react-intl";
 import emitter from "@/utils/eventEmitter";
-import TransferConfirmModel from "@/components/TransferConfirmModel";
+import TransferConfirmModel from "@/components/Vip/TransferConfirmModel";
 import { message } from "@/AntdGlobalComp";
 import { useThreadStore } from "@/stores/core/thread";
 import { openDocs } from "@/utils/electronApiUtils";
