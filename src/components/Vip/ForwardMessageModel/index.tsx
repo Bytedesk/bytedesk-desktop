@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-13 15:23:30
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-08-03 21:02:45
+ * @LastEditTime: 2025-02-04 14:32:52
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -18,6 +18,7 @@ import type { TabsProps } from "antd";
 import TabThread from "./TabThread";
 import TabContact from "./TabContact";
 import TabGroup from "./TabGroup";
+import VipContainer from "@/pages/Vip/Home/RightPanel/components/VipContainer";
 
 const onChange = (key: string) => {
   console.log(key);
@@ -65,7 +66,7 @@ const ForwardMessageModel = ({ open, onOk, onCancel }: ForwardMessageModelProps)
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <VipContainer />
       </Modal>
     </>
   );

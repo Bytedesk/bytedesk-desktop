@@ -1,3 +1,17 @@
+/*
+ * @Author: jackning 270580156@qq.com
+ * @Date: 2025-02-03 23:32:41
+ * @LastEditors: jackning 270580156@qq.com
+ * @LastEditTime: 2025-02-04 14:35:33
+ * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
+ *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
+ *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
+ *  仅支持企业内部员工自用，严禁私自用于销售、二次销售或者部署SaaS方式销售 
+ *  Business Source License 1.1: https://github.com/Bytedesk/bytedesk/blob/main/LICENSE 
+ *  contact: 270580156@qq.com 
+ * 联系：270580156@qq.com
+ * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
+ */
 export default {
   // 客戶列表
   'customer.list.title': '客戶列表',
@@ -74,5 +88,19 @@ export default {
   'customer.merge.success': '客戶合併成功',
   'customer.merge.failed': '客戶合併失敗',
   'customer.export.success': '客戶導出成功',
-  'customer.export.failed': '客戶導出失敗'
+  'customer.export.failed': '客戶導出失敗',
+
+  // Block Modal
+  'black.title': '拉黑設置',
+  'black.type': '拉黑類型',
+  'black.type.required': '請選擇至少一種拉黑類型',
+  'black.user': '拉黑用戶',
+  'black.ip': '拉黑IP',
+  'black.permanent': '永久拉黑',
+  'black.until': '拉黑截至',
+  'black.until.required': '請選擇拉黑截至時間',
+  'black.reason': '拉黑原因',
+  'black.reason.required': '請輸入拉黑原因',
+  'black.reason.placeholder': '請輸入拉黑原因',
+  'black.success': '拉黑成功'
 } 
