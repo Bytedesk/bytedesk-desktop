@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 23:32:56
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 15:43:55
+ * @LastEditTime: 2025-02-04 19:02:45
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -88,13 +88,13 @@ const Setting: React.FC = () => {
       key: "agentProfile",
     };
 
-    // @ts-ignore
+    // @ts-expect-error no error
     const isAgentProfileExist = updatedMenuItems[0]?.children?.some(
       (item) => item.key === newMenuItem.key,
     );
 
     if (!isAgentProfileExist) {
-      // @ts-ignore
+      // @ts-expect-error no error
       updatedMenuItems[0]?.children?.splice(1, 0, newMenuItem);
       setLeftMenuItems(updatedMenuItems);
     }

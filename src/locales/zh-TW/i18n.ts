@@ -144,6 +144,13 @@ export default {
   // 
   "i18n.black.user.already.exists": "用戶已拉黑",
   // 
+  "i18n.ticket.category.technical_support": "技术支持",
+  "i18n.ticket.category.service_request": "服务请求",
+  "i18n.ticket.category.consultation": "咨询",
+  "i18n.ticket.category.complaint_suggestion": "投诉建议",
+  "i18n.ticket.category.operation_maintenance": "运维",
+  "i18n.ticket.category.other": "其他",
+  // 
   "i18n.vip.component": "VIP組件, 聯繫我們了解更多詳情",
   "i18n.vip.contactUs": "聯繫我們",
   "i18n.vip.contactUrl": "https://www.weiyuai.cn/contact.html",
