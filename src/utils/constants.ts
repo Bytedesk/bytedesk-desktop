@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:19:44
+ * @LastEditTime: 2025-02-05 13:26:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -544,6 +544,9 @@ export const CLIENT_TYPE_WECHAT_MP = "WECHAT_MP";
 export const CLIENT_TYPE_WECHAT_WORK = "WECHAT_WORK";
 export const CLIENT_TYPE_WECHAT_KEFU = "WECHAT_KEFU";
 export const CLIENT_TYPE_WECHAT_CHANNEL = "WECHAT_CHANNEL";
+
+export const TICKET_TYPE_AGENT = "AGENT";
+export const TICKET_TYPE_WORKGROUP = "WORKGROUP";
 
 // Ticket Priority
 export const TICKET_PRIORITY_LOWEST = 'LOWEST'; 

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:05:29
+ * @LastEditTime: 2025-02-05 13:27:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -114,4 +114,7 @@ export default {
   // 
   'ticket.form.createdAt': '創建時間',
   'ticket.form.updatedAt': '更新時間',
+  // 工單類型
+  'ticket.type.agent': '指定客服',
+  'ticket.type.workgroup': '技能組',
 } 
