@@ -1,5 +1,8 @@
+import useTranslate from "@/hooks/useTranslate";
+
 const CustomerInfo = () => {
-  return <div>CustomerInfo</div>;
+  const { translateString } = useTranslate();
+  return <div>{translateString("i18n.vip.component")}</div>;
 };
 
 export default CustomerInfo;

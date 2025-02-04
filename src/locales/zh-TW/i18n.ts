@@ -141,5 +141,7 @@ export default {
   // 
   "i18n.black.user.already.exists": "用戶已拉黑",
   // 
-  "i18n.vip.component": "VIP組件, https://www.weiyuai.cn/contact.html 聯繫我們了解更多詳情",
+  "i18n.vip.component": "VIP組件, 聯繫我們了解更多詳情",
+  "i18n.vip.contactUs": "聯繫我們",
+  "i18n.vip.contactUrl": "https://www.weiyuai.cn/contact.html",
 } 

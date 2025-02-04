@@ -156,5 +156,7 @@ export default {
   "i18n.ticket.category.operation_maintenance": "Operation Maintenance",
   "i18n.ticket.category.other": "Other",
   // 
-  "i18n.vip.component": "VIP Component, https://www.weiyuai.cn/contact.html Contact us for more details",
+  "i18n.vip.component": "VIP Component, Contact us for more details",
+  "i18n.vip.contactUs": "Contact us",
+  "i18n.vip.contactUrl": "https://www.bytedesk.com",
 } 
