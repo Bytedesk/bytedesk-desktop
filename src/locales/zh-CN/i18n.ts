@@ -146,4 +146,6 @@ export default {
   "i18n.ticket.category.complaint_suggestion": "投诉建议",
   "i18n.ticket.category.operation_maintenance": "运维",
   "i18n.ticket.category.other": "其他",
+  // 
+  "i18n.vip.component": "VIP组件, https://www.weiyuai.cn/contact.html 联系我们了解更多详情",
 } 

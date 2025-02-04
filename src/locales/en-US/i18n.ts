@@ -155,4 +155,6 @@ export default {
   "i18n.ticket.category.complaint_suggestion": "Complaint Suggestion",
   "i18n.ticket.category.operation_maintenance": "Operation Maintenance",
   "i18n.ticket.category.other": "Other",
+  // 
+  "i18n.vip.component": "VIP Component, https://www.weiyuai.cn/contact.html Contact us for more details",
 } 

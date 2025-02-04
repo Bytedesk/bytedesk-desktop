@@ -1,5 +1,8 @@
+import useTranslate from "@/hooks/useTranslate";
+
 const AI = () => {
-  return <div>AI</div>;
+  const { translateString } = useTranslate();
+  return <div>{translateString("i18n.vip.component")}</div>;
 };
 
 export default AI;
