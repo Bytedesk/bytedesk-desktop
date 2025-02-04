@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 22:11:25
+ * @LastEditTime: 2025-02-04 22:12:32
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -15,11 +15,11 @@
 declare namespace TICKET {
 
   // 工单状态枚举
-  type TicketStatus = 'NEW' | 'ASSIGNED' | 'IN_PROGRESS' | 'PENDING' | 
-                     'ON_HOLD' | 'REOPENED' | 'RESOLVED' | 'CLOSED' | 'CANCELLED';
+  // type TicketStatus = 'NEW' | 'ASSIGNED' | 'IN_PROGRESS' | 'PENDING' | 
+  //                    'ON_HOLD' | 'REOPENED' | 'RESOLVED' | 'CLOSED' | 'CANCELLED';
   
   // 工单优先级枚举  
-  type TicketPriority = 'LOWEST' | 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT' | 'CRITICAL';
+  // type TicketPriority = 'LOWEST' | 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT' | 'CRITICAL';
 
   // 创建/更新工单请求
   type TicketRequest = {
@@ -29,34 +29,11 @@ declare namespace TICKET {
     //
     uid?: string;
     //
-    title: string; 
-    description: string;
-    //
-    status: TicketStatus;
-    priority: TicketPriority;
-    //
-    threadTopic?: string;
-    categoryUid: string;
-    //
-    assigneeUid?: string;
-    reporterUid?: string;
-    //
-    orgUid?: string;
-  };
-  //
-  type HttpRequest = {
-    //
-    pageNumber?: number;
-    pageSize?: number;
-    //
-    uid?: string;
-    //
-    title?: string;
+    title?: string; 
     description?: string;
     //
     status?: string;
     priority?: string;
-    type?: string;
     //
     threadTopic?: string;
     categoryUid?: string;
@@ -71,6 +48,34 @@ declare namespace TICKET {
     startTime?: string;
     endTime?: string;
   };
+  // //
+  // type HttpRequest = {
+  //   //
+  //   pageNumber?: number;
+  //   pageSize?: number;
+  //   //
+  //   uid?: string;
+  //   //
+  //   title?: string;
+  //   description?: string;
+  //   //
+  //   status?: string;
+  //   priority?: string;
+  //   type?: string;
+  //   //
+  //   threadTopic?: string;
+  //   categoryUid?: string;
+  //   //
+  //   assigneeUid?: string;
+  //   reporterUid?: string;
+  //   //
+  //   orgUid?: string;
+  //   // 新增字段
+  //   unassigned?: boolean;
+  //   workgroupUid?: string;
+  //   startTime?: string;
+  //   endTime?: string;
+  // };
   //
   type HttpResult = {
     message?: string;

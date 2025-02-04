@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 22:10:07
+ * @LastEditTime: 2025-02-04 22:12:13
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -83,7 +83,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
       set({ loading: true });
 
       try {
-        const params: TICKET.HttpRequest = {
+        const params: TICKET.TicketRequest = {
           orgUid,
           pageNumber: state.pagination.pageNumber,
           pageSize: state.pagination.pageSize,
