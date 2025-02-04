@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 22:12:32
+ * @LastEditTime: 2025-02-04 22:17:40
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -48,34 +48,6 @@ declare namespace TICKET {
     startTime?: string;
     endTime?: string;
   };
-  // //
-  // type HttpRequest = {
-  //   //
-  //   pageNumber?: number;
-  //   pageSize?: number;
-  //   //
-  //   uid?: string;
-  //   //
-  //   title?: string;
-  //   description?: string;
-  //   //
-  //   status?: string;
-  //   priority?: string;
-  //   type?: string;
-  //   //
-  //   threadTopic?: string;
-  //   categoryUid?: string;
-  //   //
-  //   assigneeUid?: string;
-  //   reporterUid?: string;
-  //   //
-  //   orgUid?: string;
-  //   // 新增字段
-  //   unassigned?: boolean;
-  //   workgroupUid?: string;
-  //   startTime?: string;
-  //   endTime?: string;
-  // };
   //
   type HttpResult = {
     message?: string;

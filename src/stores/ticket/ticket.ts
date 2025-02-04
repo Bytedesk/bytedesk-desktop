@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 22:12:13
+ * @LastEditTime: 2025-02-04 22:39:23
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -109,8 +109,8 @@ export const useTicketStore = create<TicketState>((set, get) => {
 
         // 时间过滤
         if (state.filters.time === 'today') {
-          // params.startTime = moment().startOf('day').valueOf();
-          // params.endTime = moment().endOf('day').valueOf();
+          params.startTime = moment().startOf('day').valueOf().toString();
+          params.endTime = moment().endOf('day').valueOf().toString();
         } else if (state.filters.time === 'yesterday') {
           params.startTime = moment().subtract(1, 'days').startOf('day').format();
           params.endTime = moment().subtract(1, 'days').endOf('day').format();
