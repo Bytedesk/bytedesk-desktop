@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 12:08:03
+ * @LastEditTime: 2025-02-05 13:36:26
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -45,6 +45,15 @@ import {
   MESSAGE_TYPE_AGENT_CLOSED,
   THREAD_STATE_CLOSED,
   THREAD_TYPE_LLM,
+  TICKET_STATUS_ASSIGNED,
+  TICKET_STATUS_CANCELLED,
+  TICKET_STATUS_CLOSED,
+  TICKET_STATUS_IN_PROGRESS,
+  TICKET_STATUS_NEW,
+  TICKET_STATUS_ON_HOLD,
+  TICKET_STATUS_PENDING,
+  TICKET_STATUS_REOPENED,
+  TICKET_STATUS_RESOLVED,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -272,4 +281,29 @@ export const isRichText = (content: string) => {
     content.includes('<ul>') ||
     content.includes('<ol>')
   );
+};
+
+export function getStatusColor(status: string) {
+  switch (status) {
+    case TICKET_STATUS_NEW:
+      return 'blue';
+    case TICKET_STATUS_ASSIGNED:
+      return 'purple';
+    case TICKET_STATUS_IN_PROGRESS:
+      return 'green';
+    case TICKET_STATUS_PENDING:
+      return 'orange';
+    case TICKET_STATUS_ON_HOLD:
+      return 'gold';
+    case TICKET_STATUS_REOPENED:
+      return 'magenta';
+    case TICKET_STATUS_RESOLVED:
+      return 'cyan';
+    case TICKET_STATUS_CLOSED:
+      return 'default';
+    case TICKET_STATUS_CANCELLED:
+      return 'red';
+    default:
+      return 'default';
+  }
 };
