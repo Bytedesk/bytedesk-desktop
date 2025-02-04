@@ -121,4 +121,5 @@ export default {
    'ticket.assignee': 'Assignee',
    'ticket.reporter': 'Reporter',
    'ticket.category': 'Category',
+   'ticket.steps.title': 'Processing Steps',
 } 

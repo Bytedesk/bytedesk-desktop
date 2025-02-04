@@ -129,4 +129,5 @@ export default {
   // 工單類型
   'ticket.type': '類型',
   'ticket.category': '分類',
+  'ticket.steps.title': '處理步驟',
 } 
