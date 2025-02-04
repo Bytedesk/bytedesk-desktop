@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:11:27
+ * @LastEditTime: 2025-02-04 21:56:32
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -37,6 +37,7 @@ export default {
    'ticket.form.thread': 'Related Conversation',
    'ticket.form.thread.placeholder': 'Select related conversation',
    // Ticket Status
+   'ticket.status.all': 'All',
    'ticket.status.new': 'New',
    'ticket.status.assigned': 'Assigned',
    'ticket.status.in_progress': 'In Progress',
@@ -47,6 +48,7 @@ export default {
    'ticket.status.closed': 'Closed',
    'ticket.status.cancelled': 'Cancelled',
    // Ticket Priority
+   'ticket.priority.all': 'All',
    'ticket.priority.lowest': 'Lowest',
    'ticket.priority.low': 'Low',
    'ticket.priority.medium': 'Medium',
@@ -84,9 +86,13 @@ export default {
    'ticket.filter.by.priority': 'Filter by Priority',
    'ticket.filter.by.assignment': 'Filter by Assignment',
    'ticket.filter.by.time': 'Filter by Time',
+   // 
+   'ticket.filter.all.assignment': 'All Assignment',
    'ticket.filter.my.tickets': 'My Tickets',
    'ticket.filter.unassigned': 'Unassigned',
    'ticket.filter.my.team': 'My Team',
+   // 
+   'ticket.filter.all.time': 'All Time',
    'ticket.filter.today': 'Today',
    'ticket.filter.yesterday': 'Yesterday',
    'ticket.filter.this.week': 'This Week',

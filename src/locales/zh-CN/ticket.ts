@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:12:01
+ * @LastEditTime: 2025-02-04 21:56:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -36,6 +36,7 @@ export default {
   'ticket.form.workgroup.placeholder': '请选择技能组',
   'ticket.workgroup.load.error': '加载技能组失败',
   // 工单状态
+  'ticket.status.all': '全部',
   'ticket.status.new': '新建',
   'ticket.status.assigned': '已分配',
   'ticket.status.in_progress': '处理中',
@@ -46,6 +47,7 @@ export default {
   'ticket.status.closed': '已关闭',
   'ticket.status.cancelled': '已取消',
   // 工单优先级
+  'ticket.priority.all': '全部',
   'ticket.priority.lowest': '最低',
   'ticket.priority.low': '低',
   'ticket.priority.medium': '中',
@@ -82,9 +84,13 @@ export default {
   'ticket.filter.by.priority': '按优先级筛选',
   'ticket.filter.by.assignment': '按分配筛选',
   'ticket.filter.by.time': '按时间筛选',
+  // 
+  'ticket.filter.all.assignment': '全部分配',
   'ticket.filter.my.tickets': '我的工单',
   'ticket.filter.unassigned': '未分配',
   'ticket.filter.my.team': '我的团队',
+  // 
+  'ticket.filter.all.time': '全部时间',
   'ticket.filter.today': '今天',
   'ticket.filter.yesterday': '昨天',
   'ticket.filter.this.week': '本周',
