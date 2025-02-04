@@ -62,7 +62,7 @@ import {
   VerticalAlignTopOutlined,
 } from "@ant-design/icons";
 import useTranslate from "@/hooks/useTranslate";
-import CreateGroup from "./CreateGroup";
+import CreateGroup from "./RightPanel/GroupInfo/CreateGroup";
 import {
   AGENT_STATUS_AVAILABLE,
   AGENT_STATUS_BUSY,
@@ -80,7 +80,7 @@ const { Text } = Typography;
 import type { MenuProps } from "antd";
 import { Dropdown, Space } from "antd";
 import { useIntl } from "react-intl";
-import CreateRobot from "./CreateRobot";
+import CreateRobot from "./RightPanel/Llm/CreateRobot";
 import { syncCurrentThreadCount } from "@/apis/service/agent";
 // import { useSettingsStore } from "@/stores/core/setting";
 

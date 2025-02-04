@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-06 21:22:07
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:07:30
+ * @LastEditTime: 2025-02-04 16:00:21
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,44 +13,44 @@
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
 export default {
-  // 
-  "menu.anonymous.title": "Anonymous Mode",
-  "menu.anonymous.home": "Messages",
-  "menu.anonymous.contact": "Contacts",
-  "menu.anonymous.robot": "Robot",
-  "menu.anonymous.setting": "Settings",
-  "menu.anonymous.status": "Anonymous Status",
-  "menu.anonymous.status.tip": "Anonymous mode only supports communication between online devices in the same LAN",
-  "menu.anonymous.login.tip": "Login to access offline messages and more features",
-  "menu.anonymous.login": "Login",
-  "menu.anonymous.current.users": "Current Users",
+  //
+  "menu.anonymous.title": "匿名模式",
+  "menu.anonymous.home": "訊息",
+  "menu.anonymous.contact": "聯絡人",
+  "menu.anonymous.robot": "機器人",
+  "menu.anonymous.setting": "設定",
+  "menu.anonymous.status": "匿名狀態",
+  "menu.anonymous.status.tip": "匿名模式僅支援同一區域網內的在線設備之間的通訊",
+  "menu.anonymous.login.tip": "登入以訪問離線訊息和更多功能",
+  "menu.anonymous.login": "登入",
+  "menu.anonymous.current.users": "當前用戶",
 
   // Menu items  
   'menu.dashboard.chat': '聊天',
-  'menu.dashboard.contact': '联系人',
+  'menu.dashboard.contact': '聯絡人',
   'menu.dashboard.ai': 'AI助手',
-  'menu.dashboard.note': '笔记',
-  'menu.dashboard.kbase': '知识库',
-  'menu.dashboard.mine': '设置',
-  'menu.dashboard.queue': '排队',
-  'menu.dashboard.ticket': '工单',
+  'menu.dashboard.note': '筆記',
+  'menu.dashboard.kbase': '知識庫',
+  'menu.dashboard.mine': '設定',
+  'menu.dashboard.queue': '排隊',
+  'menu.dashboard.ticket': '工單',
   'menu.dashboard.leavemsg': '留言',
-  'menu.dashboard.visitor': '访客',
-  'menu.dashboard.monitor': '监控',
+  'menu.dashboard.visitor': '訪客',
+  'menu.dashboard.monitor': '監控',
   'menu.dashboard.plugins': '插件',
 
   // Bottom Menu
-  'menu.settings': 'Settings',
-  'menu.settings.logout': 'Logout',
-  'menu.agent.status': 'Agent Status',
-  'menu.agent.status.available': 'Available',
-  'menu.agent.status.rest': 'Rest',
-  'menu.agent.status.offline': 'Offline',
-  'menu.language': 'Language',
-  'menu.mode': 'Mode',
-  'menu.mode.team': 'Team Mode',
-  'menu.mode.agent': 'Agent Mode',
-  'menu.mode.personal': 'Personal Mode',
-  'menu.agent.offline.warning': 'Please end all ongoing conversations before going offline',
-  'menu.mode.personal.coming': 'Coming soon...',
+  'menu.settings': '設定',
+  'menu.settings.logout': '登出',
+  'menu.agent.status': '客服狀態',
+  'menu.agent.status.available': '可用',
+  'menu.agent.status.rest': '休息',
+  'menu.agent.status.offline': '離線',
+  'menu.language': '語言',
+  'menu.mode': '模式',
+  'menu.mode.team': '團隊模式',
+  'menu.mode.agent': '一對一模式',
+  'menu.mode.personal': '個人模式',
+  'menu.agent.offline.warning': '請在離線前結束所有正在進行中的會話',
+  'menu.mode.personal.coming': '即將推出...',
 }; 

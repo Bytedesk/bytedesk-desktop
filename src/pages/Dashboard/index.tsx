@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-16 23:04:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 15:42:49
+ * @LastEditTime: 2025-02-04 16:06:00
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -69,6 +69,7 @@ import LanguageMenu from "./FootBar/LanguageMenu";
 
 const Dashboard = () => {
   const intl = useIntl();
+  const { locale } = useContext(AppContext);
   const [pathname, setPathname] = useState("/chat");
   const navigate = useNavigate();
   const { isLoggedIn, hasRoleAgent } = useContext(AppContext);
@@ -115,7 +116,7 @@ const Dashboard = () => {
         path: "/chat",
         name: intl.formatMessage({ id: "menu.dashboard.chat" }),
         icon: <MessageOutlined />,
-        component: <Home />,
+        component: <Home/>,
       },
       {
         path: "/contact", 
@@ -155,7 +156,7 @@ const Dashboard = () => {
     }
 
     setRouteItems(teamRoutes);
-  }, [intl]); // 添加 intl 作为依赖
+  }, [intl, locale]); // 添加 locale 作为依赖
   //
   useIndexedDB();
   useMqtt();
@@ -382,7 +383,7 @@ const Dashboard = () => {
       )}
     >
       <Content>
-        <Outlet />
+        <Outlet key={locale.locale} />
         {/* https://www.npmjs.com/package/react-toastify */}
         {/* <ToastContainer /> */}
       </Content>
@@ -399,8 +400,6 @@ const Dashboard = () => {
         />
       )}
       <audio id="audioPlay" src="soundUrl" hidden={true} />
-      
-      <BottomLeftMenu />
     </ProLayout>
   );
 };

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-25 10:12:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 15:48:09
+ * @LastEditTime: 2025-02-04 15:53:51
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -152,75 +152,7 @@ const Basic = () => {
     // 设置electron主题模式
     setThemeModeElectron(e.target.value);
   };
-  //
-  // const { t } = useTranslation();
-  // const { locale, changeLocale } = useContext(AppContext);
-  // async function testIt() {
-  //   // 每次只返回一个设备，可以通过循环多次请求的方式获取所有设备
-  //   const device = await navigator.bluetooth.requestDevice({
-  //     acceptAllDevices: true,
-  //   });
-  //   document.getElementById("device-name").innerHTML =
-  //     device.name || `ID: ${device.id}`;
-  //   // console.log('deviceList:', deviceList)
-  // }
 
-  // function cancelRequest() {
-  //   if (IS_ELECTRON) {
-  //     window.electronAPI.cancelBluetoothRequest();
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (IS_ELECTRON && IS_DEBUG) {
-  //     // drag
-  //     // document.getElementById("drag1").ondragstart = (event) => {
-  //     //   event.preventDefault();
-  //     //   window.electronAPI.startDrag("drag-and-drop-1.md");
-  //     // };
-  //     // document.getElementById("drag2").ondragstart = (event) => {
-  //     //   event.preventDefault();
-  //     //   window.electronAPI.startDrag("drag-and-drop-2.md");
-  //     // };
-
-  //     // bluetooth
-  //     // window.electronAPI.bluetoothPairingRequest((event, details) => {
-  //     //   let response: Response;
-  //     //   switch (details.pairingKind) {
-  //     //     case "confirm": {
-  //     //       response.confirmed = window.confirm(
-  //     //         `Do you want to connect to device ${details.deviceId}?`,
-  //     //       );
-  //     //       break;
-  //     //     }
-  //     //     case "confirmPin": {
-  //     //       response.confirmed = window.confirm(
-  //     //         `Does the pin ${details.pin} match the pin displayed on device ${details.deviceId}?`,
-  //     //       );
-  //     //       break;
-  //     //     }
-  //     //     case "providePin": {
-  //     //       const pin = window.prompt(
-  //     //         `Please provide a pin for ${details.deviceId}.`,
-  //     //       );
-  //     //       if (pin) {
-  //     //         response.pin = pin;
-  //     //         response.confirmed = true;
-  //     //       } else {
-  //     //         response.confirmed = false;
-  //     //       }
-  //     //     }
-  //     //   }
-  //     //   window.electronAPI.bluetoothPairingResponse(response);
-  //     // });
-  //   } else {
-  //     console.log("not electron");
-  //   }
-  //   //
-  //   return () => {
-  //     // window.electronAPI.unregisterBluetoothPairingListener()
-  //   };
-  // }, []);
   const handleLanguageChange = (e: RadioChangeEvent) => {
     console.log("language change", e.target.value);
     changeLocale(e.target.value);
@@ -368,9 +300,15 @@ const Basic = () => {
           defaultMessage: '语言设置：'
         })}</p>
         <Radio.Group value={locale.locale} onChange={handleLanguageChange}>
-          <Radio key="en" value={"en"}>English</Radio>
-          <Radio key="zh-cn" value={"zh-cn"}>简体中文</Radio>
-          <Radio key="zh-tw" value={"zh-tw"}>繁体中文</Radio>
+          <Radio key="en" value={"en"}>
+            {intl.formatMessage({ id: "i18n.lang.en-US" })}
+          </Radio>
+          <Radio key="zh-cn" value={"zh-cn"}>
+            {intl.formatMessage({ id: "i18n.lang.zh-CN" })}
+          </Radio>
+          <Radio key="zh-tw" value={"zh-tw"}>
+            {intl.formatMessage({ id: "i18n.lang.zh-TW" })}
+          </Radio>
         </Radio.Group>
       </div>
       {

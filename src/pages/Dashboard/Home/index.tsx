@@ -34,7 +34,7 @@ import ThreadList from "./ThreadList";
 import useStyle from "@/hooks/useStyle";
 import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
 import { useThreadStore } from "@/stores/core/thread";
-import QueueList from "./QueueList";
+import Queue from "../../Vip/Home/Queue";
 import { useIntl } from "react-intl";
 import { OrderedListOutlined } from "@ant-design/icons";
 // import { isCustomerServiceThread, isGroupThread, isRobotThread } from "@/utils/utils";
@@ -126,7 +126,7 @@ const Home = () => {
           </Header>
         )}
         <Content style={contentStyle}>
-          {showQueueList ? <QueueList /> : <ChatPage />}
+          {showQueueList ? <Queue /> : <ChatPage />}
         </Content>
         {!showQueueList && (
           (showRightPanel && (isMemberThread(currentThread) || isGroupThread(currentThread))) ||
