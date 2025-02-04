@@ -1,0 +1,47 @@
+export default {
+  'chat.copy.success': 'Copy successful',
+  'chat.network.error': 'Network connection failed, please check network',
+  'chat.thread.closing': 'Ending conversation...',
+  'chat.thread.close.success': 'Conversation ended successfully',
+  'chat.thread.close.confirm.title': 'Are you sure to end the conversation?',
+  'chat.rate.invite.confirm.title': 'Confirm to invite rating?',
+  // 右键菜单
+  'chat.menu.copy': 'Copy',
+  'chat.menu.translate': 'Translate',
+  'chat.menu.recall': 'Recall',
+  'chat.menu.enlarge': 'Enlarge',
+  'chat.menu.quickreply.add': 'Add Quick Reply...',
+  'chat.menu.browser.open': 'Open in Browser',
+  'chat.menu.forward': 'Forward...',
+  'chat.menu.collect': 'Collect',
+  'chat.menu.quote': 'Quote',
+  // 输入框
+  'chat.translation.placeholder': 'Please enter translation content...',
+  'chat.input.placeholder': 'Please enter content, Ctrl+V to paste screenshot/image',
+  // 工具栏
+  'chat.toolbar.emoji': 'Emoji',
+  'chat.toolbar.image': 'Image',
+  'chat.toolbar.file': 'File',
+  'chat.toolbar.screenshot': 'Screenshot',
+  'chat.toolbar.autoreply': 'Auto Reply',
+  'chat.toolbar.audio': 'Audio',
+  'chat.toolbar.webrtc': 'Video Call',
+  'chat.toolbar.history': 'History',
+  'chat.toolbar.block': 'Block',
+  'chat.toolbar.invite.rate': 'Invite Rating',
+  // 导航栏
+  'chat.navbar.transfer': 'Transfer',
+  'chat.navbar.close': 'End',
+  'chat.navbar.note': 'Notebase',
+  'chat.navbar.kbase': 'Knowledge Base',
+  // Right Panel Tabs
+  'chat.right.quickreply': 'Quick Reply',
+  'chat.right.userinfo': 'User Info',
+  'chat.right.ai': 'Copilot',
+  'chat.right.ticket': 'Ticket',
+  'chat.right.llm': 'LLM',
+  'chat.right.group': 'Group',
+  'chat.right.member': 'Member',
+  'chat.right.docview': 'Doc View',
+  // ... 其他聊天相关文案
+} 

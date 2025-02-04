@@ -1,0 +1,106 @@
+/**
+ * @see https://www.electron.build/configuration/configuration
+ * @see https://electron-vite.github.io/build/electron-builder.html
+ * @see https://docs.ffffee.com/electron/electron-Mas%E5%BC%80%E5%8F%91-%E6%89%93%E5%8C%85-%E7%AD%BE%E5%90%8D-%E5%85%AC%E8%AF%81-%E6%B5%8B%E8%AF%95(testflight)%E6%96%87%E6%A1%A3/electron-Mas%E5%BC%80%E5%8F%91-%E6%89%93%E5%8C%85-%E7%AD%BE%E5%90%8D-%E5%85%AC%E8%AF%81-%E6%B5%8B%E8%AF%95(testflight)%E6%96%87%E6%A1%A3.html
+ * @see https://juejin.cn/post/7407259487193169957
+ * JSON5 是 JSON 的超集，旨在使 JSON 更加人性化，允许更宽松的语法
+ */
+{
+  appId: "com.kefux.im",
+  productName: "WeiYu",
+  asar: true,
+  buildVersion: "55",
+  copyright: "Copyright © 2024 bytedesk.com",
+  directories: {
+    output: "release",
+  },
+  files: [
+    "!README.md",
+    "!.env",
+  ],
+  mac: {
+    target: [
+      // {
+      //   target: "mas",
+      //   arch: ["universal"],
+      // },
+      {
+        target: "dmg",
+        arch: ["universal"],
+      }
+    ],
+    type: "distribution",
+    category: "public.app-category.business",
+    icon: "public/icons/icon.icns",
+    asarUnpack: ["**/*.node"],
+    provisioningProfile: "build/mac-mas.provisionprofile",
+    artifactName: "${productName}-${arch}.${ext}",
+    extendInfo: {
+      ElectronTeamID: "L5F47963M2",
+      ITSAppUsesNonExemptEncryption: "NO",
+      NSMicrophoneUsageDescription: "请允许访问您的麦克风以便进行语音聊天或录音。",
+      NSCameraUsageDescription: "请允许访问您的摄像头以便进行视频通话或拍摄照片。",
+      NSDocumentsFolderUsageDescription: "Application requests access to the user's Documents folder.",
+      NSDownloadsFolderUsageDescription: "Application requests access to the user's Downloads folder.",
+    },
+    // 暂时禁用自动执行签名，使用 afterSign 手动签名
+    notarize: false,
+    // notarize: {
+    //   "teamId": "L5F47963M2"
+    // }
+  },
+  // https://www.electron.build/dmg
+  dmg: {
+    sign: false,
+    // "icon": "public/icons/icon.icns",
+    // "background": "public/icons/dmg-background.png",
+  },
+  mas: {
+    hardenedRuntime: true,
+    gatekeeperAssess: true,
+    entitlements: "build/entitlements.mas.plist",
+    entitlementsInherit: "build/entitlements.mas.inherit.plist",
+    entitlementsLoginHelper: "build/entitlements.mas.loginhelper.plist",
+    type: "distribution",
+    category: "public.app-category.business",
+  },
+  // dmg不需要签名，需要注释掉此行。mas打包需要签名，需要去掉注释
+  // https://github.com/electron-userland/electron-builder/issues/8103
+  afterSign: "src/utils/notarize.mjs",
+  win: {
+    icon: "public/icons/icon.ico",
+    // target: ["msi", "nsis", "zip"],
+    target: [
+      {
+        target: "nsis",
+        arch: ["x64"],
+      },
+    ],
+    artifactName: "${productName}-${arch}.${ext}",
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: true,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: true,
+    allowElevation: true,
+    createDesktopShortcut: true,
+    createStartMenuShortcut: true,
+  },
+  linux: {
+    icon: "public/icons",
+    category: "Utility",
+    // target: ["AppImage", "rpm", "deb", "pacman"],
+    target: [
+      {
+        target: "AppImage",
+        arch: ["x64"],
+      },
+    ],
+    artifactName: "${productName}-${arch}.${ext}",
+  },
+  publish: {
+    provider: "generic",
+    url: ""
+  },
+}

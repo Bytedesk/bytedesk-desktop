@@ -1,0 +1,105 @@
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+/*  */
+.ant-app {
+  height: 100%;
+}
+.ant-layout {
+  height: 100%;
+}
+.ant-layout-sider {
+  overflow: auto;
+}
+.ant-layout-footer {
+  padding: 0;
+}
+.ant-tabs {
+  height: 100%;
+}
+.ant-tabs-content {
+  height: 100%;
+}
+.ant-tabs-tabpane {
+  height: 100%;
+}
+
+/* .ant-layout-sider-collapsed {
+  max-width: 75px !important;
+  min-width: 75px !important;
+  width: 75px !important;
+} */
+
+/* electron拖动区域 https://www.electronjs.org/docs/latest/tutorial/window-customization#create-frameless-windows */
+.ant-pro-form-login-container {
+  -webkit-app-region: drag;
+  padding-top: 40px;
+}
+.ant-pro-form-login-top {
+  height: 80px;
+}
+.ant-pro-form-server-container {
+  -webkit-app-region: drag;
+}
+.ant-pro-form-login-main {
+  -webkit-app-region: no-drag;
+}
+.ant-pro-form-server-main {
+  -webkit-app-region: no-drag;
+}
+.ant-layout-header {
+  -webkit-app-region: drag;
+}
+.ant-menu {
+  -webkit-app-region: drag;
+}
+.ant-menu-item {
+  -webkit-app-region: no-drag;
+}
+.ant-menu-submenu {
+  -webkit-app-region: no-drag;
+}
+.ant-btn {
+  -webkit-app-region: no-drag;
+}
+/* ProLayout */
+.ant-pro-layout .ant-pro-layout-content {
+  padding-block: 0;
+  padding-inline: 0;
+}
+/* 自定义 */
+.footerLeftButton {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.footerLeftButton:hover {
+  background-color: bisque;
+}
+.footerRightButton {
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+}
+/* .footerRightButton:hover {
+  background-color: bisque;
+} */
+/* 表情 */
+.Popup.active .Popup-dialog {
+  width: 350px;
+}
+/*  */
+/* .ant-layout-sider {
+  background: #2B7BF7;
+}
+.ant-menu-item {
+  color: #fff;
+} */
+
+.profile-container {
+  /* margin: auto; */
+  margin-left: 20px;
+  overflow-y: auto;
+  height: 100vh; /* 或者其他你需要的高度 */
+}

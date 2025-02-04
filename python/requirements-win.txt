@@ -1,0 +1,14 @@
+numpy
+pandas
+fastapi[all] 
+pyinstaller
+# 
+wcferry
+wxauto
+# 
+pywin32
+pyautogui
+uiautomation
+pypiwin32
+#win32gui
+#win32con

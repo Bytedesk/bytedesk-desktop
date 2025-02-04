@@ -1,0 +1,26 @@
+{
+  "extName": {
+    "message": "WeiYu - ローカルAIモデル用のWeb UI"
+  },
+  "extDescription": {
+    "message": "ローカルで実行中のAIモデルを使って、Webブラウジングをアシストします。"
+  },
+  "openSidePanelToChat": {
+    "message": "チャットするためにCopilotを開く"
+  },
+  "contextSummarize": {
+    "message": "要約"
+  },
+  "contextExplain": {
+    "message": "説明"
+  },
+  "contextRephrase": {
+    "message": "言い換え"
+  },
+  "contextTranslate": {
+    "message": "翻訳"
+  },
+  "contextCustom": {
+    "message": "カスタム"
+  }
+}

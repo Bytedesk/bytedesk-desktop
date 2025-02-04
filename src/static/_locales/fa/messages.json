@@ -1,0 +1,29 @@
+{
+    "extName": {
+        "message": "دستیار صفحه - یک رابط کاربری وب برای مدل های هوش مصنوعی لوکال"
+    },
+    "extDescription": {
+        "message": "از مدل های هوش مصنوعی لوکال خود برای دریافت کمک در هنگام مرور وب استفاده کنید."
+    },
+    "openSidePanelToChat": {
+        "message": "باز کردن کوپایلت برای گفتگو"
+    },
+    "openOptionToChat": {
+        "message": "باز کردن رابط کاربری وب برای گفتگو"
+    },
+    "contextSummarize": {
+        "message": "خلاصه کردن"
+    },
+    "contextExplain": {
+        "message": "توضیح دادن"
+    },
+    "contextRephrase": {
+        "message": "بازنویسی"
+    },
+    "contextTranslate": {
+        "message": "ترجمه کردن"
+    },
+    "contextCustom": {
+        "message": "سفارشی"
+    }
+}

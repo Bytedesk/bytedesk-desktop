@@ -1,0 +1,62 @@
+/*
+ * @Author: jackning 270580156@qq.com
+ * @Date: 2024-09-23 15:15:23
+ * @LastEditors: jackning 270580156@qq.com
+ * @LastEditTime: 2024-09-24 14:44:31
+ * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
+ *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
+ *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
+ *  仅支持企业内部员工自用，严禁私自用于销售、二次销售或者部署SaaS方式销售
+ *  Business Source License 1.1: https://github.com/Bytedesk/bytedesk/blob/main/LICENSE
+ *  contact: 270580156@qq.com
+ * 联系：270580156@qq.com
+ * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
+ */
+import { Layout } from "antd";
+import useStyle from "@/hooks/useStyle";
+const { Sider, Content, Header } = Layout;
+import type { MenuProps } from "antd";
+import { Menu } from "antd";
+
+type MenuItem = Required<MenuProps>["items"][number];
+
+const items: MenuItem[] = [
+  {
+    key: "grp",
+    label: "访客管理",
+    type: "group",
+    children: [
+      { key: "13", label: "当前在线" },
+      { key: "14", label: "已离线" },
+    ],
+  },
+];
+//
+const Visitor = () => {
+  const { leftSiderStyle, leftSiderWidth, rightSiderStyle } = useStyle();
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
+  };
+  //
+  return (
+    <>
+      <Layout>
+        <Sider style={leftSiderStyle} width={leftSiderWidth}>
+          <Menu
+            onClick={onClick}
+            style={{ width: 256 }}
+            // defaultSelectedKeys={["1"]}
+            // defaultOpenKeys={["sub1"]}
+            mode="inline"
+            items={items}
+          />
+        </Sider>
+        <Layout>
+          <Content>visitor</Content>
+          {/* <Sider style={rightSiderStyle}></Sider> */}
+        </Layout>
+      </Layout>
+    </>
+  );
+};
+export default Visitor;
