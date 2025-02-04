@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:29:35
+ * @LastEditTime: 2025-02-05 14:11:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -31,6 +31,8 @@ export default {
    'ticket.form.category.placeholder': 'Select category',
    'ticket.form.assignee': 'Assignee',
    'ticket.form.assignee.placeholder': 'Select assignee',
+   'ticket.form.reporter': 'Reporter',
+   'ticket.form.reporter.placeholder': 'Select reporter',
    'ticket.form.workgroup': 'Workgroup',
    'ticket.form.workgroup.required': 'Please select workgroup',
    'ticket.form.workgroup.placeholder': 'Select workgroup',
@@ -87,12 +89,12 @@ export default {
    'ticket.filter.by.assignment': 'Filter by Assignment',
    'ticket.filter.by.time': 'Filter by Time',
    // 
-   'ticket.filter.all.assignment': 'All Assignment',
+   'ticket.filter.all.assignment': 'All',
    'ticket.filter.my.tickets': 'My Tickets',
    'ticket.filter.unassigned': 'Unassigned',
    'ticket.filter.my.workgroup': 'My Workgroup',
    // 
-   'ticket.filter.all.time': 'All Time',
+   'ticket.filter.all.time': 'All',
    'ticket.filter.today': 'Today',
    'ticket.filter.yesterday': 'Yesterday',
    'ticket.filter.this.week': 'This Week',

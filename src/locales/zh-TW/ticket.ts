@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:30:31
+ * @LastEditTime: 2025-02-05 14:20:18
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -31,6 +31,8 @@ export default {
   'ticket.form.category.placeholder': '請選擇工單分類',
   'ticket.form.assignee': '處理人',
   'ticket.form.assignee.placeholder': '請選擇處理人',
+  'ticket.form.reporter': '報告人',
+  'ticket.form.reporter.placeholder': '請選擇報告人',
   'ticket.form.workgroup': '技能組',
   'ticket.form.workgroup.required': '請選擇技能組',
   'ticket.form.workgroup.placeholder': '請選擇技能組',
@@ -84,12 +86,12 @@ export default {
   'ticket.filter.by.assignment': '按分配篩選',
   'ticket.filter.by.time': '按時間篩選',
   // 
-  'ticket.filter.all.assignment': '全部分配',
+  'ticket.filter.all.assignment': '全部',
   'ticket.filter.my.tickets': '我的工單',
   'ticket.filter.unassigned': '未分配',
   'ticket.filter.my.workgroup': '我的技能組',
   // 
-  'ticket.filter.all.time': '全部時間',
+  'ticket.filter.all.time': '全部',
   'ticket.filter.today': '今天',
   'ticket.filter.yesterday': '昨天',
   'ticket.filter.this.week': '本週',

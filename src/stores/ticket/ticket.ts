@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:17:57
+ * @LastEditTime: 2025-02-05 14:05:00
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -102,13 +102,16 @@ export const useTicketStore = create<TicketState>((set, get) => {
           pageSize: state.pagination.pageSize,
         };
 
-        // 根据 filters 添加过滤条件
+        // 根据状态过滤
         if (state.filters.status && state.filters.status !== TICKET_FILTER_STATUS_ALL) {
           params.status = state.filters.status;
         }
+
+        // 优先级过滤
         if (state.filters.priority && state.filters.priority !== TICKET_FILTER_PRIORITY_ALL) {
           params.priority = state.filters.priority;
         }
+
         // 分配状态过滤  
         if (state.filters.assignment === TICKET_FILTER_MY_TICKETS) {
           params.assigneeUid = agentInfo?.uid;
