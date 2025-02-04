@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-13 02:39:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-20 12:46:21
+ * @LastEditTime: 2025-02-04 13:44:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,8 +17,8 @@ import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 // https://github.com/electron-vite/vite-plugin-electron
-// import electron from "vite-plugin-electron/simple";
-// import pkg from "./package.json";
+import electron from "vite-plugin-electron/simple";
+import pkg from "./package.json";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -33,8 +33,8 @@ export default defineConfig(({ command }) => {
   console.log("isServe:", isServe, "isBuild:", isBuild, "sourcemap:", sourcemap);
   // 
   return {
-    base: "/agent", // web端打包
-    // base: "./", // 客户端打包
+    // base: "/agent", // web端打包
+    base: "./", // 客户端打包
     resolve: {
       alias: {
         "@": path.join(__dirname, "src"),
@@ -43,53 +43,53 @@ export default defineConfig(({ command }) => {
     plugins: [
       react(),
       // 开启 Electron 调试
-      // electron({
-      //   main: {
-      //     // Shortcut of `build.lib.entry`
-      //     entry: "electron/main/index.ts",
-      //     onstart(args) {
-      //       if (process.env.VSCODE_DEBUG) {
-      //         console.log("[startup] Electron App",
-      //         );
-      //       } else {
-      //         args.startup();
-      //       }
-      //     },
-      //     vite: {
-      //       build: {
-      //         sourcemap,
-      //         minify: isBuild,
-      //         outDir: "dist-electron/main",
-      //         rollupOptions: {
-      //           external: Object.keys(
-      //             "dependencies" in pkg ? pkg.dependencies : {},
-      //           ),
-      //         },
-      //       },
-      //     },
-      //   },
-      //   preload: {
-      //     // Shortcut of `build.rollupOptions.input`.
-      //     // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
-      //     input: "electron/preload/index.ts",
-      //     vite: {
-      //       build: {
-      //         sourcemap: sourcemap ? "inline" : undefined, // #332
-      //         minify: isBuild,
-      //         outDir: "dist-electron/preload",
-      //         rollupOptions: {
-      //           external: Object.keys(
-      //             "dependencies" in pkg ? pkg.dependencies : {},
-      //           ),
-      //         },
-      //       },
-      //     },
-      //   },
-      //   // Ployfill the Electron and Node.js API for Renderer process.
-      //   // If you want use Node.js in Renderer process, the `nodeIntegration` needs to be enabled in the Main process.
-      //   // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
-      //   renderer: {},
-      // }) as any,
+      electron({
+        main: {
+          // Shortcut of `build.lib.entry`
+          entry: "electron/main/index.ts",
+          onstart(args) {
+            if (process.env.VSCODE_DEBUG) {
+              console.log("[startup] Electron App",
+              );
+            } else {
+              args.startup();
+            }
+          },
+          vite: {
+            build: {
+              sourcemap,
+              minify: isBuild,
+              outDir: "dist-electron/main",
+              rollupOptions: {
+                external: Object.keys(
+                  "dependencies" in pkg ? pkg.dependencies : {},
+                ),
+              },
+            },
+          },
+        },
+        preload: {
+          // Shortcut of `build.rollupOptions.input`.
+          // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
+          input: "electron/preload/index.ts",
+          vite: {
+            build: {
+              sourcemap: sourcemap ? "inline" : undefined, // #332
+              minify: isBuild,
+              outDir: "dist-electron/preload",
+              rollupOptions: {
+                external: Object.keys(
+                  "dependencies" in pkg ? pkg.dependencies : {},
+                ),
+              },
+            },
+          },
+        },
+        // Ployfill the Electron and Node.js API for Renderer process.
+        // If you want use Node.js in Renderer process, the `nodeIntegration` needs to be enabled in the Main process.
+        // See 👉 https://github.com/electron-vite/vite-plugin-electron-renderer
+        renderer: {},
+      }),
     ],
     // 包含处理 CSS 文件的配置
     // css: {
