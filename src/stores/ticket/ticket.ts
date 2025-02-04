@@ -110,23 +110,23 @@ export const useTicketStore = create<TicketState>((set, get) => {
 
         // 时间过滤
         if (state.filters.time === TICKET_FILTER_TODAY) {
-          params.startTime = moment().startOf('day').valueOf().toString();
-          params.endTime = moment().endOf('day').valueOf().toString();
+          params.startDate = moment().startOf('day').valueOf().toString();
+          params.endDate = moment().endOf('day').valueOf().toString();
         } else if (state.filters.time === TICKET_FILTER_YESTERDAY) {
-          params.startTime = moment().subtract(1, 'days').startOf('day').format();
-          params.endTime = moment().subtract(1, 'days').endOf('day').format();
+          params.startDate = moment().subtract(1, 'days').startOf('day').format();
+          params.endDate = moment().subtract(1, 'days').endOf('day').format();
         } else if (state.filters.time === TICKET_FILTER_THIS_WEEK) {
-          params.startTime = moment().startOf('week').format();
-          params.endTime = moment().endOf('week').format();
+          params.startDate = moment().startOf('week').format();
+          params.endDate = moment().endOf('week').format();
         } else if (state.filters.time === TICKET_FILTER_LAST_WEEK) {
-          params.startTime = moment().subtract(1, 'week').startOf('week').format();
-          params.endTime = moment().subtract(1, 'week').endOf('week').format();
+          params.startDate = moment().subtract(1, 'week').startOf('week').format();
+          params.endDate = moment().subtract(1, 'week').endOf('week').format();
         } else if (state.filters.time === TICKET_FILTER_THIS_MONTH) {
-          params.startTime = moment().startOf('month').format();
-          params.endTime = moment().endOf('month').format();
+          params.startDate = moment().startOf('month').format();
+          params.endDate = moment().endOf('month').format();
         } else if (state.filters.time === TICKET_FILTER_LAST_MONTH) {
-          params.startTime = moment().subtract(1, 'month').startOf('month').format();
-          params.endTime = moment().subtract(1, 'month').endOf('month').format();
+          params.startDate = moment().subtract(1, 'month').startOf('month').format();
+          params.endDate = moment().subtract(1, 'month').endOf('month').format();
         }
 
         // 添加搜索条件
