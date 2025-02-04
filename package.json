@@ -54,6 +54,8 @@
     "@dicebear/core": "^8.0.1",
     "@emoji-mart/data": "^1.2.1",
     "@emoji-mart/react": "^1.1.1",
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.5",
     "@langchain/community": "^0.2.28",
     "@tanstack/react-query": "^5.20.5",
     "@tanstack/react-query-devtools": "^5.21.0",
