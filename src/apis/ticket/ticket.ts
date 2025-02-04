@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-23 15:20:30
+ * @LastEditTime: 2025-02-05 16:18:06
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,7 +17,7 @@ import { HTTP_CLIENT } from "@/utils/constants";
 import request from "../request";
 
 /** */
-export async function queryTicketsByOrgUid(pageParam: TICKET.HttpRequest) {
+export async function queryTicketsByOrgUid(pageParam: TICKET.TicketRequest) {
   return request<TICKET.HttpPageResult>("/api/v1/ticket/query/org", {
     method: "GET",
     params: {
@@ -27,7 +27,7 @@ export async function queryTicketsByOrgUid(pageParam: TICKET.HttpRequest) {
   });
 }
 
-export async function queryTicketByUid(ticket: TICKET.HttpRequest) {
+export async function queryTicketByUid(ticket: TICKET.TicketRequest) {
   return request<TICKET.HttpResult>("/api/v1/ticket/query/uid", {
     method: "GET",
     params: {
@@ -37,7 +37,7 @@ export async function queryTicketByUid(ticket: TICKET.HttpRequest) {
   });
 }
 
-export async function createTicket(ticket: TICKET.HttpRequest) {
+export async function createTicket(ticket: TICKET.TicketRequest) {
   return request<TICKET.HttpResult>("/api/v1/ticket/create", {
     method: "POST",
     data: {
@@ -47,7 +47,7 @@ export async function createTicket(ticket: TICKET.HttpRequest) {
   });
 }
 
-export async function updateTicket(ticket: TICKET.HttpRequest) {
+export async function updateTicket(ticket: TICKET.TicketRequest) {
   return request<TICKET.HttpResult>("/api/v1/ticket/update", {
     method: "POST",
     data: {

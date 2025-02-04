@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 15:03:46
+ * @LastEditTime: 2025-02-05 16:06:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -94,6 +94,8 @@ export default {
    'ticket.filter.my.tickets': 'My Tickets',
    'ticket.filter.unassigned': 'Unassigned',
    'ticket.filter.my.workgroup': 'My Workgroup',
+   'ticket.filter.my.created': 'My Created',
+   'ticket.filter.my.assigned': 'My Assigned',
    // 
    'ticket.filter.all.time': 'All',
    'ticket.filter.today': 'Today',

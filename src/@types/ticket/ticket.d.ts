@@ -47,6 +47,7 @@ declare namespace TICKET {
     // 
     startDate?: string;
     endDate?: string;
+    assignmentAll?: boolean;
   };
   //
   type HttpResult = {

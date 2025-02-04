@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 15:47:03
+ * @LastEditTime: 2025-02-05 16:11:12
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -17,22 +17,26 @@ import { message } from '@/AntdGlobalComp';
 import { queryTicketsByOrgUid } from '@/apis/ticket/ticket';
 import moment from 'moment';
 import { useAgentStore } from '@/stores/service/agent';
-import { useWorkgroupStore } from '@/stores/service/workgroup';
+// import { useWorkgroupStore } from '@/stores/service/workgroup';
 import { useOrgStore } from '@/stores/core/organization';
 import { 
   TICKET_FILTER_LAST_MONTH, 
   TICKET_FILTER_LAST_WEEK, 
-  TICKET_FILTER_MY_WORKGROUP, 
-  TICKET_FILTER_MY_TICKETS, 
+  // TICKET_FILTER_MY_WORKGROUP, 
+  // TICKET_FILTER_MY_TICKETS, 
   TICKET_FILTER_PRIORITY_ALL, 
   TICKET_FILTER_STATUS_ALL, 
   TICKET_FILTER_THIS_MONTH, 
   TICKET_FILTER_THIS_WEEK, 
   TICKET_FILTER_TODAY,
-  TICKET_FILTER_UNASSIGNED, 
+  // TICKET_FILTER_UNASSIGNED, 
   TICKET_FILTER_YESTERDAY, 
-  TICKET_FILTER_TIME_ALL
+  TICKET_FILTER_TIME_ALL,
+  TICKET_FILTER_MY_ASSIGNED,
+  TICKET_FILTER_MY_CREATED,
+  TICKET_FILTER_ASSIGNMENT_ALL
 } from '@/utils/constants';
+import { useUserStore } from '../core/user';
 
 interface TicketState {
   // 工单列表
@@ -68,7 +72,8 @@ interface TicketState {
 export const useTicketStore = create<TicketState>((set, get) => {
   // 获取当前用户、工作组和组织
   const agentInfo = useAgentStore.getState().agentInfo;
-  const workgroupInfo = useWorkgroupStore.getState().workgroupInfo;
+  const userInfo = useUserStore.getState().userInfo;
+  // const workgroupInfo = useWorkgroupStore.getState().workgroupInfo;
   const currentOrg = useOrgStore.getState().currentOrg;
 
   return {
@@ -114,14 +119,14 @@ export const useTicketStore = create<TicketState>((set, get) => {
         }
 
         // 分配状态过滤  
-        if (state.filters.assignment === TICKET_FILTER_MY_TICKETS) {
+        if (state.filters.assignment === TICKET_FILTER_ASSIGNMENT_ALL) {
+          params.assignmentAll = true;
+          params.reporterUid = userInfo?.uid;
           params.assigneeUid = agentInfo?.uid;
-        }
-        if (state.filters.assignment === TICKET_FILTER_UNASSIGNED) {
-          params.assigneeUid = 'unassigned';
-        }
-        if (state.filters.assignment === TICKET_FILTER_MY_WORKGROUP) {
-          params.workgroupUid = workgroupInfo?.uid;
+        } else if (state.filters.assignment === TICKET_FILTER_MY_CREATED) {
+          params.reporterUid = userInfo?.uid;
+        } else if (state.filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
+          params.assigneeUid = agentInfo?.uid;
         }
 
         // 时间过滤
@@ -156,6 +161,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
         console.log('Load tickets params:', params);
         const response = await queryTicketsByOrgUid(params);
         if (response.data?.code === 200) {
+          console.log('Load tickets response:', response.data);
           set({ 
             tickets: response.data.data.content || [],
             pagination: {
