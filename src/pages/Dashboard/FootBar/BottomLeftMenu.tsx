@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-31 15:59:53
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 15:47:21
+ * @LastEditTime: 2025-02-05 16:47:54
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -175,7 +175,7 @@ const BottomLeftMenu = () => {
           <Menu
             inlineCollapsed={true}
             onClick={onBottomItemClick}
-            style={{ width: 64, height: 44 }}
+            style={{ width: 64, height: 34 }}
             mode="inline"
             items={menuItems}
           />
