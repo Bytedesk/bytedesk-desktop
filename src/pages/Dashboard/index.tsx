@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-16 23:04:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:06:00
+ * @LastEditTime: 2025-02-05 14:38:33
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -361,7 +361,7 @@ const Dashboard = () => {
       menuItemRender={(item, dom) => (
         // console.log("menuItemRender", item, dom),
         <>
-          <a
+          <div
             onClick={() => {
               setPathname(item.path);
               navigate(item.path);
@@ -378,7 +378,7 @@ const Dashboard = () => {
                 {dom}
               </>
             )}
-          </a>
+          </div>
         </>
       )}
     >
