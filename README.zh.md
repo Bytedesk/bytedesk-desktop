@@ -65,27 +65,15 @@
 - 工作流
 - ...
 
-## Docker 快速开始
+## 快速开始
 
-### 克隆项目并启动docker compose容器
-
-```bash
-git clone https://gitee.com/270580156/weiyu.im.git && cd bytedesk/deploy/docker && docker compose -p bytedesk -f docker-compose.yaml up -d
-```
-
-### 停止容器
+### 克隆项目并启动
 
 ```bash
-docker compose -p bytedesk -f docker-compose.yaml stop
+git clone https://github.com/Bytedesk/bytedesk-desktop && cd bytedesk-desktop && pnpm install && pnpm dev
 ```
 
 ## 演示
-
-本地预览
-
-```bash
-http://127.0.0.1:9003/dev
-```
 
 - [线上预览](https://www.weiyuai.cn/admin/)
 
