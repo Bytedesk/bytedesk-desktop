@@ -1,8 +1,7 @@
-import useTranslate from "@/hooks/useTranslate";
+import VipContainer from "../components/VipContainer";
 
 const CustomerInfo = () => {
-  const { translateString } = useTranslate();
-  return <div>{translateString("i18n.vip.component")}</div>;
+  return <VipContainer />;
 };
 
 export default CustomerInfo;

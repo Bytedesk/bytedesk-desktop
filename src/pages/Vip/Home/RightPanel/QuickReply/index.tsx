@@ -1,5 +1,7 @@
+import VipContainer from "../components/VipContainer";
+
 const QuickReply = () => {
-  return <div>QuickReply</div>;
+  return <VipContainer />;
 };
 
 export default QuickReply;

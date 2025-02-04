@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-04 13:37:53
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 13:38:50
+ * @LastEditTime: 2025-02-04 14:18:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -12,8 +12,10 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
+import VipContainer from "@/pages/Vip/Home/RightPanel/components/VipContainer";
+
 const WebRtcModel = () => {
-  return <div>WebRtcModel</div>;
+  return <VipContainer />;
 };
 
 export default WebRtcModel;

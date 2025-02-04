@@ -1,8 +1,10 @@
+import VipContainer from "../Home/RightPanel/components/VipContainer";
+
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-04 13:23:06
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 13:28:39
+ * @LastEditTime: 2025-02-04 14:16:48
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,7 +15,7 @@
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
 const Ticket = () => {
-  return <div>Ticket</div>;
+  return <VipContainer />;
 };
 
 export default Ticket;
