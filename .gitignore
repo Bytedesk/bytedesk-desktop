@@ -133,6 +133,7 @@ Vip/
 *.yml
 .env
 .env.dev
+.env.build
 build/
 cicd/
 config/
