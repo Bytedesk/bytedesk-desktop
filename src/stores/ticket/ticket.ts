@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 14:05:00
+ * @LastEditTime: 2025-02-05 15:47:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -30,7 +30,8 @@ import {
   TICKET_FILTER_THIS_WEEK, 
   TICKET_FILTER_TODAY,
   TICKET_FILTER_UNASSIGNED, 
-  TICKET_FILTER_YESTERDAY 
+  TICKET_FILTER_YESTERDAY, 
+  TICKET_FILTER_TIME_ALL
 } from '@/utils/constants';
 
 interface TicketState {
@@ -124,24 +125,27 @@ export const useTicketStore = create<TicketState>((set, get) => {
         }
 
         // 时间过滤
-        if (state.filters.time === TICKET_FILTER_TODAY) {
-          params.startDate = moment().startOf('day').valueOf().toString();
-          params.endDate = moment().endOf('day').valueOf().toString();
+        if (state.filters.time === TICKET_FILTER_TIME_ALL) {
+          params.startDate = moment().subtract(100, 'years').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+        } else if (state.filters.time === TICKET_FILTER_TODAY) {
+          params.startDate = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
         } else if (state.filters.time === TICKET_FILTER_YESTERDAY) {
-          params.startDate = moment().subtract(1, 'days').startOf('day').format();
-          params.endDate = moment().subtract(1, 'days').endOf('day').format();
+          params.startDate = moment().subtract(1, 'days').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().subtract(1, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss');
         } else if (state.filters.time === TICKET_FILTER_THIS_WEEK) {
-          params.startDate = moment().startOf('week').format();
-          params.endDate = moment().endOf('week').format();
+          params.startDate = moment().startOf('week').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().endOf('week').format('YYYY-MM-DD HH:mm:ss');
         } else if (state.filters.time === TICKET_FILTER_LAST_WEEK) {
-          params.startDate = moment().subtract(1, 'week').startOf('week').format();
-          params.endDate = moment().subtract(1, 'week').endOf('week').format();
+          params.startDate = moment().subtract(1, 'week').startOf('week').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().subtract(1, 'week').endOf('week').format('YYYY-MM-DD HH:mm:ss');
         } else if (state.filters.time === TICKET_FILTER_THIS_MONTH) {
-          params.startDate = moment().startOf('month').format();
-          params.endDate = moment().endOf('month').format();
+          params.startDate = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
         } else if (state.filters.time === TICKET_FILTER_LAST_MONTH) {
-          params.startDate = moment().subtract(1, 'month').startOf('month').format();
-          params.endDate = moment().subtract(1, 'month').endOf('month').format();
+          params.startDate = moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD HH:mm:ss');
+          params.endDate = moment().subtract(1, 'month').endOf('month').format('YYYY-MM-DD HH:mm:ss');
         }
 
         // 添加搜索条件
