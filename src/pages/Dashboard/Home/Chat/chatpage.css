@@ -1,0 +1,69 @@
+.CardText {
+    padding: 5px;
+}
+.Message.left .Bubble {
+  text-align: left;
+}
+.MessageList {
+  height: 100%;
+}
+/* https://chatui.io/sdk/faq */
+.ChatFooter .Composer-input {
+  min-height: 68px;
+}
+
+/* Header样式 */
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--white);
+}
+
+/* 暗色模式支持 */
+[data-theme='dark'] .Header {
+  background-color: var(--dark-background);
+}
+
+/* electron拖动区域 https://www.electronjs.org/docs/latest/tutorial/window-customization#create-frameless-windows */
+.Navbar-main {
+  -webkit-app-region: drag;
+}
+.Navbar-left {
+  -webkit-app-region: no-drag;
+}
+.Navbar-right {
+  -webkit-app-region: no-drag;
+}
+
+/*  */
+.transfer-thread-btn {
+  font-size: 14px !important;
+  width: 30px;
+  cursor: pointer;
+  /* padding-right: 30px; */
+}
+.ticket-thread-btn {
+  font-size: 14px !important;
+  width: 30px;
+  cursor: pointer;
+  /* padding-right: 30px; */
+}
+.crm-thread-btn {
+  font-size: 14px !important;
+  width: 30px;
+  cursor: pointer;
+  /* padding-right: 30px; */
+}
+.close-thread-btn {
+  font-size: 14px !important;
+  width: 30px;
+  /* padding-right: 10px; */
+}
+.show-more-btn {
+  font-size: 16px !important;
+  width: 30px;
+  /* padding-right: 10px; */
+}
