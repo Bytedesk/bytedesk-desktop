@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-25 10:12:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 15:45:28
+ * @LastEditTime: 2025-02-04 15:48:09
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -373,20 +373,6 @@ const Basic = () => {
           <Radio key="zh-tw" value={"zh-tw"}>繁体中文</Radio>
         </Radio.Group>
       </div>
-      {/* <div>
-        <p>接待状态：</p>
-        <Radio.Group value={agentInfo.status} onChange={handleStatusChange}>
-          <Radio key={AGENT_STATUS_AVAILABLE} value={AGENT_STATUS_AVAILABLE}>
-            接待
-          </Radio>
-          <Radio key={AGENT_STATUS_BUSY} value={AGENT_STATUS_BUSY}>
-            忙碌
-          </Radio>
-          <Radio key={AGENT_STATUS_OFFLINE} value={AGENT_STATUS_OFFLINE}>
-            下线
-          </Radio>
-        </Radio.Group>
-      </div> */}
       {
         IS_DEBUG && (
           <div>

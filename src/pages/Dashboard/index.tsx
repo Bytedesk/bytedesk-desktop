@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-16 23:04:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-26 23:34:38
+ * @LastEditTime: 2025-02-04 15:42:49
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -65,6 +65,7 @@ import Ticket from "../Vip/Ticket";
 import Notebase from "./Notebase";
 // import { useSettingsStore } from "@/stores/core/setting";
 // import socketio from '@/network/socketio';
+import LanguageMenu from "./FootBar/LanguageMenu";
 
 const Dashboard = () => {
   const intl = useIntl();
@@ -143,14 +144,6 @@ const Dashboard = () => {
     ];
 
     if (IS_DEBUG) {
-      // teamRoutes.push(
-      //   {
-      //     path: "/ticket",
-      //     name: intl.formatMessage({ id: "menu.dashboard.ticket" }),
-      //     icon: <BookOutlined />,
-      //     component: <Ticket />,
-      //   },
-      // );
       teamRoutes.push(
         {
           path: "/notebase",
@@ -323,7 +316,7 @@ const Dashboard = () => {
       emitter.off(EVENT_BUS_MESSAGE_TYPE_TRANSFER_REJECT, handleTransferReject);
     };
   }, []);
-  //
+
   return (
     <ProLayout
       collapsed={true}
@@ -351,6 +344,7 @@ const Dashboard = () => {
             key="QuestionCircleFilled"
             onClick={openDocs}
           />,
+          <LanguageMenu />,
           <BottomLeftMenu />,
         ];
       }}
@@ -405,6 +399,8 @@ const Dashboard = () => {
         />
       )}
       <audio id="audioPlay" src="soundUrl" hidden={true} />
+      
+      <BottomLeftMenu />
     </ProLayout>
   );
 };

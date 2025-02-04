@@ -1,8 +1,7 @@
 export default {
   'i18n.lang.en-US': 'English',
-  'i18n.lang.zh-CN': 'Simplified Chinese',
-  'i18n.lang.zh-TW': 'Traditional Chinese',
-
+  'i18n.lang.zh-CN': '简体中文',
+  'i18n.lang.zh-TW': '繁體中文',
   //
   "i18n.queue.tip": "Queue",
   "i18n.queue.message.template": "Current Queuing: {0} people, Wait {1} minutes",

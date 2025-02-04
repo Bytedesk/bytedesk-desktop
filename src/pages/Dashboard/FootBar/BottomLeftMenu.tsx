@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-31 15:59:53
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 17:27:38
+ * @LastEditTime: 2025-02-04 15:47:21
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -120,7 +120,7 @@ const BottomLeftMenu = () => {
         ],
       };
 
-      // @ts-ignore
+      // @ts-expect-error no error
       const firstItemChildren = updatedMenuItems[0].children;
       const existingIndex = firstItemChildren.findIndex(
         (item) => item.key === newMenuItem.key,
@@ -131,7 +131,7 @@ const BottomLeftMenu = () => {
       } else {
         firstItemChildren.splice(0, 0, newMenuItem);
       }
-      // @ts-ignore
+      // @ts-expect-error no error
       updatedMenuItems[0].children = firstItemChildren;
       setMenuItems(updatedMenuItems); // 更新菜单项
     }
@@ -175,7 +175,7 @@ const BottomLeftMenu = () => {
           <Menu
             inlineCollapsed={true}
             onClick={onBottomItemClick}
-            style={{ width: 64 }}
+            style={{ width: 64, height: 44 }}
             mode="inline"
             items={menuItems}
           />
