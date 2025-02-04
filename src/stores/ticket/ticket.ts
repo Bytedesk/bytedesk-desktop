@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 16:43:36
+ * @LastEditTime: 2025-02-05 17:12:22
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -108,6 +108,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
           orgUid,
           pageNumber: state.pagination.pageNumber,
           pageSize: state.pagination.pageSize,
+          assignmentAll: false,
         };
 
         // 根据状态过滤
@@ -123,14 +124,16 @@ export const useTicketStore = create<TicketState>((set, get) => {
         // 分配状态过滤  
         if (state.filters.assignment === TICKET_FILTER_ASSIGNMENT_ALL) {
           params.assignmentAll = true;
-          params.reporterUid = userInfo?.uid;
-          params.assigneeUid = agentInfo?.uid;
+          params.reporterUid = userInfo?.uid || '';
+          params.assigneeUid = agentInfo?.uid || '';
         } else if (state.filters.assignment === TICKET_FILTER_MY_CREATED) {
           params.assignmentAll = false;
-          params.reporterUid = userInfo?.uid;
+          params.reporterUid = userInfo?.uid || '';
+          params.assigneeUid = '';
         } else if (state.filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
           params.assignmentAll = false;
-          params.assigneeUid = agentInfo?.uid;
+          params.assigneeUid = agentInfo?.uid || '';
+          params.reporterUid = '';
         }
 
         // 时间过滤
