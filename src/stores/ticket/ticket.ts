@@ -127,7 +127,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
           params.assignmentAll = false;
           params.reporterUid = userInfo?.uid;
         } else if (state.filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
-          params.assignmentAll
+          params.assignmentAll = false;
           params.assigneeUid = agentInfo?.uid;
         }
 
