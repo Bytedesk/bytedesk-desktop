@@ -73,6 +73,7 @@ export default {
   'ticket.list.empty': '暫無工單',
   'ticket.list.search.placeholder': '搜索工單',
   'ticket.list.create': '創建工單',
+  'ticket.list.total': '工單總數',
   // 工單操作
   'ticket.action.edit': '編輯',
   'ticket.action.delete': '刪除',

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 14:20:10
+ * @LastEditTime: 2025-02-05 14:30:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -73,6 +73,7 @@ export default {
   'ticket.list.filter.my': '我的工单',
   'ticket.list.filter.unassigned': '未分配',
   'ticket.list.create': '创建工单',
+  'ticket.list.total': '工单总数',
   // 工单操作
   'ticket.action.edit': '编辑',
   'ticket.action.delete': '删除',

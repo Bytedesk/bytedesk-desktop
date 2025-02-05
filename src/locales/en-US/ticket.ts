@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 14:11:02
+ * @LastEditTime: 2025-02-05 14:29:58
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -75,6 +75,7 @@ export default {
    'ticket.list.empty': 'No tickets found',
    'ticket.list.search.placeholder': 'Search tickets',
    'ticket.list.create': 'Create Ticket',
+   'ticket.list.total': 'Total',
    
    // Ticket Actions
    'ticket.action.edit': 'Edit',
