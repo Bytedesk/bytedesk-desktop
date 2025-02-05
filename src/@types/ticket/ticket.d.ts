@@ -81,8 +81,9 @@ declare namespace TICKET {
     type: string;
     //
     // threadTopic: string;
-    
-    categoryUid: string;
+    thread?: THREAD.ThreadResponse;
+    // categoryUid: string;
+    category?: CATEGORY.CategoryResponse;
     //
     workgroup?: WORKGROUP.WorkgroupResponse;
     assignee?: AGENT.AgentResponse;
