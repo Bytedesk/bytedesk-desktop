@@ -80,7 +80,8 @@ declare namespace TICKET {
     priority: string;
     type: string;
     //
-    threadTopic: string;
+    // threadTopic: string;
+    
     categoryUid: string;
     //
     workgroup?: WORKGROUP.WorkgroupResponse;
