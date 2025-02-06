@@ -1,10 +1,10 @@
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:26:14
+ * @LastEditTime: 2025-02-06 14:27:19
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -15,7 +15,7 @@ import { Modal } from "antd";
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
 import React, { useEffect, useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
+import { DeleteOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd";
 import { Upload } from "antd";
 import { RcFile, UploadChangeParam } from "antd/lib/upload";
@@ -175,6 +175,11 @@ const UploadDrag = ({
     handleSubmit(uploads);
   };
 
+  function handleDelete(uid: string) {
+    console.log("handleDelete", uid);
+    setUploads(uploads.filter((upload) => upload.uid !== uid));
+  }
+
   return (
     <>
       <Modal
@@ -194,8 +199,15 @@ const UploadDrag = ({
         <div>
           {uploads.map((upload) => (
             <div key={upload.uid}>
-              <img src={upload.fileUrl} alt={upload.fileName} />
-              <div>{upload.fileName}</div>
+              
+              {upload.fileType === "image" ? (
+                <img src={upload.fileUrl} alt={upload.fileName} style={{ width: '50px', height: '50px' }} />
+              ) : (
+                <div>{upload.fileName}</div>
+              )}
+              <div>
+                <Button icon={<DeleteOutlined />} onClick={() => handleDelete(upload.uid)} />
+              </div>
             </div>
           ))}
         </div>
