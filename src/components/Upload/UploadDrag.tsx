@@ -1,10 +1,8 @@
-import { Button, Modal } from "antd";
-
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:28:33
+ * @LastEditTime: 2025-02-06 14:40:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,13 +15,14 @@ import { Button, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { DeleteOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd";
-import { Upload } from "antd";
+import { Button, Modal, Upload } from "antd";
 import { RcFile, UploadChangeParam } from "antd/lib/upload";
 import moment from "moment";
 import { ACCESS_TOKEN, HTTP_CLIENT } from "@/utils/constants";
 import { message } from "@/AntdGlobalComp";
 import { getUploadUrl } from "@/utils/configUtils";
 const { Dragger } = Upload;
+
 //
 type UploadDragProps = {
   type: string;
@@ -50,7 +49,7 @@ const UploadDrag = ({
 }: UploadDragProps) => {
   const [uploads, setUploads] = useState<UPLOAD.UploadResponse[]>([]);
   //
-  const [uploadData, setUploadData] = useState<UploadDataProps>({
+  const [uploadParams, setUploadParams] = useState<UploadDataProps>({
     file: null,
     file_name: "test.pdf",
     file_type: "application/pdf",
@@ -82,26 +81,26 @@ const UploadDrag = ({
       },
       body: formData,
     })
-      .then((response) => {
-        // console.log("upload response:", response);
-        return response.json();
-      })
-      .then((result: UPLOAD.HttpResult) => {
-        console.log("upload data:", result);
-        if (result.code === 200) {
-          // let url = info.file.response.data.fileUrl;
-          // onSuccess(url);
-          message.destroy();
-          message.success(`${file_name} 上传成功`);
-          // handleOk();
-          setUploads([...uploads, result.data]);
-        } else {
-          // onError(info.file);
-          message.destroy();
-          message.error(`${file_name} 上传失败`);
-          handleCancel();
-        }
-      });
+    .then((response) => {
+      // console.log("upload response:", response);
+      return response.json();
+    })
+    .then((result: UPLOAD.HttpResult) => {
+      console.log("upload data:", result);
+      if (result.code === 200) {
+        // let url = info.file.response.data.fileUrl;
+        // onSuccess(url);
+        message.destroy();
+        message.success(`${file_name} 上传成功`);
+        // handleOk();
+        setUploads(prevUploads => [...prevUploads, result.data]);
+      } else {
+        // onError(info.file);
+        message.destroy();
+        message.error(`${file_name} 上传失败`);
+        handleCancel();
+      }
+    });
   };
 
   const props: UploadProps = {
@@ -112,35 +111,34 @@ const UploadDrag = ({
     headers: {
       Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
     },
-    data: uploadData,
+    data: uploadParams,
     showUploadList: false,
     beforeUpload(file: RcFile) {
       console.log("beforeUpload", file);
       const file_name =
         moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
-      uploadData.file = file;
-      uploadData.file_name = file_name;
-      uploadData.file_type = file.type;
+      uploadParams.file = file;
+      uploadParams.file_name = file_name;
+      uploadParams.file_type = file.type;
       // uploadData.kb_type = type;
-      uploadData.category_uid = "";
+      uploadParams.category_uid = "";
       // uploadData.kb_uid = currentKbase?.uid;
-      console.log("beforeUpload", uploadData);
+      console.log("beforeUpload", uploadParams);
     },
     onChange(info: UploadChangeParam<UploadFile>) {
-      console.log("onChange", info);
       if (info.file.status === "uploading") {
         // console.log('uploading:', info.file);
         message.loading(`${info.file.name} 上传中`);
       }
       if (info.file.status === "done") {
-        console.log("response: ", info.file.response);
+        console.log("onChange response: ", info.file.response);
         if (info.file.response.code === 200) {
           // let url = info.file.response.data.fileUrl;
           // onSuccess(url);
           message.destroy();
           message.success(`${info.file.name} 上传成功`);
           // handleOk();
-          setUploads([...uploads, info.file.response.data]);
+          setUploads(prevUploads => [...prevUploads, info.file.response.data]);
         } else {
           // onError(info.file);
           message.destroy();
@@ -162,8 +160,8 @@ const UploadDrag = ({
   const [uploadProps] = useState(props);
 
   useEffect(() => {
-    setUploadData({
-      ...uploadData,
+    setUploadParams({
+      ...uploadParams,
       kb_type: type,
       category_uid: "",
       // kb_uid: currentKbase?.uid,
@@ -193,22 +191,66 @@ const UploadDrag = ({
             <InboxOutlined />
           </p>
           <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
-          {/* <p className="ant-upload-hint">{uploadHit}</p> */}
         </Dragger>
         {/* 上传的文件列表, 支持点击打开URL，删除，图片支持预览*/}
-        <div>
+        <div style={{ 
+          marginTop: "16px",
+          maxHeight: "200px",
+          overflowY: "auto"
+        }}>
           {uploads.map((upload) => (
-            <div key={upload.uid} style={{ cursor: 'pointer' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                {upload.fileType === "image" ? (
-                  <img src={upload.fileUrl} alt={upload.fileName} style={{ width: '50px', height: '50px' }} />
+            <div 
+              key={upload.uid} 
+              style={{ 
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "8px",
+                marginBottom: "8px",
+                border: "1px solid #f0f0f0",
+                borderRadius: "4px"
+              }}
+            >
+              <div
+                onClick={() => window.open(upload.fileUrl, "_blank")}
+                style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "10px",
+                  cursor: "pointer",
+                  flex: 1
+                }}
+              >
+                {/* 图片支持预览, 完善图片类型判断 */}
+                {upload.fileType.startsWith("image/") ? (
+                  <img
+                    src={upload.fileUrl}
+                    alt={upload.fileName}
+                    style={{ 
+                      width: "40px", 
+                      height: "40px",
+                      objectFit: "cover",
+                      borderRadius: "4px"
+                    }}
+                  />
                 ) : (
-                  <div>{upload.fileName}</div>
+                  // 限制文件名的长度为10个字符，多余部分使用...表示
+                  <div style={{ 
+                    maxWidth: "200px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap"
+                  }}>
+                    {upload.fileName}
+                  </div>
                 )}
-                
-              <div>
-                <Button icon={<DeleteOutlined />} onClick={() => handleDelete(upload.uid)} />
               </div>
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                onClick={() => handleDelete(upload.uid)}
+                style={{ marginLeft: "8px" }}
+              />
             </div>
           ))}
         </div>
