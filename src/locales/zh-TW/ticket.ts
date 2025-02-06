@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:25:39
+ * @LastEditTime: 2025-02-06 13:32:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -138,22 +138,23 @@ export default {
   'ticket.filter.priority_high': '高',
   'ticket.filter.priority_urgent': '緊急',
   'ticket.filter.priority_critical': '嚴重',
-  
+
   // 
   'ticket.filter.assignment_all': '全部',
-  'ticket.filter.my.tickets': '我的工單',
-  'ticket.filter.unassigned': '未分配',
-  'ticket.filter.my.workgroup': '我的技能組',
-  'ticket.filter.my.created': '我創建的',
-  'ticket.filter.my.assigned': '待我處理',
+  'ticket.filter.assignment_my_tickets': '我的工單',
+  'ticket.filter.assignment_unassigned': '未分配',
+  'ticket.filter.assignment_my_workgroup': '我的技能組',
+  'ticket.filter.assignment_my_created': '我創建的',
+  'ticket.filter.assignment_my_assigned': '待我處理',
+
   // 
-  'ticket.filter.time_all': '全部',
-  'ticket.filter.today': '今天',
-  'ticket.filter.yesterday': '昨天',
-  'ticket.filter.this_week': '本週',
-  'ticket.filter.last_week': '上週',
-  'ticket.filter.this_month': '本月',
-  'ticket.filter.last_month': '上月',
+  'ticket.filter.time_all': '全部時間',
+  'ticket.filter.time_today': '今天',
+  'ticket.filter.time_yesterday': '昨天',
+  'ticket.filter.time_this_week': '本週',
+  'ticket.filter.time_last_week': '上週',
+  'ticket.filter.time_this_month': '本月',
+  'ticket.filter.time_last_month': '上月',
 
   
  

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:22:29
+ * @LastEditTime: 2025-02-06 13:32:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -118,17 +118,19 @@ export default {
 
    // 
    'ticket.filter.assignment_all': 'All',
-   'ticket.filter.my.tickets': 'My Tickets',
-   'ticket.filter.unassigned': 'Unassigned',
-   'ticket.filter.my.workgroup': 'My Workgroup',
-   'ticket.filter.my.created': 'Created by Me',
-   'ticket.filter.my.assigned': 'Assigned to Me',
+   'ticket.filter.assignment_my_tickets': 'My Tickets',
+   'ticket.filter.assignment_unassigned': 'Unassigned',
+   'ticket.filter.assignment_my_workgroup': 'My Workgroup',
+   'ticket.filter.assignment_my_created': 'Created by Me',
+   'ticket.filter.assignment_my_assigned': 'Assigned to Me',
    
    // 
    'ticket.filter.time_all': 'All Time',
-   'ticket.filter.this_week': 'This Week',
-   'ticket.filter.last_week': 'Last Week',
-   'ticket.filter.this_month': 'This Month',
-   'ticket.filter.last_month': 'Last Month',
+   'ticket.filter.time_today': 'Today',
+   'ticket.filter.time_yesterday': 'Yesterday',
+   'ticket.filter.time_this_week': 'This Week',
+   'ticket.filter.time_last_week': 'Last Week',
+   'ticket.filter.time_this_month': 'This Month',
+   'ticket.filter.time_last_month': 'Last Month',
    
 } 

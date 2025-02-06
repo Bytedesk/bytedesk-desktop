@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:24:24
+ * @LastEditTime: 2025-02-06 13:32:30
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -117,6 +117,7 @@ export default {
   'ticket.filter.by.priority': '按优先级筛选',
   'ticket.filter.by.assignment': '按分配筛选',
   'ticket.filter.by.time': '按时间筛选',
+
   // 状态筛选
   'ticket.filter.status_all': '全部状态',
   'ticket.filter.status_new': '新建',
@@ -128,6 +129,7 @@ export default {
   'ticket.filter.status_resolved': '已解决',
   'ticket.filter.status_closed': '已关闭',
   'ticket.filter.status_cancelled': '已取消',
+
   // 优先级筛选
   'ticket.filter.priority_all': '全部优先级',
   'ticket.filter.priority_lowest': '最低',
@@ -136,17 +138,21 @@ export default {
   'ticket.filter.priority_high': '高',
   'ticket.filter.priority_urgent': '紧急',
   'ticket.filter.priority_critical': '严重',
+
   // 分配筛选
   'ticket.filter.assignment_all': '全部',
-  'ticket.filter.my.created': '我创建的',
-  'ticket.filter.my.assigned': '待我处理',
-  'ticket.filter.unassigned': '未分配',
+  'ticket.filter.assignment_my_tickets': '我的工单',
+  'ticket.filter.assignment_unassigned': '未分配',
+  'ticket.filter.assignment_my_workgroup': '我的技能组',
+  'ticket.filter.assignment_my_created': '我创建的',
+  'ticket.filter.assignment_my_assigned': '待我处理',
+
   // 时间筛选
-  'ticket.filter.time_all': '全部',
-  'ticket.filter.today': '今天',
-  'ticket.filter.yesterday': '昨天',
-  'ticket.filter.this_week': '本周',
-  'ticket.filter.last_week': '上周',
-  'ticket.filter.this_month': '本月',
-  'ticket.filter.last_month': '上月',
+  'ticket.filter.time_all': '全部时间',
+  'ticket.filter.time_today': '今天',
+  'ticket.filter.time_yesterday': '昨天',
+  'ticket.filter.time_this_week': '本周',
+  'ticket.filter.time_last_week': '上周',
+  'ticket.filter.time_this_month': '本月',
+  'ticket.filter.time_last_month': '上月',
 } 
