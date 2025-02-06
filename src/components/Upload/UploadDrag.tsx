@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-11 15:06:47
+ * @LastEditTime: 2025-02-06 11:48:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -55,7 +55,7 @@ const UploadDrag = ({
   // const currentKbase = useKbaseStore((state) => state.currentKbase);
   const currentCategory = useCategoryStore((state) => state.currentCategory);
   // https://tika.apache.org/2.9.0/formats.html
-  const [uploadHit, setUploadHit] = useState(
+  const [uploadHit] = useState(
     "当前支持上传pdf/txt/markdown/docx等",
   );
   const [uploadData, setUploadData] = useState<UploadDataProps>({
@@ -126,7 +126,7 @@ const UploadDrag = ({
     showUploadList: false,
     beforeUpload(file: RcFile) {
       console.log("beforeUpload", file);
-      let file_name =
+      const file_name =
         moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
       uploadData.file = file;
       uploadData.file_name = file_name;
@@ -168,7 +168,7 @@ const UploadDrag = ({
       handleUpload(e.dataTransfer.files[0]);
     },
   };
-  const [uploadProps, setUploadProps] = useState(props);
+  const [uploadProps] = useState(props);
 
   useEffect(() => {
     setUploadData({

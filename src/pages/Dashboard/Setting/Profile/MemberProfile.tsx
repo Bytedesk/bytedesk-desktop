@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-01 12:03:34
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-04 13:54:37
+ * @LastEditTime: 2025-02-06 11:48:01
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
