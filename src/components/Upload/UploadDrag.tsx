@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:13:50
+ * @LastEditTime: 2025-02-06 14:14:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -28,7 +28,7 @@ const { Dragger } = Upload;
 type UploadDragProps = {
   type: string;
   isModalOpen: boolean;
-  handleOk: (uploads: UPLOAD.U[]) => void;
+  handleOk: (uploads: UPLOAD.UploadResponse[]) => void;
   handleCancel: () => void;
 };
 type UploadDataProps = {
@@ -136,7 +136,7 @@ const UploadDrag = ({
           // onSuccess(url);
           message.destroy();
           message.success(`${info.file.name} 上传成功`);
-          handleOk();
+          // handleOk();
         } else {
           // onError(info.file);
           message.destroy();
@@ -172,7 +172,7 @@ const UploadDrag = ({
       <Modal
         title="上传文件"
         open={isModalOpen}
-        onOk={handleOk}
+        // onOk={handleOk}
         onCancel={handleCancel}
       >
         <Dragger {...uploadProps}>
