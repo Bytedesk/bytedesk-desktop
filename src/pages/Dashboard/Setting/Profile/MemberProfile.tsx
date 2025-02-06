@@ -101,7 +101,7 @@ const MemberProfile = () => {
         console.log(info.file, info.fileList);
       }
       if (info.file.status === "done") {
-        const url = info.file.response.data;
+        const url = info.file.response.data.fileUrl;
         console.log("url: ", url);
         // userInfo.avatar = url;
         // form.setFieldValue('avatar', userInfo.avatar);

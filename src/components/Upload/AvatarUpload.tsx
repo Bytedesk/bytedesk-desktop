@@ -61,7 +61,7 @@ export const AvatarUpload = ({ children, onSuccess, onError }) => {
       if (info.file.status === "done") {
         console.log("response: ", info.file.response);
         if (info.file.response.code === 200) {
-          const url = info.file.response.data;
+          const url = info.file.response.data.fileUrl;
           onSuccess(url);
           message.success(`${info.file.name} 上传成功`);
         } else {

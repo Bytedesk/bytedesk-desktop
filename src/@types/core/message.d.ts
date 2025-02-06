@@ -57,7 +57,7 @@ declare namespace MESSAGE {
   type HttpUploadResult = {
     message: string;
     code: number;
-    data: string;
+    data: UPLOAD.UploadResponse;
   };
 
   type MessageResponse = {

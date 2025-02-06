@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-18 16:49:01
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 11:24:50
+ * @LastEditTime: 2025-02-06 12:08:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -66,10 +66,10 @@ export const ClickUpload = ({ children }) => {
         console.log("done", info.file.response);
         if (isImageFile) {
           // 发送图片
-          emitter.emit(EVENT_BUS_SEND_IMAGE_MESSAGE, info.file.response.data);
+          emitter.emit(EVENT_BUS_SEND_IMAGE_MESSAGE, info.file.response.data.fileUrl);
         } else {
           // 发送文件
-          emitter.emit(EVENT_BUS_SEND_FILE_MESSAGE, info.file.response.data);
+          emitter.emit(EVENT_BUS_SEND_FILE_MESSAGE, info.file.response.data.fileUrl);
         }
         //
         message.success(`${info.file.name} 发送成功`);

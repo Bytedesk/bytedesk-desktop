@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-08-10 17:43:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-20 17:43:09
+ * @LastEditTime: 2025-02-06 11:58:44
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -123,7 +123,7 @@ const ScreenRecorderModel = ({
       .then((result: MESSAGE.HttpUploadResult) => {
         console.log("upload data:", result);
         // callback(result);
-        emitter.emit(EVENT_BUS_SEND_IMAGE_MESSAGE, result.data);
+        emitter.emit(EVENT_BUS_SEND_IMAGE_MESSAGE, result.data.fileUrl);
         onOk();
       });
   };

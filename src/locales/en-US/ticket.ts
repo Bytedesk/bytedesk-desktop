@@ -122,4 +122,7 @@ export default {
    'ticket.reporter': 'Reporter',
    'ticket.category': 'Category',
    'ticket.steps.title': 'Processing Steps',
+   'ticket.form.upload.button': 'Upload Attachments',
+   'ticket.upload.success': 'File uploaded successfully',
+   'ticket.upload.failed': 'File upload failed',
 } 

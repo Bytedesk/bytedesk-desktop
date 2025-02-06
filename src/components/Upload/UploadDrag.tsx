@@ -100,7 +100,7 @@ const UploadDrag = ({
       .then((result: UPLOAD.HttpResult) => {
         console.log("upload data:", result);
         if (result.code === 200) {
-          // let url = info.file.response.data;
+          // let url = info.file.response.data.fileUrl;
           // onSuccess(url);
           message.destroy();
           message.success(`${file_name} 上传成功`);
@@ -145,7 +145,7 @@ const UploadDrag = ({
       if (info.file.status === "done") {
         console.log("response: ", info.file.response);
         if (info.file.response.code === 200) {
-          // let url = info.file.response.data;
+          // let url = info.file.response.data.fileUrl;
           // onSuccess(url);
           message.destroy();
           message.success(`${info.file.name} 上传成功`);
