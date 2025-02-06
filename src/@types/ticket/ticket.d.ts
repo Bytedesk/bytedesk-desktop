@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:02:46
+ * @LastEditTime: 2025-02-06 12:32:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -47,7 +47,9 @@ declare namespace TICKET {
     // 
     startDate?: string;
     endDate?: string;
+    // 
     assignmentAll?: boolean;
+    uploadUids?: string[];
   };
   //
   type HttpResult = {
@@ -92,7 +94,27 @@ declare namespace TICKET {
     //
     createdAt: string;
     updatedAt: string;
+    // 
+    attachments?: TICKET.TicketAttachmentResponse[];
   };
 
+  type TicketAttachmentResponse = {
+    uid?: string;
+    ticket?: TICKET.TicketResponse;
+    upload?: UPLOAD.UploadResponse;
+  };
+
+  type TicketAttachmentRequest = {
+    ticketUid?: string;
+    uploadUid?: string;
+  };
+
+  type TicketCommentResponse = {
+    uid?: string;
+    ticket?: TICKET.TicketResponse;
+    content?: string;
+    createdAt?: string;
+    updatedAt?: string;
+  };
   
 }
