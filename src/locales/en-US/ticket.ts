@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 16:06:41
+ * @LastEditTime: 2025-02-06 13:10:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -39,7 +39,7 @@ export default {
    'ticket.form.thread': 'Related Conversation',
    'ticket.form.thread.placeholder': 'Select related conversation',
    // Ticket Status
-   'ticket.status.all': 'All',
+   'ticket.status.all': 'All Status',
    'ticket.status.new': 'New',
    'ticket.status.assigned': 'Assigned',
    'ticket.status.in_progress': 'In Progress',
@@ -50,7 +50,7 @@ export default {
    'ticket.status.closed': 'Closed',
    'ticket.status.cancelled': 'Cancelled',
    // Ticket Priority
-   'ticket.priority.all': 'All',
+   'ticket.priority.all': 'All Priority',
    'ticket.priority.lowest': 'Lowest',
    'ticket.priority.low': 'Low',
    'ticket.priority.medium': 'Medium',
@@ -90,7 +90,7 @@ export default {
    'ticket.filter.by.assignment': 'Filter by Assignment',
    'ticket.filter.by.time': 'Filter by Time',
    // 
-   'ticket.filter.all.assignment': 'All',
+   'ticket.filter.assignment_all': 'All',
    'ticket.filter.my.tickets': 'My Tickets',
    'ticket.filter.unassigned': 'Unassigned',
    'ticket.filter.my.workgroup': 'My Workgroup',
@@ -128,15 +128,30 @@ export default {
    'ticket.current.filters': 'Current Filters',
    'ticket.filter.all': 'All Tickets',
    'ticket.filter.my_tickets': 'My Tickets',
-   'ticket.filter.unassigned': 'Unassigned',
    'ticket.filter.my_workgroup': 'My Workgroup',
    'ticket.filter.my_created': 'Created by Me',
    'ticket.filter.my_assigned': 'Assigned to Me',
    'ticket.filter.all_time': 'All Time',
-   'ticket.filter.today': 'Today',
-   'ticket.filter.yesterday': 'Yesterday',
    'ticket.filter.this_week': 'This Week',
    'ticket.filter.last_week': 'Last Week',
    'ticket.filter.this_month': 'This Month',
    'ticket.filter.last_month': 'Last Month',
+   // Filter translations
+   'ticket.filter.status_all': 'All Status',
+   'ticket.filter.status_new': 'New',
+   'ticket.filter.status_assigned': 'Assigned',
+   'ticket.filter.status_in_progress': 'In Progress',
+   'ticket.filter.status_pending': 'Pending',
+   'ticket.filter.status_on_hold': 'On Hold',
+   'ticket.filter.status_reopened': 'Reopened',
+   'ticket.filter.status_resolved': 'Resolved',
+   'ticket.filter.status_closed': 'Closed',
+   'ticket.filter.status_cancelled': 'Cancelled',
+   'ticket.filter.priority_all': 'All Priority',
+   'ticket.filter.priority_lowest': 'Lowest',
+   'ticket.filter.priority_low': 'Low',
+   'ticket.filter.priority_medium': 'Medium',
+   'ticket.filter.priority_high': 'High',
+   'ticket.filter.priority_urgent': 'Urgent',
+   'ticket.filter.priority_critical': 'Critical',
 } 

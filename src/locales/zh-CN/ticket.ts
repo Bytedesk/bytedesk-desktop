@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 16:06:49
+ * @LastEditTime: 2025-02-06 13:07:19
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -38,7 +38,7 @@ export default {
   'ticket.form.workgroup.placeholder': '请选择技能组',
   'ticket.workgroup.load.error': '加载技能组失败',
   // 工单状态
-  'ticket.status.all': '全部',
+  'ticket.status.all': '全部状态',
   'ticket.status.new': '新建',
   'ticket.status.assigned': '已分配',
   'ticket.status.in_progress': '处理中',
@@ -49,7 +49,7 @@ export default {
   'ticket.status.closed': '已关闭',
   'ticket.status.cancelled': '已取消',
   // 工单优先级
-  'ticket.priority.all': '全部',
+  'ticket.priority.all': '全部优先级',
   'ticket.priority.lowest': '最低',
   'ticket.priority.low': '低',
   'ticket.priority.medium': '中',
@@ -87,13 +87,30 @@ export default {
   'ticket.filter.by.priority': '按优先级筛选',
   'ticket.filter.by.assignment': '按分配筛选',
   'ticket.filter.by.time': '按时间筛选',
-  // 
-  'ticket.filter.all.assignment': '全部',
-  'ticket.filter.my.tickets': '我的工单',
-  'ticket.filter.unassigned': '未分配',
-  'ticket.filter.my.workgroup': '我的技能组',
+  // 状态筛选
+  'ticket.filter.status_all': '全部状态',
+  'ticket.filter.status_new': '新建',
+  'ticket.filter.status_assigned': '已分配',
+  'ticket.filter.status_in_progress': '处理中',
+  'ticket.filter.status_pending': '待处理',
+  'ticket.filter.status_on_hold': '挂起',
+  'ticket.filter.status_reopened': '重新打开',
+  'ticket.filter.status_resolved': '已解决',
+  'ticket.filter.status_closed': '已关闭',
+  'ticket.filter.status_cancelled': '已取消',
+  // 优先级筛选
+  'ticket.filter.priority_all': '全部优先级',
+  'ticket.filter.priority_lowest': '最低',
+  'ticket.filter.priority_low': '低',
+  'ticket.filter.priority_medium': '中',
+  'ticket.filter.priority_high': '高',
+  'ticket.filter.priority_urgent': '紧急',
+  'ticket.filter.priority_critical': '严重',
+  // 分配筛选
+  'ticket.filter.assignment_all': '全部',
   'ticket.filter.my.created': '我创建的',
   'ticket.filter.my.assigned': '待我处理',
+  'ticket.filter.unassigned': '未分配',
   // 
   'ticket.filter.all.time': '全部',
   'ticket.filter.today': '今天',
@@ -132,13 +149,10 @@ export default {
   'ticket.current.filters': '当前筛选',
   'ticket.filter.all': '全部工单',
   'ticket.filter.my_tickets': '我的工单',
-  'ticket.filter.unassigned': '未分配',
   'ticket.filter.my_workgroup': '我的技能组',
   'ticket.filter.my_created': '我创建的',
   'ticket.filter.my_assigned': '待我处理',
   'ticket.filter.all_time': '全部时间',
-  'ticket.filter.today': '今天',
-  'ticket.filter.yesterday': '昨天',
   'ticket.filter.this_week': '本周',
   'ticket.filter.last_week': '上周',
   'ticket.filter.this_month': '本月',

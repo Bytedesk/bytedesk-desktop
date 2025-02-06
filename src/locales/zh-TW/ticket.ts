@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 16:07:07
+ * @LastEditTime: 2025-02-06 13:07:06
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -38,7 +38,7 @@ export default {
   'ticket.form.workgroup.placeholder': '請選擇技能組',
   'ticket.workgroup.load.error': '加載技能組失敗',
   // 工單狀態
-  'ticket.status.all': '全部',
+  'ticket.status.all': '全部狀態',
   'ticket.status.new': '新建',
   'ticket.status.assigned': '已分配',
   'ticket.status.in_progress': '處理中',
@@ -49,7 +49,7 @@ export default {
   'ticket.status.closed': '已關閉',
   'ticket.status.cancelled': '已取消',
   // 工單優先級
-  'ticket.priority.all': '全部',
+  'ticket.priority.all': '全部優先級',
   'ticket.priority.lowest': '最低',
   'ticket.priority.low': '低',
   'ticket.priority.medium': '中',
@@ -87,7 +87,7 @@ export default {
   'ticket.filter.by.assignment': '按分配篩選',
   'ticket.filter.by.time': '按時間篩選',
   // 
-  'ticket.filter.all.assignment': '全部',
+  'ticket.filter.assignment_all': '全部',
   'ticket.filter.my.tickets': '我的工單',
   'ticket.filter.unassigned': '未分配',
   'ticket.filter.my.workgroup': '我的技能組',
@@ -130,4 +130,26 @@ export default {
   'ticket.type': '類型',
   'ticket.category': '分類',
   'ticket.steps.title': '處理步驟',
+  // 狀態篩選
+  'ticket.filter.status_all': '全部狀態',
+  'ticket.filter.status_new': '新建',
+  'ticket.filter.status_assigned': '已分配',
+  'ticket.filter.status_in_progress': '處理中',
+  'ticket.filter.status_pending': '待處理',
+  'ticket.filter.status_on_hold': '掛起',
+  'ticket.filter.status_reopened': '重新打開',
+  'ticket.filter.status_resolved': '已解決',
+  'ticket.filter.status_closed': '已關閉',
+  'ticket.filter.status_cancelled': '已取消',
+  // 優先級篩選
+  'ticket.filter.priority_all': '全部優先級',
+  'ticket.filter.priority_lowest': '最低',
+  'ticket.filter.priority_low': '低',
+  'ticket.filter.priority_medium': '中',
+  'ticket.filter.priority_high': '高',
+  'ticket.filter.priority_urgent': '緊急',
+  'ticket.filter.priority_critical': '嚴重',
+  // 分配篩選
+  'ticket.filter.my_created': '我創建的',
+  'ticket.filter.my_assigned': '待我處理',
 } 
