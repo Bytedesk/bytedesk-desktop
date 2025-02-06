@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:12:41
+ * @LastEditTime: 2025-02-06 14:13:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -48,7 +48,7 @@ const UploadDrag = ({
   handleOk,
   handleCancel,
 }: UploadDragProps) => {
-  // 
+  //
   const [uploadData, setUploadData] = useState<UploadDataProps>({
     file: null,
     file_name: "test.pdf",
