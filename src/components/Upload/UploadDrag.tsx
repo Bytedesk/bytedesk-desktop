@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:16:01
+ * @LastEditTime: 2025-02-06 14:17:07
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -94,6 +94,7 @@ const UploadDrag = ({
           message.destroy();
           message.success(`${file_name} 上传成功`);
           // handleOk();
+          setUploads([...uploads, result.data]);
         } else {
           // onError(info.file);
           message.destroy();
@@ -168,7 +169,7 @@ const UploadDrag = ({
   }, [type]);
   //
   const handleOk = () => {
-    console.log("handleOk", uploadData);
+    console.log("handleOk", uploads);
     handleSubmit(uploads);
   };
 
