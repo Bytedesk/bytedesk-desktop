@@ -13,14 +13,15 @@
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
 import React, { useEffect, useState, useMemo } from "react";
-import { DeleteOutlined, InboxOutlined } from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd";
-import { Button, Modal, Upload } from "antd";
+import { Modal, Upload } from "antd";
 import { RcFile, UploadChangeParam } from "antd/lib/upload";
 import moment from "moment";
 import { ACCESS_TOKEN, HTTP_CLIENT } from "@/utils/constants";
 import { message } from "@/AntdGlobalComp";
 import { getUploadUrl } from "@/utils/configUtils";
+import FilePreview from './FilePreview';
 const { Dragger } = Upload;
 
 //
@@ -146,92 +147,11 @@ const UploadDrag = ({
           gap: "12px",
         }}>
           {uploads.map((upload) => (
-            <div 
-              key={upload.uid} 
-              style={{ 
-                position: "relative",
-                width: "50px",
-                height: "50px",
-                border: "1px solid #f0f0f0",
-                borderRadius: "4px",
-                overflow: "hidden"
-              }}
-            >
-              {/* 删除按钮 */}
-              <Button
-                type="text"
-                size="small"
-                icon={<DeleteOutlined />}
-                onClick={() => handleDelete(upload.uid)}
-                style={{ 
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  padding: "2px",
-                  background: "rgba(255, 255, 255, 0.8)",
-                  border: "none",
-                  borderRadius: "0 4px 0 4px",
-                  zIndex: 1
-                }}
-              />
-
-              {/* 文件预览 */}
-              <div
-                onClick={() => window.open(upload.fileUrl, "_blank")}
-                style={{ 
-                  width: "100%",
-                  height: "100%",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "relative"
-                }}
-              >
-                {upload.fileType.startsWith("image/") ? (
-                  <img
-                    src={upload.fileUrl}
-                    alt={upload.fileName}
-                    style={{ 
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover"
-                    }}
-                  />
-                ) : (
-                  <div style={{ 
-                    fontSize: "12px",
-                    padding: "4px",
-                    textAlign: "center",
-                    wordBreak: "break-all",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden"
-                  }}>
-                    {upload.fileName}
-                  </div>
-                )}
-              </div>
-
-              {/* 文件名提示 */}
-              <div style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                background: "rgba(0, 0, 0, 0.5)",
-                color: "#fff",
-                fontSize: "10px",
-                padding: "2px",
-                textAlign: "center",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis"
-              }}>
-                {upload.fileName}
-              </div>
-            </div>
+            <FilePreview 
+              key={upload.uid}
+              file={upload}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       </div>
