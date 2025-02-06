@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-18 14:34:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 11:26:37
+ * @LastEditTime: 2025-02-06 13:52:44
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -42,12 +42,12 @@ const DropUpload: React.FC<DropUploadProps> = ({ onImageSend, children }) => {
     handleUpload(pastedImage, (result: MESSAGE.HttpUploadResult) => {
       // 发送消息
       if (pastedImage?.type.startsWith("image")) {
-        onImageSend(result.data, MESSAGE_TYPE_IMAGE);
+        onImageSend(result.data.fileUrl, MESSAGE_TYPE_IMAGE);
       } else if (pastedImage?.type.startsWith("video/")) {
         // 假设您想对视频进行特殊处理，例如传递一个不同的类型
-        onImageSend(result.data, MESSAGE_TYPE_VIDEO);
+        onImageSend(result.data.fileUrl, MESSAGE_TYPE_VIDEO);
       } else {
-        onImageSend(result.data, MESSAGE_TYPE_FILE);
+        onImageSend(result.data.fileUrl, MESSAGE_TYPE_FILE);
       }
       setPastedImage(null);
     });
