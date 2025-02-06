@@ -16,7 +16,7 @@ export default {
    // Ticket Form
    'ticket.create.title': 'Create Ticket',
    'ticket.edit.title': 'Edit Ticket',
-   'ticket.form.uid': 'Ticket ID',
+   'ticket.form.uid': 'UID',
    'ticket.form.title': 'Title',
    'ticket.form.title.required': 'Please enter ticket title',
    'ticket.form.title.placeholder': 'Enter ticket title',
