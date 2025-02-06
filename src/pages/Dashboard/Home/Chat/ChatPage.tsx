@@ -612,7 +612,7 @@ const ChatPage = () => {
   const handleImageSend = (file: File): Promise<any> => {
     console.log("handleImageSend", file);
     handleUpload(file, (result: MESSAGE.HttpUploadResult) => {
-      handleDropSend(result.data, MESSAGE_TYPE_IMAGE);
+      handleDropSend(result.data.fileUrl, MESSAGE_TYPE_IMAGE);
     });
     return null;
   };
@@ -624,7 +624,7 @@ const ChatPage = () => {
     if (file) {
       console.log("handleImageChange file: ", file);
       handleUpload(file, (result: MESSAGE.HttpUploadResult) => {
-        handleDropSend(result.data, MESSAGE_TYPE_IMAGE);
+        handleDropSend(result.data.fileUrl, MESSAGE_TYPE_IMAGE);
       });
     }
   };
@@ -636,7 +636,7 @@ const ChatPage = () => {
     if (file) {
       console.log("handleFileChange file: ", file);
       handleUpload(file, (result: MESSAGE.HttpUploadResult) => {
-        handleDropSend(result.data, MESSAGE_TYPE_FILE);
+        handleDropSend(result.data.fileUrl, MESSAGE_TYPE_FILE);
       });
     }
   };

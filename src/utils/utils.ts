@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 13:36:26
+ * @LastEditTime: 2025-02-06 12:54:51
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -54,6 +54,11 @@ import {
   TICKET_STATUS_PENDING,
   TICKET_STATUS_REOPENED,
   TICKET_STATUS_RESOLVED,
+  TICKET_PRIORITY_CRITICAL,
+  TICKET_PRIORITY_HIGH,
+  TICKET_PRIORITY_LOW,
+  TICKET_PRIORITY_MEDIUM,
+  TICKET_PRIORITY_URGENT,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -283,7 +288,7 @@ export const isRichText = (content: string) => {
   );
 };
 
-export function getStatusColor(status: string) {
+export function getTicketStatusColor(status: string) {
   switch (status) {
     case TICKET_STATUS_NEW:
       return 'blue';
@@ -303,6 +308,23 @@ export function getStatusColor(status: string) {
       return 'default';
     case TICKET_STATUS_CANCELLED:
       return 'red';
+    default:
+      return 'default';
+  }
+};
+
+export function getTicketPriorityColor(priority: string) {
+  switch (priority) {
+    case TICKET_PRIORITY_LOW:
+      return 'blue';
+    case TICKET_PRIORITY_MEDIUM:
+      return 'purple';
+    case TICKET_PRIORITY_HIGH:
+      return 'red';
+    case TICKET_PRIORITY_URGENT:
+      return 'orange';
+    case TICKET_PRIORITY_CRITICAL:
+      return 'default';
     default:
       return 'default';
   }
