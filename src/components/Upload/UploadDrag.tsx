@@ -139,6 +139,7 @@ const UploadDrag = ({
           message.destroy();
           message.success(`${info.file.name} 上传成功`);
           // handleOk();
+          setUploads([...uploads, info.file.response.data]);
         } else {
           // onError(info.file);
           message.destroy();
