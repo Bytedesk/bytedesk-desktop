@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:45:08
+ * @LastEditTime: 2025-02-06 14:47:13
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -134,67 +134,106 @@ const UploadDrag = ({
         <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
       </Dragger>
 
-      {/* 上传的文件列表, 支持点击打开URL，删除，图片支持预览*/}
+      {/* 文件预览列表 */}
       <div style={{ 
         marginTop: "16px",
         maxHeight: "200px",
         overflowY: "auto"
       }}>
-        {uploads.map((upload) => (
-          <div 
-            key={upload.uid} 
-            style={{ 
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "8px",
-              marginBottom: "8px",
-              border: "1px solid #f0f0f0",
-              borderRadius: "4px"
-            }}
-          >
-            <div
-              onClick={() => window.open(upload.fileUrl, "_blank")}
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "12px",
+        }}>
+          {uploads.map((upload) => (
+            <div 
+              key={upload.uid} 
               style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                gap: "10px",
-                cursor: "pointer",
-                flex: 1
+                position: "relative",
+                width: "50px",
+                height: "50px",
+                border: "1px solid #f0f0f0",
+                borderRadius: "4px",
+                overflow: "hidden"
               }}
             >
-              {/* 图片支持预览, 完善图片类型判断 */}
-              {upload.fileType.startsWith("image/") ? (
-                <img
-                  src={upload.fileUrl}
-                  alt={upload.fileName}
-                  style={{ 
-                    width: "40px", 
-                    height: "40px",
-                    objectFit: "cover",
-                    borderRadius: "4px"
-                  }}
-                />
-              ) : (
-                // 限制文件名的长度为10个字符，多余部分使用...表示
-                <div style={{ 
-                  maxWidth: "200px",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap"
-                }}>
-                  {upload.fileName}
-                </div>
-              )}
+              {/* 删除按钮 */}
+              <Button
+                type="text"
+                size="small"
+                icon={<DeleteOutlined />}
+                onClick={() => handleDelete(upload.uid)}
+                style={{ 
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  padding: "2px",
+                  background: "rgba(255, 255, 255, 0.8)",
+                  border: "none",
+                  borderRadius: "0 4px 0 4px",
+                  zIndex: 1
+                }}
+              />
+
+              {/* 文件预览 */}
+              <div
+                onClick={() => window.open(upload.fileUrl, "_blank")}
+                style={{ 
+                  width: "100%",
+                  height: "100%",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative"
+                }}
+              >
+                {upload.fileType.startsWith("image/") ? (
+                  <img
+                    src={upload.fileUrl}
+                    alt={upload.fileName}
+                    style={{ 
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover"
+                    }}
+                  />
+                ) : (
+                  <div style={{ 
+                    fontSize: "12px",
+                    padding: "4px",
+                    textAlign: "center",
+                    wordBreak: "break-all",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden"
+                  }}>
+                    {upload.fileName}
+                  </div>
+                )}
+              </div>
+
+              {/* 文件名提示 */}
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: "rgba(0, 0, 0, 0.5)",
+                color: "#fff",
+                fontSize: "10px",
+                padding: "2px",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+              }}>
+                {upload.fileName}
+              </div>
             </div>
-            <Button
-              type="text"
-              icon={<DeleteOutlined />}
-              onClick={() => handleDelete(upload.uid)}
-              style={{ marginLeft: "8px" }}
-            />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Modal>
   );
