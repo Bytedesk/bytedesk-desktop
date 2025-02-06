@@ -92,7 +92,7 @@ const UploadDrag = ({
           // onSuccess(url);
           message.destroy();
           message.success(`${file_name} 上传成功`);
-          handleOk();
+          // handleOk();
         } else {
           // onError(info.file);
           message.destroy();
