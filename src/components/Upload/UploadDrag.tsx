@@ -199,7 +199,7 @@ const UploadDrag = ({
         <div>
           {uploads.map((upload) => (
             <div key={upload.uid} style={{ cursor: 'pointer' }}>
-              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 {upload.fileType === "image" ? (
                   <img src={upload.fileUrl} alt={upload.fileName} style={{ width: '50px', height: '50px' }} />
                 ) : (
