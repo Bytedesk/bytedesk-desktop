@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-18 14:34:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-12 22:44:14
+ * @LastEditTime: 2025-02-06 11:24:30
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -16,7 +17,7 @@
 import { SendConfirm } from "@/components/ChatUI/components/SendConfirm";
 import { MESSAGE_TYPE_FILE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_VIDEO } from "@/utils/constants";
 import { handleUpload } from "@/utils/utils";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 // https://react-dropzone.js.org/
 import { useDropzone } from "react-dropzone";
 

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-18 16:49:01
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-11 15:06:33
+ * @LastEditTime: 2025-02-06 11:24:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -33,7 +33,7 @@ import { getUploadUrl } from "@/utils/configUtils";
 export const ClickUpload = ({ children }) => {
   //
   let isImageFile = true;
-  let uploadData = {
+  const uploadData = {
     file: null,
     file_name: "test.png",
     file_type: "image/png",
@@ -49,7 +49,7 @@ export const ClickUpload = ({ children }) => {
     showUploadList: false,
     beforeUpload(file: RcFile) {
       console.log("beforeUpload", file);
-      let file_name =
+      const file_name =
         moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
       uploadData.file = file;
       uploadData.file_name = file_name;
