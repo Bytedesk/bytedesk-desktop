@@ -5,10 +5,11 @@ import { useIntl } from 'react-intl';
 
 interface FilePreviewProps {
   file: UPLOAD.UploadResponse;
-  onDelete: (uid: string) => void;
+  showDelete?: boolean;
+  onDelete?: (uid: string) => void;
 }
 
-const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete }) => {
+const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete, showDelete = true }) => {
   const intl = useIntl();
 
   return (
@@ -26,12 +27,12 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete }) => {
         { id: file.fileType.startsWith("image/") ? 'upload.preview.image' : 'upload.preview.file' }
       )}
     >
-      {/* 删除按钮 */}
-      <Button
-        type="text"
-        size="small"
-        icon={<DeleteOutlined />}
-        onClick={() => onDelete(file.uid)}
+      {showDelete && (
+        <Button
+          type="text"
+          size="small"
+          icon={<DeleteOutlined />}
+          onClick={() => onDelete(file.uid)}
         style={{ 
           position: "absolute",
           top: 0,
@@ -41,8 +42,9 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete }) => {
           border: "none",
           borderRadius: "0 4px 0 4px",
           zIndex: 1
-        }}
-      />
+          }}
+        />
+      )}
 
       {/* 文件预览 */}
       <div

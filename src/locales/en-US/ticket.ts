@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:32:17
+ * @LastEditTime: 2025-02-06 16:07:34
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -16,6 +16,7 @@ export default {
    // Ticket Form
    'ticket.create.title': 'Create Ticket',
    'ticket.edit.title': 'Edit Ticket',
+   'ticket.form.uid': 'Ticket ID',
    'ticket.form.title': 'Title',
    'ticket.form.title.required': 'Please enter ticket title',
    'ticket.form.title.placeholder': 'Enter ticket title',

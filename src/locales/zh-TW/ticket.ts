@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:32:41
+ * @LastEditTime: 2025-02-06 16:07:53
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -16,6 +16,7 @@ export default {
   // 工單表單
   'ticket.create.title': '創建工單',
   'ticket.edit.title': '編輯工單',
+  'ticket.form.uid': '工單編號',
   'ticket.form.title': '標題',
   'ticket.form.title.required': '請輸入工單標題',
   'ticket.form.title.placeholder': '請輸入工單標題',
@@ -163,6 +164,5 @@ export default {
   // Delete ticket
   'ticket.delete.title': '刪除工單',
   'ticket.delete.content': '確定要刪除此工單嗎？',
-  'ticket.delete.success': '工單刪除成功',
   'ticket.delete.failed': '工單刪除失敗',
 } 
