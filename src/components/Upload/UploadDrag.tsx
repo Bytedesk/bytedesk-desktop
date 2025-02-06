@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:43:25
+ * @LastEditTime: 2025-02-06 14:45:08
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -62,7 +62,7 @@ const UploadDrag = ({
   // 使用 useMemo 来定义 uploadProps
   const uploadProps = useMemo<UploadProps>(() => ({
     name: "file",
-    multiple: true, // 启用多文件上传
+    multiple: true,
     action: getUploadUrl(),
     headers: {
       Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
@@ -78,7 +78,7 @@ const UploadDrag = ({
         file_type: file.type,
         category_uid: "",
       }));
-      return true; // 返回 true 允许上传
+      return true;
     },
     onChange(info: UploadChangeParam<UploadFile>) {
       if (info.file.status === "uploading") {
@@ -99,47 +99,8 @@ const UploadDrag = ({
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
-      Array.from(e.dataTransfer.files).forEach(file => {
-        handleUpload(file);
-      });
     },
-  }), [uploadParams]); // 依赖 uploadParams
-
-  const handleUpload = (file: File) => {
-    const file_name = moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("file_name", file_name);
-    formData.append("file_type", file.type);
-    formData.append("is_avatar", "false");
-    formData.append("kb_type", type);
-    formData.append("category_uid", "");
-    formData.append("kb_uid", "");
-    formData.append("client", HTTP_CLIENT);
-
-    fetch(getUploadUrl(), {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
-      },
-      body: formData,
-    })
-    .then(response => response.json())
-    .then((result: UPLOAD.HttpResult) => {
-      if (result.code === 200) {
-        message.destroy();
-        message.success(`${file_name} 上传成功`);
-        setUploads(prevUploads => [...prevUploads, result.data]);
-      } else {
-        message.destroy();
-        message.error(`${file_name} 上传失败`);
-      }
-    })
-    .catch(error => {
-      console.error('Upload error:', error);
-      message.error(`${file_name} 上传失败`);
-    });
-  };
+  }), [uploadParams]);
 
   useEffect(() => {
     setUploadParams(prev => ({
