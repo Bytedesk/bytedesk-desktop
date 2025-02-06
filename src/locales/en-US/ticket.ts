@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:10:43
+ * @LastEditTime: 2025-02-06 13:22:29
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -38,25 +38,7 @@ export default {
    'ticket.form.workgroup.placeholder': 'Select workgroup',
    'ticket.form.thread': 'Related Conversation',
    'ticket.form.thread.placeholder': 'Select related conversation',
-   // Ticket Status
-   'ticket.status.all': 'All Status',
-   'ticket.status.new': 'New',
-   'ticket.status.assigned': 'Assigned',
-   'ticket.status.in_progress': 'In Progress',
-   'ticket.status.pending': 'Pending',
-   'ticket.status.on_hold': 'On Hold',
-   'ticket.status.reopened': 'Reopened',
-   'ticket.status.resolved': 'Resolved',
-   'ticket.status.closed': 'Closed',
-   'ticket.status.cancelled': 'Cancelled',
-   // Ticket Priority
-   'ticket.priority.all': 'All Priority',
-   'ticket.priority.lowest': 'Lowest',
-   'ticket.priority.low': 'Low',
-   'ticket.priority.medium': 'Medium',
-   'ticket.priority.high': 'High',
-   'ticket.priority.urgent': 'Urgent',
-   'ticket.priority.critical': 'Critical',
+   
    // Ticket Messages
    'ticket.create.success': 'Ticket created successfully',
    'ticket.create.failed': 'Failed to create ticket',
@@ -84,26 +66,6 @@ export default {
    'ticket.action.close': 'Close',
    'ticket.action.reopen': 'Reopen',
    'ticket.delete.confirm': 'Are you sure to delete this ticket?',
-   // Ticket Filters
-   'ticket.filter.by.status': 'Filter by Status',
-   'ticket.filter.by.priority': 'Filter by Priority',
-   'ticket.filter.by.assignment': 'Filter by Assignment',
-   'ticket.filter.by.time': 'Filter by Time',
-   // 
-   'ticket.filter.assignment_all': 'All',
-   'ticket.filter.my.tickets': 'My Tickets',
-   'ticket.filter.unassigned': 'Unassigned',
-   'ticket.filter.my.workgroup': 'My Workgroup',
-   'ticket.filter.my.created': 'My Created',
-   'ticket.filter.my.assigned': 'My Assigned',
-   // 
-   'ticket.filter.all.time': 'All',
-   'ticket.filter.today': 'Today',
-   'ticket.filter.yesterday': 'Yesterday',
-   'ticket.filter.this.week': 'This Week',
-   'ticket.filter.last.week': 'Last Week',
-   'ticket.filter.this.month': 'This Month',
-   'ticket.filter.last.month': 'Last Month',
    // Ticket Layout
    'ticket.conversation.title': 'Conversation',
    'ticket.conversation.empty': 'Select a ticket to view conversation',
@@ -126,16 +88,13 @@ export default {
    'ticket.upload.success': 'File uploaded successfully',
    'ticket.upload.failed': 'File upload failed',
    'ticket.current.filters': 'Current Filters',
-   'ticket.filter.all': 'All Tickets',
-   'ticket.filter.my_tickets': 'My Tickets',
-   'ticket.filter.my_workgroup': 'My Workgroup',
-   'ticket.filter.my_created': 'Created by Me',
-   'ticket.filter.my_assigned': 'Assigned to Me',
-   'ticket.filter.all_time': 'All Time',
-   'ticket.filter.this_week': 'This Week',
-   'ticket.filter.last_week': 'Last Week',
-   'ticket.filter.this_month': 'This Month',
-   'ticket.filter.last_month': 'Last Month',
+   // 
+   // Ticket Filters
+   'ticket.filter.by.status': 'Filter by Status',
+   'ticket.filter.by.priority': 'Filter by Priority',
+   'ticket.filter.by.assignment': 'Filter by Assignment',
+   'ticket.filter.by.time': 'Filter by Time',
+
    // Filter translations
    'ticket.filter.status_all': 'All Status',
    'ticket.filter.status_new': 'New',
@@ -147,6 +106,8 @@ export default {
    'ticket.filter.status_resolved': 'Resolved',
    'ticket.filter.status_closed': 'Closed',
    'ticket.filter.status_cancelled': 'Cancelled',
+
+   // 
    'ticket.filter.priority_all': 'All Priority',
    'ticket.filter.priority_lowest': 'Lowest',
    'ticket.filter.priority_low': 'Low',
@@ -154,4 +115,20 @@ export default {
    'ticket.filter.priority_high': 'High',
    'ticket.filter.priority_urgent': 'Urgent',
    'ticket.filter.priority_critical': 'Critical',
+
+   // 
+   'ticket.filter.assignment_all': 'All',
+   'ticket.filter.my.tickets': 'My Tickets',
+   'ticket.filter.unassigned': 'Unassigned',
+   'ticket.filter.my.workgroup': 'My Workgroup',
+   'ticket.filter.my.created': 'Created by Me',
+   'ticket.filter.my.assigned': 'Assigned to Me',
+   
+   // 
+   'ticket.filter.time_all': 'All Time',
+   'ticket.filter.this_week': 'This Week',
+   'ticket.filter.last_week': 'Last Week',
+   'ticket.filter.this_month': 'This Month',
+   'ticket.filter.last_month': 'Last Month',
+   
 } 

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:07:19
+ * @LastEditTime: 2025-02-06 13:24:24
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -82,6 +82,36 @@ export default {
   'ticket.action.reopen': '重新打开',
   'ticket.delete.confirm': '确定要删除此工单吗？',
   'ticket.category.load.error': '加载工单分类失败',
+  
+  // 工单布局
+  'ticket.conversation.title': '工单对话',
+  'ticket.conversation.empty': '请选择工单查看对话',
+  'ticket.conversation.input.placeholder': '请输入消息...',
+  'ticket.details.title': '工单详情',
+  'ticket.details.empty': '请选择工单查看详情',
+  'ticket.messages.load.error': '加载工单消息失败',
+  'ticket.message.send.error': '发送消息失败',
+  'ticket.form.thread': '关联会话',
+  'ticket.form.thread.placeholder': '选择关联会话',
+  // 
+  'ticket.form.createdAt': '创建时间',
+  'ticket.form.updatedAt': '更新时间',
+  // 工单类型
+  'ticket.type.agent': '指定客服',
+  'ticket.type.workgroup': '技能组',
+  // 工单分配人
+  'ticket.assignee': '处理人',
+  // 工单报告人
+  'ticket.reporter': '报告人',
+  // 工单类型
+  'ticket.type': '类型',
+  'ticket.category': '分类',
+  'ticket.steps.title': '处理步骤',
+  'ticket.form.upload.button': '上传附件',
+  'ticket.upload.success': '文件上传成功',
+  'ticket.upload.failed': '文件上传失败',
+  'ticket.current.filters': '当前筛选',
+
   // 工单筛选
   'ticket.filter.by.status': '按状态筛选',
   'ticket.filter.by.priority': '按优先级筛选',
@@ -111,48 +141,10 @@ export default {
   'ticket.filter.my.created': '我创建的',
   'ticket.filter.my.assigned': '待我处理',
   'ticket.filter.unassigned': '未分配',
-  // 
-  'ticket.filter.all.time': '全部',
+  // 时间筛选
+  'ticket.filter.time_all': '全部',
   'ticket.filter.today': '今天',
   'ticket.filter.yesterday': '昨天',
-  'ticket.filter.this.week': '本周',
-  'ticket.filter.last.week': '上周',
-  'ticket.filter.this.month': '本月',
-  'ticket.filter.last.month': '上月',
-  // 工单布局
-  'ticket.conversation.title': '工单对话',
-  'ticket.conversation.empty': '请选择工单查看对话',
-  'ticket.conversation.input.placeholder': '请输入消息...',
-  'ticket.details.title': '工单详情',
-  'ticket.details.empty': '请选择工单查看详情',
-  'ticket.messages.load.error': '加载工单消息失败',
-  'ticket.message.send.error': '发送消息失败',
-  'ticket.form.thread': '关联会话',
-  'ticket.form.thread.placeholder': '选择关联会话',
-  // 
-  'ticket.form.createdAt': '创建时间',
-  'ticket.form.updatedAt': '更新时间',
-  // 工单类型
-  'ticket.type.agent': '指定客服',
-  'ticket.type.workgroup': '技能组',
-  // 工单分配人
-  'ticket.assignee': '处理人',
-  // 工单报告人
-  'ticket.reporter': '报告人',
-  // 工单类型
-  'ticket.type': '类型',
-  'ticket.category': '分类',
-  'ticket.steps.title': '处理步骤',
-  'ticket.form.upload.button': '上传附件',
-  'ticket.upload.success': '文件上传成功',
-  'ticket.upload.failed': '文件上传失败',
-  'ticket.current.filters': '当前筛选',
-  'ticket.filter.all': '全部工单',
-  'ticket.filter.my_tickets': '我的工单',
-  'ticket.filter.my_workgroup': '我的技能组',
-  'ticket.filter.my_created': '我创建的',
-  'ticket.filter.my_assigned': '待我处理',
-  'ticket.filter.all_time': '全部时间',
   'ticket.filter.this_week': '本周',
   'ticket.filter.last_week': '上周',
   'ticket.filter.this_month': '本月',
