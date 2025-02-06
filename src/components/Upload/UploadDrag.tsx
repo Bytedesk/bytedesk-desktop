@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:17:07
+ * @LastEditTime: 2025-02-06 14:25:11
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -127,6 +127,7 @@ const UploadDrag = ({
       console.log("beforeUpload", uploadData);
     },
     onChange(info: UploadChangeParam<UploadFile>) {
+      console.log("onChange", info);
       if (info.file.status === "uploading") {
         // console.log('uploading:', info.file);
         message.loading(`${info.file.name} 上传中`);
@@ -189,6 +190,15 @@ const UploadDrag = ({
           <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
           {/* <p className="ant-upload-hint">{uploadHit}</p> */}
         </Dragger>
+        {/* 上传的文件列表, 显示文件名和文件预览*/}
+        <div>
+          {uploads.map((upload) => (
+            <div key={upload.uid}>
+              <img src={upload.fileUrl} alt={upload.fileName} />
+              <div>{upload.fileName}</div>
+            </div>
+          ))}
+        </div>
       </Modal>
     </>
   );
