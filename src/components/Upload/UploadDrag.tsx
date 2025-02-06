@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 11:48:43
+ * @LastEditTime: 2025-02-06 14:12:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -22,9 +22,6 @@ import { RcFile, UploadChangeParam } from "antd/lib/upload";
 import moment from "moment";
 import { ACCESS_TOKEN, HTTP_CLIENT } from "@/utils/constants";
 import { message } from "@/AntdGlobalComp";
-// import { useOrgStore } from "@/stores/organiztion";
-// import { useKbaseStore } from "@/stores/kbase";
-import { useCategoryStore } from "@/stores/core/category";
 import { getUploadUrl } from "@/utils/configUtils";
 const { Dragger } = Upload;
 //
@@ -51,20 +48,14 @@ const UploadDrag = ({
   handleOk,
   handleCancel,
 }: UploadDragProps) => {
-  // const currentOrg = useOrgStore((state) => state.currentOrg);
-  // const currentKbase = useKbaseStore((state) => state.currentKbase);
-  const currentCategory = useCategoryStore((state) => state.currentCategory);
-  // https://tika.apache.org/2.9.0/formats.html
-  const [uploadHit] = useState(
-    "当前支持上传pdf/txt/markdown/docx等",
-  );
+  // 
   const [uploadData, setUploadData] = useState<UploadDataProps>({
     file: null,
     file_name: "test.pdf",
     file_type: "application/pdf",
     is_avatar: "false",
     kb_type: type,
-    category_uid: currentCategory?.uid === "all" ? "" : currentCategory?.uid,
+    category_uid: "",
     kb_uid: "",
     client: HTTP_CLIENT,
   });
@@ -79,10 +70,7 @@ const UploadDrag = ({
     formData.append("file_type", file.type);
     formData.append("is_avatar", "false");
     formData.append("kb_type", type);
-    formData.append(
-      "category_uid",
-      currentCategory?.uid === "all" ? "" : currentCategory?.uid,
-    );
+    formData.append("category_uid", "");
     formData.append("kb_uid", "");
     formData.append("client", HTTP_CLIENT);
     //
@@ -132,8 +120,7 @@ const UploadDrag = ({
       uploadData.file_name = file_name;
       uploadData.file_type = file.type;
       // uploadData.kb_type = type;
-      uploadData.category_uid =
-        currentCategory?.uid === "all" ? "" : currentCategory?.uid;
+      uploadData.category_uid = "";
       // uploadData.kb_uid = currentKbase?.uid;
       console.log("beforeUpload", uploadData);
     },
@@ -174,10 +161,10 @@ const UploadDrag = ({
     setUploadData({
       ...uploadData,
       kb_type: type,
-      category_uid: currentCategory?.uid === "all" ? "" : currentCategory?.uid,
+      category_uid: "",
       // kb_uid: currentKbase?.uid,
     });
-  }, [type, currentCategory]);
+  }, [type]);
   //
 
   return (
@@ -193,7 +180,7 @@ const UploadDrag = ({
             <InboxOutlined />
           </p>
           <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
-          <p className="ant-upload-hint">{uploadHit}</p>
+          {/* <p className="ant-upload-hint">{uploadHit}</p> */}
         </Dragger>
       </Modal>
     </>

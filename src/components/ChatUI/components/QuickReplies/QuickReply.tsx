@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 15:34:48
+ * @LastEditTime: 2025-02-06 14:03:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -15,8 +15,6 @@
 import React from "react";
 import clsx from "clsx";
 import { Icon } from "../Icon";
-// import { Upload,} from "antd";
-// import { ClickUpload } from "@/pages/Dashboard/Home/ClickUpload";
 
 export interface QuickReplyItemProps {
   name: string;
@@ -52,23 +50,6 @@ export const QuickReply = (props: QuickReplyProps) => {
       aria-label={`快捷短语: ${item.name}，双击发送`}
       onClick={handleClick}
     >
-      {/* {item.type === "upload" ? (
-        <ClickUpload>
-          <div className="QuickReply-inner">
-            {item.icon && <Icon type={item.icon} />}
-            {item.img && (
-              <img className="QuickReply-img" src={item.img} alt="" />
-            )}
-            <span>{item.name}</span>
-          </div>
-        </ClickUpload>
-      ) : (
-        <div className="QuickReply-inner">
-          {item.icon && <Icon type={item.icon} />}
-          {item.img && <img className="QuickReply-img" src={item.img} alt="" />}
-          <span>{item.name}</span>
-        </div>
-      )} */}
       <div className="QuickReply-inner">
         {item.icon && <Icon type={item.icon} />}
         {/* {item.img && <img className="QuickReply-img" src={item.img} alt="" />} */}
