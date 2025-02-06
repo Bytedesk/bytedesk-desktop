@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2023-08-26 16:06:55
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:46:06
+ * @LastEditTime: 2025-02-06 14:52:04
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -31,6 +31,7 @@ import contact from './en-US/contact'
 import autoreply from './en-US/autoreply';
 import queue from './en-US/queue';
 import group from './en-US/group';
+import upload from './en-US/upload';
 
 export default {
   ...app,
@@ -52,4 +53,5 @@ export default {
   ...autoreply,
   ...queue,
   ...group,
+  ...upload,
 }

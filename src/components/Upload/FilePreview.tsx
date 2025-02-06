@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import { useIntl } from 'react-intl';
 
 interface FilePreviewProps {
   file: UPLOAD.UploadResponse;
@@ -8,6 +9,8 @@ interface FilePreviewProps {
 }
 
 const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete }) => {
+  const intl = useIntl();
+
   return (
     <div 
       key={file.uid} 
@@ -19,6 +22,9 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete }) => {
         borderRadius: "4px",
         overflow: "hidden"
       }}
+      title={intl.formatMessage(
+        { id: file.fileType.startsWith("image/") ? 'upload.preview.image' : 'upload.preview.file' }
+      )}
     >
       {/* 删除按钮 */}
       <Button

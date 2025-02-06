@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:47:13
+ * @LastEditTime: 2025-02-06 14:51:23
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -22,6 +22,7 @@ import { ACCESS_TOKEN, HTTP_CLIENT } from "@/utils/constants";
 import { message } from "@/AntdGlobalComp";
 import { getUploadUrl } from "@/utils/configUtils";
 import FilePreview from './FilePreview';
+import { useIntl } from "react-intl";
 const { Dragger } = Upload;
 
 //
@@ -48,6 +49,7 @@ const UploadDrag = ({
   handleSubmit,
   handleCancel,
 }: UploadDragProps) => {
+  const intl = useIntl();
   const [uploads, setUploads] = useState<UPLOAD.UploadResponse[]>([]);
   const [uploadParams, setUploadParams] = useState<UploadDataProps>({
     file: null,
@@ -83,25 +85,37 @@ const UploadDrag = ({
     },
     onChange(info: UploadChangeParam<UploadFile>) {
       if (info.file.status === "uploading") {
-        message.loading(`${info.file.name} 上传中`);
+        message.loading(intl.formatMessage(
+          { id: 'upload.uploading' },
+          { filename: info.file.name }
+        ));
       }
       if (info.file.status === "done") {
         if (info.file.response.code === 200) {
           message.destroy();
-          message.success(`${info.file.name} 上传成功`);
+          message.success(intl.formatMessage(
+            { id: 'upload.success' },
+            { filename: info.file.name }
+          ));
           setUploads(prevUploads => [...prevUploads, info.file.response.data]);
         } else {
           message.destroy();
-          message.error(`${info.file.name} 上传失败`);
+          message.error(intl.formatMessage(
+            { id: 'upload.failed' },
+            { filename: info.file.name }
+          ));
         }
       } else if (info.file.status === "error") {
-        message.error(`${info.file.name} 上传失败`);
+        message.error(intl.formatMessage(
+          { id: 'upload.failed' },
+          { filename: info.file.name }
+        ));
       }
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
     },
-  }), [uploadParams]);
+  }), [uploadParams, intl]);
 
   useEffect(() => {
     setUploadParams(prev => ({
@@ -112,7 +126,7 @@ const UploadDrag = ({
   }, [type]);
 
   const handleOk = () => {
-    console.log("handleOk", uploads);
+    // console.log("handleOk", uploads);
     handleSubmit(uploads);
   };
 
@@ -123,7 +137,7 @@ const UploadDrag = ({
 
   return (
     <Modal
-      title="上传文件"
+      title={intl.formatMessage({ id: 'upload.modal.title' })}
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -132,7 +146,12 @@ const UploadDrag = ({
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
+        <p className="ant-upload-text">
+          {intl.formatMessage({ id: 'upload.drag.text' })}
+        </p>
+        <p className="ant-upload-hint">
+          {intl.formatMessage({ id: 'upload.drag.hint' })}
+        </p>
       </Dragger>
 
       {/* 文件预览列表 */}
