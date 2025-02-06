@@ -190,7 +190,7 @@ const UploadDrag = ({
           <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
           {/* <p className="ant-upload-hint">{uploadHit}</p> */}
         </Dragger>
-        {/* 上传的文件列表, 支持点击打开URL，*/}
+        {/* 上传的文件列表, 支持点击打开URL，删除，图片支持预览*/}
         <div>
           {uploads.map((upload) => (
             <div key={upload.uid}>
