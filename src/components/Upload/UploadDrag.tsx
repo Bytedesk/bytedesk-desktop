@@ -4,7 +4,7 @@ import { Modal } from "antd";
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 14:25:11
+ * @LastEditTime: 2025-02-06 14:26:14
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -190,7 +190,7 @@ const UploadDrag = ({
           <p className="ant-upload-text">点击或拖拽文件至此处实现上传</p>
           {/* <p className="ant-upload-hint">{uploadHit}</p> */}
         </Dragger>
-        {/* 上传的文件列表, 显示文件名和文件预览*/}
+        {/* 上传的文件列表, 支持点击打开URL，*/}
         <div>
           {uploads.map((upload) => (
             <div key={upload.uid}>
