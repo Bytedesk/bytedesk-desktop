@@ -28,7 +28,7 @@ const { Dragger } = Upload;
 type UploadDragProps = {
   type: string;
   isModalOpen: boolean;
-  handleOk: () => void;
+  handleOk: (uploads: UPLOAD.U[]) => void;
   handleCancel: () => void;
 };
 type UploadDataProps = {
