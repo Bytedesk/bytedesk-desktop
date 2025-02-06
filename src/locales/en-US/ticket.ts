@@ -133,4 +133,12 @@ export default {
    'ticket.filter.time_this_month': 'This Month',
    'ticket.filter.time_last_month': 'Last Month',
    
+   // Content title
+   'ticket.content.title': 'Ticket',
+   'ticket.content.number': 'No.',
+   
+   // Delete ticket
+   'ticket.delete.title': 'Delete Ticket',
+   'ticket.delete.content': 'Are you sure you want to delete this ticket?',
+   'ticket.delete.failed': 'Failed to delete ticket',
 } 

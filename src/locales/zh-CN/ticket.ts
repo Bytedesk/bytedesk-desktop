@@ -155,4 +155,14 @@ export default {
   'ticket.filter.time_last_week': '上周',
   'ticket.filter.time_this_month': '本月',
   'ticket.filter.time_last_month': '上月',
+
+  // Content title
+  'ticket.content.title': '工单',
+  'ticket.content.number': '编号',
+  
+  // Delete ticket
+  'ticket.delete.title': '删除工单',
+  'ticket.delete.content': '确定要删除此工单吗？',
+  'ticket.delete.success': '工单删除成功',
+  'ticket.delete.failed': '工单删除失败',
 } 

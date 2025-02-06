@@ -156,6 +156,13 @@ export default {
   'ticket.filter.time_this_month': '本月',
   'ticket.filter.time_last_month': '上月',
 
+  // Content title
+  'ticket.content.title': '工單',
+  'ticket.content.number': '編號',
   
- 
+  // Delete ticket
+  'ticket.delete.title': '刪除工單',
+  'ticket.delete.content': '確定要刪除此工單嗎？',
+  'ticket.delete.success': '工單刪除成功',
+  'ticket.delete.failed': '工單刪除失敗',
 } 
