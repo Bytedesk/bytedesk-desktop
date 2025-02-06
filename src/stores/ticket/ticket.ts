@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 17:12:22
+ * @LastEditTime: 2025-02-06 10:39:40
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -34,7 +34,8 @@ import {
   TICKET_FILTER_TIME_ALL,
   TICKET_FILTER_MY_ASSIGNED,
   TICKET_FILTER_MY_CREATED,
-  TICKET_FILTER_ASSIGNMENT_ALL
+  TICKET_FILTER_ASSIGNMENT_ALL,
+  TICKET_FILTER_UNASSIGNED
 } from '@/utils/constants';
 import { useUserStore } from '../core/user';
 
@@ -133,6 +134,10 @@ export const useTicketStore = create<TicketState>((set, get) => {
         } else if (state.filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = agentInfo?.uid || '';
+          params.reporterUid = '';
+        } else if (state.filters.assignment === TICKET_FILTER_UNASSIGNED) {
+          params.assignmentAll = false;
+          params.assigneeUid = TICKET_FILTER_UNASSIGNED;
           params.reporterUid = '';
         }
 
