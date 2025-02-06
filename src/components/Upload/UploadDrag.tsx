@@ -205,6 +205,7 @@ const UploadDrag = ({
                 ) : (
                   <div>{upload.fileName}</div>
                 )}
+                
               <div>
                 <Button icon={<DeleteOutlined />} onClick={() => handleDelete(upload.uid)} />
               </div>
