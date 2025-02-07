@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 13:33:07
+ * @LastEditTime: 2025-02-07 10:23:56
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -465,6 +465,8 @@ export const AUTO_REPLY_TYPE_LLM = "LLM";
 //
 export const QUICK_REPLY_TYPE_KB = "KB";
 export const QUICK_REPLY_TYPE_CATEGORY = "CATEGORY";
+// 
+export const LAST_PATH = "lastPath";
 
 //
 export const LEVEL_TYPE_PLATFORM = "PLATFORM";

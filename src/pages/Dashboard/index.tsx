@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-16 23:04:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-05 14:38:33
+ * @LastEditTime: 2025-02-07 10:23:23
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -20,6 +20,7 @@ import {
   EVENT_BUS_MESSAGE_TYPE_TRANSFER_ACCEPT,
   EVENT_BUS_MESSAGE_TYPE_TRANSFER_REJECT,
   IS_DEBUG,
+  LAST_PATH,
 } from "@/utils/constants";
 import {
   BookOutlined,
@@ -70,7 +71,9 @@ import LanguageMenu from "./FootBar/LanguageMenu";
 const Dashboard = () => {
   const intl = useIntl();
   const { locale } = useContext(AppContext);
-  const [pathname, setPathname] = useState("/chat");
+  // 获取localStorage中的lastPath
+  const lastPath = localStorage.getItem(LAST_PATH);
+  const [pathname, setPathname] = useState(lastPath || "/chat");
   const navigate = useNavigate();
   const { isLoggedIn, hasRoleAgent } = useContext(AppContext);
   const { footerStyle } = useStyle();
@@ -365,6 +368,8 @@ const Dashboard = () => {
             onClick={() => {
               setPathname(item.path);
               navigate(item.path);
+              // 保存到localStorage
+              localStorage.setItem(LAST_PATH, item.path);
             }}
           >
             {showUnreadDot && (

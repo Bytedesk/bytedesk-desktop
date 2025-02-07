@@ -37,66 +37,6 @@ const LeftNavAvatar = () => {
     navigate("/setting");
   };
 
-  // const getAvatar = () => {
-  //   if (
-  //     userInfo.avatar === null ||
-  //     userInfo.avatar === undefined ||
-  //     userInfo.avatar === ""
-  //   ) {
-  //     //   console.log("getAvatar 1", userInfo);
-  //     return (
-  //       <img
-  //         style={{
-  //           marginTop: 30,
-  //           cursor: "pointer",
-  //           width: 40,
-  //         }}
-  //         src={avatar}
-  //         alt="Avatar"
-  //         onClick={handleAvatarClick} // 使用事件处理函数，而不是直接调用
-  //       />
-  //     );
-  //   }
-  //   if (userInfo.avatar.indexOf("local://") > -1) {
-  //     //   console.log("getAvatar 2", userInfo);
-  //     return (
-  //       <img
-  //         style={{
-  //           marginTop: 30,
-  //           cursor: "pointer",
-  //           width: 40,
-  //         }}
-  //         src={avatar}
-  //         alt="Avatar"
-  //         onClick={handleAvatarClick} // 使用事件处理函数，而不是直接调用
-  //       />
-  //     );
-  //   }
-  //   //   console.log("getAvatar 3", userInfo);
-  //   return (
-  //     <>
-  //       <Avatar
-  //         style={{
-  //           marginTop: 60,
-  //           cursor: "pointer",
-  //         }}
-  //         size={40}
-  //         // src={mode === MODE_AGENT ? agentInfo?.avatar : userInfo?.avatar}
-  //         src={userInfo?.avatar}
-  //         onClick={handleAvatarClick} // 使用事件处理函数，而不是直接调用
-  //       />
-  //     </>
-  //   );
-  // };
-
-  // const content = (
-  //   <div>
-  //     <p>{mode === MODE_AGENT ? agentInfo?.email : userInfo?.email}</p>
-  //     <p>{mode === MODE_AGENT ? agentInfo?.mobile : userInfo?.mobile}</p>
-  //     <p>{translateString(mode === MODE_AGENT ? agentInfo?.description : userInfo?.description)}</p>
-  //   </div>
-  // );
-
   useEffect(() => {
     // if (mode === MODE_AGENT) { 
     //   setPopTitle(translateString(agentInfo?.nickname));
