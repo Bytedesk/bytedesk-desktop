@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-04 08:27:46
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-11-19 07:35:07
+ * @LastEditTime: 2025-02-07 14:13:26
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -12,7 +12,6 @@
  *  技术/商务联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-// @ts-ignore
 /* eslint-disable */
 import { HTTP_CLIENT } from "@/utils/constants";
 import request from "@/apis/request";
