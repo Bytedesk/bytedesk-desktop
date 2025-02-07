@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:23:56
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 11:12:47
+ * @LastEditTime: 2025-02-07 11:30:25
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -101,6 +101,7 @@ const GroupInfoDrawer = ({ open, onClose }: GroupInfoProps) => {
       open={open}
     >
       <Collapse
+        bordered={false}
         items={items}
         defaultActiveKey={["1"]}
         onChange={onCollapseChange}

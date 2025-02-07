@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 21:47:12
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 10:57:32
+ * @LastEditTime: 2025-02-07 13:49:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -14,17 +14,17 @@
  */
 import { Layout, Space, Splitter } from "antd";
 import React from "react";
-import ChatPage from "./Chat/ChatPage";
+// import ChatPage from "./Chat/ChatPage";
 import "react-contexify/ReactContexify.css";
 import RightPanel from "./RightPanel";
 import ThreadList from "./Thread/ThreadList";
 import useStyle from "@/hooks/useStyle";
-// import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
 import { useThreadStore } from "@/stores/core/thread";
 import Queue from "../../Vip/Home/Queue";
 import { useIntl } from "react-intl";
 import { OrderedListOutlined } from "@ant-design/icons";
 import { isCustomerServiceThread } from "@/utils/utils";
+import ChatPage from "./Chat";
 
 const { Sider, Header, Content } = Layout;
 
