@@ -142,6 +142,10 @@ import NoticeMsg from "@/components/Bubbles/NoticeMsg";
 import { IMessageStatus } from "@/components/ChatUI/components/MessageStatus";
 import StreamQa from "@/components/Bubbles/StreamQa";
 import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
+import MemberInfoDrawer from "../RightPanel/MemberInfo";
+import GroupInfoDrawer from "../RightPanel/GroupInfo";
+import RobotInfoDrawer from "../RightPanel/RobotInfo";
+// import { useRightPanelStore } from "@/stores/ui/rightPanel";
 
 const ChatPage = () => {
   const intl = useIntl();
@@ -195,6 +199,9 @@ const ChatPage = () => {
   const [screenShotImg, setScreenShotImg] = useState("");
   const [isScreenRecorderModelOpen, setIsScreenRecorderModelOpen] =
     useState(false);
+  const [isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen] = useState(false);
+  const [isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen] = useState(false);
+  const [isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen] = useState(false);
   //
   const {
     messageList,
@@ -1355,6 +1362,11 @@ const ChatPage = () => {
     return currentThread.user.nickname;
   };
 
+  // 添加这个 store
+  // const { setRightPanelVisible } = useRightPanelStore((state) => ({
+  //   setRightPanelVisible: state.setRightPanelVisible,
+  // }));
+
   return (
     <>
       {isDarkMode && (
@@ -1492,6 +1504,15 @@ const ChatPage = () => {
                 icon={<MenuOutlined />}
                 onClick={() => {
                   // 以drawer方式打开
+                  if (isGroupThread(currentThread)) {
+                    // setRightPanelVisible(true); // 打开右侧面板
+                  } else if (isMemberThread(currentThread)) {
+                    // setIsMemberThreadDrawerOpen(true);
+                  } else if (isRobotThread(currentThread)) {
+                    // setIsRobotThreadDrawerOpen(true);
+                  } else {
+                    message.warning("当前聊天对象类型不支持");
+                  }
                 }}
               >
               </Button>
@@ -1692,6 +1713,27 @@ const ChatPage = () => {
             screenShotImg={screenShotImg}
             onOk={handleScreenRecorderModelOk}
             onCancel={handleScreenRecorderModelCancel}
+          />
+        )}
+        {/* 群组资料 */}
+        {isGroupInfoDrawerOpen && (
+          <GroupInfoDrawer
+            open={isGroupInfoDrawerOpen}
+            onClose={() => setIsGroupInfoDrawerOpen(false)}
+          />
+        )}
+        {/* 成员资料 */}
+        {isMemberInfoDrawerOpen && (
+          <MemberInfoDrawer
+            open={isMemberInfoDrawerOpen}
+            onClose={() => setIsMemberInfoDrawerOpen(false)}
+          />
+        )}
+        {/* 大模型设置 */}
+        {isRobotInfoDrawerOpen && (
+          <RobotInfoDrawer
+            open={isRobotInfoDrawerOpen}
+            onClose={() => setIsRobotInfoDrawerOpen(false)}
           />
         )}
         {showEmoji && (

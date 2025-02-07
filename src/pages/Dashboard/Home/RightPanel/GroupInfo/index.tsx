@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:23:56
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:36:55
+ * @LastEditTime: 2025-02-07 11:12:47
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,7 +17,7 @@ import { message } from "@/AntdGlobalComp";
 import { queryGroupByUid } from "@/apis/team/group";
 import { useThreadStore } from "@/stores/core/thread";
 import { isGroupThread } from "@/utils/utils";
-import { Collapse, CollapseProps } from "antd";
+import { Collapse, CollapseProps, Drawer } from "antd";
 import { useEffect, useState } from "react";
 import GroupNotice from "./GroupNotice";
 import GroupMembers from "./GroupMembers";
@@ -26,9 +26,14 @@ import GroupRobots from "./GroupRobots";
 import GroupQrcode from "./GroupQrcode";
 import { useIntl } from "react-intl";
 
+interface GroupInfoProps {
+  open: boolean;
+  onClose: () => void;
+}
+
 // 聊天对象-群组资料
 // TODO: 群成员超过100人，分页加载
-const GroupInfo = () => {
+const GroupInfoDrawer = ({ open, onClose }: GroupInfoProps) => {
   const intl = useIntl();
   const currentThread = useThreadStore((state) => state.currentThread);
   const [group, setGroup] = useState<GROUP.GroupResponse>()
@@ -89,14 +94,19 @@ const GroupInfo = () => {
   };
   
   return (
-    <div>
+    <Drawer
+      title="群组资料"
+      width={500}
+      onClose={onClose}
+      open={open}
+    >
       <Collapse
         items={items}
         defaultActiveKey={["1"]}
         onChange={onCollapseChange}
       />                        
-    </div>
+    </Drawer>
   );
 };
 
-export default GroupInfo;
+export default GroupInfoDrawer;

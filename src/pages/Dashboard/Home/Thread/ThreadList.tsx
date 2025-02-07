@@ -80,7 +80,7 @@ const { Text } = Typography;
 import type { MenuProps } from "antd";
 import { Dropdown, Space } from "antd";
 import { useIntl } from "react-intl";
-import CreateRobot from "../RightPanel/Llm/CreateRobot";
+import CreateRobot from "../RightPanel/RobotInfo/CreateRobot";
 import { syncCurrentThreadCount } from "@/apis/service/agent";
 // import { useSettingsStore } from "@/stores/core/setting";
 

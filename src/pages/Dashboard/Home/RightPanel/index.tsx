@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 16:33:18
+ * @LastEditTime: 2025-02-07 11:19:04
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -21,13 +21,13 @@ import QuickReply from "../../../Vip/Home/RightPanel/QuickReply";
 import { useIntl } from "react-intl";
 import { useThreadStore } from "@/stores/core/thread";
 import { useEffect, useState, useContext } from "react";
-import Llm from "./Llm";
+// import LlmInfoDrawer from "./LlmInfo";
 import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
-import GroupInfo from "./GroupInfo";
-import MemberInfo from "./MemberInfo";
+// import GroupInfo from "./GroupInfo";
+// import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
 import Ticket from "../../../Vip/Home/RightPanel/Ticket";
-import DocView from "./Llm/DocView";
+// import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
 
@@ -90,52 +90,56 @@ const RightPanel = () => {
         });
       }
       setTabItems(itemsCs);
-    } else if (isRobotThread(currentThread)) {
-      const itemsRobot = [
-        {
-          key: "llm",
-          label: intl.formatMessage({
-            id: "chat.right.llm",
-            defaultMessage: "LLM"
-          }),
-          children: <Llm />,
-        },
-      ];
+    }
+    //  else if (isRobotThread(currentThread)) {
+    //   const itemsRobot = [
+    //     {
+    //       key: "llm",
+    //       label: intl.formatMessage({
+    //         id: "chat.right.llm",
+    //         defaultMessage: "LLM"
+    //       }),
+    //       children: <LlmInfoDrawer />,
+    //     },
+    //   ];
 
-      if (IS_DEBUG) {
-        itemsRobot.splice(0, 0, {
-          key: "docview",
-          label: intl.formatMessage({
-            id: "chat.right.docview",
-            defaultMessage: "Doc View"
-          }),
-          children: <DocView />,
-        });
-      }
-      setTabItems(itemsRobot);
-    } else if (isGroupThread(currentThread)) {
-      setTabItems([
-        {
-          key: "group",
-          label: intl.formatMessage({
-            id: "chat.right.group",
-            defaultMessage: "Group"
-          }),
-          children: <GroupInfo />,
-        },
-      ]);
-    } else if (isMemberThread(currentThread)) {
-      setTabItems([
-        {
-          key: "member",
-          label: intl.formatMessage({
-            id: "chat.right.member",
-            defaultMessage: "Member"
-          }),
-          children: <MemberInfo />,
-        },
-      ]);
-    } else {
+    //   if (IS_DEBUG) {
+    //     itemsRobot.splice(0, 0, {
+    //       key: "docview",
+    //       label: intl.formatMessage({
+    //         id: "chat.right.docview",
+    //         defaultMessage: "Doc View"
+    //       }),
+    //       children: <DocView />,
+    //     });
+    //   }
+    //   setTabItems(itemsRobot);
+    // }
+    //  else if (isGroupThread(currentThread)) {
+    //   setTabItems([
+    //     {
+    //       key: "group",
+    //       label: intl.formatMessage({
+    //         id: "chat.right.group",
+    //         defaultMessage: "Group"
+    //       }),
+    //       children: <GroupInfo />,
+    //     },
+    //   ]);
+    // } 
+    // else if (isMemberThread(currentThread)) {
+    //   setTabItems([
+    //     {
+    //       key: "member",
+    //       label: intl.formatMessage({
+    //         id: "chat.right.member",
+    //         defaultMessage: "Member"
+    //       }),
+    //       children: <MemberInfo />,
+    //     },
+    //   ]);
+    // }
+     else {
       setTabItems([]);
     }
   }, [currentThread, intl, locale]);

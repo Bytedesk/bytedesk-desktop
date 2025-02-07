@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-28 11:24:59
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-04 19:09:53
+ * @LastEditTime: 2025-02-07 11:17:36
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -18,11 +18,16 @@ import { queryMemberByUserUid } from "@/apis/team/member";
 import useTranslate from "@/hooks/useTranslate";
 import { useThreadStore } from "@/stores/core/thread";
 import { isMemberThread } from "@/utils/utils";
-import { Descriptions, DescriptionsProps } from "antd";
+import { Descriptions, DescriptionsProps, Drawer } from "antd";
 import { useEffect, useState } from "react";
 
+interface MemberInfoProps {
+  open: boolean;
+  onClose: () => void;
+}
+
 //
-const MemberInfo = () => {
+const MemberInfoDrawer = ({ open, onClose }: MemberInfoProps) => {
   const currentThread = useThreadStore((state) => state.currentThread);
     const [member, setMember] = useState<MEMBER.MemberResponse>();
     const { translateString } = useTranslate();
@@ -89,7 +94,12 @@ const MemberInfo = () => {
 
   //
   return (
-    <div style={{ marginLeft: 20 }}>
+    <Drawer
+      title="成员资料"
+      width={500}
+      onClose={onClose}
+      open={open}
+    >
       <Descriptions
        column={1} 
        items={items} 
@@ -105,7 +115,8 @@ const MemberInfo = () => {
           </List.Item>
         )}
       /> */}
-    </div>
+    </Drawer>
   );
 };
-export default MemberInfo;
+
+export default MemberInfoDrawer;
