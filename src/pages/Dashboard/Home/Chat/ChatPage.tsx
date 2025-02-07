@@ -97,7 +97,7 @@ import useStyle from "@/hooks/useStyle";
 import { useUserStore } from "@/stores/core/user";
 import { useIntl } from "react-intl";
 import { message } from "@/AntdGlobalComp";
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import { ExclamationCircleFilled, MenuOutlined } from "@ant-design/icons";
 import {
   createNewWindow,
   openUrl,
@@ -148,7 +148,6 @@ const ChatPage = () => {
   const { translateString } = useTranslate();
   const isNetworkOnline = useNetworkStatus();
   const { hasRoleAgent } = useAppContext();
-  // const [showRightPanel, setShowRightPanel] = useState(false);
   // 消息列表 setTyping
   const [previewText, setPreviewText] = useState<string>("");
   const [debouncedPreviewText] = useDebounce(previewText, 1000);
@@ -157,13 +156,11 @@ const ChatPage = () => {
   // const [refreshing, setRefreshing] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const { messages, appendMsg, updateMsg, resetList } = useMessages([]);
-  const { currentThread, setCurrentThread, showRightPanel, setShowRightPanel } =
+  const { currentThread, setCurrentThread,} =
     useThreadStore((state) => {
       return {
         currentThread: state.currentThread,
         setCurrentThread: state.setCurrentThread,
-        showRightPanel: state.showRightPanel,
-        setShowRightPanel: state.setShowRightPanel,
       };
     });
   const [typing, setTyping] = useState(false);
@@ -1484,7 +1481,7 @@ const ChatPage = () => {
               )}
             </div>
           )}
-          {(isGroupThread(currentThread) || isMemberThread(currentThread)) && (
+          {(isGroupThread(currentThread) || isMemberThread(currentThread) || isRobotThread(currentThread)) && (
             <div
               style={{
                 display: "flex",
@@ -1492,10 +1489,11 @@ const ChatPage = () => {
               }}
             >
               <Button
-                type="text"
-                onClick={() => setShowRightPanel(!showRightPanel)}
+                icon={<MenuOutlined />}
+                onClick={() => {
+                  // 以drawer方式打开
+                }}
               >
-                ...
               </Button>
             </div>
           )}
