@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-09-11 13:31:34
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-20 16:29:03
+ * @LastEditTime: 2025-02-08 12:57:51
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -24,11 +24,13 @@ import {
   CONFIG_ENABLED,
   CONFIG_HTML_URL,
   CONFIG_WEBSOCKET_URL,
+  CONFIG_PROPERTIES,
   IS_DEBUG,
   MQTT_WSS_URL,
   SERVER_MODE,
   SERVER_MODE_OPEN,
 } from "./constants";
+import { queryConfigProperties } from "@/apis/core/config_properties";
 
 // 修改 loadConfig 函数，使其返回 Promise
 export async function loadConfig() {
@@ -170,4 +172,54 @@ export function getMqttWssHost() {
   } else {
     return MQTT_WSS_URL;
   }
+}
+
+
+export async function getConfigProperties() {
+  const response = await queryConfigProperties();
+  console.log("getConfigProperties response: ", response.data.data);
+  if (response.data.code === 200) {
+    localStorage.setItem(CONFIG_PROPERTIES, JSON.stringify(response.data.data));
+    return response.data.data;
+  } else {
+    return null;
+  }
+}
+
+export function getLogoProperties() {
+  const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
+  if (configProperties) {
+    const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
+    // 如果logo不为空，且字符串长度大于0，而且以http开头，则返回logo
+    if (configPropertiesObj.logo
+        && configPropertiesObj.logo.length > 0
+        && configPropertiesObj.logo.startsWith("http")) {
+      return configPropertiesObj.logo;
+    }
+  }
+  // 如果logo为空，则返回默认logo
+  // return "/agent/icons/logo.png";
+  return "https://www.weiyuai.cn/logo.png";
+}
+
+export function getTitleProperties() {
+  const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
+  if (configProperties) {
+    const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
+    if (configPropertiesObj.name && configPropertiesObj.name.length > 0) {
+      return configPropertiesObj.name;
+    }
+  }
+  return null;
+}
+
+export function getSubTitleProperties() {
+  const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
+  if (configProperties) {
+    const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
+    if (configPropertiesObj.description && configPropertiesObj.description.length > 0) {
+      return configPropertiesObj.description;
+    }
+  }
+  return null;
 }

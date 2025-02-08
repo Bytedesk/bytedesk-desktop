@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 10:23:56
+ * @LastEditTime: 2025-02-08 12:47:44
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -122,6 +122,8 @@ export const CONFIG_CUSTOM_ENABLED = "CONFIG_CUSTOM_ENABLED_AGENT";
 export const CONFIG_CUSTOM_API_URL = "CONFIG_CUSTOM_API_URL_AGENT";
 export const CONFIG_CUSTOM_WEBSOCKET_URL = "CONFIG_CUSTOM_WEBSOCKET_URL_AGENT";
 export const CONFIG_CUSTOM_HTML_URL = "CONFIG_CUSTOM_HTML_URL_AGENT";
+//
+export const CONFIG_PROPERTIES = "CONFIG_PROPERTIES";
 //
 export const ORG_TREE_TYPE_ORGANIZATION = "organization";
 export const ORG_TREE_TYPE_DEPARTMENT = "department";

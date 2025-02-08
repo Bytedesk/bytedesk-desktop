@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 09:56:19
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 17:11:30
+ * @LastEditTime: 2025-02-08 13:03:59
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -21,7 +21,7 @@ import {
   // TabsProps,
   theme,
 } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Account from "./Account";
 import Mobile from "./Mobile";
@@ -48,6 +48,7 @@ import { loginSuccess, openUrl } from "@/utils/electronApiUtils";
 // import { AppContext } from '@/context/AppContext';
 // const { Option } = Select;
 import { Checkbox } from 'antd';
+import { getConfigProperties, getLogoProperties, getTitleProperties, getSubTitleProperties } from "@/utils/configUtils";
 // import type { CheckboxProps } from 'antd';
 // import { CheckboxChangeEvent } from 'antd';
 
@@ -55,6 +56,28 @@ type LoginType = "mobile" | "account" | "scan";
 interface LoginPageProps {
   isModel?: boolean;
 }
+const getLogo = () => {
+  const transId = getLogoProperties();
+  return <img alt="logo" src={transId} />;
+};
+const getTitle = () => {
+  const title = getTitleProperties();
+  if (title) {
+    return title;
+  }
+  return (
+    <FormattedMessage id={"app.title"} defaultMessage="微语" />
+  );
+};
+const getSubTitle = () => {
+  const subTitle = getSubTitleProperties();
+  if (subTitle) {
+    return subTitle;
+  }
+  return (
+    <FormattedMessage id={"slogan"} defaultMessage="Chat As A Service" />
+  );
+};
 
 const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
   const intl = useIntl();
@@ -274,6 +297,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
     }
   };
 
+  useEffect(() => {
+    const configProperties = getConfigProperties();
+    console.log("configProperties: ", configProperties);
+  }, []);
+
   return (
     <ProConfigProvider hashed={false}>
       <div
@@ -290,11 +318,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
             contentStyle={{
               minWidth: 400,
             }}
-            logo="https://www.weiyuai.cn/logo.png"
-            title={<FormattedMessage id="app.title" />}
-            subTitle={intl.formatMessage({
-              id: "slogan",
-            })}
+            logo={getLogo()}
+            title={getTitle()}
+            subTitle={getSubTitle()}
             initialValues={getInitialValues()}
             onFinish={async (values) => {
               console.log("login:", values);
