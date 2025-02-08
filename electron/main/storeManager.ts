@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-20 21:15:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 15:38:16
+ * @LastEditTime: 2025-02-08 15:39:29
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -55,22 +55,7 @@ export const getIsAppQuitting = () => {
   return appStateManager.getIsAppQuitting();
 };
 
-// export const getStoreManager = () : Store => {
-//   return store;
-// };
-
-// export const setStoreValue = (key: string, value: any) => {
-//   store.set(key, value);
-// };
-
-// export const getStoreValue = (key: string) => {
-//   return store.get(key);
-// };
-
-// export const removeStoreValue = (key: string) => {
-//   store.delete(key);
-// };
-
-// export const clearStore = () => {
-//   store.clear();
-// };
+// 在其他组件中监听变化
+// appStateManager.on('appQuittingChanged', (value) => {
+//   console.log('App quitting state changed:', value);
+// });
