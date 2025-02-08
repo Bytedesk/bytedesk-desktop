@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-27 21:55:59
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 15:03:57
+ * @LastEditTime: 2025-02-08 16:08:11
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -26,7 +26,7 @@ import {
   ProForm,
   ProFormTextArea,
   ProFormSelect,
-  ProFormSlider,
+  // ProFormSlider,
   ProFormDigit,
   // ProFormSwitch,
 } from "@ant-design/pro-components";
@@ -320,7 +320,18 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
           }}
           rules={[{ required: true, message: "请选择大模型" }]}
         />
-        <ProFormSlider
+        <ProFormDigit
+          width="lg"
+          label="温度"
+          name="temperature"
+          min={0}
+          max={1}
+          fieldProps={{ precision: 1, step: 0.1 }}
+          rules={[
+            { required: true, message: "请输入温度" },
+          ]}
+        />
+        {/* <ProFormSlider
           width="lg"
           label="温度"
           name="temperature"
@@ -329,7 +340,7 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
           max={1}
           // fieldProps={{ step: 0.1 }}
           rules={[{ required: true, message: "请输入温度" }]}
-        />
+        /> */}
         <ProFormDigit
           width={'lg'}
           label="上下文消息数"
