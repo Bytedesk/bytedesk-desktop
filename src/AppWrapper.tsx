@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-21 10:34:31
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-20 15:32:55
+ * @LastEditTime: 2025-02-08 13:18:13
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -34,7 +34,7 @@ import { IS_ELECTRON, WINDOWS_SCROLLBAR_CSS } from "./utils/constants";
 import { bytedeskBanner } from "./utils/utils";
 // https://github.com/bowser-js/bowser
 import Bowser from "bowser"; 
-import { getApiUrl, loadConfig } from "./utils/configUtils";
+import { getApiUrl, getConfigProperties, loadConfig } from "./utils/configUtils";
 
 const messageMap = {
   'zh-cn': zhCN,
@@ -70,6 +70,7 @@ const AppWrapper: React.FC = () => {
   // 
   const getConfig = async () => {
     console.log("getConfig");
+    await getConfigProperties();
     // 线上动态读取配置
     if (!IS_ELECTRON) {
       await loadConfig(); // 修改为同步执行，等待 loadConfig 执行完毕

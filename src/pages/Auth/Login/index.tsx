@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 09:56:19
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 13:03:59
+ * @LastEditTime: 2025-02-08 13:18:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -21,7 +21,7 @@ import {
   // TabsProps,
   theme,
 } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Account from "./Account";
 import Mobile from "./Mobile";
@@ -48,7 +48,7 @@ import { loginSuccess, openUrl } from "@/utils/electronApiUtils";
 // import { AppContext } from '@/context/AppContext';
 // const { Option } = Select;
 import { Checkbox } from 'antd';
-import { getConfigProperties, getLogoProperties, getTitleProperties, getSubTitleProperties } from "@/utils/configUtils";
+import { getLogoProperties, getTitleProperties, getSubTitleProperties } from "@/utils/configUtils";
 // import type { CheckboxProps } from 'antd';
 // import { CheckboxChangeEvent } from 'antd';
 
@@ -296,11 +296,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
       }
     }
   };
-
-  useEffect(() => {
-    const configProperties = getConfigProperties();
-    console.log("configProperties: ", configProperties);
-  }, []);
 
   return (
     <ProConfigProvider hashed={false}>
