@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-27 21:55:59
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 11:21:39
+ * @LastEditTime: 2025-02-08 15:03:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -15,6 +15,7 @@
 import { message } from "@/AntdGlobalComp";
 import { queryLlmModelsByOrg } from "@/apis/ai/llmmodel";
 import { queryLlmProvidersByOrg } from "@/apis/ai/llmprovider";
+import { getOllamaServerStatus, getOllamaLocalModels } from "@/apis/ai/ollama";
 import { updateThread } from "@/apis/ai/robot";
 import useTranslate from "@/hooks/useTranslate";
 import { useLlmProviderStore } from "@/stores/ai/llmprovider";
@@ -26,11 +27,12 @@ import {
   ProFormTextArea,
   ProFormSelect,
   ProFormSlider,
-  ProFormSwitch,
+  ProFormDigit,
+  // ProFormSwitch,
 } from "@ant-design/pro-components";
 import { Button, Drawer } from "antd";
 import { useEffect, useState } from "react";
-// import { useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 interface RobotInfoProps {
   open: boolean;
@@ -39,7 +41,7 @@ interface RobotInfoProps {
 
 //
 const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
-  // const intl = useIntl();
+  const intl = useIntl();
   const [form] = ProForm.useForm();
   const { translateString } = useTranslate();
   const currentOrg = useOrgStore((state) => state.currentOrg)
@@ -49,7 +51,7 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
       setCurrentThread: state.setCurrentThread,
     };
   });
-  const [modelResult, setModelResult] = useState<LLMMODEL.HttpPageResult>();
+  // const [modelResult, setModelResult] = useState<LLMMODEL.HttpPageResult>();
   const { llmproviderResult, setLlmProviderResult, } = useLlmProviderStore((state) => {
     return {
       llmproviderResult: state.llmproviderResult,
@@ -58,8 +60,9 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
   });
   const [robot, setRobot] = useState<ROBOT.RobotResponse>({});
   const [thread, setThread] = useState<THREAD.ThreadResponse>();
-  const [providerUid, setProviderUid] = useState<string>("");
-  const [providerName, setProviderName] = useState<string>("");
+  // const [providerUid, setProviderUid] = useState<string>("");
+  // const [providerName, setProviderName] = useState<string>("");
+  const [models, setModels] = useState<{ value: string; label: string }[]>([]);
   // 
   useEffect(() => {
     // 机器人会话：org/robot/{robot_uid}/{visitor_uid}
@@ -81,8 +84,9 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
       model: agent?.llm?.model,
       temperature: agent?.llm?.temperature,
       prompt: translateString(agent?.llm?.prompt),
+      contextMsgCount: agent?.llm?.contextMsgCount,
     });
-    getLlmModels(agent?.llm?.provider, false);
+    // getLlmModels(agent?.llm?.provider, false);
     // 
   }, [currentThread]);
 
@@ -100,29 +104,6 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
     if (response.data.code === 200) {
       setLlmProviderResult(response.data);
     } else {
-      message.error(response.data.message);
-    }
-  };
-
-  const getLlmModels = async (providerUid: string, setDefault: boolean) => {
-    console.log("getLlmModels:", providerUid);
-    const pageParams: LLMMODEL.LlmModelRequest = {
-      pageNumber: 0,
-      pageSize: 20,
-      // 
-      providerUid: providerUid,
-      level: LEVEL_TYPE_ORGANIZATION,
-      orgUid: currentOrg?.uid,
-    };
-    const response = await queryLlmModelsByOrg(pageParams);
-    console.log("queryLlmModelsByOrg: ", response);
-    if (response.data.code === 200) {
-      setModelResult(response.data);
-      if (setDefault && response?.data.data.content.length > 0) {
-        form.setFieldValue("model", response?.data?.data?.content[0].uid);
-      }
-    } else {
-      console.log("error", response);
       message.error(response.data.message);
     }
   };
@@ -153,36 +134,6 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log("llm provider", providerUid, providerName);
-    if (providerUid === "") {
-      return;
-    }
-    getLlmModels(providerUid, true);
-    // TODO 遍历llmproviderResult.data.content，从中找出provider相同的item.logo
-    if (llmproviderResult?.data?.content.length > 0) {
-      for (let i = 0; i < llmproviderResult?.data?.content.length; i++) {
-        if (llmproviderResult?.data?.content[i].name === providerUid) {
-          console.log("llm logo", llmproviderResult?.data?.content[i].logo);
-          const newRobot = {
-            ...robot,
-            logo: llmproviderResult?.data?.content[i].logo,
-          };
-          setRobot(newRobot);
-          const newThread = {
-            ...currentThread,
-            user: {
-              ...currentThread.user,
-              logo: llmproviderResult?.data?.content[i].logo,
-            },
-            agent: JSON.stringify(newRobot),
-          };
-          setThread(newThread);
-        }
-      }
-    }
-  }, [providerUid]);
-
   const submitterRender = (props, defaultDoms) => {
     console.log("submitterRender", props, defaultDoms);
     return [
@@ -195,8 +146,8 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
             model: robot?.llm?.model,
             temperature: robot?.llm?.temperature,
             prompt: translateString(robot?.llm?.prompt),
+            contextMsgCount: robot?.llm?.contextMsgCount,
           });
-          getLlmModels(robot?.llm?.provider, false);
         }}
       >
         重置
@@ -213,12 +164,88 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
     ];
   };
 
+  const requestOllamaStatus = async () => {
+    console.log("pingOllama");
+    const response = await getOllamaServerStatus();
+    console.log('getOllamaServerStatus: ', response);
+    if (response.data.code === 200 && response.data.data) {
+      requestLocalModels();
+    } else {
+      message.error(response.data.message);
+    }
+  }
+
+  const requestLocalModels = async () => {
+    console.log("requestLocalModels");
+    const response = await getOllamaLocalModels();
+    console.log('getOllamaLocalModels: ', response);
+    if (response.data.code === 200) {
+      setModels(response.data.data.map(model => ({
+        value: model.name,
+        label: model.name
+      })));
+      // 如果modelOptions为空，则清空model选择
+      if (response.data.data.length === 0) {
+        form.setFieldValue('model', undefined);
+      } else {
+        form.setFieldValue('model', response.data.data[0].name);
+      }
+    } else {
+      message.error(response.data.message);
+    }
+  }
+
+  const requestModels = async (selectedProvider: LLMPROVIDER.LlmProviderResponse) => {
+    message.loading(intl.formatMessage({ id: 'loading' }));
+      try {
+        const params: LLMMODEL.LlmModelRequest = {
+          pageNumber: 0,
+          pageSize: 50,
+          //
+          providerUid: selectedProvider.uid,
+          orgUid: currentOrg?.uid,
+          level: LEVEL_TYPE_ORGANIZATION,
+        };
+        const response = await queryLlmModelsByOrg(params);
+        console.log('queryLlmModelsByOrg response:', response);
+        if (response.data.code === 200) {
+          const modelOptions = response.data.data.content.map(model => ({
+            value: model.uid,
+            label: model.name
+          }));
+          setModels(modelOptions);
+          // 如果modelOptions为空，则清空model选择
+          if (modelOptions.length === 0) {
+            form.setFieldValue('model', undefined);
+          } else {
+            form.setFieldValue('model', modelOptions[0].value);
+          }
+        } else {
+          message.error(response.data.message);
+        }
+      } catch (error) {
+        console.error('Failed to fetch models:', error);
+        message.error(intl.formatMessage({ id: 'error' }));
+      } finally {
+        message.destroy();
+      }
+  }
+
   const handleProviderSelected = (value: string) => {
     // value是llmproviderResult.data.content中name的值，通过name找到对应的uid
-    const uid = llmproviderResult.data.content.find((item) => item.name === value)?.uid;
-    console.log('handleProviderSelected uid:', uid, value)
-    setProviderUid(uid);
-    setProviderName(value);
+    // const uid = llmproviderResult.data.content.find((item) => item.name === value)?.uid;
+    // console.log('handleProviderSelected uid:', uid, value)
+    // setProviderUid(uid);
+    // setProviderName(value);
+    const selectedProvider = llmproviderResult?.data?.content.find(p => p.name === value);
+    console.log('selectedProvider:', selectedProvider);
+    if (selectedProvider?.name) {
+      if (selectedProvider.name === "ollama") {
+        requestOllamaStatus();
+      } else {
+        requestModels(selectedProvider);
+      }
+    }
   }
 
   const handleModelSelected = (value: string) => {
@@ -226,9 +253,9 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
     // form.setFieldValue("model", value);
   }
 
-  const handleSwitchChange = async (checked: boolean) => {
-    console.log('自定义模型开关 handleChange', checked);
-  }
+  // const handleSwitchChange = async (checked: boolean) => {
+  //   console.log('自定义模型开关 handleChange', checked);
+  // }
 
   return (
     <Drawer 
@@ -284,12 +311,7 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
           name="model"
           label="模型"
           allowClear
-          options={modelResult?.data?.content.map((item) => {
-            return { 
-              value: item.uid, 
-              label: item.nickname 
-            };
-          })}
+          options={models}
           fieldProps={{
             onChange(value, option) {
               console.log("model value:", value, option);
@@ -308,13 +330,24 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
           // fieldProps={{ step: 0.1 }}
           rules={[{ required: true, message: "请输入温度" }]}
         />
-        <ProFormSwitch
+        <ProFormDigit
+          width={'lg'}
+          label="上下文消息数"
+          name={'contextMsgCount'}
+          min={0}
+          max={10}
+          fieldProps={{ precision: 0, step: 1 }}
+          rules={[
+            { required: true, message: "请输入上下文消息数" },
+          ]}
+        />
+        {/* <ProFormSwitch
           label="自定义模型开关"
           name={'custom'}
           fieldProps={{
             onChange: handleSwitchChange
           }}
-        />
+        /> */}
         {/* <ProFormDigit
           width="lg"
           label="温度"
