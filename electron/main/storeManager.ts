@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-20 21:15:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 15:34:36
+ * @LastEditTime: 2025-02-08 15:38:16
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,16 +17,42 @@
 // import Store from "electron-store";
 // import { IS_APP_QUIT } from "../utils/constants";
 
-// const store = new Store();
-let isAppQuittingInstance = false;
+import { EventEmitter } from 'events';
+
+class AppStateManager extends EventEmitter {
+  private static instance: AppStateManager;
+  private isAppQuitting: boolean = false;
+
+  private constructor() {
+    super();
+  }
+
+  public static getInstance(): AppStateManager {
+    if (!AppStateManager.instance) {
+      AppStateManager.instance = new AppStateManager();
+    }
+    return AppStateManager.instance;
+  }
+
+  public setIsAppQuitting(value: boolean): void {
+    this.isAppQuitting = value;
+    this.emit('appQuittingChanged', value);
+  }
+
+  public getIsAppQuitting(): boolean {
+    return this.isAppQuitting;
+  }
+}
+
+const appStateManager = AppStateManager.getInstance();
 
 export const setIsAppQuitting = (isAppQuitting: boolean) => {
   console.log("setIsAppQuitting", isAppQuitting);
-  isAppQuittingInstance = isAppQuitting;
+  appStateManager.setIsAppQuitting(isAppQuitting);
 };
 
 export const getIsAppQuitting = () => {
-  return isAppQuittingInstance;
+  return appStateManager.getIsAppQuitting();
 };
 
 // export const getStoreManager = () : Store => {
