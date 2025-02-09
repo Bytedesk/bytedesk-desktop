@@ -198,8 +198,8 @@ export function getLogoProperties() {
     }
   }
   // 如果logo为空，则返回默认logo
-  // return "/agent/icons/logo.png";
-  return "https://www.weiyuai.cn/logo.png";
+  return "/agent/icons/logo.png";
+  // return "https://www.weiyuai.cn/logo.png";
 }
 
 export function getTitleProperties() {
