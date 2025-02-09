@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-09-11 13:31:34
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 12:57:51
+ * @LastEditTime: 2025-02-09 18:36:16
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -198,8 +198,10 @@ export function getLogoProperties() {
     }
   }
   // 如果logo为空，则返回默认logo
-  return "/agent/icons/logo.png";
+  // return "/agent/icons/logo.png";
   // return "https://www.weiyuai.cn/logo.png";
+  // 自定义logo: 广西全景云客服logo
+  return "/agent/icons/custom/logo_1.jpg";
 }
 
 export function getTitleProperties() {
