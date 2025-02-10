@@ -79,5 +79,6 @@ export default {
   'thread.status.online': 'Online',
   'thread.status.offline': 'Offline',
   'thread.status.busy': '🏃‍♀️Busy',
-  'thread.coming.soon': 'Coming soon...'
+  'thread.coming.soon': 'Coming soon...',
+  'thread.menu.star.cancel': 'Remove Star'
 } 

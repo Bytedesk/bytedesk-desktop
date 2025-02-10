@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-10 20:39:02
+ * @LastEditTime: 2025-02-10 20:58:58
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -91,7 +91,17 @@ import { Dropdown, Space } from "antd";
 import { useIntl } from "react-intl";
 import CreateRobot from "../RightPanel/RobotInfo/CreateRobot";
 import { syncCurrentThreadCount } from "@/apis/service/agent";
+import BlockModel from "@/components/Vip/BlockModel";
+import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
 // import { useSettingsStore } from "@/stores/core/setting";
+
+// 添加星标颜色常量
+const STAR_COLORS = {
+  "star-1": "#FFB800", // 金色
+  "star-2": "#FF4D4F", // 红色
+  "star-3": "#52C41A", // 绿色
+  "star-4": "#1890FF", // 蓝色
+};
 
 const ThreadList = () => {
   const intl = useIntl();
@@ -108,6 +118,8 @@ const ThreadList = () => {
     THREAD.ThreadResponse[]
   >([]);
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
+  const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
+  const [isTicketCreateModelOpen, setIsTicketCreateModelOpen] = useState(false);
 
   const dropDownItems: MenuProps["items"] = [
     {
@@ -381,22 +393,12 @@ const ThreadList = () => {
 
   const handleBlackThreadClick = async () => {
     console.log("handleBlackThreadClick");
-    message.warning(
-      intl.formatMessage({
-        id: "thread.feature.unavailable",
-        defaultMessage: "TODO: 该功能暂未开放",
-      }),
-    );
+    setIsBlockModelOpen(true);
   };
 
   const handleTicketThreadClick = async () => {
     console.log("handleTicketThreadClick");
-    message.warning(
-      intl.formatMessage({
-        id: "thread.feature.unavailable",
-        defaultMessage: "TODO: 该功能暂未开放",
-      }),
-    );
+    setIsTicketCreateModelOpen(true);
   };
 
   const handleCrmThreadClick = async () => {
@@ -444,6 +446,9 @@ const ThreadList = () => {
     switch (id) {
       case "top":
         handleTopThreadClick();
+        break;
+      case "star-0":
+        handleStarThreadClick(0);
         break;
       case "star-1":
         handleStarThreadClick(1);
@@ -658,22 +663,35 @@ const ThreadList = () => {
     }));
   };
 
+  // 修改 filterThreads 函数，添加排序逻辑
   const filterThreads = (threads: THREAD.ThreadResponse[]) => {
-    // 如果没有选中任何过滤条件，返回所有会话
-    if (!Object.values(filters).some((v) => v)) {
-      return threads;
+    // 创建数组副本
+    let filteredThreads = [...threads];
+
+    // 应用过滤条件
+    if (Object.values(filters).some((v) => v)) {
+      filteredThreads = filteredThreads.filter((thread) => {
+        if (filters.groupThread && isGroupThread(thread)) return true;
+        if (filters.robotThread && isRobotThread(thread)) return true;
+        if (filters.workgroupThread && isWorkgroupThread(thread)) return true;
+        if (filters.agentThread && isAgentThread(thread)) return true;
+        if (filters.ticketThread && isTicketThread(thread)) return true;
+        if (filters.memberThread && isMemberThread(thread)) return true;
+        if (filters.deviceThread && isDeviceThread(thread)) return true;
+        if (filters.systemThread && isSystemThread(thread)) return true;
+        return false;
+      });
     }
 
-    return threads.filter((thread) => {
-      if (filters.groupThread && isGroupThread(thread)) return true;
-      if (filters.robotThread && isRobotThread(thread)) return true;
-      if (filters.workgroupThread && isWorkgroupThread(thread)) return true;
-      if (filters.agentThread && isAgentThread(thread)) return true;
-      if (filters.ticketThread && isTicketThread(thread)) return true;
-      if (filters.memberThread && isMemberThread(thread)) return true;
-      if (filters.deviceThread && isDeviceThread(thread)) return true;
-      if (filters.systemThread && isSystemThread(thread)) return true;
-      return false;
+    // 按星标等级排序
+    return [...filteredThreads].sort((a, b) => {
+      const aStarLevel = a.star || 0;
+      const bStarLevel = b.star || 0;
+      if (aStarLevel !== bStarLevel) {
+        return bStarLevel - aStarLevel; // 高星级排在前面
+      }
+      // 如果星级相同，按最后消息时间排序
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     });
   };
 
@@ -815,6 +833,14 @@ const ThreadList = () => {
                         ? "list-item-dark"
                         : "list-item"
                   }
+                  style={{
+                    backgroundColor: thread.star
+                      ? STAR_COLORS[`star-${thread.star}`] + "10"
+                      : undefined,
+                    borderLeft: thread.star
+                      ? `3px solid ${STAR_COLORS[`star-${thread.star}`]}`
+                      : undefined,
+                  }}
                 >
                   <List.Item.Meta
                     avatar={getAvatar(thread)}
@@ -874,6 +900,68 @@ const ThreadList = () => {
             ? intl.formatMessage({ id: "thread.menu.unmute" })
             : intl.formatMessage({ id: "thread.menu.mute" })}
         </Item>
+        <Submenu label={intl.formatMessage({ id: "thread.menu.star" })}>
+          <Item id="star-1" onClick={handleRightClick}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: STAR_COLORS["star-1"],
+                }}
+              />
+              {intl.formatMessage({ id: "thread.menu.star.1" })}
+            </div>
+          </Item>
+          <Item id="star-2" onClick={handleRightClick}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: STAR_COLORS["star-2"],
+                }}
+              />
+              {intl.formatMessage({ id: "thread.menu.star.2" })}
+            </div>
+          </Item>
+          <Item id="star-3" onClick={handleRightClick}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: STAR_COLORS["star-3"],
+                }}
+              />
+              {intl.formatMessage({ id: "thread.menu.star.3" })}
+            </div>
+          </Item>
+          <Item id="star-4" onClick={handleRightClick}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor: STAR_COLORS["star-4"],
+                }}
+              />
+              {intl.formatMessage({ id: "thread.menu.star.4" })}
+            </div>
+          </Item>
+          {currentThread?.star && (
+            <>
+              <Separator />
+              <Item id="star-0" onClick={handleRightClick}>
+                {intl.formatMessage({ id: "thread.menu.star.cancel" })}
+              </Item>
+            </>
+          )}
+        </Submenu>
         <Separator />
         <Item id="transfer" onClick={handleRightClick}>
           {intl.formatMessage({ id: "thread.menu.transfer" })}
@@ -881,32 +969,15 @@ const ThreadList = () => {
         <Item id="hide" onClick={handleRightClick}>
           {intl.formatMessage({ id: "i18n.hide" })}
         </Item>
+        <Separator />
+        <Item id="black" onClick={handleRightClick}>
+          {intl.formatMessage({ id: "thread.menu.block" })}
+        </Item>
+        <Item id="ticket" onClick={handleRightClick}>
+          {intl.formatMessage({ id: "thread.menu.ticket" })}
+        </Item>
         {IS_DEBUG && (
           <>
-            <Submenu
-              label={intl.formatMessage({ id: "thread.menu.star", })}
-            >
-              <Item id="star-1" onClick={handleRightClick}>
-                {intl.formatMessage({ id: "thread.menu.star.1" })}
-              </Item>
-              <Item id="star-2" onClick={handleRightClick}>
-                {intl.formatMessage({ id: "thread.menu.star.2" })}
-              </Item>
-              <Item id="star-3" onClick={handleRightClick}>
-                {intl.formatMessage({ id: "thread.menu.star.3" })}
-              </Item>
-              <Item id="star-4" onClick={handleRightClick}>
-                {intl.formatMessage({ id: "thread.menu.star.4" })}
-              </Item>
-            </Submenu>
-            <Separator />
-            <Item id="black" onClick={handleRightClick}>
-              {intl.formatMessage({ id: "thread.menu.block" })}
-            </Item>
-            <Separator />
-            <Item id="ticket" onClick={handleRightClick}>
-              {intl.formatMessage({ id: "thread.menu.ticket" })}
-            </Item>
             <Item id="crm" onClick={handleRightClick}>
               {intl.formatMessage({ id: "thread.menu.crm" })}
             </Item>
@@ -990,7 +1061,6 @@ const ThreadList = () => {
             </div>
           </Item>
         </Submenu>
-        {/* <Separator /> */}
         {/* <Submenu label="Foobar">
           <Item id="reload" onClick={handleRightClick}>Reload</Item>
         </Submenu> */}
@@ -1007,6 +1077,28 @@ const ThreadList = () => {
           open={isCreateRobotModalOpen}
           onSubmit={handleCreateRobotOk}
           onCancel={handleCreateRobotCancel}
+        />
+      )}
+      {isTicketCreateModelOpen && (
+        <TicketCreateDrawer
+          open={isTicketCreateModelOpen}
+          onSuccess={() => {
+            setIsTicketCreateModelOpen(false);
+          }}
+          onCancel={() => {
+            setIsTicketCreateModelOpen(false);
+          }}
+        />
+      )}
+      {isBlockModelOpen && (
+        <BlockModel
+          open={isBlockModelOpen}
+          onOk={() => {
+            setIsBlockModelOpen(false);
+          }}
+          onCancel={() => {
+            setIsBlockModelOpen(false);
+          }}
         />
       )}
     </>

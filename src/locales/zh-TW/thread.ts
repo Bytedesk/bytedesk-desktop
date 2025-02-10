@@ -78,4 +78,5 @@ export default {
   'thread.status.message.transfer': '轉接中...',
   'thread.status.message.transferred': '已轉接',
   'thread.status.message.closed': '會話已關閉',
+  'thread.menu.star.cancel': '取消星標',
 } 
