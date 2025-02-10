@@ -98,6 +98,7 @@ export default {
   "ticket.category.other": "其他",
   'ticket.form.thread': '關聯會話',
   'ticket.form.thread.placeholder': '選擇關聯會話',
+  'ticket.form.thread.none': '不關聯',
   // 
   'ticket.form.createdAt': '創建時間',
   'ticket.form.updatedAt': '更新時間',

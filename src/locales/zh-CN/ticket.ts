@@ -94,6 +94,7 @@ export default {
   'ticket.message.send.error': '发送消息失败',
   'ticket.form.thread': '关联会话',
   'ticket.form.thread.placeholder': '选择关联会话',
+  'ticket.form.thread.none': '不关联',
   // 
   'ticket.form.createdAt': '创建时间',
   'ticket.form.updatedAt': '更新时间',

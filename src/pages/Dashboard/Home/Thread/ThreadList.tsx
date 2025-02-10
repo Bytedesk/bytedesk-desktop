@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 12:05:29
+ * @LastEditTime: 2025-02-10 20:39:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -23,6 +23,7 @@ import {
   Input,
   List,
   Skeleton,
+  Checkbox,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { queryThreads, updateThread } from "@/apis/core/thread";
@@ -47,9 +48,17 @@ import { useAppContext } from "@/context/AppContext";
 import { message } from "@/AntdGlobalComp";
 import {
   generateAvatar,
+  isAgentThread,
+  isDeviceThread,
+  isGroupThread,
+  isMemberThread,
   isOrgAgentTopic,
   isOrgRobotTopic,
   isOrgWorkgroupTopic,
+  isRobotThread,
+  isSystemThread,
+  isTicketThread,
+  isWorkgroupThread,
   shortTimeFormat,
 } from "@/utils/utils";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -103,39 +112,39 @@ const ThreadList = () => {
   const dropDownItems: MenuProps["items"] = [
     {
       key: "group",
-      label: intl.formatMessage({ 
-        id: 'thread.dropdown.create.group',
-        defaultMessage: '创建群聊'
+      label: intl.formatMessage({
+        id: "thread.dropdown.create.group",
+        defaultMessage: "创建群聊",
       }),
     },
     {
       key: "ai",
-      label: intl.formatMessage({ 
-        id: 'thread.dropdown.create.ai',
-        defaultMessage: '创建AI对话'
+      label: intl.formatMessage({
+        id: "thread.dropdown.create.ai",
+        defaultMessage: "创建AI对话",
       }),
     },
   ];
   const agentStatusItems: MenuProps["items"] = [
     {
       key: AGENT_STATUS_AVAILABLE,
-      label: intl.formatMessage({ 
-        id: 'thread.agent.status.online',
-        defaultMessage: '😀 - 在线接待'
+      label: intl.formatMessage({
+        id: "thread.agent.status.online",
+        defaultMessage: "😀 - 在线接待",
       }),
     },
     {
       key: AGENT_STATUS_OFFLINE,
-      label: intl.formatMessage({ 
-        id: 'thread.agent.status.offline',
-        defaultMessage: '🔻 - 客服下线'
+      label: intl.formatMessage({
+        id: "thread.agent.status.offline",
+        defaultMessage: "🔻 - 客服下线",
       }),
     },
     {
       key: AGENT_STATUS_BUSY,
-      label: intl.formatMessage({ 
-        id: 'thread.agent.status.busy',
-        defaultMessage: '🏃‍♀️ - 客服忙碌'
+      label: intl.formatMessage({
+        id: "thread.agent.status.busy",
+        defaultMessage: "🏃‍♀️ - 客服忙碌",
       }),
     },
   ];
@@ -292,15 +301,19 @@ const ThreadList = () => {
     console.log("updateThread:", response.data, newThread);
     if (response.data.code === 200) {
       setCurrentThread(response.data.data);
-      message.success(intl.formatMessage({
-        id: 'thread.set.success',
-        defaultMessage: '设置成功'
-      }));
+      message.success(
+        intl.formatMessage({
+          id: "thread.set.success",
+          defaultMessage: "设置成功",
+        }),
+      );
     } else {
-      message.error(intl.formatMessage({
-        id: 'thread.set.error',
-        defaultMessage: '设置失败'
-      }));
+      message.error(
+        intl.formatMessage({
+          id: "thread.set.error",
+          defaultMessage: "设置失败",
+        }),
+      );
     }
   };
 
@@ -469,10 +482,12 @@ const ThreadList = () => {
         handleTransferThreadClick();
         break;
       default:
-        message.warning(intl.formatMessage({
-          id: 'thread.coming.soon',
-          defaultMessage: '即将上线，敬请期待'
-        }));
+        message.warning(
+          intl.formatMessage({
+            id: "thread.coming.soon",
+            defaultMessage: "即将上线，敬请期待",
+          }),
+        );
       //etc...
     }
   };
@@ -560,20 +575,26 @@ const ThreadList = () => {
   // 抽取设置状态的公共函数
   const setAgentStatusByKey = (statusKey: string) => {
     if (statusKey === AGENT_STATUS_AVAILABLE) {
-      return setAgentStatus(intl.formatMessage({
-        id: 'thread.status.online',
-        defaultMessage: '😀接待'
-      }));
+      return setAgentStatus(
+        intl.formatMessage({
+          id: "thread.status.online",
+          defaultMessage: "😀接待",
+        }),
+      );
     } else if (statusKey === AGENT_STATUS_OFFLINE) {
-      return setAgentStatus(intl.formatMessage({
-        id: 'thread.status.offline',
-        defaultMessage: '🔻下线'
-      }));
+      return setAgentStatus(
+        intl.formatMessage({
+          id: "thread.status.offline",
+          defaultMessage: "🔻下线",
+        }),
+      );
     } else if (statusKey === AGENT_STATUS_BUSY) {
-      return setAgentStatus(intl.formatMessage({
-        id: 'thread.status.busy',
-        defaultMessage: '🏃‍♀️忙碌'
-      }));
+      return setAgentStatus(
+        intl.formatMessage({
+          id: "thread.status.busy",
+          defaultMessage: "🏃‍♀️忙碌",
+        }),
+      );
     }
   };
 
@@ -617,6 +638,48 @@ const ThreadList = () => {
     }
   };
 
+  // 添加过滤状态
+  const [filters, setFilters] = useState({
+    groupThread: false,
+    robotThread: false,
+    workgroupThread: false,
+    agentThread: false,
+    ticketThread: false,
+    memberThread: false,
+    deviceThread: false,
+    systemThread: false,
+  });
+
+  // 处理复选框点击
+  const handleFilterChange = (id: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const filterThreads = (threads: THREAD.ThreadResponse[]) => {
+    // 如果没有选中任何过滤条件，返回所有会话
+    if (!Object.values(filters).some((v) => v)) {
+      return threads;
+    }
+
+    return threads.filter((thread) => {
+      if (filters.groupThread && isGroupThread(thread)) return true;
+      if (filters.robotThread && isRobotThread(thread)) return true;
+      if (filters.workgroupThread && isWorkgroupThread(thread)) return true;
+      if (filters.agentThread && isAgentThread(thread)) return true;
+      if (filters.ticketThread && isTicketThread(thread)) return true;
+      if (filters.memberThread && isMemberThread(thread)) return true;
+      if (filters.deviceThread && isDeviceThread(thread)) return true;
+      if (filters.systemThread && isSystemThread(thread)) return true;
+      return false;
+    });
+  };
+
+  // 在渲染列表时使用这个过滤函数
+  const filteredThreads = filterThreads(threads);
+
   return (
     <>
       <div>
@@ -633,9 +696,9 @@ const ThreadList = () => {
                 width: "55%",
               }}
               size="small"
-              placeholder={intl.formatMessage({ 
-                id: 'thread.search.placeholder',
-                defaultMessage: '搜索'
+              placeholder={intl.formatMessage({
+                id: "thread.search.placeholder",
+                defaultMessage: "搜索",
               })}
               onChange={(e) => handleSearchChange(e.target.value)}
               prefix={<SearchOutlined />}
@@ -704,9 +767,9 @@ const ThreadList = () => {
             loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
             endMessage={
               <Divider plain>
-                {intl.formatMessage({ 
-                  id: 'thread.list.no.more',
-                  defaultMessage: '没有更多了'
+                {intl.formatMessage({
+                  id: "thread.list.no.more",
+                  defaultMessage: "没有更多了",
                 })}
               </Divider>
             }
@@ -721,23 +784,23 @@ const ThreadList = () => {
             pullDownToRefreshThreshold={20}
             pullDownToRefreshContent={
               <h3 style={{ textAlign: "center" }}>
-                {intl.formatMessage({ 
-                  id: 'thread.refresh.pull',
-                  defaultMessage: '↓ 下拉刷新'
+                {intl.formatMessage({
+                  id: "thread.refresh.pull",
+                  defaultMessage: "↓ 下拉刷新",
                 })}
               </h3>
             }
             releaseToRefreshContent={
               <h3 style={{ textAlign: "center" }}>
-                {intl.formatMessage({ 
-                  id: 'thread.refresh.release',
-                  defaultMessage: '↑ 松开刷新'
+                {intl.formatMessage({
+                  id: "thread.refresh.release",
+                  defaultMessage: "↑ 松开刷新",
                 })}
               </h3>
             }
           >
             <List
-              dataSource={threadSortedList}
+              dataSource={filteredThreads}
               renderItem={(thread) => (
                 <List.Item
                   key={thread?.uid}
@@ -820,33 +883,20 @@ const ThreadList = () => {
         </Item>
         {IS_DEBUG && (
           <>
-            <Submenu label={intl.formatMessage({
-              id: 'thread.menu.star',
-              defaultMessage: '星标'
-            })}>
+            <Submenu
+              label={intl.formatMessage({ id: "thread.menu.star", })}
+            >
               <Item id="star-1" onClick={handleRightClick}>
-                {intl.formatMessage({
-                  id: 'thread.menu.star.1',
-                  defaultMessage: '星标1'
-                })}
+                {intl.formatMessage({ id: "thread.menu.star.1" })}
               </Item>
               <Item id="star-2" onClick={handleRightClick}>
-                {intl.formatMessage({
-                  id: 'thread.menu.star.2',
-                  defaultMessage: '星标2'
-                })}
+                {intl.formatMessage({ id: "thread.menu.star.2" })}
               </Item>
               <Item id="star-3" onClick={handleRightClick}>
-                {intl.formatMessage({
-                  id: 'thread.menu.star.3',
-                  defaultMessage: '星标3'
-                })}
+                {intl.formatMessage({ id: "thread.menu.star.3" })}
               </Item>
               <Item id="star-4" onClick={handleRightClick}>
-                {intl.formatMessage({
-                  id: 'thread.menu.star.4',
-                  defaultMessage: '星标4'
-                })}
+                {intl.formatMessage({ id: "thread.menu.star.4" })}
               </Item>
             </Submenu>
             <Separator />
@@ -865,6 +915,81 @@ const ThreadList = () => {
             </Item>
           </>
         )}
+        <Separator />
+        <Submenu label={intl.formatMessage({ id: "thread.menu.filter" })}>
+          <Item
+            id="groupThread"
+            onClick={() => handleFilterChange("groupThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.groupThread} />
+              {intl.formatMessage({ id: "thread.menu.groupThread" })}
+            </div>
+          </Item>
+          <Item
+            id="robotThread"
+            onClick={() => handleFilterChange("robotThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.robotThread} />
+              {intl.formatMessage({ id: "thread.menu.robotThread" })}
+            </div>
+          </Item>
+          <Item
+            id="workgroupThread"
+            onClick={() => handleFilterChange("workgroupThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.workgroupThread} />
+              {intl.formatMessage({ id: "thread.menu.workgroupThread" })}
+            </div>
+          </Item>
+          <Item
+            id="agentThread"
+            onClick={() => handleFilterChange("agentThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.agentThread} />
+              {intl.formatMessage({ id: "thread.menu.agentThread" })}
+            </div>
+          </Item>
+          <Item
+            id="ticketThread"
+            onClick={() => handleFilterChange("ticketThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.ticketThread} />
+              {intl.formatMessage({ id: "thread.menu.ticketThread" })}
+            </div>
+          </Item>
+          <Item
+            id="memberThread"
+            onClick={() => handleFilterChange("memberThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.memberThread} />
+              {intl.formatMessage({ id: "thread.menu.memberThread" })}
+            </div>
+          </Item>
+          <Item
+            id="deviceThread"
+            onClick={() => handleFilterChange("deviceThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.deviceThread} />
+              {intl.formatMessage({ id: "thread.menu.deviceThread" })}
+            </div>
+          </Item>
+          <Item
+            id="systemThread"
+            onClick={() => handleFilterChange("systemThread")}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Checkbox checked={filters.systemThread} />
+              {intl.formatMessage({ id: "thread.menu.systemThread" })}
+            </div>
+          </Item>
+        </Submenu>
         {/* <Separator /> */}
         {/* <Submenu label="Foobar">
           <Item id="reload" onClick={handleRightClick}>Reload</Item>

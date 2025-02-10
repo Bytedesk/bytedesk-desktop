@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:23:06
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:32:17
+ * @LastEditTime: 2025-02-10 20:18:48
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -31,6 +31,17 @@ export default {
   'thread.status.agent': '[一对一]',
   'thread.status.workgroup': '[工作组]',
   'thread.search.placeholder': '搜索会话...',
+  // 
+  'thread.menu.filter': '会话过滤',
+  'thread.menu.groupThread': '群聊会话',
+  'thread.menu.robotThread': '机器人会话',
+  'thread.menu.workgroupThread': '工作组会话',
+  'thread.menu.agentThread': '一对一会话',
+  'thread.menu.ticketThread': '工单会话',
+  'thread.menu.memberThread': '成员会话',
+  'thread.menu.deviceThread': '设备会话',
+  'thread.menu.systemThread': '系统会话',
+
   // Thread List
   'thread.dropdown.create.group': '创建群聊',
   'thread.dropdown.create.ai': '创建AI对话',

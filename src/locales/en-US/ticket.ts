@@ -39,6 +39,7 @@ export default {
    'ticket.form.workgroup.placeholder': 'Select workgroup',
    'ticket.form.thread': 'Related Conversation',
    'ticket.form.thread.placeholder': 'Select related conversation',
+   'ticket.form.thread.none': 'No Association',
    
    // Ticket Messages
    'ticket.create.success': 'Ticket created successfully',

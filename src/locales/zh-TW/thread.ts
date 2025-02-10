@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:23:14
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:28:23
+ * @LastEditTime: 2025-02-10 20:18:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -27,6 +27,17 @@ export default {
   'thread.menu.ticket': '創建工單',
   'thread.menu.crm': '查看CRM',
   'thread.menu.summary': '會話總結',
+  // 
+  'thread.menu.filter': '會話過濾',
+  'thread.menu.groupThread': '群聊會話',
+  'thread.menu.robotThread': '機器人會話',
+  'thread.menu.workgroupThread': '工作組會話',
+  'thread.menu.agentThread': '一對一會話',
+  'thread.menu.ticketThread': '工單會話',
+  'thread.menu.memberThread': '成員會話',
+  'thread.menu.deviceThread': '設備會話',
+  'thread.menu.systemThread': '系統會話',
+  // 
   'thread.status.robot': '[機器人]',
   'thread.status.agent': '[一對一]',
   'thread.status.workgroup': '[工作組]',

@@ -1,3 +1,17 @@
+/*
+ * @Author: jackning 270580156@qq.com
+ * @Date: 2025-02-03 23:00:59
+ * @LastEditors: jackning 270580156@qq.com
+ * @LastEditTime: 2025-02-10 17:39:36
+ * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
+ *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
+ *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
+ *  仅支持企业内部员工自用，严禁私自用于销售、二次销售或者部署SaaS方式销售 
+ *  Business Source License 1.1: https://github.com/Bytedesk/bytedesk/blob/main/LICENSE 
+ *  contact: 270580156@qq.com 
+ * 联系：270580156@qq.com
+ * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
+ */
 export default {
   // Thread List
   'thread.error.message': 'Failed to get data',
@@ -17,6 +31,16 @@ export default {
   'thread.status.agent': '[1-on-1]',
   'thread.status.workgroup': '[Group]',
   'thread.search.placeholder': 'Search conversations...',
+  // 
+  'thread.menu.filter': 'Filter Threads',
+  'thread.menu.groupThread': 'Group Thread',
+  'thread.menu.robotThread': 'Robot Thread',
+  'thread.menu.workgroupThread': 'Workgroup Thread',
+  'thread.menu.agentThread': 'Agent Thread',
+  'thread.menu.ticketThread': 'Ticket Thread',
+  'thread.menu.memberThread': 'Member Thread',
+  'thread.menu.deviceThread': 'Device Thread',
+  'thread.menu.systemThread': 'System Thread',
 
   // Thread Status
   'thread.status.loading': 'Loading...',

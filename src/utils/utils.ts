@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 12:54:51
+ * @LastEditTime: 2025-02-10 20:27:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -59,6 +59,7 @@ import {
   TICKET_PRIORITY_LOW,
   TICKET_PRIORITY_MEDIUM,
   TICKET_PRIORITY_URGENT,
+  THREAD_TYPE_TICKET,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -204,6 +205,18 @@ export const isCustomerServiceThread = (thread: THREAD.ThreadResponse) => {
   );
 };
 
+export const isAgentThread = (thread: THREAD.ThreadResponse) => {
+  return thread?.type === THREAD_TYPE_AGENT;
+};
+
+export const isWorkgroupThread = (thread: THREAD.ThreadResponse) => {
+  return thread?.type === THREAD_TYPE_WORKGROUP;
+};
+
+export const isTicketThread = (thread: THREAD.ThreadResponse) => {
+  return thread?.type === THREAD_TYPE_TICKET;
+};
+
 export const isRobotThread = (thread: THREAD.ThreadResponse) => {
   return (
     // thread?.type === THREAD_TYPE_KB ||
@@ -214,6 +227,18 @@ export const isRobotThread = (thread: THREAD.ThreadResponse) => {
 
 export const isThreadClosed = (thread: THREAD.ThreadResponse) => {
   return thread?.state === THREAD_STATE_CLOSED;
+};
+
+export const isDeviceThread = (thread: THREAD.ThreadResponse) => {
+  console.log("isDeviceThread", thread);
+  // return thread?.type === THREAD_TYPE_DEVICE;
+  return false;
+};
+
+export const isSystemThread = (thread: THREAD.ThreadResponse) => {
+  console.log("isSystemThread", thread);
+  // return thread?.type === THREAD_TYPE_SYSTEM;
+  return false;
 };
 
 export function shouldSendReceipt(type: string) {
