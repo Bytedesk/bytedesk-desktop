@@ -108,7 +108,7 @@ export default {
   // 工单类型
   'ticket.type': '类型',
   'ticket.category': '分类',
-  'ticket.steps.title': '处理步骤',
+  'ticket.steps.title': '流转过程',
   'ticket.form.upload.button': '上传附件',
   'ticket.upload.success': '文件上传成功',
   'ticket.upload.failed': '文件上传失败',

@@ -141,14 +141,16 @@ export default {
   "i18n.TOOL": "工具",
   "i18n.WRITING": "寫作",
   "i18n.RAG": "知識庫問答",
+  "i18n.module.service": "客服",
+  "i18n.module.ticket": "工單",
   // 
   "i18n.black.user.already.exists": "用戶已拉黑",
   // 
-  "i18n.ticket.category.technical_support": "技术支持",
-  "i18n.ticket.category.service_request": "服务请求",
-  "i18n.ticket.category.consultation": "咨询",
-  "i18n.ticket.category.complaint_suggestion": "投诉建议",
-  "i18n.ticket.category.operation_maintenance": "运维",
+  "i18n.ticket.category.technical_support": "技術支持",
+  "i18n.ticket.category.service_request": "服務請求",
+  "i18n.ticket.category.consultation": "咨詢",
+  "i18n.ticket.category.complaint_suggestion": "投訴建議",
+  "i18n.ticket.category.operation_maintenance": "運維",
   "i18n.ticket.category.other": "其他",
   // 
   "i18n.vip.component": "VIP組件, 聯繫我們了解更多詳情",

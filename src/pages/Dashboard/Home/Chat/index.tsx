@@ -40,7 +40,7 @@ import {
   isOrgMemberTopic,
   isRichText,
   isRobotThread,
-  isThreadClosed,
+  // isThreadClosed,
 } from "@/utils/utils";
 import {
   getTranslation,
@@ -87,6 +87,7 @@ import {
   MESSAGE_TYPE_TRANSFER_REJECT,
   MESSAGE_TYPE_VIDEO,
   MESSAGE_TYPE_WELCOME,
+  THREAD_STATE_CLOSED,
 } from "@/utils/constants";
 import DropUpload from "../../../../components/Upload/DropUpload";
 import { AppContext, useAppContext } from "@/context/AppContext";
@@ -1483,7 +1484,7 @@ const ChatPage = () => {
                   defaultMessage: "工单",
                 })}
               </Button>
-              {!isThreadClosed(currentThread) && (
+              {currentThread?.state !== THREAD_STATE_CLOSED && (
                 <Button type="text" onClick={showCloseThreadConfirm}>
                   {intl.formatMessage({
                     id: "chat.navbar.close",

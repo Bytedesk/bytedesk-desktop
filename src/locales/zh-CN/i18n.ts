@@ -140,6 +140,8 @@ export default {
   "i18n.TOOL": "工具",
   "i18n.WRITING": "写作",
   "i18n.RAG": "知识库问答",
+  "i18n.module.service": "客服",
+  "i18n.module.ticket": "工单",
   // 
   "i18n.black.user.already.exists": "用户已拉黑",
   // 

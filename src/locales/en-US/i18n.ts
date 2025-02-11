@@ -145,6 +145,8 @@ export default {
   "i18n.TOOL": "Tool",
   "i18n.WRITING": "Writing",
   "i18n.RAG": "RAG",
+  "i18n.module.service": "Service",
+  "i18n.module.ticket": "Ticket",
   // 
   "i18n.black.user.already.exists": "User already blocked",
   // 

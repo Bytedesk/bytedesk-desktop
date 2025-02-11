@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 16:30:21
+ * @LastEditTime: 2025-02-11 14:44:26
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -112,7 +112,7 @@ export default {
   // 工單類型
   'ticket.type': '類型',
   'ticket.category': '分類',
-  'ticket.steps.title': '處理步驟',
+  'ticket.steps.title': '轉移過程',
 
   // 工單篩選
   'ticket.filter.by.status': '按狀態篩選',
