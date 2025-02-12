@@ -143,6 +143,12 @@ export const ticketService = {
     const { agentInfo } = useAgentStore.getState();
     const { userInfo } = useUserStore.getState();
     
+    const tryLoad = async (attempt: number) => {
+      try {
+        setLoading(true);
+        setError(null);
+      }
+    }
   },
 
   // 刷新工单列表
