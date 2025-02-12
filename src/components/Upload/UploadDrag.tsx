@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 23:12:33
+ * @LastEditTime: 2025-02-13 16:03:39
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -29,6 +29,7 @@ const { Dragger } = Upload;
 type UploadDragProps = {
   type: string;
   isModalOpen: boolean;
+  attachments?: TICKET.TicketAttachmentResponse[];
   handleSubmit: (uploads: UPLOAD.UploadResponse[]) => void;
   handleCancel: () => void;
 };
@@ -46,6 +47,7 @@ type UploadDataProps = {
 const UploadDrag = ({
   type,
   isModalOpen,
+  attachments,
   handleSubmit,
   handleCancel,
 }: UploadDragProps) => {
