@@ -26,7 +26,7 @@ import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread }
 // import GroupInfo from "./GroupInfo";
 // import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
-import Ticket from "../../../Vip/Home/RightPanel/Ticket";
+import TicketRecords from "../../../Vip/Home/RightPanel/TicketRecords";
 // import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
@@ -86,7 +86,7 @@ const RightPanel = () => {
             id: "chat.right.ticket",
             defaultMessage: "Ticket"
           }),
-          children: <Ticket />,
+          children: <TicketRecords />,
         });
       }
       setTabItems(itemsCs);
