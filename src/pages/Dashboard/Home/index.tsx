@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 21:47:12
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 13:49:57
+ * @LastEditTime: 2025-02-12 14:05:45
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -23,7 +23,7 @@ import { useThreadStore } from "@/stores/core/thread";
 import Queue from "../../Vip/Home/Queue";
 import { useIntl } from "react-intl";
 import { OrderedListOutlined } from "@ant-design/icons";
-import { isCustomerServiceThread } from "@/utils/utils";
+import { isCustomerServiceThreadOrTicketThread } from "@/utils/utils";
 import ChatPage from "./Chat";
 
 const { Sider, Header, Content } = Layout;
@@ -70,7 +70,7 @@ const Home = () => {
         )}
         {!showQueueList && (
           <>
-            {isCustomerServiceThread(currentThread) && (
+            {isCustomerServiceThreadOrTicketThread(currentThread) && (
               <Splitter>
                 <Splitter.Panel>
                   <ChatPage />
@@ -80,7 +80,7 @@ const Home = () => {
                 </Splitter.Panel>
               </Splitter>
             )}
-            {!isCustomerServiceThread(currentThread) && (
+            {!isCustomerServiceThreadOrTicketThread(currentThread) && (
               <Content style={contentStyle}>
                 <ChatPage />
               </Content>

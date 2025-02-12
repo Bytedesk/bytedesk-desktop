@@ -50,7 +50,7 @@ export default {
   "chat.right.docview": "文档预览",
   "chat.right.group": "群详情",
   "chat.right.member": "联系人",
-  "chat.ai.summary": "小结",
+  "chat.ai.summary": "会话小结",
   "chat.ai.switch": "切换AI",
   "chat.thread.nomore": "没有更多了",
   "chat.message.loadmore": "加载更多",

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-11 18:01:31
+ * @LastEditTime: 2025-02-12 14:05:30
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -204,6 +204,12 @@ export const isGroupThread = (thread: THREAD.ThreadResponse) => {
 export const isCustomerServiceThread = (thread: THREAD.ThreadResponse) => {
   return (
     thread?.type === THREAD_TYPE_AGENT || thread?.type === THREAD_TYPE_WORKGROUP
+  );
+};
+
+export const isCustomerServiceThreadOrTicketThread = (thread: THREAD.ThreadResponse) => {
+  return (
+    thread?.type === THREAD_TYPE_AGENT || thread?.type === THREAD_TYPE_WORKGROUP || thread?.type === THREAD_TYPE_TICKET
   );
 };
 

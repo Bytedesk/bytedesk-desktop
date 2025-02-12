@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 14:01:34
+ * @LastEditTime: 2025-02-12 14:20:45
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -22,7 +22,7 @@ import { useIntl } from "react-intl";
 import { useThreadStore } from "@/stores/core/thread";
 import { useEffect, useState, useContext } from "react";
 // import LlmInfoDrawer from "./LlmInfo";
-import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
+import { isCustomerServiceThread, isTicketThread } from "@/utils/utils";
 // import GroupInfo from "./GroupInfo";
 // import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
@@ -30,8 +30,9 @@ import TicketRecords from "../../../Vip/Home/RightPanel/TicketRecords";
 // import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
-import TicketTabs from "@/pages/Vip/Ticket/components/TicketTabs";
 import { useTicketStore } from "@/stores/ticket/ticket";
+import TicketDetails from "@/pages/Vip/Ticket/components/TicketDetails";
+import TicketSteps from "@/pages/Vip/Ticket/components/TicketSteps";
 
 const RightPanel = () => {
   const intl = useIntl();
@@ -39,22 +40,16 @@ const RightPanel = () => {
   const currentThread = useThreadStore((state) => state.currentThread);
   const { activeKey, setActiveKey, defaultKey, setDefaultKey } = useRightPanelStore();
   const [tabItems, setTabItems] = useState([]);
-  const [currentTicket] = useTicketStore((state) => [state.currentTicket]);
+  const [currentThreadTicket] = useTicketStore((state) => [state.currentThreadTicket]);
 
   // 监听会话变化,设置默认tab
   useEffect(() => {
     if (isCustomerServiceThread(currentThread)) {
       setActiveKey("quickreply");
       setDefaultKey("quickreply");
-    } else if (isRobotThread(currentThread)) {
-      setActiveKey("llm");
-      setDefaultKey("llm"); 
-    } else if (isGroupThread(currentThread)) {
-      setActiveKey("group");
-      setDefaultKey("group");
-    } else if (isMemberThread(currentThread)) {
-      setActiveKey("member");
-      setDefaultKey("member");
+    } else if (isTicketThread(currentThread)) {
+      setActiveKey("ticket-details");
+      setDefaultKey("ticket-details");
     }
   }, [currentThread]);
 
@@ -77,81 +72,33 @@ const RightPanel = () => {
       if (IS_DEBUG) {
         itemsCs.splice(0, 0, {
           key: "ai",
-          label: intl.formatMessage({
-            id: "chat.right.ai",
-            defaultMessage: "Copilot"
-          }),
+          label: intl.formatMessage({ id: "chat.right.ai" }),
           children: <AI />,
         });
-        itemsCs.splice(3, 0, {
-          key: "ticket",
-          label: intl.formatMessage({
-            id: "chat.right.ticket",
-            defaultMessage: "Ticket"
-          }),
-          children: <TicketRecords />,
-        });
       }
+      itemsCs.push({
+        key: "ticket",
+        label: intl.formatMessage({ id: "chat.right.ticket" }),
+        children: <TicketRecords />,
+      });
       setTabItems(itemsCs);
     }
     else if (isTicketThread(currentThread)) {
       setTabItems([
         {
-          key: "ticket",
-          label: intl.formatMessage({ id: "chat.right.ticket" }),
-          children: <TicketTabs ticket={currentTicket} onEdit={() => {}} onDelete={() => {}} />,
+          key: "ticket-details",
+          label: intl.formatMessage({ id: "ticket.details.title" }),
+          children: <TicketDetails ticket={currentThreadTicket} isThreadTicket={true} onEdit={() => {}} onDelete={() => {}}
+        />,
+        },
+        {
+          key: "ticket-steps",
+          label: intl.formatMessage({ id: "ticket.steps.title" }),
+          children: <TicketSteps ticket={currentThreadTicket} />,
         },
       ]);
     }
-    //  else if (isRobotThread(currentThread)) {
-    //   const itemsRobot = [
-    //     {
-    //       key: "llm",
-    //       label: intl.formatMessage({
-    //         id: "chat.right.llm",
-    //         defaultMessage: "LLM"
-    //       }),
-    //       children: <LlmInfoDrawer />,
-    //     },
-    //   ];
-
-    //   if (IS_DEBUG) {
-    //     itemsRobot.splice(0, 0, {
-    //       key: "docview",
-    //       label: intl.formatMessage({
-    //         id: "chat.right.docview",
-    //         defaultMessage: "Doc View"
-    //       }),
-    //       children: <DocView />,
-    //     });
-    //   }
-    //   setTabItems(itemsRobot);
-    // }
-    //  else if (isGroupThread(currentThread)) {
-    //   setTabItems([
-    //     {
-    //       key: "group",
-    //       label: intl.formatMessage({
-    //         id: "chat.right.group",
-    //         defaultMessage: "Group"
-    //       }),
-    //       children: <GroupInfo />,
-    //     },
-    //   ]);
-    // } 
-    // else if (isMemberThread(currentThread)) {
-    //   setTabItems([
-    //     {
-    //       key: "member",
-    //       label: intl.formatMessage({
-    //         id: "chat.right.member",
-    //         defaultMessage: "Member"
-    //       }),
-    //       children: <MemberInfo />,
-    //     },
-    //   ]);
-    // }
-     else {
+    else {
       setTabItems([]);
     }
   }, [currentThread, intl, locale]);

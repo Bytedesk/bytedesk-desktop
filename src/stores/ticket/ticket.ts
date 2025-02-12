@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 10:39:40
+ * @LastEditTime: 2025-02-12 14:19:56
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -44,6 +44,7 @@ interface TicketState {
   tickets: TICKET.TicketResponse[];
   // 当前选中的工单
   currentTicket?: TICKET.TicketResponse;
+  currentThreadTicket?: TICKET.TicketResponse;
   // 加载状态
   loading: boolean;
   // 搜索关键词
@@ -63,6 +64,7 @@ interface TicketState {
 
   // Actions
   setCurrentTicket: (ticket?: TICKET.TicketResponse) => void;
+  setCurrentThreadTicket: (ticket?: TICKET.TicketResponse) => void;
   setSearchText: (text: string) => void;
   loadTickets: (orgUid: string) => Promise<void>;
   refreshTickets: () => Promise<void>;
@@ -81,6 +83,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
     // State
     tickets: [],
     currentTicket: undefined,
+    currentThreadTicket: undefined,
     loading: false,
     searchText: '',
     pagination: {
@@ -94,6 +97,8 @@ export const useTicketStore = create<TicketState>((set, get) => {
 
     // Actions
     setCurrentTicket: (ticket) => set({ currentTicket: ticket }),
+
+    setCurrentThreadTicket: (ticket) => set({ currentThreadTicket: ticket }),
     
     setSearchText: (text) => {
       set({ searchText: text });

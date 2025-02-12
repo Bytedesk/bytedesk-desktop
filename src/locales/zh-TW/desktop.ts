@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-27 14:31:39
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-21 09:39:18
+ * @LastEditTime: 2025-02-12 14:15:53
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -50,7 +50,7 @@ export default {
   "chat.right.docview": "文档预览",
   "chat.right.group": "群详情",
   "chat.right.member": "联系人",
-  "chat.ai.summary": "小结",
+  "chat.ai.summary": "会话小结",
   "chat.ai.switch": "切换AI",
   "chat.thread.nomore": "没有更多了",
   "chat.message.loadmore": "加载更多",
