@@ -28,6 +28,7 @@ const { Dragger } = Upload;
 //
 type UploadDragProps = {
   type: string;
+  acceptType?: string;
   isModalOpen: boolean;
   attachments?: TICKET.TicketAttachmentResponse[];
   handleSubmit: (uploads: UPLOAD.UploadResponse[]) => void;
@@ -46,6 +47,7 @@ type UploadDataProps = {
 //
 const UploadDrag = ({
   type,
+  acceptType,
   isModalOpen,
   attachments,
   handleSubmit,
@@ -63,6 +65,7 @@ const UploadDrag = ({
     kb_uid: "",
     client: HTTP_CLIENT,
   });
+  console.log("acceptType", acceptType);
 
   // 使用 useMemo 来定义 uploadProps
   const uploadProps = useMemo<UploadProps>(() => ({
