@@ -124,7 +124,11 @@ import ChatHeader from "./components/ChatHeader";
 import ChatModels from "./components/ChatModels";
 import ChatMenu from "./components/ChatMenu";
 
-const ChatPage = () => {
+interface ChatPageProps {
+  ticket?: TICKET.TicketResponse;
+}
+
+const ChatPage = ({ ticket }: ChatPageProps) => {
   const intl = useIntl();
   const { translateString } = useTranslate();
   const isNetworkOnline = useNetworkStatus();
@@ -187,6 +191,7 @@ const ChatPage = () => {
       };
     },
   );
+  console.log("ticket:", ticket);
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
