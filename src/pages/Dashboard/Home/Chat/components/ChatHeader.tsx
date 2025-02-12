@@ -183,6 +183,7 @@ const ChatHeader = ({
               </Button>
             </div>
           )}
+          
         </Header>
   </>
   );
