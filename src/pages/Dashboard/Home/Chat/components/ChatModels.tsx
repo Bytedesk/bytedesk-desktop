@@ -48,6 +48,10 @@ interface ChatModelsProps {
   isMemberInfoDrawerOpen: boolean;
   setIsMemberInfoDrawerOpen: (isOpen: boolean) => void;
   isRobotInfoDrawerOpen: boolean;
+  setIsRobotInfoDrawerOpen: (isOpen: boolean) => void;
+  showEmoji: boolean;
+  handleEmojiSelect: (emoji: string) => void;
+  setShowEmoji: (isOpen: boolean) => void;
 }
         
 const ChatModels = ({ 
