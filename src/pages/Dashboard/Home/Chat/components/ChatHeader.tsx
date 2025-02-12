@@ -4,6 +4,7 @@ import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useThreadStore } from "@/stores/core/thread";
 import { Layout } from "antd";
+import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
 
