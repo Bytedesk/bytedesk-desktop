@@ -36,6 +36,12 @@ interface ChatModelsProps {
   isBlockModelOpen: boolean;
   handleBlockModelOk: () => void;
   handleBlockModelCancel: () => void;
+  isWebRtcModelOpen: boolean;
+  handleWebRtcModelOk: () => void;
+  handleWebRtcModelCancel: () => void;
+  isScreenRecorderModelOpen: boolean;
+  screenShotImg: string;
+  handleScreenRecorderModelOk: () => void;
 }
         
 const ChatModels = ({ 
