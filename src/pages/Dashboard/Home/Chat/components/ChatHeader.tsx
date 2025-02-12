@@ -22,6 +22,12 @@ interface ChatHeaderProps {
   setIsRobotInfoDrawerOpen: (open: boolean) => void;
 }
 
+const ChatHeader = ({
+  typing,
+  previewContent,
+  setIsTransferThreadModelOpen,
+  setIsTicketCreateModelOpen,
+  showCloseThreadConfirm,
 const ChatHeader = () => {
   const intl = useIntl();
   const { headerStyle } = useStyle();
