@@ -1507,6 +1507,7 @@ const ChatPage = () => {
             </Menu>
           </>
         )}
+        {/*  */}
         <ChatModels
           isAutoReplyModelOpen={isAutoReplyModelOpen}
           handleAutoReplyModelOk={handleAutoReplyModelOk}
@@ -1539,9 +1540,13 @@ const ChatPage = () => {
           isGroupInfoDrawerOpen={isGroupInfoDrawerOpen}
           setIsGroupInfoDrawerOpen={setIsGroupInfoDrawerOpen}
           isMemberInfoDrawerOpen={isMemberInfoDrawerOpen}
-          
-          />
-        
+          setIsMemberInfoDrawerOpen={setIsMemberInfoDrawerOpen}
+          isRobotInfoDrawerOpen={isRobotInfoDrawerOpen}
+          setIsRobotInfoDrawerOpen={setIsRobotInfoDrawerOpen}
+          showEmoji={showEmoji}
+          handleEmojiSelect={handleEmojiSelect}
+          setShowEmoji={setShowEmoji}
+        />
         {contextHolder}
       </DropUpload>
     </>
