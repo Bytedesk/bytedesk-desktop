@@ -21,7 +21,7 @@ interface ThreadContextMenuProps {
   onFilterChange: (id: string) => void;
   onSetCurrentThread: (thread: THREAD.ThreadResponse) => void;
   onOpenBlockModal: () => void;
-  onOpenTicketModal: () => void;
+//   onOpenTicketModal: () => void;
 }
 
 const MENU_ID = "thread_list_item";
@@ -40,7 +40,6 @@ const ThreadContextMenu = ({
   onFilterChange,
   onSetCurrentThread,
   onOpenBlockModal,
-  onOpenTicketModal,
 }: ThreadContextMenuProps) => {
   const intl = useIntl();
 
@@ -143,8 +142,6 @@ const ThreadContextMenu = ({
       case "black":
         onOpenBlockModal();
         break;
-      case "ticket":
-        onOpenTicketModal();
         break;
       case "transfer":
         emitter.emit(EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL);
@@ -162,37 +159,66 @@ const ThreadContextMenu = ({
           : intl.formatMessage({ id: "thread.menu.top" })}
       </Item>
       <Submenu label={intl.formatMessage({ id: "thread.menu.star" })}>
-        <Item id="star-0" onClick={handleRightClick}>
-          {intl.formatMessage({ id: "thread.menu.star.cancel" })}
+        <Item id="star-1" onClick={handleRightClick}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                backgroundColor: STAR_COLORS["star-1"],
+              }}
+            />
+            {intl.formatMessage({ id: "thread.menu.star.1" })}
+          </div>
         </Item>
-        <Item 
-          id="star-1" 
-          onClick={handleRightClick}
-          style={{ color: STAR_COLORS["star-1"] }}
-        >
-          {intl.formatMessage({ id: "thread.menu.star.1" })}
+        <Item id="star-2" onClick={handleRightClick}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                backgroundColor: STAR_COLORS["star-2"],
+              }}
+            />
+            {intl.formatMessage({ id: "thread.menu.star.2" })}
+          </div>
         </Item>
-        <Item 
-          id="star-2" 
-          onClick={handleRightClick}
-          style={{ color: STAR_COLORS["star-2"] }}
-        >
-          {intl.formatMessage({ id: "thread.menu.star.2" })}
+        <Item id="star-3" onClick={handleRightClick}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                backgroundColor: STAR_COLORS["star-3"],
+              }}
+            />
+            {intl.formatMessage({ id: "thread.menu.star.3" })}
+          </div>
         </Item>
-        <Item 
-          id="star-3" 
-          onClick={handleRightClick}
-          style={{ color: STAR_COLORS["star-3"] }}
-        >
-          {intl.formatMessage({ id: "thread.menu.star.3" })}
+        <Item id="star-4" onClick={handleRightClick}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: "50%",
+                backgroundColor: STAR_COLORS["star-4"],
+              }}
+            />
+            {intl.formatMessage({ id: "thread.menu.star.4" })}
+          </div>
         </Item>
-        <Item 
-          id="star-4" 
-          onClick={handleRightClick}
-          style={{ color: STAR_COLORS["star-4"] }}
-        >
-          {intl.formatMessage({ id: "thread.menu.star.4" })}
-        </Item>
+        {currentThread?.star && (
+          <>
+            <Separator />
+            <Item id="star-0" onClick={handleRightClick}>
+              {intl.formatMessage({ id: "thread.menu.star.cancel" })}
+            </Item>
+          </>
+        )}
       </Submenu>
       <Item id="mute" onClick={handleRightClick}>
         {currentThread?.mute
@@ -213,15 +239,12 @@ const ThreadContextMenu = ({
       <Item id="black" onClick={handleRightClick}>
         {intl.formatMessage({ id: "thread.menu.block" })}
       </Item>
-      <Item id="ticket" onClick={handleRightClick}>
-        {intl.formatMessage({ id: "thread.menu.ticket" })}
-      </Item>
       <Separator />
       <Submenu label={intl.formatMessage({ id: "thread.menu.filter" })}>
         <Item>
           <Checkbox
             checked={filters.groupThread}
-            onChange={() => onFilterChange('groupThread')}
+            onChange={() => onFilterChange("groupThread")}
           >
             {intl.formatMessage({ id: "thread.menu.groupThread" })}
           </Checkbox>
@@ -229,7 +252,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.robotThread}
-            onChange={() => onFilterChange('robotThread')}
+            onChange={() => onFilterChange("robotThread")}
           >
             {intl.formatMessage({ id: "thread.menu.robotThread" })}
           </Checkbox>
@@ -237,7 +260,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.workgroupThread}
-            onChange={() => onFilterChange('workgroupThread')}
+            onChange={() => onFilterChange("workgroupThread")}
           >
             {intl.formatMessage({ id: "thread.menu.workgroupThread" })}
           </Checkbox>
@@ -245,7 +268,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.agentThread}
-            onChange={() => onFilterChange('agentThread')}
+            onChange={() => onFilterChange("agentThread")}
           >
             {intl.formatMessage({ id: "thread.menu.agentThread" })}
           </Checkbox>
@@ -253,7 +276,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.ticketThread}
-            onChange={() => onFilterChange('ticketThread')}
+            onChange={() => onFilterChange("ticketThread")}
           >
             {intl.formatMessage({ id: "thread.menu.ticketThread" })}
           </Checkbox>
@@ -261,7 +284,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.memberThread}
-            onChange={() => onFilterChange('memberThread')}
+            onChange={() => onFilterChange("memberThread")}
           >
             {intl.formatMessage({ id: "thread.menu.memberThread" })}
           </Checkbox>
@@ -269,7 +292,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.deviceThread}
-            onChange={() => onFilterChange('deviceThread')}
+            onChange={() => onFilterChange("deviceThread")}
           >
             {intl.formatMessage({ id: "thread.menu.deviceThread" })}
           </Checkbox>
@@ -277,7 +300,7 @@ const ThreadContextMenu = ({
         <Item>
           <Checkbox
             checked={filters.systemThread}
-            onChange={() => onFilterChange('systemThread')}
+            onChange={() => onFilterChange("systemThread")}
           >
             {intl.formatMessage({ id: "thread.menu.systemThread" })}
           </Checkbox>
@@ -287,4 +310,4 @@ const ThreadContextMenu = ({
   );
 };
 
-export { ThreadContextMenu, MENU_ID }; 
+export { ThreadContextMenu, MENU_ID };

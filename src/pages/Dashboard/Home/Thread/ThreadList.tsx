@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:34:03
+ * @LastEditTime: 2025-02-12 17:41:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -86,7 +86,7 @@ import { useIntl } from "react-intl";
 import CreateRobot from "../RightPanel/RobotInfo/CreateRobot";
 import { syncCurrentThreadCount } from "@/apis/service/agent";
 import BlockModel from "@/components/Vip/BlockModel";
-import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
+// import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
 // import { useSettingsStore } from "@/stores/core/setting";
 import { threadService } from "@/services/threadService";
 import { useOrgStore } from "@/stores/core/organization";
@@ -115,7 +115,7 @@ const ThreadList = () => {
   >([]);
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
   const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
-  const [isTicketCreateModelOpen, setIsTicketCreateModelOpen] = useState(false);
+  // const [isTicketCreateModelOpen, setIsTicketCreateModelOpen] = useState(false);
   const currentOrg = useOrgStore((state) => state.currentOrg);
   // 
   const dropDownItems: MenuProps["items"] = [
@@ -810,7 +810,7 @@ const ThreadList = () => {
         onFilterChange={handleFilterChange}
         onSetCurrentThread={setCurrentThread}
         onOpenBlockModal={() => setIsBlockModelOpen(true)}
-        onOpenTicketModal={() => setIsTicketCreateModelOpen(true)}
+        // onOpenTicketModal={() => setIsTicketCreateModelOpen(true)}
       />
       {isCreateGroupModalOpen && (
         <CreateGroup
@@ -826,7 +826,7 @@ const ThreadList = () => {
           onCancel={handleCreateRobotCancel}
         />
       )}
-      {isTicketCreateModelOpen && (
+      {/* {isTicketCreateModelOpen && (
         <TicketCreateDrawer
           open={isTicketCreateModelOpen}
           onSuccess={() => {
@@ -836,7 +836,7 @@ const ThreadList = () => {
             setIsTicketCreateModelOpen(false);
           }}
         />
-      )}
+      )} */}
       {isBlockModelOpen && (
         <BlockModel
           open={isBlockModelOpen}
