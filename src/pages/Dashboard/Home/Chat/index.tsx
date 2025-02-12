@@ -1506,7 +1506,7 @@ const ChatPage = () => {
             </Menu>
           </>
         )}
-        
+        <ChatModels
         {contextHolder}
       </DropUpload>
     </>
