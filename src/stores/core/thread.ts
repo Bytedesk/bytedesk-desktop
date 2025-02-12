@@ -259,7 +259,7 @@ export const useThreadStore = create<ThreadState>()(
           }
         },
         updateThreadContent(
-          threadTopic: string,
+          threadUid: string,
           content: string,
         ): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
