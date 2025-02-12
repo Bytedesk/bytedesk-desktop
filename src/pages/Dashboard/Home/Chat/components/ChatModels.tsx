@@ -42,6 +42,12 @@ interface ChatModelsProps {
   isScreenRecorderModelOpen: boolean;
   screenShotImg: string;
   handleScreenRecorderModelOk: () => void;
+  handleScreenRecorderModelCancel: () => void;
+  isGroupInfoDrawerOpen: boolean;
+  setIsGroupInfoDrawerOpen: (isOpen: boolean) => void;
+  isMemberInfoDrawerOpen: boolean;
+  setIsMemberInfoDrawerOpen: (isOpen: boolean) => void;
+  isRobotInfoDrawerOpen: boolean;
 }
         
 const ChatModels = ({ 
