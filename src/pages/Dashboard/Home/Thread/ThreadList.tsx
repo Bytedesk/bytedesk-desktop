@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 18:35:56
+ * @LastEditTime: 2025-02-12 18:37:01
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -476,7 +476,7 @@ const ThreadList = () => {
       if (aTop !== bTop) {
         return aTop ? -1 : 1;
       }
-      // 
+      // 4星 > 3星 > 2星 > 1星
       const aStarLevel = a.star || 0;
       const bStarLevel = b.star || 0;
       if (aStarLevel !== bStarLevel) {
