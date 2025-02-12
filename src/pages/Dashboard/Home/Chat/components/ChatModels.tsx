@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-13 20:45:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 20:46:54
+ * @LastEditTime: 2025-02-13 20:47:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -46,7 +46,7 @@ const ChatModels = ({
     isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, 
     isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
     isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
-    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
+    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,   isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
   return (
     <>
         {isAutoReplyModelOpen && (
