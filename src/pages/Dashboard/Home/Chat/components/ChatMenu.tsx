@@ -18,7 +18,6 @@ import { AppContext } from "@/context/AppContext";
 import { MESSAGE_TYPE_TEXT, IS_ELECTRON, MESSAGE_TYPE_IMAGE, IS_DEBUG } from "@/utils/constants";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
-import { MENU_ID } from "../../Thread/components/ThreadContextMenu";
 // https://fkhadra.github.io/react-contexify/
 // https://github.com/fkhadra/react-contexify
 import {
