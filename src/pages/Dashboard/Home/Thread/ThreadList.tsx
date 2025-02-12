@@ -217,20 +217,20 @@ const ThreadList = () => {
     setThreadSortedList(sortedThreads);
   }, [threads, currentThread]);
   //
-  const [refreshing, setRefreshing] = useState(false);
+  // const [refreshing, setRefreshing] = useState(false);
   const isRefreshing = useRef(false);
-  const [pageNumber, setPageNumber] = useState(0);
+  // const [pageNumber, setPageNumber] = useState(0);
   const getThreads = async () => {
     if (isRefreshing.current || !currentOrg?.uid) return;
     
-    setRefreshing(true);
+    // setRefreshing(true);
     isRefreshing.current = true;
     
     try {
       await threadService.loadThreads(currentOrg.uid);
       await syncThreadCount();
     } finally {
-      setRefreshing(false);
+      // setRefreshing(false);
       isRefreshing.current = false;
     }
   };
