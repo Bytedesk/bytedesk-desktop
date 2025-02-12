@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:51:31
+ * @LastEditTime: 2025-02-12 18:11:10
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -105,17 +105,13 @@ const ThreadList = () => {
   const { isDarkMode, agentInfo, hasRoleAgent, handleUpdateAgentStatus } =
     useAppContext();
   console.log("hasRoleAgent: ", hasRoleAgent, agentInfo);
-  // const { showNotification } = useNotification();
   const isNetworkOnline = useNetworkStatus();
-  // const [isLoadingMessage, setIsLoadingMessage] = useState(false);
-  // const [searchValue, setSearchValue] = useState("");
   const [agentStatus, setAgentStatus] = useState<string>("下线");
   const [threadSortedList, setThreadSortedList] = useState<
     THREAD.ThreadResponse[]
   >([]);
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
   const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
-  // const [isTicketCreateModelOpen, setIsTicketCreateModelOpen] = useState(false);
   const currentOrg = useOrgStore((state) => state.currentOrg);
   // 
   const dropDownItems: MenuProps["items"] = [
@@ -177,16 +173,6 @@ const ThreadList = () => {
     // 给threads排序，thread.top=true的排在前面
     const sortedThreads = [...threads]
       .filter((thread) => !thread.hide)
-      // .filter((thread) => {
-      //   if (searchText && searchText.length > 0) {
-      //     return (
-      //       thread?.user.nickname?.includes(searchText) ||
-      //       thread?.content?.includes(searchText)
-      //     );
-      //   } else {
-      //     return true;
-      //   }
-      // })
       .sort((a, b) => {
         // 首先，根据 top 属性进行排序
         if (a.top && !b.top) {
