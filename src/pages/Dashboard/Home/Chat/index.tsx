@@ -1379,7 +1379,8 @@ const ChatPage = () => {
           showCloseThreadConfirm={showCloseThreadConfirm}
           setIsGroupInfoDrawerOpen={setIsGroupInfoDrawerOpen}
           setIsMemberInfoDrawerOpen={setIsMemberInfoDrawerOpen}
-         />
+          setIsRobotInfoDrawerOpen={setIsRobotInfoDrawerOpen}
+        />
         {currentThread?.topic === "" ? (
           <>
             <Empty style={{ marginTop: 200 }} description={false} />
