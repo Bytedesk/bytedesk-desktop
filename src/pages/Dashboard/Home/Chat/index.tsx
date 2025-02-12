@@ -116,29 +116,16 @@ import RateBubble from "@/components/Bubbles/Rate";
 // https://react-photo-view.vercel.app/
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-import AutoReplyModel from "@/components/AutoReplyModel";
-import TransferThreadModel from "@/components/Vip/TransferThreadModel";
-import ForwardMessageModel from "@/components/Vip/ForwardMessageModel";
 import LeaveMsg from "@/components/Bubbles/LeaveMsg";
-import EmojiPicker from "@/components/EmojiPicker";
 import RobotQa from "@/components/Bubbles/RobotQa";
 import "./chatpage.css";
 import { FaqQa } from "@/components/Bubbles/FaqQa";
-import TransferMessageModel from "@/components/Vip/TransferMessageModel";
 import TransferBubble from "@/components/Bubbles/TransferBubble";
-import ScreenRecorderModel from "@/components/ScreenRecorderModel";
 // https://www.npmjs.com/package/file-saver
 // import { saveAs } from "file-saver";
-import HistoryMessageModel from "@/components/Vip/HistoryMessageModel";
-import BlockModel from "@/components/Vip/BlockModel";
-import WebRtcModel from "@/components/Vip/WebRtcModel";
 import NoticeMsg from "@/components/Bubbles/NoticeMsg";
 import { IMessageStatus } from "@/components/ChatUI/components/MessageStatus";
 import StreamQa from "@/components/Bubbles/StreamQa";
-import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
-import MemberInfoDrawer from "../RightPanel/MemberInfo";
-import GroupInfoDrawer from "../RightPanel/GroupInfo";
-import RobotInfoDrawer from "../RightPanel/RobotInfo";
 import ChatHeader from "./components/ChatHeader";
 import ChatModels from "./components/ChatModels";
 
