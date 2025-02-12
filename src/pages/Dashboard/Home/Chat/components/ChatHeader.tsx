@@ -4,12 +4,17 @@ import { Layout } from "antd";
 const { Header } = Layout;
 
 const ChatHeader = () => {
+  const intl = useIntl();
+  const { headerStyle } = useStyle();
+  const { currentThread } = useThreadStore((state) => ({
+    currentThread: state.currentThread,
+  }));
 
-    
-  return <>
-    <Header
-          style={{
-            ...headerStyle,
+  return (
+    <>
+      <Header
+        style={{
+          ...headerStyle,
             padding: "0 16px",
             display: "flex",
             justifyContent: "space-between",
