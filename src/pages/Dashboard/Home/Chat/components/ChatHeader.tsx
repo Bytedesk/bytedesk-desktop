@@ -1,5 +1,6 @@
 
 
+import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useThreadStore } from "@/stores/core/thread";
 import { Layout } from "antd";
@@ -9,6 +10,7 @@ const { Header } = Layout;
 const ChatHeader = () => {
   const intl = useIntl();
   const { headerStyle } = useStyle();
+  const { isDarkMode, locale } = useContext(AppContext);
   const { currentThread } = useThreadStore((state) => ({
     currentThread: state.currentThread,
   }));  
