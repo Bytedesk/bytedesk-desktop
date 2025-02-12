@@ -1320,8 +1320,6 @@ const ChatPage = () => {
     ],
   };
 
-  
-
   return (
     <>
       {isDarkMode && (
