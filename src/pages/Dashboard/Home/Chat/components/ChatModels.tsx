@@ -47,7 +47,6 @@ const ChatModels = ({
     isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
     isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
     isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,  
-    isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, 
     isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, 
     isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji 
   }: ChatModelsProps) => {
