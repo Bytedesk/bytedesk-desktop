@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 07:59:26
+ * @LastEditTime: 2025-02-14 08:02:56
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -38,10 +38,10 @@ interface ThreadState {
   addThread: (thread: THREAD.ThreadResponse) => number;
   addThreadWithMessage: (thread: THREAD.ThreadResponse, message: MESSAGE.MessageResponse) => void;
   addQueuingThread: (thread: THREAD.ThreadResponse) => void;
-  updateThreadContent: (threadTopic: string, content: string,) => THREAD.ThreadResponse | null;
-  updateThreadStatus: (threadTopic: string, status: string,) => THREAD.ThreadResponse | null;
+  updateThreadContent: (threadUid: string, content: string,) => THREAD.ThreadResponse | null;
+  updateThreadStatus: (threadUid: string, status: string,) => THREAD.ThreadResponse | null;
   removeThread: (thread: THREAD.ThreadResponse) => void;
-  closeThread: (threadTopic: string) => void;
+  closeThread: (threadUid: string) => void;
   addThreads: (threads: THREAD.ThreadResponse[]) => void;
   setQueuingThreads: (threads: THREAD.ThreadResponse[]) => void;
   setCurrentThread: (thread: THREAD.ThreadResponse) => void;
