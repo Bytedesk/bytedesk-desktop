@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-05 11:17:42
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-11-23 19:20:52
+ * @LastEditTime: 2025-02-14 08:00:47
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -13,12 +13,11 @@
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
 import { useAuthStore } from "@/stores/core/auth";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   mqttConnect,
   mqttConnected,
   mqttDisconnect,
-  mqttSendReceiptReceivedMessage,
 } from "@/network/mqtt";
 import { useNetworkStatus } from "./useNetworkStatus";
 import { useUserStore } from "@/stores/core/user";
@@ -41,11 +40,8 @@ import emitter from "@/utils/eventEmitter";
 import { playAudio } from "@/utils/utils";
 import useTranslate from "./useTranslate";
 import useNotification from "./useNotification";
-import { getMessageUnread, sendPingMessage } from "@/apis/core/message";
 import { useAgentStore } from "@/stores/service/agent";
-import { useMessageStore } from "@/stores/core/message";
 import { useThreadStore } from "@/stores/core/thread";
-import { AppContext } from "@/context/AppContext";
 
 function useMqtt() {
   // const isConnecting = useRef(false);
@@ -56,12 +52,6 @@ function useMqtt() {
   const [isMqttConnected, setMqttConnected] = useState(false);
   const { showNotification } = useNotification();
   const { translateString } = useTranslate();
-  const addMessage = useMessageStore((state) => state.addMessage);
-  const updateThreadContent = useThreadStore(
-    (state) => state.updateThreadContent,
-  );
-  const { isPingLoading, setPingLoading } = useContext(AppContext);
-  const isLoadingUnreadMessage = useRef(false);
   const threads = useThreadStore((state) => state.threads);
   const [threadList, setThreadList] = useState(threads);
 
