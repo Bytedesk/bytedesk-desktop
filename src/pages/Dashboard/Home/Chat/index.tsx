@@ -129,7 +129,7 @@ interface ChatPageProps {
   ticket?: TICKET.TicketResponse;
 }
 
-const ChatPage = ({ ticket }: ChatPageProps) => {
+const ChatPage = ({  ticket }: ChatPageProps) => {
   const intl = useIntl();
   const { translateString } = useTranslate();
   const isNetworkOnline = useNetworkStatus();
