@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 08:04:04
+ * @LastEditTime: 2025-02-14 08:05:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -258,13 +258,10 @@ export const useThreadStore = create<ThreadState>()(
             });
           }
         },
-        updateThreadContent(
-          threadUid: string,
-          content: string,
-        ): THREAD.ThreadResponse | null {
+        updateThreadContent(threadUid: string, content: string): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
           const updatedThreads = get().threads.map((t) => {
-            if (t.topic === threadTopic) {
+            if (t.uid === threadUid) {
               // 创建一个新对象，而不是直接修改原始对象
               updatedThread = {
                 ...t,
@@ -278,10 +275,7 @@ export const useThreadStore = create<ThreadState>()(
           set({ threads: updatedThreads });
           return updatedThread;
         },
-        updateThreadStatus(
-          threadUid: string,
-          status: string,
-        ): THREAD.ThreadResponse | null {
+        updateThreadStatus(threadUid: string, status: string): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
           const updatedThreads = get().threads.map((t) => {
             if (t.uid === threadUid) {
@@ -322,7 +316,7 @@ export const useThreadStore = create<ThreadState>()(
               continue;
             } 
             const contains = get().threads.some((item) => {
-              return item.topic === thread.topic;
+              return item.uid === thread.uid;
             });
             if (!contains) {
               set({
@@ -331,7 +325,7 @@ export const useThreadStore = create<ThreadState>()(
             } else {
               // 存在，更新
               const updatedThreads = get().threads.map((t) => {
-                if (t.topic === thread.topic) {
+                if (t.uid === thread.uid) {
                   // 保留原先thread元素的top、mute、unread字段不变
                   // console.log('thread update:', thread, t)
                   const newThread: THREAD.ThreadResponse = {
@@ -365,7 +359,7 @@ export const useThreadStore = create<ThreadState>()(
           const newThread = { ...thread, unreadCount: 0 };
           // 遍历threads数组，找到并更新具有相同uid的线程
           const updatedThreads = get().threads.map((t) => {
-            if (t.topic === newThread.topic) {
+            if (t.uid === newThread.uid) {
               // 如果找到匹配的uid，则返回更新的线程对象
               return newThread;
             }
@@ -392,7 +386,7 @@ export const useThreadStore = create<ThreadState>()(
           return get().threads.reduce((total, thread) => {
             if (
               thread.unreadCount > 0 &&
-              thread.topic !== get().currentThread?.topic
+              thread.uid !== get().currentThread?.uid
             ) {
               return total + thread.unreadCount;
             } else {
