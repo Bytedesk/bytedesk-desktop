@@ -24,7 +24,7 @@ interface ChatModelsProps {
   isForwardMessageModelOpen: boolean;
   handleForwardMessageModelOk: () => void;
   handleForwardMessageModelCancel: () => void;
-  isTransferThreadModelOpen: boolean;
+  isTransferMessageModelOpen: boolean;
   handleTransferThreadModelOk: () => void;
   handleTransferThreadModelCancel: () => void;
   isForwardMessageModelOpen: boolean;
@@ -36,7 +36,8 @@ const ChatModels = ({
     isAutoReplyModelOpen, 
     handleAutoReplyModelOk, handleAutoReplyModelCancel, 
     isTransferThreadModelOpen, handleTransferThreadModelOk, handleTransferThreadModelCancel, 
-    isForwardMessageModelOpen, handleForwardMessageModelOk, handleForwardMessageModelCancel, isTransferMessageModelOpen, handleTransferMessageModelOk, handleTransferMessageModelCancel, isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
+    isForwardMessageModelOpen, handleForwardMessageModelOk, handleForwardMessageModelCancel, 
+    isTransferMessageModelOpen, handleTransferMessageModelOk, handleTransferMessageModelCancel, isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
   return (
     <>
         {isAutoReplyModelOpen && (
