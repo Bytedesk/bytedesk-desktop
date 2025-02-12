@@ -200,16 +200,16 @@ const ThreadList = () => {
     // 给threads排序，thread.top=true的排在前面
     const sortedThreads = [...threads]
       .filter((thread) => !thread.hide)
-      .filter((thread) => {
-        if (searchValue && searchValue.length > 0) {
-          return (
-            thread?.user.nickname?.includes(searchValue) ||
-            thread?.content?.includes(searchValue)
-          );
-        } else {
-          return true;
-        }
-      })
+      // .filter((thread) => {
+      //   if (searchValue && searchValue.length > 0) {
+      //     return (
+      //       thread?.user.nickname?.includes(searchValue) ||
+      //       thread?.content?.includes(searchValue)
+      //     );
+      //   } else {
+      //     return true;
+      //   }
+      // })
       .sort((a, b) => {
         // 首先，根据 top 属性进行排序
         if (a.top && !b.top) {
@@ -231,7 +231,7 @@ const ThreadList = () => {
         return 0;
       });
     setThreadSortedList(sortedThreads);
-  }, [threads, currentThread, searchValue]);
+  }, [threads, currentThread]);
   //
   const [refreshing, setRefreshing] = useState(false);
   const isRefreshing = useRef(false);
