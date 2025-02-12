@@ -105,9 +105,6 @@ const ThreadList = () => {
   console.log("hasRoleAgent: ", hasRoleAgent, agentInfo);
   const isNetworkOnline = useNetworkStatus();
   const [agentStatus, setAgentStatus] = useState<string>("下线");
-  // const [threadSortedList, setThreadSortedList] = useState<
-  //   THREAD.ThreadResponse[]
-  // >([]);
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
   const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
   const currentOrg = useOrgStore((state) => state.currentOrg);
