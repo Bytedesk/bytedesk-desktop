@@ -85,7 +85,7 @@ import {
   MESSAGE_TYPE_WELCOME,
 } from "@/utils/constants";
 import DropUpload from "../../../../components/Upload/DropUpload";
-import { AppContext, useAppContext } from "@/context/AppContext";
+import { AppContext } from "@/context/AppContext";
 // https://github.com/nfl/react-helmet
 import { Helmet } from "react-helmet-async";
 import { useUserStore } from "@/stores/core/user";
@@ -105,11 +105,8 @@ import { useDebounce } from "use-debounce";
 // https://fkhadra.github.io/react-contexify/
 // https://github.com/fkhadra/react-contexify
 import {
-  Menu,
-  Item,
   useContextMenu,
   ItemParams,
-  Separator,
 } from "react-contexify";
 import "react-contexify/ReactContexify.css";
 import RateBubble from "@/components/Bubbles/Rate";
@@ -128,6 +125,7 @@ import { IMessageStatus } from "@/components/ChatUI/components/MessageStatus";
 import StreamQa from "@/components/Bubbles/StreamQa";
 import ChatHeader from "./components/ChatHeader";
 import ChatModels from "./components/ChatModels";
+import ChatMenu from "./components/ChatMenu";
 
 const ChatPage = () => {
   const intl = useIntl();
@@ -1407,7 +1405,11 @@ const ChatPage = () => {
                 // onAccessoryToggle={handleAccessoryToggle}
               />
             </PhotoProvider>
-            
+            {/* 右键菜单 */}
+            <ChatMenu
+              contextMessage={contextMessage}
+              handleRightClick={handleRightClick}
+            />
           </>
         )}
         {/*  */}
