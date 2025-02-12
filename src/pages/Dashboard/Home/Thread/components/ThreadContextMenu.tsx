@@ -5,6 +5,7 @@ import { message } from "@/AntdGlobalComp";
 import { updateThread } from "@/apis/core/thread";
 import emitter from "@/utils/eventEmitter";
 import { EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL } from "@/utils/constants";
+import { useThreadStore } from "@/stores/core/thread";
 
 interface ThreadContextMenuProps {
   currentThread?: THREAD.ThreadResponse;
@@ -58,10 +59,24 @@ const ThreadContextMenu = ({
   };
 
   const handleStarThreadClick = async (star: number) => {
-    const newThread: THREAD.ThreadRequest = { ...currentThread, star };
+    const newThread: THREAD.ThreadRequest = { 
+      ...currentThread, 
+      star,
+      // 如果取消星标且当前是置顶状态，保持置顶
+      top: star === 0 ? currentThread?.top : currentThread?.top 
+    };
+    
     const response = await updateThread(newThread);
     if (response.data.code === 200) {
+      // 更新当前线程状态
       onSetCurrentThread(response.data.data);
+      
+      // 如果是取消星标，需要触发重新排序
+      if (star === 0) {
+        const { refreshThreads } = useThreadStore.getState();
+        await refreshThreads();
+      }
+      
       message.success(intl.formatMessage({ id: "thread.set.success" }));
     } else {
       message.error(response.data.message);
