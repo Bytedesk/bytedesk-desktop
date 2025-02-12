@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-06 16:07:34
+ * @LastEditTime: 2025-02-12 13:38:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -30,6 +30,8 @@ export default {
    'ticket.form.category': 'Category',
    'ticket.form.category.required': 'Please select category',
    'ticket.form.category.placeholder': 'Select category',
+   'ticket.form.user': 'Customer',
+   'ticket.form.user.placeholder': 'Select customer',
    'ticket.form.assignee': 'Assignee',
    'ticket.form.assignee.placeholder': 'Select assignee',
    'ticket.form.reporter': 'Reporter',

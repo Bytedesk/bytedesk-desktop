@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-11 14:44:26
+ * @LastEditTime: 2025-02-12 13:38:18
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -30,6 +30,8 @@ export default {
   'ticket.form.category': '分類',
   'ticket.form.category.required': '請選擇工單分類',
   'ticket.form.category.placeholder': '請選擇工單分類',
+  'ticket.form.user': '客戶',
+  'ticket.form.user.placeholder': '請選擇客戶',
   'ticket.form.assignee': '處理人',
   'ticket.form.assignee.placeholder': '請選擇處理人',
   'ticket.form.reporter': '報告人',

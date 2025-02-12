@@ -89,6 +89,7 @@ declare namespace TICKET {
     // 
     categoryUid?: string;
     //
+    user?: USER.UserProtobuf;
     workgroup?: USER.UserProtobuf;
     assignee?: USER.UserProtobuf;
     reporter?: USER.UserProtobuf;
