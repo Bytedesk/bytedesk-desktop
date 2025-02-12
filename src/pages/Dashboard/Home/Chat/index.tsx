@@ -811,7 +811,6 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    // console.log("useEffect 2:", currentThread.user.nickname, messages.length);
     const list = [];
     messageList.forEach((item) => {
       let flag = false;
