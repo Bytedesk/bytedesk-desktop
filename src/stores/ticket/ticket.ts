@@ -19,6 +19,8 @@ import { TICKET_FILTER_ASSIGNMENT_ALL } from '@/utils/constants';
 interface TicketState {
   // 工单列表
   tickets: TICKET.TicketResponse[];
+  // 历史工单列表
+  historyTickets: TICKET.TicketResponse[];
   // 当前选中的工单
   currentTicket?: TICKET.TicketResponse;
   currentThreadTicket?: TICKET.TicketResponse;
