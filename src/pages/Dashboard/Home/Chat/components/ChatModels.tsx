@@ -25,19 +25,28 @@ interface ChatModelsProps {
   handleForwardMessageModelOk: () => void;
   handleForwardMessageModelCancel: () => void;
   isTransferMessageModelOpen: boolean;
-  handleTransferThreadModelOk: () => void;
-  handleTransferThreadModelCancel: () => void;
-  isForwardMessageModelOpen: boolean;
-  handleForwardMessageModelOk: () => void;
-  handleForwardMessageModelCancel: () => void;
+  handleTransferMessageModelOk: () => void; 
+  handleTransferMessageModelCancel: () => void;
+  isHistoryMessageModelOpen: boolean;
+  handleHistoryMessageModelOk: () => void;
+  handleHistoryMessageModelCancel: () => void;
+  isTicketCreateModelOpen: boolean;
+  handleTicketCreateModelSuccess: () => void;
+  handleTicketCreateModelCancel: () => void;
+  isBlockModelOpen: boolean;
+  handleBlockModelOk: () => void;
+  handleBlockModelCancel: () => void;
 }
         
 const ChatModels = ({ 
-    isAutoReplyModelOpen, 
-    handleAutoReplyModelOk, handleAutoReplyModelCancel, 
+    isAutoReplyModelOpen, handleAutoReplyModelOk, handleAutoReplyModelCancel, 
     isTransferThreadModelOpen, handleTransferThreadModelOk, handleTransferThreadModelCancel, 
     isForwardMessageModelOpen, handleForwardMessageModelOk, handleForwardMessageModelCancel, 
-    isTransferMessageModelOpen, handleTransferMessageModelOk, handleTransferMessageModelCancel, isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
+    isTransferMessageModelOpen, handleTransferMessageModelOk, handleTransferMessageModelCancel, 
+    isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, 
+    isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
+    isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
+    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
   return (
     <>
         {isAutoReplyModelOpen && (
