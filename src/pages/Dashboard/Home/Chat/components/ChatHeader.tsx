@@ -11,6 +11,17 @@ import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
 
+interface ChatHeaderProps {
+  typing: boolean;
+  previewContent: string;
+  setIsTransferThreadModelOpen: (open: boolean) => void;
+  setIsTicketCreateModelOpen: (open: boolean) => void;
+  showCloseThreadConfirm: () => void;
+  setIsGroupInfoDrawerOpen: (open: boolean) => void;
+  setIsMemberInfoDrawerOpen: (open: boolean) => void;
+  setIsRobotInfoDrawerOpen: (open: boolean) => void;
+}
+
 const ChatHeader = () => {
   const intl = useIntl();
   const { headerStyle } = useStyle();
