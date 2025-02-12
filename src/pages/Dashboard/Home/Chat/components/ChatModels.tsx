@@ -46,7 +46,11 @@ const ChatModels = ({
     isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, 
     isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
     isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
-    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,   isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
+    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,  
+    isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, 
+    isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, 
+    isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji 
+  }: ChatModelsProps) => {
   return (
     <>
         {isAutoReplyModelOpen && (
