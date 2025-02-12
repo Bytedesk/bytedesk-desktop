@@ -138,7 +138,7 @@ export const ticketService = {
   },
 
   // 根据serviceThreadTopic加载历史工单
-  async loadHistoryTickets(orgUid: string, retryCount = 3) {
+  async loadHistoryTickets(serviceThreadTopic: string, retryCount = 3) {
     const { setLoading, setError, setTickets, filters, searchText, pagination } = useTicketStore.getState();
     const { agentInfo } = useAgentStore.getState();
     const { userInfo } = useUserStore.getState();
