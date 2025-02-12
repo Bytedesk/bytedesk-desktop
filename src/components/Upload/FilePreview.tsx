@@ -24,7 +24,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete, showDelete = 
         overflow: "hidden"
       }}
       title={intl.formatMessage(
-        { id: file.fileType.startsWith("image/") ? 'upload.preview.image' : 'upload.preview.file' }
+        { id: file?.fileType?.startsWith("image/") ? 'upload.preview.image' : 'upload.preview.file' }
       )}
     >
       {showDelete && (
@@ -59,10 +59,10 @@ const FilePreview: React.FC<FilePreviewProps> = ({ file, onDelete, showDelete = 
           position: "relative"
         }}
       >
-        {file.fileType.startsWith("image/") ? (
+        {file?.fileType?.startsWith("image/") ? (
           <img
-            src={file.fileUrl}
-            alt={file.fileName}
+            src={file?.fileUrl}
+            alt={file?.fileName}
             style={{ 
               width: "100%",
               height: "100%",
