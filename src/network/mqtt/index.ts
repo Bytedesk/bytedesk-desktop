@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-22 14:37:08
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-21 09:05:25
+ * @LastEditTime: 2025-02-14 08:03:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -184,7 +184,7 @@ export const mqttConnect = ({
         case constants.MESSAGE_TYPE_AUTO_CLOSED: // 自动关闭
         case constants.MESSAGE_TYPE_AGENT_CLOSED: // 客服关闭
           console.log("thread closed message");
-          useThreadStore.getState().closeThread(thread.topic);
+          useThreadStore.getState().closeThread(thread.uid);
           break;
         default:
           // 向服务器发送消息送达回执
@@ -229,7 +229,7 @@ export const mqttConnect = ({
         case constants.MESSAGE_TYPE_AGENT_CLOSED: 
           // 客服关闭
           console.log("thread closed message");
-          useThreadStore.getState().closeThread(thread.topic);
+          useThreadStore.getState().closeThread(thread.uid);
           break;
         default:
           // 收到从服务器返回自己发的消息，发送成功
