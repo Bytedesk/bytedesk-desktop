@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:26:27
+ * @LastEditTime: 2025-02-12 17:30:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -84,6 +84,7 @@ import emitter from "@/utils/eventEmitter";
 import { useWorkgroupStore } from "@/stores/service/workgroup";
 // import useNotification from "@/hooks/useNotification";
 import { Typography } from "antd";
+import { ThreadContextMenu, MENU_ID } from './components/ThreadContextMenu';
 
 const { Text } = Typography;
 
@@ -371,17 +372,11 @@ const ThreadList = () => {
   };
 
   // https://github.com/fkhadra/react-contexify
-  const MENU_ID = "thread_list_item";
   const { show } = useContextMenu({ id: MENU_ID });
   function handleContextMenu(event, thread: THREAD.ThreadResponse) {
     console.log("handleContextMenu:", event, " item:", thread);
     setCurrentThread(thread);
-    show({
-      event,
-      props: {
-        key: thread.uid,
-      },
-    });
+    show({ event });
   }
   //
   // I'm using a single event handler for all items but you don't have too :)
@@ -817,177 +812,14 @@ const ThreadList = () => {
         )}
       </div>
       {/* https://github.com/fkhadra/react-contexify */}
-      <Menu id={MENU_ID} theme={isDarkMode ? "dark" : "light"}>
-        <Item id="top" onClick={handleRightClick}>
-          {currentThread?.top
-            ? intl.formatMessage({ id: "thread.menu.untop" })
-            : intl.formatMessage({ id: "thread.menu.top" })}
-        </Item>
-        <Item id="unread" onClick={handleRightClick}>
-          {currentThread?.unread
-            ? intl.formatMessage({ id: "thread.menu.read" })
-            : intl.formatMessage({ id: "thread.menu.unread" })}
-        </Item>
-        <Item id="mute" onClick={handleRightClick}>
-          {currentThread?.mute
-            ? intl.formatMessage({ id: "thread.menu.unmute" })
-            : intl.formatMessage({ id: "thread.menu.mute" })}
-        </Item>
-        <Submenu label={intl.formatMessage({ id: "thread.menu.star" })}>
-          <Item id="star-1" onClick={handleRightClick}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  backgroundColor: STAR_COLORS["star-1"],
-                }}
-              />
-              {intl.formatMessage({ id: "thread.menu.star.1" })}
-            </div>
-          </Item>
-          <Item id="star-2" onClick={handleRightClick}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  backgroundColor: STAR_COLORS["star-2"],
-                }}
-              />
-              {intl.formatMessage({ id: "thread.menu.star.2" })}
-            </div>
-          </Item>
-          <Item id="star-3" onClick={handleRightClick}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  backgroundColor: STAR_COLORS["star-3"],
-                }}
-              />
-              {intl.formatMessage({ id: "thread.menu.star.3" })}
-            </div>
-          </Item>
-          <Item id="star-4" onClick={handleRightClick}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  backgroundColor: STAR_COLORS["star-4"],
-                }}
-              />
-              {intl.formatMessage({ id: "thread.menu.star.4" })}
-            </div>
-          </Item>
-          {currentThread?.star && (
-            <>
-              <Separator />
-              <Item id="star-0" onClick={handleRightClick}>
-                {intl.formatMessage({ id: "thread.menu.star.cancel" })}
-              </Item>
-            </>
-          )}
-        </Submenu>
-        <Separator />
-        <Item id="transfer" onClick={handleRightClick}>
-          {intl.formatMessage({ id: "thread.menu.transfer" })}
-        </Item>
-        <Item id="hide" onClick={handleRightClick}>
-          {intl.formatMessage({ id: "i18n.hide" })}
-        </Item>
-        <Separator />
-        <Item id="black" onClick={handleRightClick}>
-          {intl.formatMessage({ id: "thread.menu.block" })}
-        </Item>
-        <Item id="ticket" onClick={handleRightClick}>
-          {intl.formatMessage({ id: "thread.menu.ticket" })}
-        </Item>
-        <Separator />
-        <Submenu label={intl.formatMessage({ id: "thread.menu.filter" })}>
-          <Item
-            id="groupThread"
-            onClick={() => handleFilterChange("groupThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.groupThread} />
-              {intl.formatMessage({ id: "thread.menu.groupThread" })}
-            </div>
-          </Item>
-          <Item
-            id="robotThread"
-            onClick={() => handleFilterChange("robotThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.robotThread} />
-              {intl.formatMessage({ id: "thread.menu.robotThread" })}
-            </div>
-          </Item>
-          <Item
-            id="workgroupThread"
-            onClick={() => handleFilterChange("workgroupThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.workgroupThread} />
-              {intl.formatMessage({ id: "thread.menu.workgroupThread" })}
-            </div>
-          </Item>
-          <Item
-            id="agentThread"
-            onClick={() => handleFilterChange("agentThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.agentThread} />
-              {intl.formatMessage({ id: "thread.menu.agentThread" })}
-            </div>
-          </Item>
-          <Item
-            id="ticketThread"
-            onClick={() => handleFilterChange("ticketThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.ticketThread} />
-              {intl.formatMessage({ id: "thread.menu.ticketThread" })}
-            </div>
-          </Item>
-          <Item
-            id="memberThread"
-            onClick={() => handleFilterChange("memberThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.memberThread} />
-              {intl.formatMessage({ id: "thread.menu.memberThread" })}
-            </div>
-          </Item>
-          <Item
-            id="deviceThread"
-            onClick={() => handleFilterChange("deviceThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.deviceThread} />
-              {intl.formatMessage({ id: "thread.menu.deviceThread" })}
-            </div>
-          </Item>
-          <Item
-            id="systemThread"
-            onClick={() => handleFilterChange("systemThread")}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Checkbox checked={filters.systemThread} />
-              {intl.formatMessage({ id: "thread.menu.systemThread" })}
-            </div>
-          </Item>
-        </Submenu>
-        {/* <Submenu label="Foobar">
-          <Item id="reload" onClick={handleRightClick}>Reload</Item>
-        </Submenu> */}
-      </Menu>
+      <ThreadContextMenu 
+        currentThread={currentThread}
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onSetCurrentThread={setCurrentThread}
+        onOpenBlockModal={() => setIsBlockModelOpen(true)}
+        onOpenTicketModal={() => setIsTicketCreateModelOpen(true)}
+      />
       {isCreateGroupModalOpen && (
         <CreateGroup
           open={isCreateGroupModalOpen}
