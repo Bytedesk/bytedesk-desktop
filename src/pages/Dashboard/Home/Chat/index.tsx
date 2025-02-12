@@ -180,7 +180,6 @@ const ChatPage = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isDarkMode, locale } = useContext(AppContext);
-  const { headerStyle } = useStyle();
   const [contextMessage, setContextMessage] = useState<MessageProps>(null);
   const [confirmModel, contextHolder] = Modal.useModal();
   const [inputText, setInputText] = useState<string>("");
