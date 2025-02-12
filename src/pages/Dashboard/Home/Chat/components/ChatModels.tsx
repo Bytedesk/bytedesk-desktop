@@ -46,7 +46,6 @@ const ChatModels = ({
     isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, 
     isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
     isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
-    isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,  
   }: ChatModelsProps) => {
   return (
     <>
