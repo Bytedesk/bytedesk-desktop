@@ -36,7 +36,6 @@ import {
   handleUpload,
   isCustomerServiceThread,
   isGroupThread,
-  isMemberThread,
   isOrgMemberTopic,
   isRichText,
   isRobotThread,
@@ -65,8 +64,6 @@ import {
   EVENT_BUS_SCREEN_CAPTURE_IMAGE,
   EVENT_BUS_SEND_FILE_MESSAGE,
   EVENT_BUS_SEND_IMAGE_MESSAGE,
-  // EVENT_BUS_SWITCH_CHAT_RIGHT_PANEL,
-  I18N_PREFIX,
   IS_DEBUG,
   IS_ELECTRON,
   MESSAGE_STATUS_SENDING,
@@ -86,18 +83,15 @@ import {
   MESSAGE_TYPE_TRANSFER_REJECT,
   MESSAGE_TYPE_VIDEO,
   MESSAGE_TYPE_WELCOME,
-  THREAD_STATE_CLOSED,
 } from "@/utils/constants";
 import DropUpload from "../../../../components/Upload/DropUpload";
 import { AppContext, useAppContext } from "@/context/AppContext";
-import { Header } from "antd/lib/layout/layout";
 // https://github.com/nfl/react-helmet
 import { Helmet } from "react-helmet-async";
-import useStyle from "@/hooks/useStyle";
 import { useUserStore } from "@/stores/core/user";
 import { useIntl } from "react-intl";
 import { message } from "@/AntdGlobalComp";
-import { ExclamationCircleFilled, MenuOutlined } from "@ant-design/icons";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 import {
   createNewWindow,
   openUrl,
