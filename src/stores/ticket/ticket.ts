@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 15:35:21
+ * @LastEditTime: 2025-02-12 15:40:21
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,31 +13,8 @@
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
 import { create } from 'zustand';
-import { message } from '@/AntdGlobalComp';
-import { queryTicketsByOrgUid } from '@/apis/ticket/ticket';
-import moment from 'moment';
-import { useAgentStore } from '@/stores/service/agent';
-// import { useWorkgroupStore } from '@/stores/service/workgroup';
 import { useOrgStore } from '@/stores/core/organization';
-import { 
-  TICKET_FILTER_LAST_MONTH, 
-  TICKET_FILTER_LAST_WEEK, 
-  // TICKET_FILTER_MY_WORKGROUP, 
-  // TICKET_FILTER_MY_TICKETS, 
-  TICKET_FILTER_PRIORITY_ALL, 
-  TICKET_FILTER_STATUS_ALL, 
-  TICKET_FILTER_THIS_MONTH, 
-  TICKET_FILTER_THIS_WEEK, 
-  TICKET_FILTER_TODAY,
-  // TICKET_FILTER_UNASSIGNED, 
-  TICKET_FILTER_YESTERDAY, 
-  TICKET_FILTER_TIME_ALL,
-  TICKET_FILTER_MY_ASSIGNED,
-  TICKET_FILTER_MY_CREATED,
-  TICKET_FILTER_ASSIGNMENT_ALL,
-  TICKET_FILTER_UNASSIGNED
-} from '@/utils/constants';
-import { useUserStore } from '../core/user';
+import { TICKET_FILTER_ASSIGNMENT_ALL } from '@/utils/constants';
 
 interface TicketState {
   // 工单列表
@@ -76,12 +53,6 @@ interface TicketState {
 }
 
 export const useTicketStore = create<TicketState>((set, get) => {
-  // 获取当前用户、工作组和组织
-  const agentInfo = useAgentStore.getState().agentInfo;
-  const userInfo = useUserStore.getState().userInfo;
-  // const workgroupInfo = useWorkgroupStore.getState().workgroupInfo;
-  const currentOrg = useOrgStore.getState().currentOrg;
-
   return {
     // State
     tickets: [],
