@@ -187,7 +187,6 @@ const ChatHeader = ({
             isTicketThread(currentThread) && (
               <div>
                 <Button type="text" onClick={() => {
-                  setIsTicketCreateModelOpen(true);
                 }}>
                 </Button>
               </div>
