@@ -11,7 +11,7 @@ const ChatHeader = () => {
   const { headerStyle } = useStyle();
   const { currentThread } = useThreadStore((state) => ({
     currentThread: state.currentThread,
-  }));
+  }));  
 
   return (
     <>
