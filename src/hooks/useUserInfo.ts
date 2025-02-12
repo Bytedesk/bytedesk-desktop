@@ -206,7 +206,7 @@ function useUserInfo() {
     responseMessageList?.data?.data?.forEach((item) => {
       console.log("getAgentMessageUnread item:", item);
       addMessage(item);
-      const thread = updateThreadContent(item.threadTopic, item.content);
+      const thread = updateThreadContent(item.uid, item.content);
       // 发送送达回执
       if (thread) {
         mqttSendReceiptReceivedMessage(item?.uid, thread);
