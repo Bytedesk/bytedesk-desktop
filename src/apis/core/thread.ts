@@ -24,12 +24,11 @@ export async function queryThreads(pageParam: THREAD.ThreadRequest) {
   });
 }
 
-export async function queryThreadByTopic(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpResult>("/api/v1/ticket/query/topic", {
+export async function queryThreadByTopic(topic: string) {
+  return request<THREAD.HttpResult>("/api/v1/thread/query/topic", {
     method: "GET",
     params: {
-      ...ticket,
-      client: HTTP_CLIENT,
+      topic,
     },
   });
 }
