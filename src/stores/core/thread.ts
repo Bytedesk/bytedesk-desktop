@@ -12,11 +12,17 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-import { MESSAGE_TYPE_QUEUE, THREAD_STATE_CLOSED, THREAD_STATE_QUEUING, THREAD_STORE } from "@/utils/constants";
+import { 
+  MESSAGE_TYPE_QUEUE, 
+  THREAD_STATE_CLOSED, 
+  THREAD_STATE_QUEUING, 
+  THREAD_STORE 
+} from "@/utils/constants";
 import { isMessageTypeClosed, isMessageTypeNotification } from "@/utils/utils";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { useOrgStore } from "@/stores/core/organization";
 
 interface ThreadState {
   threads: THREAD.ThreadResponse[];
@@ -37,7 +43,6 @@ interface ThreadState {
   removeThread: (thread: THREAD.ThreadResponse) => void;
   closeThread: (threadTopic: string) => void;
   addThreads: (threads: THREAD.ThreadResponse[]) => void;
-  setThreads: (threads: THREAD.ThreadResponse[]) => void;
   setQueuingThreads: (threads: THREAD.ThreadResponse[]) => void;
   setCurrentThread: (thread: THREAD.ThreadResponse) => void;
   setCurrentQueuingThread: (thread: THREAD.ThreadResponse) => void;
@@ -48,6 +53,27 @@ interface ThreadState {
   setShowRightPanel: (showRightPanel: boolean) => void;
   //
   resetThreads: () => void;
+  //
+  loading: boolean;
+  error: string | null;
+  searchText: string;
+  pagination: {
+    pageNumber: number;
+    pageSize: number;
+    total: number;
+  };
+  filters: {
+    status?: string;
+    assignment?: string;
+  };
+  //
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  setThreads: (threads: THREAD.ThreadResponse[]) => void;
+  setSearchText: (text: string) => void;
+  setFilter: (key: string, value: string) => void;
+  clearFilters: () => void;
+  refreshThreads: () => Promise<void>;
 }
 
 export const useThreadStore = create<ThreadState>()(
@@ -87,6 +113,15 @@ export const useThreadStore = create<ThreadState>()(
         showQueueButton: false,
         showQueueList: false,
         showRightPanel: false,
+        loading: false,
+        error: null,
+        searchText: '',
+        pagination: {
+          pageNumber: 0,
+          pageSize: 100,
+          total: 0
+        },
+        filters: {},
         addThread(thread) {
           if (thread.state === THREAD_STATE_QUEUING) {
             get().addQueuingThread(thread);
@@ -412,6 +447,20 @@ export const useThreadStore = create<ThreadState>()(
             state.showQueueList = false;
             state.showRightPanel = false;
           });
+        },
+        setLoading: (loading) => set({ loading }),
+        setError: (error) => set({ error }),
+        setSearchText: (text) => set({ searchText: text }),
+        setFilter: (key, value) => set((state) => {
+          state.filters[key] = value;
+        }),
+        clearFilters: () => set({ filters: {} }),
+        refreshThreads: async () => {
+          const { currentOrg } = useOrgStore.getState();
+          if (currentOrg?.uid) {
+            const { threadService } = await import('@/services/threadService');
+            await threadService.loadThreads(currentOrg.uid);
+          }
         },
       })),
       {

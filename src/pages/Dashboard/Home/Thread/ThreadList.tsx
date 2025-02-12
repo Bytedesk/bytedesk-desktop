@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-11 18:02:58
+ * @LastEditTime: 2025-02-12 16:53:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -95,6 +95,8 @@ import { syncCurrentThreadCount } from "@/apis/service/agent";
 import BlockModel from "@/components/Vip/BlockModel";
 import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
 // import { useSettingsStore } from "@/stores/core/setting";
+import { threadService } from "@/services/threadService";
+import { useOrgStore } from "@/stores/core/organization";
 
 // 添加星标颜色常量
 const STAR_COLORS = {
@@ -121,7 +123,8 @@ const ThreadList = () => {
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
   const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
   const [isTicketCreateModelOpen, setIsTicketCreateModelOpen] = useState(false);
-
+  const currentOrg = useOrgStore((state) => state.currentOrg);
+  // 
   const dropDownItems: MenuProps["items"] = [
     {
       key: "group",
@@ -172,6 +175,9 @@ const ThreadList = () => {
     setCurrentThread,
     setThreadResult,
     setShowQueueList,
+    loading,
+    error,
+    setSearchText,
   } = useThreadStore((state) => {
     return {
       threads: state.threads,
@@ -183,6 +189,9 @@ const ThreadList = () => {
       setCurrentThread: state.setCurrentThread,
       setThreadResult: state.setThreadResult,
       setShowQueueList: state.setShowQueueList,
+      loading: state.loading,
+      error: state.error,
+      setSearchText: state.setSearchText,
     };
   });
   //
@@ -699,8 +708,31 @@ const ThreadList = () => {
   // 在渲染列表时使用这个过滤函数
   const filteredThreads = filterThreads(threads);
 
+  // 处理搜索
+  const handleSearch = (value: string) => {
+    setSearchText(value);
+    threadService.loadThreadsWithFilters({ searchText: value });
+  };
+
+  // 初始加载
+  useEffect(() => {
+    if (currentOrg?.uid) {
+      threadService.loadThreads(currentOrg.uid);
+    }
+  }, [currentOrg?.uid]);
+
   return (
-    <>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* 搜索区域 */}
+      <div style={{ padding: '16px' }}>
+        <Input.Search
+          placeholder={intl.formatMessage({ id: 'thread.search.placeholder' })}
+          onSearch={handleSearch}
+          style={{ width: '100%' }}
+          allowClear
+        />
+      </div>
+
       <div>
         <div>
           {/* FIXME: 控制输入框不随列表滚动 */}
@@ -1107,7 +1139,7 @@ const ThreadList = () => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };
 
