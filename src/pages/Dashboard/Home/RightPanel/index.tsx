@@ -26,7 +26,7 @@ import { isCustomerServiceThread, isTicketThread } from "@/utils/utils";
 // import GroupInfo from "./GroupInfo";
 // import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
-import TicketRecords from "../../../Vip/Home/RightPanel/TicketRecords";
+import TicketHistory from "../../../Vip/Home/RightPanel/TicketHistory";
 // import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
@@ -79,7 +79,7 @@ const RightPanel = () => {
       itemsCs.push({
         key: "ticket",
         label: intl.formatMessage({ id: "chat.right.ticket" }),
-        children: <TicketRecords />,
+        children: <TicketHistory />,
       });
       setTabItems(itemsCs);
     }
