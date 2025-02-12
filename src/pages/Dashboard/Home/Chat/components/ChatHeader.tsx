@@ -4,7 +4,7 @@ import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useThreadStore } from "@/stores/core/thread";
 import { I18N_PREFIX, THREAD_STATE_CLOSED } from "@/utils/constants";
-import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
+import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Layout, message } from "antd";
 import { useContext } from "react";
@@ -183,7 +183,16 @@ const ChatHeader = ({
               </Button>
             </div>
           )}
-          
+          {
+            isTicketThread(currentThread) && (
+              <div>
+                <Button type="text" onClick={() => {
+                  setIsTicketCreateModelOpen(true);
+                }}>
+                </Button>
+              </div>
+            )
+          }
         </Header>
   </>
   );
