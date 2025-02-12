@@ -102,5 +102,7 @@ export const useTicketStore = create<TicketState>((set) => {
     setError: (error: string | null) => set({ error }),
 
     setTickets: (tickets: TICKET.TicketResponse[]) => set({ tickets }),
+
+    setHistoryTickets: (tickets: TICKET.TicketResponse[]) => set({ historyTickets: tickets }),
   };
 }); 
