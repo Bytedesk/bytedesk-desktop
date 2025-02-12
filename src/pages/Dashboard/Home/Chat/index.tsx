@@ -125,7 +125,7 @@ import ChatModels from "./components/ChatModels";
 import ChatMenu from "./components/ChatMenu";
 
 interface ChatPageProps {
-  isTicketThread?: boolean;
+  isTicket?: boolean;
   ticket?: TICKET.TicketResponse;
 }
 
