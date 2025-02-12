@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 18:11:10
+ * @LastEditTime: 2025-02-12 18:18:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -86,8 +86,6 @@ import { useIntl } from "react-intl";
 import CreateRobot from "../RightPanel/RobotInfo/CreateRobot";
 import { syncCurrentThreadCount } from "@/apis/service/agent";
 import BlockModel from "@/components/Vip/BlockModel";
-// import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer";
-// import { useSettingsStore } from "@/stores/core/setting";
 import { threadService } from "@/services/threadService";
 import { useOrgStore } from "@/stores/core/organization";
 
@@ -170,29 +168,28 @@ const ThreadList = () => {
   //
   useEffect(() => {
     console.log("update threadList");
-    // 给threads排序，thread.top=true的排在前面
+    // 给threads排序：置顶 > 星级 > 更新时间
     const sortedThreads = [...threads]
       .filter((thread) => !thread.hide)
       .sort((a, b) => {
-        // 首先，根据 top 属性进行排序
-        if (a.top && !b.top) {
-          return -1; // a 排在前面
+        // 1. 首先比较置顶状态
+        if (a.top !== b.top) {
+          return a.top ? -1 : 1;
         }
-        if (!a.top && b.top) {
-          return 1; // b 排在前面
+
+        // 2. 如果置顶状态相同，比较星级
+        const aStarLevel = a.star || 0;
+        const bStarLevel = b.star || 0;
+        if (aStarLevel !== bStarLevel) {
+          return bStarLevel - aStarLevel; // 高星级排在前面
         }
-        // 如果两个线程的 top 属性相同，则根据时间戳进行排序
-        if (!a.top && !b.top) {
-          // 将字符串转换为 Date 对象，然后获取时间戳进行比较
-          const dateA = new Date(a.updatedAt).getTime();
-          const dateB = new Date(b.updatedAt).getTime();
-          // 按时间降序排列，最新的线程在前
-          return dateB - dateA;
-          // 如果您想按时间升序排列，则使用 dateA - dateB
-        }
-        // 如果两个线程都是 top 或者都不是 top，并且时间戳也相同，则保持它们的相对顺序不变
-        return 0;
+
+        // 3. 如果星级也相同，按更新时间排序
+        const dateA = new Date(a.updatedAt).getTime();
+        const dateB = new Date(b.updatedAt).getTime();
+        return dateB - dateA; // 最新的排在前面
       });
+
     setThreadSortedList(sortedThreads);
   }, [threads, currentThread]);
   //
