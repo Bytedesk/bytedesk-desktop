@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 14:20:45
+ * @LastEditTime: 2025-02-13 14:19:00
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -12,22 +12,16 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-//
 import { Tabs } from "antd";
-// import type { TabsProps } from "antd";
 import AI from "../../../Vip/Home/RightPanel/AI";
 import CustomerInfo from "../../../Vip/Home/RightPanel/CustomerInfo";
 import QuickReply from "../../../Vip/Home/RightPanel/QuickReply";
 import { useIntl } from "react-intl";
 import { useThreadStore } from "@/stores/core/thread";
 import { useEffect, useState, useContext } from "react";
-// import LlmInfoDrawer from "./LlmInfo";
 import { isCustomerServiceThread, isTicketThread } from "@/utils/utils";
-// import GroupInfo from "./GroupInfo";
-// import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
 import TicketHistory from "../../../Vip/Home/RightPanel/TicketHistory";
-// import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
 import { useTicketStore } from "@/stores/ticket/ticket";
