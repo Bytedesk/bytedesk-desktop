@@ -28,7 +28,10 @@ const ChatHeader = ({
   setIsTransferThreadModelOpen,
   setIsTicketCreateModelOpen,
   showCloseThreadConfirm,
-const ChatHeader = () => {
+  setIsGroupInfoDrawerOpen,
+  setIsMemberInfoDrawerOpen,
+  setIsRobotInfoDrawerOpen,
+}: ChatHeaderProps) => {
   const intl = useIntl();
   const { headerStyle } = useStyle();
   const { isDarkMode } = useContext(AppContext);
