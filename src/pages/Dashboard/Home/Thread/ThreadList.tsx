@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:03:07
+ * @LastEditTime: 2025-02-12 17:05:42
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -171,29 +171,13 @@ const ThreadList = () => {
     threadResult,
     currentThread,
     showQueueList,
-    addThreads,
-    setCurrentThread,
-    setThreadResult,
-    setShowQueueList,
     loading,
     error,
     setSearchText,
-  } = useThreadStore((state) => {
-    return {
-      threads: state.threads,
-      queuingThreads: state.queuingThreads,
-      threadResult: state.threadResult,
-      currentThread: state.currentThread,
-      showQueueList: state.showQueueList,
-      addThreads: state.addThreads,
-      setCurrentThread: state.setCurrentThread,
-      setThreadResult: state.setThreadResult,
-      setShowQueueList: state.setShowQueueList,
-      loading: state.loading,
-      error: state.error,
-      setSearchText: state.setSearchText,
-    };
-  });
+    setCurrentThread,
+    setThreadResult,
+    setShowQueueList,
+  } = useThreadStore();
   //
   useEffect(() => {
     console.log("update threadList");
@@ -237,39 +221,18 @@ const ThreadList = () => {
   const isRefreshing = useRef(false);
   const [pageNumber, setPageNumber] = useState(0);
   const getThreads = async () => {
-    console.log("getThreads start: ", pageNumber);
-    if (isRefreshing.current) {
-      console.log("queryThreads isRefreshing.current", isRefreshing.current);
-      return;
-    }
+    if (isRefreshing.current || !currentOrg?.uid) return;
+    
     setRefreshing(true);
     isRefreshing.current = true;
-    const response = await queryThreads({
-      pageNumber: pageNumber,
-      pageSize: 20,
-    });
-    console.log("queryThreads: ", pageNumber, response.data);
-    if (response.data.code === 200) {
-      setThreadResult(response.data);
-      addThreads(response.data.data.content);
-      // 非最后一页，则继续加载下一页
-      if (!response.data.data.last) {
-        setPageNumber((pageNumber) => pageNumber + 1);
-      } else {
-        // setPageNumber(0);
-      }
-    } else if (response.data.code === 601) {
-      // 匿名访问拦截
-    } else {
-      message.error(
-        intl.formatMessage({
-          id: "thread.error.message",
-          defaultMessage: "获取数据失败",
-        }),
-      );
+    
+    try {
+      await threadService.loadThreads(currentOrg.uid);
+      await syncThreadCount();
+    } finally {
+      setRefreshing(false);
+      isRefreshing.current = false;
     }
-    setRefreshing(false);
-    isRefreshing.current = false;
   };
   const syncThreadCount = async () => {
     const agent: AGENT.AgentRequest = {
@@ -285,14 +248,11 @@ const ThreadList = () => {
   };
   //
   useEffect(() => {
-    if (isNetworkOnline) {
-      console.log("isNetworkOnline ✅网络断开重连之后，需要重新拉取聊天记录");
+    if (isNetworkOnline && currentOrg?.uid) {
+      console.log("网络重连，重新加载会话列表");
       getThreads();
-      syncThreadCount();
-    } else {
-      console.log("isNetworkOnline ❌网络断开，不重新拉取聊天记录");
     }
-  }, [isNetworkOnline]);
+  }, [isNetworkOnline, currentOrg?.uid]);
 
   const handleSelectThreadClick = async (thread: THREAD.ThreadResponse) => {
     console.log("handleSelectThreadClick", thread.uid);
@@ -584,9 +544,10 @@ const ThreadList = () => {
   //
   const handleSearchChange = (value: string) => {
     console.log("handleSearchChange:", value);
-    // setSearchValue(value);
     setSearchText(value);
-    threadService.loadThreadsWithFilters({ searchText: value });
+    if (currentOrg?.uid) {
+      threadService.loadThreadsWithFilters({ searchText: value });
+    }
   };
 
   // 抽取设置状态的公共函数
@@ -782,7 +743,7 @@ const ThreadList = () => {
               banner
             />
           )}
-          {refreshing && (
+          {loading && (
             <p style={{ paddingLeft: 10, paddingRight: 10 }}>
               <Button loading block>
                 {intl.formatMessage({ id: "i18n.message.pulling" })}
