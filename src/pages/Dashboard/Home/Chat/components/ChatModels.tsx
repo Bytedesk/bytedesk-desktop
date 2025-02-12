@@ -47,7 +47,6 @@ const ChatModels = ({
     isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, 
     isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, 
     isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel,  
-    isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji 
   }: ChatModelsProps) => {
   return (
     <>
