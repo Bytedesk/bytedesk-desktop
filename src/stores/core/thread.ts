@@ -279,12 +279,12 @@ export const useThreadStore = create<ThreadState>()(
           return updatedThread;
         },
         updateThreadStatus(
-          threadTopic: string,
+          threadUid: string,
           status: string,
         ): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
           const updatedThreads = get().threads.map((t) => {
-            if (t.topic === threadTopic) {
+            if (t.uid === threadUid) {
               // 创建一个新对象，而不是直接修改原始对象
               updatedThread = {
                 ...t,
