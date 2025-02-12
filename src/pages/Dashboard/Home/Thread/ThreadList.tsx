@@ -468,8 +468,15 @@ const ThreadList = () => {
       });
     }
 
-    // 
+    // 置顶 > 星级 > 更新时间
     return [...filteredThreads].sort((a, b) => {
+      // 置顶 > 星级 > 更新时间
+      const aTop = a.top || false;
+      const bTop = b.top || false;
+      if (aTop !== bTop) {
+        return aTop ? -1 : 1;
+      }
+      // 
       const aStarLevel = a.star || 0;
       const bStarLevel = b.star || 0;
       if (aStarLevel !== bStarLevel) {
