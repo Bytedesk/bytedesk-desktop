@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 11:19:04
+ * @LastEditTime: 2025-02-12 14:01:34
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -31,6 +31,7 @@ import TicketRecords from "../../../Vip/Home/RightPanel/TicketRecords";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
 import TicketTabs from "@/pages/Vip/Ticket/components/TicketTabs";
+import { useTicketStore } from "@/stores/ticket/ticket";
 
 const RightPanel = () => {
   const intl = useIntl();
@@ -38,6 +39,7 @@ const RightPanel = () => {
   const currentThread = useThreadStore((state) => state.currentThread);
   const { activeKey, setActiveKey, defaultKey, setDefaultKey } = useRightPanelStore();
   const [tabItems, setTabItems] = useState([]);
+  const [currentTicket] = useTicketStore((state) => [state.currentTicket]);
 
   // 监听会话变化,设置默认tab
   useEffect(() => {
@@ -97,7 +99,7 @@ const RightPanel = () => {
         {
           key: "ticket",
           label: intl.formatMessage({ id: "chat.right.ticket" }),
-          children: <TicketTabs ticket={currentThread.ticket} onEdit={() => {}} onDelete={() => {}} />,
+          children: <TicketTabs ticket={currentTicket} onEdit={() => {}} onDelete={() => {}} />,
         },
       ]);
     }
