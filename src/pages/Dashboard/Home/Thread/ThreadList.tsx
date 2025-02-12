@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 18:31:55
+ * @LastEditTime: 2025-02-12 18:33:10
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -575,12 +575,12 @@ const ThreadList = () => {
               ")"}
           </Button>
         )}
-        {threadSortedList?.length === 0 && <Empty />}
-        {threadSortedList?.length > 0 && (
+        {filteredThreads?.length === 0 && <Empty />}
+        {filteredThreads?.length > 0 && (
           <InfiniteScroll
-            dataLength={threadSortedList.length}
+            dataLength={filteredThreads.length}
             next={loadMoreThreads}
-            hasMore={!threadResult.data.last && threadSortedList.length < pagination.total}
+            hasMore={!threadResult.data.last && filteredThreads.length < pagination.total}
             loader={
               <div style={{ textAlign: 'center', padding: '20px' }}>
                 <Spin tip={intl.formatMessage({ id: 'thread.loading.more' })} />
