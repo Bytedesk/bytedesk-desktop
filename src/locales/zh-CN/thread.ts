@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:23:06
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-10 20:18:48
+ * @LastEditTime: 2025-02-12 17:24:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -80,4 +80,5 @@ export default {
   'thread.status.message.transferred': '已转接',
   'thread.status.message.closed': '会话已关闭',
   'thread.menu.star.cancel': '取消星标',
+  'thread.loading.more': '加载更多...',
 } 

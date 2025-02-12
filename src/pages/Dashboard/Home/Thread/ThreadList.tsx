@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:08:01
+ * @LastEditTime: 2025-02-12 17:26:27
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -17,13 +17,14 @@ import {
   Avatar,
   Badge,
   Button,
-  Divider,
+  // Divider,
   Empty,
   Flex,
   Input,
   List,
-  Skeleton,
+  // Skeleton,
   Checkbox,
+  Spin,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import {updateThread } from "@/apis/core/thread";
@@ -78,7 +79,6 @@ import {
   AGENT_STATUS_BUSY,
   AGENT_STATUS_OFFLINE,
   EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL,
-  IS_DEBUG,
 } from "@/utils/constants";
 import emitter from "@/utils/eventEmitter";
 import { useWorkgroupStore } from "@/stores/service/workgroup";
@@ -172,6 +172,7 @@ const ThreadList = () => {
     currentThread,
     showQueueList,
     loading,
+    pagination,
     setSearchText,
     setCurrentThread,
     setShowQueueList,
@@ -238,11 +239,6 @@ const ThreadList = () => {
     };
     const response = await syncCurrentThreadCount(agent);
     console.log("syncCurrentThreadCount:", response.data);
-  };
-  const loadFirstPageThreads = async () => {
-    console.log("queryThreads loadFirstPageThreads");
-    getThreads();
-    syncThreadCount();
   };
   //
   useEffect(() => {
@@ -369,26 +365,6 @@ const ThreadList = () => {
     setIsTicketCreateModelOpen(true);
   };
 
-  const handleCrmThreadClick = async () => {
-    console.log("handleCrmThreadClick");
-    message.warning(
-      intl.formatMessage({
-        id: "thread.feature.unavailable",
-        defaultMessage: "TODO: 该功能暂未开放",
-      }),
-    );
-  };
-
-  const handleSummaryThreadClick = async () => {
-    console.log("handleSummaryThreadClick");
-    message.warning(
-      intl.formatMessage({
-        id: "thread.feature.unavailable",
-        defaultMessage: "TODO: 该功能暂未开放",
-      }),
-    );
-  };
-
   const handleTransferThreadClick = async () => {
     console.log("handleTransferThreadClick");
     emitter.emit(EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL);
@@ -444,12 +420,6 @@ const ThreadList = () => {
         break;
       case "ticket":
         handleTicketThreadClick();
-        break;
-      case "crm":
-        handleCrmThreadClick();
-        break;
-      case "summary":
-        handleSummaryThreadClick();
         break;
       case "transfer":
         handleTransferThreadClick();
@@ -544,6 +514,7 @@ const ThreadList = () => {
     console.log("handleSearchChange:", value);
     setSearchText(value);
     if (currentOrg?.uid) {
+      // 搜索时重置分页并重新加载
       threadService.loadThreadsWithFilters({ searchText: value });
     }
   };
@@ -672,22 +643,21 @@ const ThreadList = () => {
   // 初始加载
   useEffect(() => {
     if (currentOrg?.uid) {
-      threadService.loadThreads(currentOrg.uid);
+      // 重置并加载第一页
+      threadService.resetAndLoad();
     }
   }, [currentOrg?.uid]);
 
+  // 加载更多数据
+  const loadMoreThreads = async () => {
+    if (loading || !currentOrg?.uid) return;
+    if (!threadResult.data.last) {
+      await threadService.loadThreads(currentOrg.uid);
+    }
+  };
+
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {/* 搜索区域 */}
-      {/* <div style={{ padding: '16px' }}>
-        <Input.Search
-          placeholder={intl.formatMessage({ id: 'thread.search.placeholder' })}
-          onSearch={(value) => handleSearchChange(value)}
-          style={{ width: '100%' }}
-          allowClear
-        />
-      </div> */}
-
       <div>
         <div>
           {/* FIXME: 控制输入框不随列表滚动 */}
@@ -765,45 +735,15 @@ const ThreadList = () => {
         {threadSortedList?.length > 0 && (
           <InfiniteScroll
             dataLength={threadSortedList.length}
-            next={getThreads}
-            hasMore={
-              !threadResult.data.last &&
-              threadSortedList.length < threadResult.data.totalElements
+            next={loadMoreThreads}
+            hasMore={!threadResult.data.last && threadSortedList.length < pagination.total}
+            loader={
+              <div style={{ textAlign: 'center', padding: '20px' }}>
+                <Spin tip={intl.formatMessage({ id: 'thread.loading.more' })} />
+              </div>
             }
-            loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
-            endMessage={
-              <Divider plain>
-                {intl.formatMessage({
-                  id: "thread.list.no.more",
-                  defaultMessage: "没有更多了",
-                })}
-              </Divider>
-            }
-            // height={window.innerHeight - 100}
-            // onScroll={(e) => {
-            //   console.log("queryThreads onScroll:", e);
-            // }}
             scrollableTarget="scrollableDiv"
-            // below props only if you need pull down functionality
-            refreshFunction={loadFirstPageThreads}
-            pullDownToRefresh={true}
-            pullDownToRefreshThreshold={20}
-            pullDownToRefreshContent={
-              <h3 style={{ textAlign: "center" }}>
-                {intl.formatMessage({
-                  id: "thread.refresh.pull",
-                  defaultMessage: "↓ 下拉刷新",
-                })}
-              </h3>
-            }
-            releaseToRefreshContent={
-              <h3 style={{ textAlign: "center" }}>
-                {intl.formatMessage({
-                  id: "thread.refresh.release",
-                  defaultMessage: "↑ 松开刷新",
-                })}
-              </h3>
-            }
+            style={{ overflow: 'hidden' }}
           >
             <List
               dataSource={filteredThreads}
@@ -969,16 +909,6 @@ const ThreadList = () => {
         <Item id="ticket" onClick={handleRightClick}>
           {intl.formatMessage({ id: "thread.menu.ticket" })}
         </Item>
-        {IS_DEBUG && (
-          <>
-            <Item id="crm" onClick={handleRightClick}>
-              {intl.formatMessage({ id: "thread.menu.crm" })}
-            </Item>
-            <Item id="summary" onClick={handleRightClick}>
-              {intl.formatMessage({ id: "thread.menu.summary" })}
-            </Item>
-          </>
-        )}
         <Separator />
         <Submenu label={intl.formatMessage({ id: "thread.menu.filter" })}>
           <Item

@@ -74,6 +74,11 @@ interface ThreadState {
   setFilter: (key: string, value: string) => void;
   clearFilters: () => void;
   refreshThreads: () => Promise<void>;
+  setPagination: (pagination: {
+    pageNumber: number;
+    pageSize: number;
+    total: number;
+  }) => void;
 }
 
 export const useThreadStore = create<ThreadState>()(
@@ -462,6 +467,7 @@ export const useThreadStore = create<ThreadState>()(
             await threadService.loadThreads(currentOrg.uid);
           }
         },
+        setPagination: (pagination) => set({ pagination }),
       })),
       {
         name: THREAD_STORE,
