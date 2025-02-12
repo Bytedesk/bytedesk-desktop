@@ -435,7 +435,9 @@ export const TOPIC_ORG_AGENT_PREFIX = "org/agent/";
 export const TOPIC_ORG_WORKGROUP_PREFIX = "org/workgroup/";
 export const TOPIC_ORG_KB_PREFIX = "org/kb/";
 export const TOPIC_ORG_KBDOC_PREFIX = "org/kbdoc/";
-//
+export const TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX = "org/ticket/agent/";
+export const TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX = "org/ticket/workgroup/";
+// 
 export const KB_TYPE_ASSISTANT = "ASSISTANT";
 export const KB_TYPE_HELPCENTER = "HELPCENTER";
 export const KB_TYPE_LLM = "LLM";

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-10 20:27:38
+ * @LastEditTime: 2025-02-11 18:01:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -60,6 +60,8 @@ import {
   TICKET_PRIORITY_MEDIUM,
   TICKET_PRIORITY_URGENT,
   THREAD_TYPE_TICKET,
+  TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX,
+  TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -291,6 +293,9 @@ export function isOrgAgentTopic(topic: string) {
 }
 export function isOrgWorkgroupTopic(topic: string) {
   return topic.startsWith(TOPIC_ORG_WORKGROUP_PREFIX);
+}
+export function isOrgTicketThreadTopic(topic: string) {
+  return topic.startsWith(TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX) || topic.startsWith(TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX);
 }
 
 export function bytedeskBanner() {

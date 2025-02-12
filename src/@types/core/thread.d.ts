@@ -34,7 +34,7 @@ declare namespace THREAD {
     type?: string;
     extra?: string;
     client?: string;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
     agent?: string;
     //
     memberUids?: string[];
@@ -80,7 +80,7 @@ declare namespace THREAD {
     client?: string;
     extra?: string;
     //
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
     agent?: string;
     //
     updatedAt?: string;

@@ -73,7 +73,7 @@ declare namespace UPLOAD {
     kbUid?: string;
     //
     updatedAt?: string;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
   };
 
 

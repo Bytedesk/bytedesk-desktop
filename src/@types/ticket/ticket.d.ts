@@ -84,12 +84,14 @@ declare namespace TICKET {
     priority: string;
     type: string;
     //
-    thread?: THREAD.ThreadResponse;
-    category?: CATEGORY.CategoryResponse;
+    threadTopic?: string;
+    serviceThreadTopic?: string;
+    // 
+    categoryUid?: string;
     //
-    workgroup?: WORKGROUP.WorkgroupResponse;
-    assignee?: AGENT.AgentResponse;
-    reporter?: USER.UserSimple;
+    workgroup?: USER.UserProtobuf;
+    assignee?: USER.UserProtobuf;
+    reporter?: USER.UserProtobuf;
     //
     createdAt: string;
     updatedAt: string;

@@ -70,7 +70,7 @@ declare namespace MESSAGE {
     extra?: MessageExtra;
     //
     threadTopic: string;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
   };
 
   type MessageExtra = {
@@ -97,7 +97,7 @@ declare namespace MESSAGE {
     extra?: string;
     //
     thread?: THREAD.ThreadResponse;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
   };
 
   type HttpTranslateResult = {

@@ -65,7 +65,7 @@ declare namespace GROUP {
     type?: string;
     //
     members?: MEMBER.MemberResponseSimple[];
-    admins?: USER.UserSimple[]
+    admins?: USER.UserProtobuf[]
     robots?: ROBOT.RobotResponseSimple[]
   };
 }

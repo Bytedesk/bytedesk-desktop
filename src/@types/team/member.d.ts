@@ -63,7 +63,7 @@ declare namespace MEMBER {
     //
     departments?: DEPARTMENT.Department[];
     status?: string;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
     //
     password?: string;
     mobile?: string;

@@ -549,7 +549,7 @@ export const mqttSendMessage = async (
       },
     };
     //
-    let user: USER.UserSimple;
+    let user: USER.UserProtobuf;
     if (
       agentInfo?.uid != "" &&
       (currentThread?.type === constants.THREAD_TYPE_AGENT ||

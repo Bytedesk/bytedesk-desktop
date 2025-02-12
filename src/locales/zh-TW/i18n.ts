@@ -31,6 +31,7 @@ export default {
   "i18n.workgroup": "[技能组]",
   "i18n.group": "[群聊]",
   "i18n.rate.invite": "邀請評價",
+  "i18n.ticket": "[工單]",
   //
   "i18n.notice": "通知",
   "i18n.notice.title": "通知標題",
@@ -141,6 +142,8 @@ export default {
   "i18n.TOOL": "工具",
   "i18n.WRITING": "寫作",
   "i18n.RAG": "知識庫問答",
+  "i18n.module.ai": "AI",
+  "i18n.module.void": "空白",
   "i18n.module.service": "客服",
   "i18n.module.ticket": "工單",
   // 

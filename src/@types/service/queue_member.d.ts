@@ -33,7 +33,7 @@ declare namespace QUEUE_MEMBER {
     type?: string;
     extra?: string;
     client?: string;
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
     agent?: string;
     //
     memberUids?: string[];
@@ -78,7 +78,7 @@ declare namespace QUEUE_MEMBER {
     client?: string;
     extra?: string;
     //
-    user?: USER.UserSimple;
+    user?: USER.UserProtobuf;
     agent?: string;
     //
     updatedAt?: string;

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2023-10-11 14:08:39
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-28 10:41:13
+ * @LastEditTime: 2025-02-11 17:50:37
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -93,11 +93,12 @@ declare namespace USER {
     roles?: Role[]
   };
 
-  type UserSimple = {
-    uid: string;
+  type UserProtobuf = {
+    uid?: string;
     nickname?: string;
     avatar?: string;
     type?: string;
+    extra?: string;
   };
 
   type Role = {

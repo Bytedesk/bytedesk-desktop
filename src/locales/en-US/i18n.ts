@@ -30,6 +30,7 @@ export default {
   "i18n.workgroup": "WorkGroup",
   "i18n.group": "Group",
   "i18n.rate.invite": "Rate Invite",
+  "i18n.ticket": "Ticket",
   //
   "i18n.notice": "Notice",
   "i18n.notice.title": "Notice",
@@ -145,6 +146,8 @@ export default {
   "i18n.TOOL": "Tool",
   "i18n.WRITING": "Writing",
   "i18n.RAG": "RAG",
+  "i18n.module.ai": "AI",
+  "i18n.module.void": "Void",
   "i18n.module.service": "Service",
   "i18n.module.ticket": "Ticket",
   // 
