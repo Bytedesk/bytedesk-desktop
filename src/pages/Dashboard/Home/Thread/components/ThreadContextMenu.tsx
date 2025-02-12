@@ -194,7 +194,70 @@ const ThreadContextMenu = ({
       </Item>
       <Separator />
       <Submenu label={intl.formatMessage({ id: "thread.menu.filter" })}>
-        {/* ... 过滤菜单项保持不变 ... */}
+        <Item>
+          <Checkbox
+            checked={filters.groupThread}
+            onChange={() => onFilterChange('groupThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.groupThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.robotThread}
+            onChange={() => onFilterChange('robotThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.robotThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.workgroupThread}
+            onChange={() => onFilterChange('workgroupThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.workgroupThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.agentThread}
+            onChange={() => onFilterChange('agentThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.agentThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.ticketThread}
+            onChange={() => onFilterChange('ticketThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.ticketThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.memberThread}
+            onChange={() => onFilterChange('memberThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.memberThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.deviceThread}
+            onChange={() => onFilterChange('deviceThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.deviceThread" })}
+          </Checkbox>
+        </Item>
+        <Item>
+          <Checkbox
+            checked={filters.systemThread}
+            onChange={() => onFilterChange('systemThread')}
+          >
+            {intl.formatMessage({ id: "thread.menu.systemThread" })}
+          </Checkbox>
+        </Item>
       </Submenu>
     </Menu>
   );

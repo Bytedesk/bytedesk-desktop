@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:32:24
+ * @LastEditTime: 2025-02-12 17:34:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -23,7 +23,7 @@ import {
   Input,
   List,
   // Skeleton,
-  Checkbox,
+  // Checkbox,
   Spin,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
@@ -35,18 +35,12 @@ import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 // https://fkhadra.github.io/react-contexify/
 // https://github.com/fkhadra/react-contexify
 import {
-  Menu,
-  Item,
-  useContextMenu,
-  ItemParams,
-  Separator,
-  Submenu,
+    useContextMenu,
 } from "react-contexify";
 import "react-contexify/ReactContexify.css";
 // import emitter from '@/utils/events';
 import { useAppContext } from "@/context/AppContext";
 // import { useIntl } from "react-intl";
-import { message } from "@/AntdGlobalComp";
 import {
   generateAvatar,
   isAgentThread,
@@ -78,9 +72,7 @@ import {
   AGENT_STATUS_AVAILABLE,
   AGENT_STATUS_BUSY,
   AGENT_STATUS_OFFLINE,
-  EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL,
 } from "@/utils/constants";
-import emitter from "@/utils/eventEmitter";
 import { useWorkgroupStore } from "@/stores/service/workgroup";
 // import useNotification from "@/hooks/useNotification";
 import { Typography } from "antd";
