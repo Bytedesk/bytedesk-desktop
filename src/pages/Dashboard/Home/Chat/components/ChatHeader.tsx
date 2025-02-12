@@ -116,7 +116,7 @@ const ChatHeader = ({
                 {
                   typing
                   ? previewContent || intl.formatMessage({ id: "i18n.typing" })
-                  : "会话编号：#" + currentThread?.uid
+                  : )("会话编号：#" + currentThread?.uid
                 }
               </span>
             </div>
