@@ -481,7 +481,7 @@ const ThreadList = () => {
   };
 
   // 在渲染列表时使用这个过滤函数
-  const filteredThreads = filterThreads(threads);
+  const filteredThreads = filterThreads(so);
 
   // 初始加载
   useEffect(() => {
