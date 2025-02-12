@@ -192,7 +192,7 @@ const ChatPage = ({ isTicket = false, ticket }: ChatPageProps) => {
       };
     },
   );
-  console.log("ticket:", ticket);
+  console.log( "ticket:", ticket);
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
