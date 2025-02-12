@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-07 10:22:23
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-25 23:29:28
+ * @LastEditTime: 2025-02-14 08:02:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -195,23 +195,6 @@ function useUserInfo() {
     }
   };
   //
-  // const getAgentProfile = async () => {
-  //   // 未登录或当前组织为空或无agent权限，则不获取工作组
-  //   if (!isLoggedIn || currentOrg?.uid === "" || !hasRoleAgent) {
-  //     return;
-  //   }
-  //   const response = await queryAgent(currentOrg?.uid);
-  //   console.log("getAgentProfile response:", currentOrg?.uid, response.data);
-  //   if (response.data.code === 200) {
-  //     setAgentInfo(response.data.data);
-  //   } else {
-  //     // message.error(response.data.message);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getAgentProfile();
-  // }, [currentOrg]);
-
   const getAgentMessageUnread = async () => {
     if (isLoadingUnreadMessage.current) {
       return;
