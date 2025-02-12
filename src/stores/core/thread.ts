@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-26 11:20:50
+ * @LastEditTime: 2025-02-14 07:59:26
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -133,7 +133,7 @@ export const useThreadStore = create<ThreadState>()(
             return 0;
           }
           const contains = get().threads.some((item) => {
-            return item.topic === thread.topic;
+            return item.uid === thread.uid;
           });
           if (!contains) {
             // 新增会话，未读数==1
@@ -143,13 +143,13 @@ export const useThreadStore = create<ThreadState>()(
             });
             return thread.unreadCount;
           } else if (
-            get().currentThread?.topic === "" ||
-            get().currentThread?.topic !== thread.topic
+            get().currentThread?.uid === "" ||
+            get().currentThread?.uid !== thread.uid
           ) {
             // 在列表中且不是当前会话，增加未读数目
             for (let i = 0; i < get().threads.length; i++) {
               const element = get().threads[i];
-              if (element.topic === thread.topic) {
+              if (element.uid === thread.uid) {
                 thread.unreadCount = element.unreadCount + 1;
                 // 保留原先thread元素的top、mute、unread字段不变
                 thread.top = element.top;
@@ -161,14 +161,14 @@ export const useThreadStore = create<ThreadState>()(
             set({
               threads: [
                 thread,
-                ...get().threads.filter((item) => item.topic !== thread.topic),
+                ...get().threads.filter((item) => item.uid !== thread.uid),
               ],
             });
             return thread.unreadCount;
           } else {
             // 如果是当前会话
             const updatedThreads = get().threads.map((t) => {
-              if (t.topic === thread.topic) {
+              if (t.uid === thread.uid) {
                 // 保留原先thread元素的top、mute、unread字段不变
                 thread.top = t.top;
                 thread.mute = t.mute;
@@ -189,7 +189,7 @@ export const useThreadStore = create<ThreadState>()(
             return 0;
           }
           const contains = get().threads.some((item) => {
-            return item.topic === thread.topic;
+            return item.uid === thread.uid;
           });
           const shouldIncreaseUnreadCount = !isMessageTypeNotification(message.type);
           const shouldCloseThread = isMessageTypeClosed(message.type);
@@ -206,13 +206,13 @@ export const useThreadStore = create<ThreadState>()(
             });
             return thread.unreadCount;
           } else if (
-            get().currentThread?.topic === "" ||
-            get().currentThread?.topic !== thread.topic
+            get().currentThread?.uid === "" ||
+            get().currentThread?.uid !== thread.uid
           ) {
             // 在列表中且不是当前会话，增加未读数目
             for (let i = 0; i < get().threads.length; i++) {
               const element = get().threads[i];
-              if (element.topic === thread.topic) {
+              if (element.uid === thread.uid) {
                 if (shouldIncreaseUnreadCount) {
                   thread.unreadCount = element.unreadCount + 1;
                 }
@@ -226,14 +226,14 @@ export const useThreadStore = create<ThreadState>()(
             set({
               threads: [
                 thread,
-                ...get().threads.filter((item) => item.topic !== thread.topic),
+                ...get().threads.filter((item) => item.uid !== thread.uid),
               ],
             });
             return thread.unreadCount;
           } else {
             // 如果是当前会话
             const updatedThreads = get().threads.map((t) => {
-              if (t.topic === thread.topic) {
+              if (t.uid === thread.uid) {
                 // 保留原先thread元素的top、mute、unread字段不变
                 thread.top = t.top;
                 thread.mute = t.mute;
@@ -250,7 +250,7 @@ export const useThreadStore = create<ThreadState>()(
         },
         addQueuingThread(thread) {
           const contains = get().queuingThreads.some((item) => {
-            return item.topic === thread.topic;
+            return item.uid === thread.uid;
           });
           if (!contains) {
             set({
