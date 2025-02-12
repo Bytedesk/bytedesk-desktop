@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 16:30:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:20:15
+ * @LastEditTime: 2025-02-12 17:50:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  */
 import { queryThreads } from '@/apis/core/thread';
@@ -35,7 +35,7 @@ export const threadService = {
         }
 
         const response = await queryThreads(params);
-        console.log('queryThreads response', response.data);
+        console.log('queryThreads response', params, response.data);
         
         if (response.data.code === 200) {
           // 更新分页信息

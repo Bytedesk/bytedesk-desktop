@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:41:57
+ * @LastEditTime: 2025-02-12 17:51:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -166,6 +166,7 @@ const ThreadList = () => {
     showQueueList,
     loading,
     pagination,
+    searchText,
     setSearchText,
     setCurrentThread,
     setShowQueueList,
@@ -177,10 +178,10 @@ const ThreadList = () => {
     const sortedThreads = [...threads]
       .filter((thread) => !thread.hide)
       // .filter((thread) => {
-      //   if (searchValue && searchValue.length > 0) {
+      //   if (searchText && searchText.length > 0) {
       //     return (
-      //       thread?.user.nickname?.includes(searchValue) ||
-      //       thread?.content?.includes(searchValue)
+      //       thread?.user.nickname?.includes(searchText) ||
+      //       thread?.content?.includes(searchText)
       //     );
       //   } else {
       //     return true;
@@ -260,109 +261,6 @@ const ThreadList = () => {
     await updateThread(newThread);
   };
 
-  // const handleTopThreadClick = async () => {
-  //   console.log("handleTopThreadClick", currentThread);
-  //   const newThread: THREAD.ThreadRequest = {
-  //     ...currentThread,
-  //     top: !currentThread?.top,
-  //   };
-  //   const response = await updateThread(newThread);
-  //   console.log("updateThread:", response.data, newThread);
-  //   if (response.data.code === 200) {
-  //     setCurrentThread(response.data.data);
-  //     message.success(
-  //       intl.formatMessage({
-  //         id: "thread.set.success",
-  //         defaultMessage: "设置成功",
-  //       }),
-  //     );
-  //   } else {
-  //     message.error(
-  //       intl.formatMessage({
-  //         id: "thread.set.error",
-  //         defaultMessage: "设置失败",
-  //       }),
-  //     );
-  //   }
-  // };
-
-  // const handleStarThreadClick = async (star: number) => {
-  //   console.log("handleStarThreadClick", star);
-  //   // TODO: 支持多级星标
-  //   const newThread: THREAD.ThreadRequest = { ...currentThread, star: star };
-  //   const response = await updateThread(newThread);
-  //   console.log("updateThread:", response.data, newThread);
-  //   if (response.data.code === 200) {
-  //     setCurrentThread(response.data.data);
-  //     message.success("设置成功");
-  //   } else {
-  //     message.error(response.data.message);
-  //   }
-  // };
-
-  // const handleMuteThreadClick = async () => {
-  //   console.log("handleMuteThreadClick", currentThread);
-  //   const newThread: THREAD.ThreadRequest = {
-  //     ...currentThread,
-  //     mute: !currentThread?.mute,
-  //   };
-  //   const response = await updateThread(newThread);
-  //   console.log("updateThread:", response.data, newThread);
-  //   if (response.data.code === 200) {
-  //     setCurrentThread(response.data.data);
-  //     message.success("设置成功");
-  //   } else {
-  //     message.error(response.data.message);
-  //   }
-  // };
-
-  // const handleUnreadThreadClick = async () => {
-  //   console.log("handleUnreadThreadClick", currentThread);
-  //   const newThread: THREAD.ThreadRequest = {
-  //     ...currentThread,
-  //     unread: !currentThread?.unread,
-  //   };
-  //   const response = await updateThread(newThread);
-  //   console.log("updateThread:", response.data, newThread);
-  //   if (response.data.code === 200) {
-  //     setCurrentThread(response.data.data);
-  //     message.success("设置成功");
-  //   } else {
-  //     message.error(response.data.message);
-  //   }
-  // };
-
-  // const handleHideThreadClick = async () => {
-  //   console.log("handleHideThreadClick", currentThread);
-  //   const newThread: THREAD.ThreadRequest = {
-  //     ...currentThread,
-  //     hide: !currentThread?.hide,
-  //   };
-  //   const response = await updateThread(newThread);
-  //   console.log("updateThread:", response.data, newThread);
-  //   if (response.data.code === 200) {
-  //     setCurrentThread(response.data.data);
-  //     message.success("设置成功");
-  //   } else {
-  //     message.error(response.data.message);
-  //   }
-  // };
-
-  // const handleBlackThreadClick = async () => {
-  //   console.log("handleBlackThreadClick");
-  //   setIsBlockModelOpen(true);
-  // };
-
-  // const handleTicketThreadClick = async () => {
-  //   console.log("handleTicketThreadClick");
-  //   setIsTicketCreateModelOpen(true);
-  // };
-
-  // const handleTransferThreadClick = async () => {
-  //   console.log("handleTransferThreadClick");
-  //   emitter.emit(EVENT_BUS_MESSAGE_TYPE_TRANSFER_LOCAL);
-  // };
-
   // https://github.com/fkhadra/react-contexify
   const { show } = useContextMenu({ id: MENU_ID });
   function handleContextMenu(event, thread: THREAD.ThreadResponse) {
@@ -370,57 +268,6 @@ const ThreadList = () => {
     setCurrentThread(thread);
     show({ event });
   }
-  //
-  // I'm using a single event handler for all items but you don't have too :)
-  // const handleRightClick = ({ id, event, props }: ItemParams) => {
-  //   console.log("handleRightClick:", id, event, props);
-  //   switch (id) {
-  //     case "top":
-  //       handleTopThreadClick();
-  //       break;
-  //     case "star-0":
-  //       handleStarThreadClick(0);
-  //       break;
-  //     case "star-1":
-  //       handleStarThreadClick(1);
-  //       break;
-  //     case "star-2":
-  //       handleStarThreadClick(2);
-  //       break;
-  //     case "star-3":
-  //       handleStarThreadClick(3);
-  //       break;
-  //     case "star-4":
-  //       handleStarThreadClick(4);
-  //       break;
-  //     case "mute":
-  //       handleMuteThreadClick();
-  //       break;
-  //     case "unread":
-  //       handleUnreadThreadClick();
-  //       break;
-  //     case "hide":
-  //       handleHideThreadClick();
-  //       break;
-  //     case "black":
-  //       handleBlackThreadClick();
-  //       break;
-  //     case "ticket":
-  //       handleTicketThreadClick();
-  //       break;
-  //     case "transfer":
-  //       handleTransferThreadClick();
-  //       break;
-  //     default:
-  //       message.warning(
-  //         intl.formatMessage({
-  //           id: "thread.coming.soon",
-  //           defaultMessage: "即将上线，敬请期待",
-  //         }),
-  //       );
-  //     //etc...
-  //   }
-  // };
   //
   const getAvatar = (item: THREAD.ThreadResponse) => {
     // 生成默认头像
@@ -663,6 +510,7 @@ const ThreadList = () => {
                 id: "thread.search.placeholder",
                 defaultMessage: "搜索",
               })}
+              value={searchText}
               onChange={(e) => handleSearchChange(e.target.value)}
               prefix={<SearchOutlined />}
               allowClear

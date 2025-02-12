@@ -96,19 +96,22 @@ const ThreadContextMenu = ({
     }
   };
 
-  const handleHideThreadClick = async () => {
-    const newThread: THREAD.ThreadRequest = {
-      ...currentThread,
-      hide: !currentThread?.hide,
-    };
-    const response = await updateThread(newThread);
-    if (response.data.code === 200) {
-      onSetCurrentThread(response.data.data);
-      message.success(intl.formatMessage({ id: "thread.set.success" }));
-    } else {
-      message.error(response.data.message);
-    }
-  };
+//   const handleHideThreadClick = async () => {
+//     const newThread: THREAD.ThreadRequest = {
+//       ...currentThread,
+//     //   hide: !currentThread?.hide,
+//     hide: true,
+//     };
+//     const response = await updateThread(newThread);
+//     if (response.data.code === 200) {
+//     //   onSetCurrentThread(response.data.data);
+//     // 隐藏后，将此thread从列表中删除
+
+//       message.success(intl.formatMessage({ id: "thread.set.success" }));
+//     } else {
+//       message.error(response.data.message);
+//     }
+//   };
 
   const handleRightClick = ({ id }: ItemParams) => {
     switch (id) {
@@ -136,8 +139,8 @@ const ThreadContextMenu = ({
       case "unread":
         handleUnreadThreadClick();
         break;
-      case "hide":
-        handleHideThreadClick();
+    //   case "hide":
+    //     handleHideThreadClick();
         break;
       case "black":
         onOpenBlockModal();
@@ -230,9 +233,9 @@ const ThreadContextMenu = ({
           ? intl.formatMessage({ id: "thread.menu.read" })
           : intl.formatMessage({ id: "thread.menu.unread" })}
       </Item>
-      <Item id="hide" onClick={handleRightClick}>
+      {/* <Item id="hide" onClick={handleRightClick}>
         {intl.formatMessage({ id: "thread.menu.hide" })}
-      </Item>
+      </Item> */}
       <Item id="transfer" onClick={handleRightClick}>
         {intl.formatMessage({ id: "thread.menu.transfer" })}
       </Item>
