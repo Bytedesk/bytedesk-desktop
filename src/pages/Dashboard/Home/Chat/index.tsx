@@ -145,6 +145,7 @@ import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketCreateDrawer
 import MemberInfoDrawer from "../RightPanel/MemberInfo";
 import GroupInfoDrawer from "../RightPanel/GroupInfo";
 import RobotInfoDrawer from "../RightPanel/RobotInfo";
+import ChatHeader from "./components/ChatHeader";
 // import { useRightPanelStore } from "@/stores/ui/rightPanel";
 
 const ChatPage = () => {
