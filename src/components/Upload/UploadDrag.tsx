@@ -125,6 +125,9 @@ const UploadDrag = ({
       kb_type: type,
       category_uid: "",
     }));
+    if (attachments) {
+      setUploads(attachments);
+    }
   }, [type]);
 
   const handleOk = () => {
