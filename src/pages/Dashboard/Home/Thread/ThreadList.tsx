@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 16:53:03
+ * @LastEditTime: 2025-02-12 17:01:54
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -115,7 +115,7 @@ const ThreadList = () => {
   // const { showNotification } = useNotification();
   const isNetworkOnline = useNetworkStatus();
   // const [isLoadingMessage, setIsLoadingMessage] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   const [agentStatus, setAgentStatus] = useState<string>("下线");
   const [threadSortedList, setThreadSortedList] = useState<
     THREAD.ThreadResponse[]
@@ -585,6 +585,7 @@ const ThreadList = () => {
   const handleSearchChange = (value: string) => {
     console.log("handleSearchChange:", value);
     setSearchValue(value);
+    threadService.loadThreadsWithFilters({ searchText: value });
   };
 
   // 抽取设置状态的公共函数
@@ -708,12 +709,6 @@ const ThreadList = () => {
   // 在渲染列表时使用这个过滤函数
   const filteredThreads = filterThreads(threads);
 
-  // 处理搜索
-  const handleSearch = (value: string) => {
-    setSearchText(value);
-    threadService.loadThreadsWithFilters({ searchText: value });
-  };
-
   // 初始加载
   useEffect(() => {
     if (currentOrg?.uid) {
@@ -724,14 +719,14 @@ const ThreadList = () => {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* 搜索区域 */}
-      <div style={{ padding: '16px' }}>
+      {/* <div style={{ padding: '16px' }}>
         <Input.Search
           placeholder={intl.formatMessage({ id: 'thread.search.placeholder' })}
-          onSearch={handleSearch}
+          onSearch={(value) => handleSearchChange(value)}
           style={{ width: '100%' }}
           allowClear
         />
-      </div>
+      </div> */}
 
       <div>
         <div>
