@@ -13,8 +13,121 @@
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
 // 
-const ChatModels = () => {
-  return <div>ChatModels</div>;
+
+interface ChatModelsProps {
+  isAutoReplyModelOpen: boolean;
+  handleAutoReplyModelOk: () => void;
+  handleAutoReplyModelCancel: () => void;
+  isTransferThreadModelOpen: boolean;
+  handleTransferThreadModelOk: () => void;
+  handleTransferThreadModelCancel: () => void;
+  isForwardMessageModelOpen: boolean;
+  handleForwardMessageModelOk: () => void;
+  handleForwardMessageModelCancel: () => void;
+  isTransferThreadModelOpen: boolean;
+  handleTransferThreadModelOk: () => void;
+  handleTransferThreadModelCancel: () => void;
+  isForwardMessageModelOpen: boolean;
+  handleForwardMessageModelOk: () => void;
+  handleForwardMessageModelCancel: () => void;
+}
+
+const ChatModels = ({ isAutoReplyModelOpen, handleAutoReplyModelOk, handleAutoReplyModelCancel, isTransferThreadModelOpen, handleTransferThreadModelOk, handleTransferThreadModelCancel, isForwardMessageModelOpen, handleForwardMessageModelOk, handleForwardMessageModelCancel, isTransferMessageModelOpen, handleTransferMessageModelOk, handleTransferMessageModelCancel, isHistoryMessageModelOpen, handleHistoryMessageModelOk, handleHistoryMessageModelCancel, isTicketCreateModelOpen, handleTicketCreateModelSuccess, handleTicketCreateModelCancel, isBlockModelOpen, handleBlockModelOk, handleBlockModelCancel, isWebRtcModelOpen, handleWebRtcModelOk, handleWebRtcModelCancel, isScreenRecorderModelOpen, screenShotImg, handleScreenRecorderModelOk, handleScreenRecorderModelCancel, isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen, isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen, isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen, showEmoji, handleEmojiSelect, setShowEmoji }: ChatModelsProps) => {
+  return (
+    <>
+        {isAutoReplyModelOpen && (
+          <AutoReplyModel
+            open={isAutoReplyModelOpen}
+            onOk={handleAutoReplyModelOk}
+            onCancel={handleAutoReplyModelCancel}
+          />
+        )}
+        {isTransferThreadModelOpen && (
+          <TransferThreadModel
+            open={isTransferThreadModelOpen}
+            onOk={handleTransferThreadModelOk}
+            onCancel={handleTransferThreadModelCancel}
+          />
+        )}
+        {isForwardMessageModelOpen && (
+          <ForwardMessageModel
+            open={isForwardMessageModelOpen}
+            onOk={handleForwardMessageModelOk}
+            onCancel={handleForwardMessageModelCancel}
+          />
+        )}
+        {isTransferMessageModelOpen && (
+          <TransferMessageModel
+            open={isTransferMessageModelOpen}
+            onOk={handleTransferMessageModelOk}
+            onCancel={handleTransferMessageModelCancel}
+          />
+        )}
+        {isHistoryMessageModelOpen && (
+          <HistoryMessageModel
+            open={isHistoryMessageModelOpen}
+            onOk={handleHistoryMessageModelOk}
+            onCancel={handleHistoryMessageModelCancel}
+          />
+        )}
+        {isTicketCreateModelOpen && (
+          <TicketCreateDrawer
+            open={isTicketCreateModelOpen}
+            onSuccess={handleTicketCreateModelSuccess}
+            onCancel={handleTicketCreateModelCancel}
+          />
+        )}
+        {isBlockModelOpen && (
+          <BlockModel
+            open={isBlockModelOpen}
+            onOk={handleBlockModelOk}
+            onCancel={handleBlockModelCancel}
+          />
+        )}
+        {isWebRtcModelOpen && (
+          <WebRtcModel
+            open={isWebRtcModelOpen}
+            onOk={handleWebRtcModelOk}
+            onCancel={handleWebRtcModelCancel}
+          />
+        )}
+        {isScreenRecorderModelOpen && (
+          <ScreenRecorderModel
+            open={isScreenRecorderModelOpen}
+            screenShotImg={screenShotImg}
+            onOk={handleScreenRecorderModelOk}
+            onCancel={handleScreenRecorderModelCancel}
+          />
+        )}
+        {/* 群组资料 */}
+        {isGroupInfoDrawerOpen && (
+          <GroupInfoDrawer
+            open={isGroupInfoDrawerOpen}
+            onClose={() => setIsGroupInfoDrawerOpen(false)}
+          />
+        )}
+        {/* 成员资料 */}
+        {isMemberInfoDrawerOpen && (
+          <MemberInfoDrawer
+            open={isMemberInfoDrawerOpen}
+            onClose={() => setIsMemberInfoDrawerOpen(false)}
+          />
+        )}
+        {/* 大模型设置 */}
+        {isRobotInfoDrawerOpen && (
+          <RobotInfoDrawer
+            open={isRobotInfoDrawerOpen}
+            onClose={() => setIsRobotInfoDrawerOpen(false)}
+          />
+        )}
+        {showEmoji && (
+          <EmojiPicker
+            onSelect={handleEmojiSelect}
+            onClose={() => setShowEmoji(false)}
+          />
+        )}
+    </>
+  );
 };
 
 export default ChatModels;
