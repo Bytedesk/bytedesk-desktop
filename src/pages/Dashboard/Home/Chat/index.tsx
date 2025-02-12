@@ -128,7 +128,7 @@ import ForwardMessageModel from "@/components/Vip/ForwardMessageModel";
 import LeaveMsg from "@/components/Bubbles/LeaveMsg";
 import EmojiPicker from "@/components/EmojiPicker";
 import RobotQa from "@/components/Bubbles/RobotQa";
-import "./chatPage.css";
+import "./chatpage.css";
 import { FaqQa } from "@/components/Bubbles/FaqQa";
 import TransferMessageModel from "@/components/Vip/TransferMessageModel";
 import TransferBubble from "@/components/Bubbles/TransferBubble";
@@ -207,13 +207,11 @@ const ChatPage = () => {
     messageList,
     addMessageList,
     updateMessage,
-    // deleteMessage,
   } = useMessageStore((state) => {
     return {
       messageList: state.messageList,
       addMessageList: state.addMessageList,
       updateMessage: state.updateMessage,
-      // deleteMessage: state.deleteMessage,
     };
   });
   // 默认快捷短语，可选
@@ -1361,11 +1359,6 @@ const ChatPage = () => {
     }
     return currentThread.user.nickname;
   };
-
-  // 添加这个 store
-  // const { setRightPanelVisible } = useRightPanelStore((state) => ({
-  //   setRightPanelVisible: state.setRightPanelVisible,
-  // }));
 
   return (
     <>
