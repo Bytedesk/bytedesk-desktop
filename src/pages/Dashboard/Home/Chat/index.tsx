@@ -1342,23 +1342,7 @@ const ChatPage = () => {
     ],
   };
 
-  // 添加一个获取头像的辅助函数
-  const getAvatar = () => {
-    if (!currentThread?.user) return "";
-    return currentThread.user.avatar;
-  };
-
-  // 添加一个获取昵称的辅助函数
-  const getNickname = () => {
-    if (!currentThread?.user) return "";
-    if (currentThread.user.nickname?.startsWith(I18N_PREFIX)) {
-      return intl.formatMessage({
-        id: currentThread.user.nickname,
-        defaultMessage: currentThread.user.nickname,
-      });
-    }
-    return currentThread.user.nickname;
-  };
+  
 
   return (
     <>
