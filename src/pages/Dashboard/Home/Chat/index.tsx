@@ -1372,7 +1372,13 @@ const ChatPage = () => {
         onImageSend={handleDropSend}
       >
         <ChatHeader
-        
+          typing={typing}
+          previewContent={previewContent}
+          setIsTransferThreadModelOpen={setIsTransferThreadModelOpen}
+          setIsTicketCreateModelOpen={setIsTicketCreateModelOpen}
+          showCloseThreadConfirm={showCloseThreadConfirm}
+          setIsGroupInfoDrawerOpen={setIsGroupInfoDrawerOpen}
+          setIsMemberInfoDrawerOpen={setIsMemberInfoDrawerOpen}
          />
         {currentThread?.topic === "" ? (
           <>
