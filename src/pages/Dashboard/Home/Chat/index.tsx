@@ -104,10 +104,7 @@ import { useAgentStore } from "@/stores/service/agent";
 import { useDebounce } from "use-debounce";
 // https://fkhadra.github.io/react-contexify/
 // https://github.com/fkhadra/react-contexify
-import {
-  useContextMenu,
-  ItemParams,
-} from "react-contexify";
+import { useContextMenu, ItemParams } from "react-contexify";
 import "react-contexify/ReactContexify.css";
 import RateBubble from "@/components/Bubbles/Rate";
 // https://react-photo-view.vercel.app/
@@ -140,13 +137,12 @@ const ChatPage = () => {
   // const [refreshing, setRefreshing] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const { messages, appendMsg, updateMsg, resetList } = useMessages([]);
-  const { currentThread, setCurrentThread,} =
-    useThreadStore((state) => {
-      return {
-        currentThread: state.currentThread,
-        setCurrentThread: state.setCurrentThread,
-      };
-    });
+  const { currentThread, setCurrentThread } = useThreadStore((state) => {
+    return {
+      currentThread: state.currentThread,
+      setCurrentThread: state.setCurrentThread,
+    };
+  });
   const [typing, setTyping] = useState(false);
   const [previewContent, setPreviewContent] = useState<string>("");
   const [loadMoreText, setLoadMoreText] = useState(
@@ -182,17 +178,15 @@ const ChatPage = () => {
   const [isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen] = useState(false);
   const [isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen] = useState(false);
   //
-  const {
-    messageList,
-    addMessageList,
-    updateMessage,
-  } = useMessageStore((state) => {
-    return {
-      messageList: state.messageList,
-      addMessageList: state.addMessageList,
-      updateMessage: state.updateMessage,
-    };
-  });
+  const { messageList, addMessageList, updateMessage } = useMessageStore(
+    (state) => {
+      return {
+        messageList: state.messageList,
+        addMessageList: state.addMessageList,
+        updateMessage: state.updateMessage,
+      };
+    },
+  );
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
@@ -1344,9 +1338,7 @@ const ChatPage = () => {
         ref={fileInputRef}
         onChange={handleFileChange}
       />
-      <DropUpload
-        onImageSend={handleDropSend}
-      >
+      <DropUpload onImageSend={handleDropSend}>
         <ChatHeader
           typing={typing}
           previewContent={previewContent}
