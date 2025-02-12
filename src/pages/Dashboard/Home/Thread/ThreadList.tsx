@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:01:54
+ * @LastEditTime: 2025-02-12 17:03:07
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -584,7 +584,8 @@ const ThreadList = () => {
   //
   const handleSearchChange = (value: string) => {
     console.log("handleSearchChange:", value);
-    setSearchValue(value);
+    // setSearchValue(value);
+    setSearchText(value);
     threadService.loadThreadsWithFilters({ searchText: value });
   };
 
