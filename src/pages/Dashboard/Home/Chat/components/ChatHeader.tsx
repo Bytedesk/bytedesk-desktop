@@ -1,6 +1,8 @@
 
 
-import { Layout, Space, Splitter } from "antd";
+import { Layout } from "antd";
+const { Header } = Layout;
+
 const ChatHeader = () => {
   return <>
     <Header
