@@ -1,6 +1,7 @@
 
 
 import { Layout } from "antd";
+import { useIntl } from "react-intl";
 const { Header } = Layout;
 
 const ChatHeader = () => {
