@@ -468,7 +468,7 @@ const ThreadList = () => {
       });
     }
 
-    // 按星标等级排序
+    // 
     return [...filteredThreads].sort((a, b) => {
       const aStarLevel = a.star || 0;
       const bStarLevel = b.star || 0;
