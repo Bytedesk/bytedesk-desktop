@@ -125,11 +125,11 @@ import ChatModels from "./components/ChatModels";
 import ChatMenu from "./components/ChatMenu";
 
 interface ChatPageProps {
-  isTicket?: boolean;
+  fromTicketTab?: boolean;
   ticket?: TICKET.TicketResponse;
 }
 
-const ChatPage = ({ isTicket = false, ticket }: ChatPageProps) => {
+const ChatPage = ({ fromTicketTab: isTicket = false, ticket }: ChatPageProps) => {
   const intl = useIntl();
   const { translateString } = useTranslate();
   const isNetworkOnline = useNetworkStatus();
