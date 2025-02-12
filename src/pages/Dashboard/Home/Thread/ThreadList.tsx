@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 18:33:10
+ * @LastEditTime: 2025-02-12 18:35:56
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -105,9 +105,9 @@ const ThreadList = () => {
   console.log("hasRoleAgent: ", hasRoleAgent, agentInfo);
   const isNetworkOnline = useNetworkStatus();
   const [agentStatus, setAgentStatus] = useState<string>("下线");
-  const [threadSortedList, setThreadSortedList] = useState<
-    THREAD.ThreadResponse[]
-  >([]);
+  // const [threadSortedList, setThreadSortedList] = useState<
+  //   THREAD.ThreadResponse[]
+  // >([]);
   const workgroupResult = useWorkgroupStore((state) => state.workgroupResult);
   const [isBlockModelOpen, setIsBlockModelOpen] = useState(false);
   const currentOrg = useOrgStore((state) => state.currentOrg);
@@ -166,58 +166,58 @@ const ThreadList = () => {
     setShowQueueList,
   } = useThreadStore();
   //
-  useEffect(() => {
-    console.log("update threadList");
-    // 给threads排序：置顶 > 星级 > 更新时间
-    const sortedThreads = [...threads]
-      .filter((thread) => !thread.hide)
-      .sort((a, b) => {
+  // useEffect(() => {
+  //   console.log("update threadList");
+  //   // 给threads排序：置顶 > 星级 > 更新时间
+  //   const sortedThreads = [...threads]
+  //     .filter((thread) => !thread.hide)
+  //     .sort((a, b) => {
 
-        // 首先，根据 top 属性进行排序
-        if (a.top && !b.top) {
-          return -1; // a 排在前面
-        }
-        if (!a.top && b.top) {
-          return 1; // b 排在前面
-        }
-        // 如果两个线程的 top 属性相同，则根据时间戳进行排序
-        if (!a.top && !b.top) {
-          // 将字符串转换为 Date 对象，然后获取时间戳进行比较
-          const dateA = new Date(a.updatedAt).getTime();
-          const dateB = new Date(b.updatedAt).getTime();
-          // 按时间降序排列，最新的线程在前
-          return dateB - dateA;
-          // 如果您想按时间升序排列，则使用 dateA - dateB
-        }
-        // 如果两个线程都是 top 或者都不是 top，并且时间戳也相同，则保持它们的相对顺序不变
-        return 0;
+  //       // 首先，根据 top 属性进行排序
+  //       if (a.top && !b.top) {
+  //         return -1; // a 排在前面
+  //       }
+  //       if (!a.top && b.top) {
+  //         return 1; // b 排在前面
+  //       }
+  //       // 如果两个线程的 top 属性相同，则根据时间戳进行排序
+  //       if (!a.top && !b.top) {
+  //         // 将字符串转换为 Date 对象，然后获取时间戳进行比较
+  //         const dateA = new Date(a.updatedAt).getTime();
+  //         const dateB = new Date(b.updatedAt).getTime();
+  //         // 按时间降序排列，最新的线程在前
+  //         return dateB - dateA;
+  //         // 如果您想按时间升序排列，则使用 dateA - dateB
+  //       }
+  //       // 如果两个线程都是 top 或者都不是 top，并且时间戳也相同，则保持它们的相对顺序不变
+  //       return 0;
 
-        // 1. 置顶的会话始终排在最前面
-        // if (a.top !== b.top) {
-        //   return a.top ? -1 : 1;
-        // }
+  //       // 1. 置顶的会话始终排在最前面
+  //       // if (a.top !== b.top) {
+  //       //   return a.top ? -1 : 1;
+  //       // }
 
-        // // 2. 在置顶组内或非置顶组内，按更新时间排序
-        // const dateA = new Date(a.updatedAt).getTime();
-        // const dateB = new Date(b.updatedAt).getTime();
-        // if (a.top && b.top) {
-        //   // 置顶组内按时间排序
-        //   return dateB - dateA;
-        // }
+  //       // // 2. 在置顶组内或非置顶组内，按更新时间排序
+  //       // const dateA = new Date(a.updatedAt).getTime();
+  //       // const dateB = new Date(b.updatedAt).getTime();
+  //       // if (a.top && b.top) {
+  //       //   // 置顶组内按时间排序
+  //       //   return dateB - dateA;
+  //       // }
 
-        // // 3. 非置顶组内，先按星级排序
-        // const aStarLevel = a.star || 0;
-        // const bStarLevel = b.star || 0;
-        // if (aStarLevel !== bStarLevel) {
-        //   return bStarLevel - aStarLevel; // 高星级排在前面
-        // }
+  //       // // 3. 非置顶组内，先按星级排序
+  //       // const aStarLevel = a.star || 0;
+  //       // const bStarLevel = b.star || 0;
+  //       // if (aStarLevel !== bStarLevel) {
+  //       //   return bStarLevel - aStarLevel; // 高星级排在前面
+  //       // }
 
-        // // 4. 星级相同时，按更新时间排序
-        // return dateB - dateA;
-      });
-    console.log("sortedThreads: ", threads, sortedThreads);
-    setThreadSortedList(sortedThreads);
-  }, [threads, currentThread]);
+  //       // // 4. 星级相同时，按更新时间排序
+  //       // return dateB - dateA;
+  //     });
+  //   console.log("sortedThreads: ", threads, sortedThreads);
+  //   setThreadSortedList(sortedThreads);
+  // }, [threads, currentThread]);
   //
   // const [refreshing, setRefreshing] = useState(false);
   const isRefreshing = useRef(false);
@@ -481,7 +481,7 @@ const ThreadList = () => {
   };
 
   // 在渲染列表时使用这个过滤函数
-  const filteredThreads = filterThreads(threadSortedList);
+  const filteredThreads = filterThreads(threads);
 
   // 初始加载
   useEffect(() => {
