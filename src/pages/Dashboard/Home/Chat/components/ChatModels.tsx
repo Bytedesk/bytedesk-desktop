@@ -13,3 +13,9 @@
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
 // 
+const ChatModels = () => {
+  return <div>ChatModels</div>;
+};
+
+export default ChatModels;
+
