@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 15:16:33
+ * @LastEditTime: 2025-02-12 15:35:21
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -67,7 +67,6 @@ interface TicketState {
   setCurrentTicket: (ticket?: TICKET.TicketResponse) => void;
   setCurrentThreadTicket: (ticket?: TICKET.TicketResponse) => void;
   setSearchText: (text: string) => void;
-  loadTickets: (orgUid: string) => Promise<void>;
   refreshTickets: () => Promise<void>;
   setFilter: (key: string, value: string) => void;
   clearFilters: () => void;
@@ -108,96 +107,6 @@ export const useTicketStore = create<TicketState>((set, get) => {
     setSearchText: (text) => {
       set({ searchText: text });
       get().refreshTickets();
-    },
-
-    loadTickets: async (orgUid: string) => {
-      const state = get();
-      set({ loading: true });
-
-      try {
-        const params: TICKET.TicketRequest = {
-          orgUid,
-          pageNumber: state.pagination.pageNumber,
-          pageSize: state.pagination.pageSize,
-          assignmentAll: false,
-        };
-
-        // 根据状态过滤
-        if (state.filters.status && state.filters.status !== TICKET_FILTER_STATUS_ALL) {
-          params.status = state.filters.status;
-        }
-
-        // 优先级过滤
-        if (state.filters.priority && state.filters.priority !== TICKET_FILTER_PRIORITY_ALL) {
-          params.priority = state.filters.priority;
-        }
-
-        // 分配状态过滤  
-        if (state.filters.assignment === TICKET_FILTER_ASSIGNMENT_ALL) {
-          params.assignmentAll = true;
-          params.reporterUid = userInfo?.uid || '';
-          params.assigneeUid = agentInfo?.uid || '';
-        } else if (state.filters.assignment === TICKET_FILTER_MY_CREATED) {
-          params.assignmentAll = false;
-          params.reporterUid = userInfo?.uid || '';
-          params.assigneeUid = '';
-        } else if (state.filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
-          params.assignmentAll = false;
-          params.assigneeUid = agentInfo?.uid || '';
-          params.reporterUid = '';
-        } else if (state.filters.assignment === TICKET_FILTER_UNASSIGNED) {
-          params.assignmentAll = false;
-          params.assigneeUid = TICKET_FILTER_UNASSIGNED;
-          params.reporterUid = '';
-        }
-
-        // 时间过滤
-        if (state.filters.time === TICKET_FILTER_TIME_ALL) {
-          params.startDate = moment().subtract(100, 'years').startOf('day').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_TODAY) {
-          params.startDate = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().endOf('day').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_YESTERDAY) {
-          params.startDate = moment().subtract(1, 'days').startOf('day').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().subtract(1, 'days').endOf('day').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_THIS_WEEK) {
-          params.startDate = moment().startOf('week').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().endOf('week').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_LAST_WEEK) {
-          params.startDate = moment().subtract(1, 'week').startOf('week').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().subtract(1, 'week').endOf('week').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_THIS_MONTH) {
-          params.startDate = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
-        } else if (state.filters.time === TICKET_FILTER_LAST_MONTH) {
-          params.startDate = moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD HH:mm:ss');
-          params.endDate = moment().subtract(1, 'month').endOf('month').format('YYYY-MM-DD HH:mm:ss');
-        }
-
-        // 添加搜索条件
-        if (state.searchText) {
-          params.searchText = state.searchText;
-        }
-
-        console.log('Load tickets params:', params);
-        const response = await queryTicketsByOrgUid(params);
-        if (response.data?.code === 200) {
-          console.log('Load tickets response:', response.data);
-          set({ 
-            tickets: response.data.data.content || [],
-            pagination: {
-              ...state.pagination,
-              total: response.data.data.totalElements || 0
-            }
-          });
-        }
-      } catch (error) {
-        console.error('Load tickets error:', error);
-        message.error('ticket.load.error');
-      } finally {
-        set({ loading: false });
-      }
     },
 
     refreshTickets: async () => {
