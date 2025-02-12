@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 14:42:28
+ * @LastEditTime: 2025-02-13 14:44:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -138,7 +138,7 @@ export const ticketService = {
   },
 
   // 根据serviceThreadTopic加载历史工单
-  async loadHistoryTickets(serviceThreadTopic: string, retryCount = 3) {
+  async loadHistoryTickets(serviceThreadTopic: string, searchText: string, retryCount = 3) {
     const { setLoading, setError, setHistoryTickets, pagination } = useTicketStore.getState();
     const currentOrg = useOrgStore.getState().currentOrg;
     
@@ -152,6 +152,7 @@ export const ticketService = {
           pageNumber: pagination.pageNumber,
           pageSize: pagination.pageSize,
           serviceThreadTopic,
+          searchText,
         };
 
         const response = await queryTicketByServiceThreadTopic(params);
