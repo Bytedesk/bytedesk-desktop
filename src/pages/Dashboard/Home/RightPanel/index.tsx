@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-22 12:19:57
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 14:19:00
+ * @LastEditTime: 2025-02-13 14:45:43
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -22,7 +22,7 @@ import { useEffect, useState, useContext } from "react";
 import { isCustomerServiceThread, isTicketThread } from "@/utils/utils";
 import { IS_DEBUG } from "@/utils/constants";
 import TicketHistory from "../../../Vip/Home/RightPanel/TicketHistory";
-import { useRightPanelStore } from '@/stores/ui/rightPanel';
+import { useRightPanelStore } from "@/stores/ui/rightPanel";
 import { AppContext } from "@/context/AppContext";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import TicketDetails from "@/pages/Vip/Ticket/components/TicketDetails";
@@ -32,9 +32,12 @@ const RightPanel = () => {
   const intl = useIntl();
   const { locale } = useContext(AppContext);
   const currentThread = useThreadStore((state) => state.currentThread);
-  const { activeKey, setActiveKey, defaultKey, setDefaultKey } = useRightPanelStore();
+  const { activeKey, setActiveKey, defaultKey, setDefaultKey } =
+    useRightPanelStore();
   const [tabItems, setTabItems] = useState([]);
-  const [currentThreadTicket] = useTicketStore((state) => [state.currentThreadTicket]);
+  const [currentThreadTicket] = useTicketStore((state) => [
+    state.currentThreadTicket,
+  ]);
 
   // 监听会话变化,设置默认tab
   useEffect(() => {
@@ -76,14 +79,19 @@ const RightPanel = () => {
         children: <TicketHistory />,
       });
       setTabItems(itemsCs);
-    }
-    else if (isTicketThread(currentThread)) {
+    } else if (isTicketThread(currentThread)) {
       setTabItems([
         {
           key: "ticket-details",
           label: intl.formatMessage({ id: "ticket.details.title" }),
-          children: <TicketDetails ticket={currentThreadTicket} isThreadTicket={true} onEdit={() => {}} onDelete={() => {}}
-        />,
+          children: (
+            <TicketDetails
+              ticket={currentThreadTicket}
+              isThreadTicket={true}
+              onEdit={() => {}}
+              onDelete={() => {}}
+            />
+          ),
         },
         {
           key: "ticket-steps",
@@ -91,8 +99,7 @@ const RightPanel = () => {
           children: <TicketSteps ticket={currentThreadTicket} />,
         },
       ]);
-    }
-    else {
+    } else {
       setTabItems([]);
     }
   }, [currentThread, intl, locale]);
