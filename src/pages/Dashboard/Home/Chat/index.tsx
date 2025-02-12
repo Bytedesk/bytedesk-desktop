@@ -1512,6 +1512,8 @@ const ChatPage = () => {
           handleAutoReplyModelCancel={handleAutoReplyModelCancel}
           isTransferThreadModelOpen={isTransferThreadModelOpen}
           handleTransferThreadModelOk={handleTransferThreadModelOk}
+          
+          />
         
         {contextHolder}
       </DropUpload>
