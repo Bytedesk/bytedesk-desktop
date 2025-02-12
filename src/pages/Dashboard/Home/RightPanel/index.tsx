@@ -22,7 +22,7 @@ import { useIntl } from "react-intl";
 import { useThreadStore } from "@/stores/core/thread";
 import { useEffect, useState, useContext } from "react";
 // import LlmInfoDrawer from "./LlmInfo";
-import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
+import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
 // import GroupInfo from "./GroupInfo";
 // import MemberInfo from "./MemberInfo";
 import { IS_DEBUG } from "@/utils/constants";
@@ -30,6 +30,7 @@ import TicketRecords from "../../../Vip/Home/RightPanel/TicketRecords";
 // import DocView from "./LlmInfo/DocView";
 import { useRightPanelStore } from '@/stores/ui/rightPanel';
 import { AppContext } from "@/context/AppContext";
+import TicketTabs from "@/pages/Vip/Ticket/components/TicketTabs";
 
 const RightPanel = () => {
   const intl = useIntl();
@@ -90,6 +91,15 @@ const RightPanel = () => {
         });
       }
       setTabItems(itemsCs);
+    }
+    else if (isTicketThread(currentThread)) {
+      setTabItems([
+        {
+          key: "ticket",
+          label: intl.formatMessage({ id: "chat.right.ticket" }),
+          children: <TicketTabs ticket={currentThread.ticket} onEdit={() => {}} onDelete={() => {}} />,
+        },
+      ]);
     }
     //  else if (isRobotThread(currentThread)) {
     //   const itemsRobot = [

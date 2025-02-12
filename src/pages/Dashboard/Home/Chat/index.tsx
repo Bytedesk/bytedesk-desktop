@@ -40,7 +40,6 @@ import {
   isOrgMemberTopic,
   isRichText,
   isRobotThread,
-  // isThreadClosed,
 } from "@/utils/utils";
 import {
   getTranslation,
