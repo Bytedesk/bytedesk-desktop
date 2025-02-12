@@ -187,7 +187,9 @@ const ChatHeader = ({
             isTicketThread(currentThread) && (
               <div>
                 <Button type="text" onClick={() => {
+                  message.warning("TODO: 处理完毕");
                 }}>
+                  处理完毕
                 </Button>
               </div>
             )
