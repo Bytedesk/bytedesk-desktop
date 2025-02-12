@@ -1387,7 +1387,7 @@ const ChatPage = () => {
       <DropUpload
         onImageSend={handleDropSend}
       >
-        
+        <ChatHeader />
         {currentThread?.topic === "" ? (
           <>
             <Empty style={{ marginTop: 200 }} description={false} />
