@@ -1,5 +1,7 @@
 
 
+import useStyle from "@/hooks/useStyle";
+import { useThreadStore } from "@/stores/core/thread";
 import { Layout } from "antd";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
