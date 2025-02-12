@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 15:40:21
+ * @LastEditTime: 2025-02-12 15:36:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -52,7 +52,7 @@ interface TicketState {
   setTickets: (tickets: TICKET.TicketResponse[]) => void;
 }
 
-export const useTicketStore = create<TicketState>((set, get) => {
+export const useTicketStore = create<TicketState>((set) => {
   return {
     // State
     tickets: [],
@@ -77,14 +77,13 @@ export const useTicketStore = create<TicketState>((set, get) => {
     
     setSearchText: (text) => {
       set({ searchText: text });
-      get().refreshTickets();
     },
 
     refreshTickets: async () => {
       const { currentOrg } = useOrgStore.getState();
       if (currentOrg?.uid) {
-        const { loadTickets } = await import('@/services/ticketService');
-        await loadTickets(currentOrg.uid);
+        const { ticketService } = await import('@/services/ticketService');
+        await ticketService.loadTickets(currentOrg.uid);
       }
     },
 
