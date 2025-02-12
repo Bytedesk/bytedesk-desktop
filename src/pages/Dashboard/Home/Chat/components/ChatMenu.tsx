@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-13 21:39:32
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 21:43:20
+ * @LastEditTime: 2025-02-13 21:44:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -27,9 +27,10 @@ import {
     ItemParams,
     Separator,
   } from "react-contexify";
+import { MessageProps } from "@/components/ChatUI";
 
 interface ChatMenuProps {
-  contextMessage: MESSAGE.MessageResponse;
+  contextMessage: MessageProps;
   handleRightClick: (event: ItemParams) => void;
 }
 
@@ -38,7 +39,7 @@ const ChatMenu = ({ contextMessage, handleRightClick }: ChatMenuProps) => {
   const { isDarkMode, hasRoleAgent } = useContext(AppContext);
   // https://github.com/fkhadra/react-contexify
   const MENU_ID = "message_list_item";
-  const { show } = useContextMenu({ id: MENU_ID });
+//   const { show } = useContextMenu({ id: MENU_ID });
 
   return (
     <>
