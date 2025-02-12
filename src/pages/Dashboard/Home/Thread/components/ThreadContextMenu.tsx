@@ -26,6 +26,14 @@ interface ThreadContextMenuProps {
 
 const MENU_ID = "thread_list_item";
 
+// 添加星标颜色常量
+const STAR_COLORS = {
+  "star-1": "#FFB800", // 金色
+  "star-2": "#FF4D4F", // 红色
+  "star-3": "#52C41A", // 绿色
+  "star-4": "#1890FF", // 蓝色
+};
+
 const ThreadContextMenu = ({
   currentThread,
   filters,
@@ -157,16 +165,32 @@ const ThreadContextMenu = ({
         <Item id="star-0" onClick={handleRightClick}>
           {intl.formatMessage({ id: "thread.menu.star.cancel" })}
         </Item>
-        <Item id="star-1" onClick={handleRightClick}>
+        <Item 
+          id="star-1" 
+          onClick={handleRightClick}
+          style={{ color: STAR_COLORS["star-1"] }}
+        >
           {intl.formatMessage({ id: "thread.menu.star.1" })}
         </Item>
-        <Item id="star-2" onClick={handleRightClick}>
+        <Item 
+          id="star-2" 
+          onClick={handleRightClick}
+          style={{ color: STAR_COLORS["star-2"] }}
+        >
           {intl.formatMessage({ id: "thread.menu.star.2" })}
         </Item>
-        <Item id="star-3" onClick={handleRightClick}>
+        <Item 
+          id="star-3" 
+          onClick={handleRightClick}
+          style={{ color: STAR_COLORS["star-3"] }}
+        >
           {intl.formatMessage({ id: "thread.menu.star.3" })}
         </Item>
-        <Item id="star-4" onClick={handleRightClick}>
+        <Item 
+          id="star-4" 
+          onClick={handleRightClick}
+          style={{ color: STAR_COLORS["star-4"] }}
+        >
           {intl.formatMessage({ id: "thread.menu.star.4" })}
         </Item>
       </Submenu>
