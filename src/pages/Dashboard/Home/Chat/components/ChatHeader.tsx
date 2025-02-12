@@ -156,7 +156,9 @@ const ChatHeader = ({
               )}
             </div>
           )}
-          {(isGroupThread(currentThread) || isMemberThread(currentThread) || isRobotThread(currentThread)) && (
+          {(isGroupThread(currentThread) 
+            || isMemberThread(currentThread) 
+            || isRobotThread(currentThread)) && (
             <div
               style={{
                 display: "flex",
