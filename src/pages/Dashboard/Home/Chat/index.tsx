@@ -1386,7 +1386,6 @@ const ChatPage = () => {
       />
       <DropUpload
         onImageSend={handleDropSend}
-        // onFileSend={handleFileSend}
       >
         <Header
           style={{
