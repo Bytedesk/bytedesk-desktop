@@ -129,7 +129,7 @@ interface ChatPageProps {
   ticket?: TICKET.TicketResponse;
 }
 
-const ChatPage = ({ fromTicketTab: isTicket = false, ticket }: ChatPageProps) => {
+const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const intl = useIntl();
   const { translateString } = useTranslate();
   const isNetworkOnline = useNetworkStatus();
@@ -192,7 +192,7 @@ const ChatPage = ({ fromTicketTab: isTicket = false, ticket }: ChatPageProps) =>
       };
     },
   );
-  console.log("isTicket:", isTicket, "ticket:", ticket);
+  console.log("fromTicketTab:", fromTicketTab, "ticket:", ticket);
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
