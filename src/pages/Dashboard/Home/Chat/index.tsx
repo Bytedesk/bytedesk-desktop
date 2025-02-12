@@ -140,6 +140,7 @@ import MemberInfoDrawer from "../RightPanel/MemberInfo";
 import GroupInfoDrawer from "../RightPanel/GroupInfo";
 import RobotInfoDrawer from "../RightPanel/RobotInfo";
 import ChatHeader from "./components/ChatHeader";
+import ChatModels from "./components/ChatModels";
 
 const ChatPage = () => {
   const intl = useIntl();
@@ -1512,6 +1513,32 @@ const ChatPage = () => {
           handleAutoReplyModelCancel={handleAutoReplyModelCancel}
           isTransferThreadModelOpen={isTransferThreadModelOpen}
           handleTransferThreadModelOk={handleTransferThreadModelOk}
+          handleTransferThreadModelCancel={handleTransferThreadModelCancel}
+          isForwardMessageModelOpen={isForwardMessageModelOpen}
+          handleForwardMessageModelOk={handleForwardMessageModelOk}
+          handleForwardMessageModelCancel={handleForwardMessageModelCancel}
+          isTransferMessageModelOpen={isTransferMessageModelOpen}
+          handleTransferMessageModelOk={handleTransferMessageModelOk}
+          handleTransferMessageModelCancel={handleTransferMessageModelCancel}
+          isHistoryMessageModelOpen={isHistoryMessageModelOpen}
+          handleHistoryMessageModelOk={handleHistoryMessageModelOk}
+          handleHistoryMessageModelCancel={handleHistoryMessageModelCancel}
+          isTicketCreateModelOpen={isTicketCreateModelOpen}
+          handleTicketCreateModelSuccess={handleTicketCreateModelSuccess}
+          handleTicketCreateModelCancel={handleTicketCreateModelCancel}
+          isBlockModelOpen={isBlockModelOpen}
+          handleBlockModelOk={handleBlockModelOk}
+          handleBlockModelCancel={handleBlockModelCancel}
+          isWebRtcModelOpen={isWebRtcModelOpen}
+          handleWebRtcModelOk={handleWebRtcModelOk}
+          handleWebRtcModelCancel={handleWebRtcModelCancel}
+          isScreenRecorderModelOpen={isScreenRecorderModelOpen}
+          screenShotImg={screenShotImg}
+          handleScreenRecorderModelOk={handleScreenRecorderModelOk}
+          handleScreenRecorderModelCancel={handleScreenRecorderModelCancel}
+          isGroupInfoDrawerOpen={isGroupInfoDrawerOpen}
+          setIsGroupInfoDrawerOpen={setIsGroupInfoDrawerOpen}
+          isMemberInfoDrawerOpen={isMemberInfoDrawerOpen}
           
           />
         
