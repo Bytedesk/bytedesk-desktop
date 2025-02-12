@@ -3,8 +3,10 @@
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useThreadStore } from "@/stores/core/thread";
-import { I18N_PREFIX } from "@/utils/constants";
-import { Layout } from "antd";
+import { I18N_PREFIX, THREAD_STATE_CLOSED } from "@/utils/constants";
+import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread } from "@/utils/utils";
+import { MenuOutlined } from "@ant-design/icons";
+import { Button, Layout, message } from "antd";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
