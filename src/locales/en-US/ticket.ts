@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 13:38:02
+ * @LastEditTime: 2025-02-12 15:20:14
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -145,4 +145,8 @@ export default {
    'ticket.delete.title': 'Delete Ticket',
    'ticket.delete.content': 'Are you sure you want to delete this ticket?',
    'ticket.delete.failed': 'Failed to delete ticket',
+
+   // Loading
+   'ticket.loading': 'Loading tickets...',
+   'ticket.empty': 'No tickets found',
 } 

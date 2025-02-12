@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-01-23 17:42:15
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 14:19:56
+ * @LastEditTime: 2025-02-12 15:16:33
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -47,6 +47,7 @@ interface TicketState {
   currentThreadTicket?: TICKET.TicketResponse;
   // 加载状态
   loading: boolean;
+  error: string | null;
   // 搜索关键词
   searchText: string;
   // 分页信息
@@ -70,6 +71,9 @@ interface TicketState {
   refreshTickets: () => Promise<void>;
   setFilter: (key: string, value: string) => void;
   clearFilters: () => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  setTickets: (tickets: TICKET.TicketResponse[]) => void;
 }
 
 export const useTicketStore = create<TicketState>((set, get) => {
@@ -85,6 +89,7 @@ export const useTicketStore = create<TicketState>((set, get) => {
     currentTicket: undefined,
     currentThreadTicket: undefined,
     loading: false,
+    error: null,
     searchText: '',
     pagination: {
       pageNumber: 0,
@@ -196,8 +201,10 @@ export const useTicketStore = create<TicketState>((set, get) => {
     },
 
     refreshTickets: async () => {
+      const { currentOrg } = useOrgStore.getState();
       if (currentOrg?.uid) {
-        get().loadTickets(currentOrg.uid);
+        const { loadTickets } = await import('@/services/ticketService');
+        await loadTickets(currentOrg.uid);
       }
     },
 
@@ -209,5 +216,11 @@ export const useTicketStore = create<TicketState>((set, get) => {
     })),
 
     clearFilters: () => set({ filters: {} }),
+
+    setLoading: (loading: boolean) => set({ loading }),
+
+    setError: (error: string | null) => set({ error }),
+
+    setTickets: (tickets: TICKET.TicketResponse[]) => set({ tickets }),
   };
 }); 
