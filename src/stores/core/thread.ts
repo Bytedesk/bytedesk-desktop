@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 08:02:56
+ * @LastEditTime: 2025-02-14 08:04:04
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -304,10 +304,10 @@ export const useThreadStore = create<ThreadState>()(
             ],
           });
         },
-        closeThread(threadTopic: string) {
+        closeThread(threadUid: string) {
           // 关闭会话，state=closed
           const updatedThreads = get().threads.map((t) => {
-            if (t.topic === threadTopic) {
+            if (t.uid === threadUid) {
               return { ...t, state: THREAD_STATE_CLOSED };
             }
             return t;
