@@ -1507,6 +1507,12 @@ const ChatPage = () => {
           </>
         )}
         <ChatModels
+          isAutoReplyModelOpen={isAutoReplyModelOpen}
+          handleAutoReplyModelOk={handleAutoReplyModelOk}
+          handleAutoReplyModelCancel={handleAutoReplyModelCancel}
+          isTransferThreadModelOpen={isTransferThreadModelOpen}
+          handleTransferThreadModelOk={handleTransferThreadModelOk}
+        
         {contextHolder}
       </DropUpload>
     </>
