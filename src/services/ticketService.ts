@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 14:26:25
+ * @LastEditTime: 2025-02-13 14:27:25
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,7 +13,7 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
-import { queryTicketsByOrgUid } from '@/apis/ticket/ticket';
+import { queryTicketByServiceThreadTopic, queryTicketsByOrgUid } from '@/apis/ticket/ticket';
 import { useOrgStore } from '@/stores/core/organization';
 import { useTicketStore } from '@/stores/ticket/ticket';
 import { useAgentStore } from '@/stores/service/agent';
@@ -139,16 +139,39 @@ export const ticketService = {
 
   // 根据serviceThreadTopic加载历史工单
   async loadHistoryTickets(serviceThreadTopic: string, retryCount = 3) {
-    const { setLoading, setError, setTickets, filters, searchText, pagination } = useTicketStore.getState();
-    const { agentInfo } = useAgentStore.getState();
-    const { userInfo } = useUserStore.getState();
+    const { setLoading, setError, setTickets, pagination } = useTicketStore.getState();
+    const currentOrg = useOrgStore.getState().currentOrg;
     
     const tryLoad = async (attempt: number) => {
       try {
         setLoading(true);
         setError(null);
+
+        const params: TICKET.TicketRequest = {
+          orgUid: currentOrg.uid,
+          pageNumber: pagination.pageNumber,
+          pageSize: pagination.pageSize,
+          serviceThreadTopic,
+        };
+
+        const response = await queryTicketByServiceThreadTopic(params);
+        console.log('queryTicketByServiceThreadTopic response', response);
+        if (response.data.code === 200) {
+          setTickets(response.data.data.content);
+        } else {
+          throw new Error(response.data.message);
+        }
+
+      } catch (error) {
+        if (attempt < retryCount) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          return tryLoad(attempt + 1);
+        }
+        setError(error instanceof Error ? error.message : 'Failed to load tickets');
       }
     }
+
+    return tryLoad(1);
   },
 
   // 刷新工单列表
