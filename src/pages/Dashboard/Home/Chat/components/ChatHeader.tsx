@@ -113,9 +113,11 @@ const ChatHeader = ({
                   minHeight: "16px",
                 }}
               >
-                {typing
+                {
+                  typing
                   ? previewContent || intl.formatMessage({ id: "i18n.typing" })
-                  : ""}
+                  : "#" + currentThread?.uid
+                }
               </span>
             </div>
           </div>
