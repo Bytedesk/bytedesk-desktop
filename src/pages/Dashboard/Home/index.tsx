@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 21:47:12
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 14:05:45
+ * @LastEditTime: 2025-02-14 10:13:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -14,7 +14,6 @@
  */
 import { Layout, Space, Splitter } from "antd";
 import React from "react";
-// import ChatPage from "./Chat/ChatPage";
 import "react-contexify/ReactContexify.css";
 import RightPanel from "./RightPanel";
 import ThreadList from "./Thread/ThreadList";

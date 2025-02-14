@@ -32,6 +32,7 @@ export default {
   "i18n.group": "[群聊]",
   "i18n.rate.invite": "邀請評價",
   "i18n.ticket": "[工單]",
+  "i18n.ticket.thread": "[工單會話]",
   //
   "i18n.notice": "通知",
   "i18n.notice.title": "通知標題",

@@ -31,6 +31,7 @@ export default {
   "i18n.group": "Group",
   "i18n.rate.invite": "Rate Invite",
   "i18n.ticket": "Ticket",
+  "i18n.ticket.thread": "Ticket Thread",
   //
   "i18n.notice": "Notice",
   "i18n.notice.title": "Notice",

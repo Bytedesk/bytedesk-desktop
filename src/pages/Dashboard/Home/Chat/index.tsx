@@ -199,13 +199,14 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       };
     },
   );
-  console.log("ChatPage fromTicketTab:", fromTicketTab, "ticket:", ticket);
+  console.log("ChatPage fromTicketTab:", fromTicketTab);
 
   const fetchTicketThread = async (threadUid?: string) => {
     if (!threadUid) {
       console.log("fetchTicketThread: threadUid is undefined");
       return;
     }
+    message.loading(translateString("i18n.loading"));
     const response = await queryThreadByUid(threadUid);
     console.log("fetchTicketThread:", threadUid, response.data);
     if (response.data.code === 200) {
@@ -215,11 +216,8 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     } else {
       message.error(response.data.message);
     }
+    message.destroy();
   };
-
-  useEffect(() => {
-    console.log("ChatPage fromTicketTab changed:", fromTicketTab);
-  }, [fromTicketTab]);
 
   useEffect(() => {
     console.log("ChatPage ticket changed:", ticket);
@@ -227,6 +225,13 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       fetchTicketThread(ticket.threadUid);
     }
   }, [ticket, fromTicketTab]);
+
+  useEffect(() => {
+    console.log("ChatPage currentThread changed:", currentThread);
+    if (currentThread) {
+      setChatThread(currentThread);
+    }
+  }, [currentThread]);
 
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
