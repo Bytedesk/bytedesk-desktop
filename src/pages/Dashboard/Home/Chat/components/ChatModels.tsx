@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-13 20:45:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 09:40:17
+ * @LastEditTime: 2025-02-14 10:09:39
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -29,6 +29,7 @@ import RobotInfoDrawer from "../../RightPanel/RobotInfo";
 
 interface ChatModelsProps {
   fromTicketTab?: boolean;
+  chatThread: THREAD.ThreadResponse;
   isAutoReplyModelOpen: boolean;
   handleAutoReplyModelOk: () => void;
   handleAutoReplyModelCancel: () => void;
@@ -70,6 +71,7 @@ interface ChatModelsProps {
 
 const ChatModels = ({
   fromTicketTab = false,
+  // chatThread,
   isAutoReplyModelOpen,
   handleAutoReplyModelOk,
   handleAutoReplyModelCancel,

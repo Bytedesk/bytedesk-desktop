@@ -199,11 +199,15 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       };
     },
   );
-  console.log("fromTicketTab:", fromTicketTab, "ticket:", ticket);
+  console.log("ChatPage fromTicketTab:", fromTicketTab, "ticket:", ticket);
 
-  const fetchTicketThread = async (threadUid: string) => {
+  const fetchTicketThread = async (threadUid?: string) => {
+    if (!threadUid) {
+      console.log("fetchTicketThread: threadUid is undefined");
+      return;
+    }
     const response = await queryThreadByUid(threadUid);
-    console.log("fetchTicketThread:", response.data);
+    console.log("fetchTicketThread:", threadUid, response.data);
     if (response.data.code === 200) {
       const thread = response.data.data;
       setChatThread(thread);
@@ -213,9 +217,16 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
   };
 
-  if (fromTicketTab) {
-    fetchTicketThread(ticket?.uid);
-  }
+  useEffect(() => {
+    console.log("ChatPage fromTicketTab changed:", fromTicketTab);
+  }, [fromTicketTab]);
+
+  useEffect(() => {
+    console.log("ChatPage ticket changed:", ticket);
+    if (fromTicketTab && ticket?.threadUid) {
+      fetchTicketThread(ticket.threadUid);
+    }
+  }, [ticket, fromTicketTab]);
 
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
@@ -1370,6 +1381,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       <DropUpload onImageSend={handleDropSend}>
         <ChatHeader
           fromTicketTab={fromTicketTab}
+          chatThread={chatThread}
           typing={typing}
           previewContent={previewContent}
           setIsTransferThreadModelOpen={setIsTransferThreadModelOpen}
@@ -1427,6 +1439,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             {/* 右键菜单 */}
             <ChatMenu
               fromTicketTab={fromTicketTab}
+              chatThread={chatThread}
               contextMessage={contextMessage}
               handleRightClick={handleRightClick}
             />
@@ -1435,6 +1448,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         {/* Model弹窗 */}
         <ChatModels
           fromTicketTab={fromTicketTab}
+          chatThread={chatThread}
           isAutoReplyModelOpen={isAutoReplyModelOpen}
           handleAutoReplyModelOk={handleAutoReplyModelOk}
           handleAutoReplyModelCancel={handleAutoReplyModelCancel}

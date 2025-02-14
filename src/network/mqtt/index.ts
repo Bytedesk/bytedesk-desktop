@@ -86,11 +86,11 @@ export const mqttConnect = ({
     connectTimeout: 30 * 1000, // ms, 设置超时时间
     reschedulePings: true, // 发送数据包后重新安排 ping 消息（默认true）
     rejectUnauthorized: false,
-    log(...args) {
-      if (constants.IS_DEBUG) {
-        console.log("mqtt debug log", ...args);
-      }
-    },
+    // log(...args) {
+    //   if (constants.IS_DEBUG) {
+    //     console.log("mqtt debug log", ...args);
+    //   }
+    // },
   };
   console.log("mqtt start connect:", options);
   mqttClient = mqtt.connect(getMqttWssHost(), options);

@@ -1,18 +1,19 @@
 
 
+import { message } from "@/AntdGlobalComp";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
-import { useThreadStore } from "@/stores/core/thread";
 import { I18N_PREFIX, THREAD_STATE_CLOSED } from "@/utils/constants";
 import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Layout, message } from "antd";
-import { useContext, useState } from "react";
+import { Button, Layout } from "antd";
+import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
 
 interface ChatHeaderProps {
   fromTicketTab?: boolean;
+  chatThread: THREAD.ThreadResponse;
   typing: boolean;
   previewContent: string;
   setIsTransferThreadModelOpen: (open: boolean) => void;
@@ -25,6 +26,7 @@ interface ChatHeaderProps {
 
 const ChatHeader = ({
   fromTicketTab = false,
+  chatThread,
   typing,
   previewContent,
   setIsTransferThreadModelOpen,
@@ -37,11 +39,7 @@ const ChatHeader = ({
   const intl = useIntl();
   const { headerStyle } = useStyle();
   const { isDarkMode } = useContext(AppContext);
-  const { currentThread, currentTicketThread } = useThreadStore((state) => ({
-    currentThread: state.currentThread,
-    currentTicketThread: state.currentTicketThread,
-  }));  
-  const [chatThread] = useState<THREAD.ThreadResponse>(fromTicketTab ? currentTicketThread : currentThread);
+  console.log("ChatHeader fromTicketTab", fromTicketTab);
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
     if (!chatThread?.user) return "";
