@@ -98,7 +98,7 @@ import {
   startCaptureScreen,
 } from "@/utils/electronApiUtils";
 import useTranslate from "@/hooks/useTranslate";
-import { closeThread } from "@/apis/core/thread";
+import { closeThread, queryThreadByUid } from "@/apis/core/thread";
 import { useAgentStore } from "@/stores/service/agent";
 // https://www.npmjs.com/package/use-debounce
 import { useDebounce } from "use-debounce";
@@ -139,7 +139,6 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const [debouncedPreviewText] = useDebounce(previewText, 1000);
   const userInfo = useUserStore((state) => state.userInfo);
   const agentInfo = useAgentStore((state) => state.agentInfo);
-  // const [refreshing, setRefreshing] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const { messages, appendMsg, updateMsg, resetList } = useMessages([]);
   const { 
@@ -202,10 +201,15 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   );
   console.log("fromTicketTab:", fromTicketTab, "ticket:", ticket);
 
-  const fetchTicketThread = async (ticketUid: string) => {
-    const response = await getTicketThread(ticketUid);
-    if (response.code === 200) {
-      setChatThread(response.data.data);
+  const fetchTicketThread = async (threadUid: string) => {
+    const response = await queryThreadByUid(threadUid);
+    console.log("fetchTicketThread:", response.data);
+    if (response.data.code === 200) {
+      const thread = response.data.data;
+      setChatThread(thread);
+      setCurrentTicketThread(thread);
+    } else {
+      message.error(response.data.message);
     }
   };
 
@@ -322,7 +326,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         break;
       case "recall":
         // deleteMessage(messageUid);
-        mqttSendRecallMessage(messageUid, currentThread);
+        mqttSendRecallMessage(messageUid, chatThread);
         break;
       case "addquickreply":
         handleAddQuickReply();
@@ -389,7 +393,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         defaultMessage: "结束会话中...",
       }),
     );
-    const response = await closeThread(currentThread);
+    const response = await closeThread(chatThread);
     console.log("handleCloseThread", response.data);
     if (response.data.code === 200) {
       setCurrentThread(response?.data?.data);
@@ -413,7 +417,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         defaultMessage: "确定要结束会话?",
       }),
       icon: <ExclamationCircleFilled />,
-      content: <>{currentThread?.user?.nickname}</>,
+      content: <>{chatThread?.user?.nickname}</>,
       onOk() {
         console.log("OK");
         handleCloseThread();
@@ -435,7 +439,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       pageNumber: pageNumber,
       pageSize: 20,
       //
-      threadTopic: currentThread?.topic,
+      threadTopic: chatThread?.topic,
     };
     const response = await queryMessagesByThreadTopic(messageRequest);
     console.log("queryMessages: ", response.data, messageRequest);
@@ -463,7 +467,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     setPageNumber(0);
     setLoadMoreText(translateString("i18n.load.more"));
     // resetList();
-    // console.log("useEffect 1: ", currentThread.user.nickname, messages.length);
+    // console.log("useEffect 1: ", chatThread.user.nickname, messages.length);
     if (messageList.length === 0) {
       getHistoryMessages();
     }
@@ -494,7 +498,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       };
       moreToolbarQuickButtons.push(webrtcQuickButton);
     }
-    if (isCustomerServiceThread(currentThread)) {
+    if (isCustomerServiceThread(chatThread)) {
       // 评价按钮
       const rateQuickButton = {
         name: intl.formatMessage({
@@ -533,7 +537,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         moreToolbarQuickButtons.push(historyButton);
       }
     }
-    if (isRobotThread(currentThread)) {
+    if (isRobotThread(chatThread)) {
       defaultQuickButtons = [];
       moreToolbarQuickButtons = [];
     }
@@ -544,7 +548,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     if (msgRef.current) {
       msgRef.current.scrollToEnd();
     }
-  }, [currentThread, locale]);
+  }, [chatThread, locale]);
 
   // 输入框回车发送消息
   const handleSend = (type: string, content: string) => {
@@ -579,7 +583,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       content: content,
       position: "right",
       user: {
-        avatar: isCustomerServiceThread(currentThread)
+        avatar: isCustomerServiceThread(chatThread)
           ? agentInfo.avatar
           : userInfo.avatar,
       },
@@ -594,12 +598,12 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     console.log("debouncedPreviewText", debouncedPreviewText);
     // 客服端不能发送preview消息，发送typing状态消息
     if (
-      currentThread?.topic.length > 0 &&
+      chatThread?.topic.length > 0 &&
       debouncedPreviewText.trim().length > 0
     ) {
-      mqttSendTypingMessage(currentThread);
+      mqttSendTypingMessage(chatThread);
     }
-  }, [debouncedPreviewText, currentThread]);
+  }, [debouncedPreviewText, chatThread]);
 
   // 输入框内容变化
   const handleInputChange = (content: string) => {
@@ -657,7 +661,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         avatar: userInfo.avatar,
       },
     });
-    mqttSendMessage(uid, type, url, currentThread);
+    mqttSendMessage(uid, type, url, chatThread);
     //
     msgRef.current.scrollToEnd();
     console.log("scrollToEnd:", msgRef);
@@ -781,7 +785,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
           defaultMessage: "取消",
         }),
         onOk: () => {
-          mqttSendRateInviteMessage(currentThread);
+          mqttSendRateInviteMessage(chatThread);
         },
         onCancel: () => {
           console.log("onCancel");
@@ -823,7 +827,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     if (item?.type === MESSAGE_TYPE_LEAVE_MSG) {
       return "left";
     }
-    if (isCustomerServiceThread(currentThread)) {
+    if (isCustomerServiceThread(chatThread)) {
       return item?.user?.uid === agentInfo?.uid ? "right" : "left";
     }
     return item?.user?.uid === userInfo?.uid ? "right" : "left";
@@ -833,20 +837,20 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     const list = [];
     messageList.forEach((item) => {
       let flag = false;
-      if (isOrgMemberTopic(currentThread?.topic)) {
-        const reverseTopic = getOrgMemberTopicReverse(currentThread?.topic);
+      if (isOrgMemberTopic(chatThread?.topic)) {
+        const reverseTopic = getOrgMemberTopicReverse(chatThread?.topic);
         console.log(
           "useEffect messageList :",
           item?.threadTopic,
-          currentThread?.topic,
+          chatThread?.topic,
           reverseTopic,
         );
-        if (item?.threadTopic === currentThread?.topic) {
+        if (item?.threadTopic === chatThread?.topic) {
           flag = true;
         } else if (item?.threadTopic === reverseTopic) {
           flag = true;
         }
-      } else if (item?.threadTopic === currentThread?.topic) {
+      } else if (item?.threadTopic === chatThread?.topic) {
         flag = true;
       }
       if (flag) {
@@ -866,14 +870,14 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       }
     });
     resetList(list);
-  }, [messageList, currentThread]);
+  }, [messageList, chatThread]);
 
   //
   const handleResendMessage = (message: MessageProps) => {
     // 点击发送失败红点，重试发送消息
     console.log("handleResendMessage", message);
     const { _id, type, content } = message;
-    mqttSendMessage(_id.toString(), type, content, currentThread);
+    mqttSendMessage(_id.toString(), type, content, chatThread);
   };
 
   const renderMessageContent = (message: MessageProps): React.ReactNode => {
@@ -884,7 +888,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     //   shouldSendReceipt(type) &&
     //   status != MESSAGE_STATUS_READ
     // ) {
-    //   mqttSendReceiptReadMessage(message._id.toString(), currentThread);
+    //   mqttSendReceiptReadMessage(message._id.toString(), chatThread);
     //   // 更新本地消息状态
     //   updateMessageStatus(message._id.toString(), MESSAGE_STATUS_READ);
     // }
@@ -900,7 +904,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
               isRichText={isRichText(content)}
               onContextMenu={() => handleContextMenu(event, message)}
             ></Bubble>
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -914,7 +918,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             <StreamQa
               uid={_id.toString()}
               content={content}
-              thread={currentThread}
+              thread={chatThread}
             />
             {position === "right" && (
               <MessageStatus
@@ -941,7 +945,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
                 <img src={content} alt="" />
               </PhotoView>
             </Bubble>
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -960,7 +964,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
                 <Button onClick={() => openUrl(content)}>下载文件</Button>
               </FileCard>
             </Bubble>
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -977,7 +981,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             >
               <Video src={message.content} />
             </Bubble>
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -1048,7 +1052,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
               status={status}
               type={type}
             />
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -1067,7 +1071,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
               status={status}
               position={position}
             />
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -1082,7 +1086,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
               content={translateString(content)}
               onContextMenu={() => handleContextMenu(event, message)}
             />
-            {position === "right" && !isGroupThread(currentThread) && (
+            {position === "right" && !isGroupThread(chatThread) && (
               <MessageStatus
                 status={status}
                 onRetry={() => handleResendMessage(message)}
@@ -1290,7 +1294,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
           name: userInfo?.nickname,
         },
       });
-      mqttSendMessage(uid, quickReply.type, quickReply.content, currentThread);
+      mqttSendMessage(uid, quickReply.type, quickReply.content, chatThread);
     };
     //
     emitter.on(EVENT_BUS_MESSAGE_TYPE_STATUS, handleMessageTypeStatus);
@@ -1375,7 +1379,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
           setIsMemberInfoDrawerOpen={setIsMemberInfoDrawerOpen}
           setIsRobotInfoDrawerOpen={setIsRobotInfoDrawerOpen}
         />
-        {currentThread?.topic === "" ? (
+        {chatThread?.topic === "" ? (
           <>
             <Empty style={{ marginTop: 200 }} description={false} />
           </>

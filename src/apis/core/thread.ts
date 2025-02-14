@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:21:14
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 14:32:08
+ * @LastEditTime: 2025-02-14 09:34:32
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -29,6 +29,15 @@ export async function queryThreadByTopic(topic: string) {
     method: "GET",
     params: {
       topic,
+    },
+  });
+}
+
+export async function queryThreadByUid(uid: string) {
+  return request<THREAD.HttpResult>("/api/v1/thread/query/uid", {
+    method: "GET",
+    params: {
+      uid,
     },
   });
 }

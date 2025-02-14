@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-13 21:39:32
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 09:27:27
+ * @LastEditTime: 2025-02-14 09:40:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -39,7 +39,7 @@ const ChatMenu = ({ fromTicketTab = false, contextMessage, handleRightClick }: C
   const intl = useIntl();
   const { isDarkMode, hasRoleAgent } = useContext(AppContext);
   // https://github.com/fkhadra/react-contexify
-  console.log("fromTicketTab", fromTicketTab);
+  console.log("ChatMenu fromTicketTab", fromTicketTab);
 
   return (
     <>

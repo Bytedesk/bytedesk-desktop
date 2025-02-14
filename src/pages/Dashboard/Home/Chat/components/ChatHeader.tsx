@@ -7,7 +7,7 @@ import { I18N_PREFIX, THREAD_STATE_CLOSED } from "@/utils/constants";
 import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Layout, message } from "antd";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
 
@@ -37,26 +37,27 @@ const ChatHeader = ({
   const intl = useIntl();
   const { headerStyle } = useStyle();
   const { isDarkMode } = useContext(AppContext);
-  const { currentThread } = useThreadStore((state) => ({
+  const { currentThread, currentTicketThread } = useThreadStore((state) => ({
     currentThread: state.currentThread,
+    currentTicketThread: state.currentTicketThread,
   }));  
+  const [chatThread] = useState<THREAD.ThreadResponse>(fromTicketTab ? currentTicketThread : currentThread);
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
-    if (!currentThread?.user) return "";
-    return currentThread.user.avatar;
+    if (!chatThread?.user) return "";
+    return chatThread.user.avatar;
   };
-  console.log("fromTicketTab", fromTicketTab);
 
   // 添加一个获取昵称的辅助函数
   const getNickname = () => {
-    if (!currentThread?.user) return "";
-    if (currentThread.user.nickname?.startsWith(I18N_PREFIX)) {
+    if (!chatThread?.user) return "";
+    if (chatThread.user.nickname?.startsWith(I18N_PREFIX)) {
       return intl.formatMessage({
-        id: currentThread.user.nickname,
-        defaultMessage: currentThread.user.nickname,
+        id: chatThread.user.nickname,
+        defaultMessage: chatThread.user.nickname,
       });
     }
-    return currentThread.user.nickname;
+    return chatThread.user.nickname;
   };
 
   return (
@@ -119,14 +120,14 @@ const ChatHeader = ({
                 {
                   typing
                   ? previewContent || intl.formatMessage({ id: "i18n.typing" })
-                  : (isTicketThread(currentThread) ? '工单' : '客服') + "会话编号：#" + currentThread?.uid
+                  : (isTicketThread(chatThread) ? '工单' : '客服') + "会话编号：#" + chatThread?.uid
                 }
               </span>
             </div>
           </div>
 
           {/* 右侧按钮组 */}
-          {isCustomerServiceThread(currentThread) && (
+          {isCustomerServiceThread(chatThread) && (
             <div
               style={{
                 display: "flex",
@@ -151,7 +152,7 @@ const ChatHeader = ({
                   defaultMessage: "工单",
                 })}
               </Button>
-              {currentThread?.state !== THREAD_STATE_CLOSED && (
+              {chatThread?.state !== THREAD_STATE_CLOSED && (
                 <Button type="text" onClick={showCloseThreadConfirm}>
                   {intl.formatMessage({
                     id: "chat.navbar.close",
@@ -161,9 +162,9 @@ const ChatHeader = ({
               )}
             </div>
           )}
-          {(isGroupThread(currentThread) 
-            || isMemberThread(currentThread) 
-            || isRobotThread(currentThread)) && (
+          {(isGroupThread(chatThread) 
+            || isMemberThread(chatThread) 
+            || isRobotThread(chatThread)) && (
             <div
               style={{
                 display: "flex",
@@ -174,11 +175,11 @@ const ChatHeader = ({
                 icon={<MenuOutlined />}
                 onClick={() => {
                   // 以drawer方式打开
-                  if (isGroupThread(currentThread)) {
+                  if (isGroupThread(chatThread)) {
                     setIsGroupInfoDrawerOpen(true);
-                  } else if (isMemberThread(currentThread)) {
+                  } else if (isMemberThread(chatThread)) {
                     setIsMemberInfoDrawerOpen(true);
-                  } else if (isRobotThread(currentThread)) {
+                  } else if (isRobotThread(chatThread)) {
                     setIsRobotInfoDrawerOpen(true);
                   } else {
                     message.warning("当前聊天对象类型不支持");
@@ -189,7 +190,7 @@ const ChatHeader = ({
             </div>
           )}
           {
-            isTicketThread(currentThread) && (
+            isTicketThread(chatThread) && (
               <div>
                 <Button type="text" onClick={() => {
                   message.warning("TODO: 处理完毕");
