@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 10:55:44
+ * @LastEditTime: 2025-02-14 11:27:06
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -29,9 +29,10 @@ const { Dragger } = Upload;
 type UploadDragProps = {
   type: string;
   acceptType?: string;
+  maxCount?: number;
   isModalOpen: boolean;
   attachments?: TICKET.TicketAttachmentResponse[];
-  handleSubmit: (uploads: UPLOAD.UploadResponse[]) => void;
+  handleSubmit: (files?: File[], uploads?: UPLOAD.UploadResponse[]) => void;
   handleCancel: () => void;
 };
 type UploadDataProps = {
@@ -48,12 +49,14 @@ type UploadDataProps = {
 const UploadDrag = ({
   type,
   acceptType,
+  maxCount = 5,
   isModalOpen,
   attachments,
   handleSubmit,
   handleCancel,
 }: UploadDragProps) => {
   const intl = useIntl();
+  const [files, setFiles] = useState<File[]>([]);
   const [uploads, setUploads] = useState<UPLOAD.UploadResponse[]>([]);
   const [uploadParams, setUploadParams] = useState<UploadDataProps>({
     file: null,
@@ -78,6 +81,14 @@ const UploadDrag = ({
     data: uploadParams,
     showUploadList: false,
     beforeUpload(file: RcFile) {
+      if (files.length >= maxCount) {
+        message.error(intl.formatMessage(
+          { id: 'upload.maxCount' },
+          { maxCount: maxCount }
+        ));
+        return false;
+      }
+      setFiles(prevFiles => [...prevFiles, file]);
       const file_name = moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
       setUploadParams(prev => ({
         ...prev,
@@ -135,7 +146,7 @@ const UploadDrag = ({
 
   const handleOk = () => {
     // console.log("handleOk", uploads);
-    handleSubmit(uploads);
+    handleSubmit(files, uploads);
   };
 
   const handleDelete = (uid: string) => {
