@@ -10,4 +10,6 @@ export default {
   'upload.preview.file': '文件預覽',
   'upload.button.ok': '確定',
   'upload.button.cancel': '取消',
+  'upload.maxCount': '最多只能上傳 {maxCount} 個文件',
+  'upload.maxSize': '文件大小不能超過 {maxSize}MB',
 }; 
