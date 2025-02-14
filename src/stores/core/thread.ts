@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 08:05:05
+ * @LastEditTime: 2025-02-14 09:22:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -29,6 +29,7 @@ interface ThreadState {
   queuingThreads: THREAD.ThreadResponse[];
   currentThread: THREAD.ThreadResponse;
   currentQueuingThread: THREAD.ThreadResponse;
+  currentTicketThread: THREAD.ThreadResponse;
   threadResult: THREAD.HttpPageResult;
   //
   showQueueButton: boolean;
@@ -46,6 +47,7 @@ interface ThreadState {
   setQueuingThreads: (threads: THREAD.ThreadResponse[]) => void;
   setCurrentThread: (thread: THREAD.ThreadResponse) => void;
   setCurrentQueuingThread: (thread: THREAD.ThreadResponse) => void;
+  setCurrentTicketThread: (thread: THREAD.ThreadResponse) => void;
   setThreadResult: (threadResult: THREAD.HttpPageResult) => void;
   getUnreadCount: () => number;
   setShowQueueButton: (showQueue: boolean) => void;
@@ -108,6 +110,20 @@ export const useThreadStore = create<ThreadState>()(
             nickname: "",
             avatar: "",
           },
+        },
+        currentTicketThread: {
+          uid: "",
+          user: {
+            uid: "",
+            nickname: "",
+            avatar: "",
+          },
+          topic: "",
+          content: "",
+          type: "",
+          unreadCount: 0,
+          extra: "",
+          updatedAt: "",
         },
         threadResult: {
           data: {
@@ -376,6 +392,11 @@ export const useThreadStore = create<ThreadState>()(
             set((state) => {
               state.currentQueuingThread = thread;
             });
+        },
+        setCurrentTicketThread(thread) {
+          set((state) => {
+            state.currentTicketThread = thread;
+          });
         },
         setThreadResult(threadResult) {
           set((state) => {

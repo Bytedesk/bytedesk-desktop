@@ -25,7 +25,6 @@ import {
   mqttSendMessage,
   mqttSendRateInviteMessage,
   mqttSendRecallMessage,
-  // mqttSendReceiptReadMessage,
   mqttSendTextMessage,
   mqttSendTypingMessage,
 } from "@/network/mqtt";
@@ -66,6 +65,7 @@ import {
   EVENT_BUS_SEND_IMAGE_MESSAGE,
   IS_DEBUG,
   IS_ELECTRON,
+  MENU_ID,
   MESSAGE_STATUS_SENDING,
   MESSAGE_TYPE_FAQ,
   MESSAGE_TYPE_FILE,
@@ -142,12 +142,20 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   // const [refreshing, setRefreshing] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const { messages, appendMsg, updateMsg, resetList } = useMessages([]);
-  const { currentThread, setCurrentThread } = useThreadStore((state) => {
+  const { 
+    currentThread, 
+    setCurrentThread, 
+    currentTicketThread, 
+    setCurrentTicketThread 
+  } = useThreadStore((state) => {
     return {
       currentThread: state.currentThread,
       setCurrentThread: state.setCurrentThread,
+      currentTicketThread: state.currentTicketThread,
+      setCurrentTicketThread: state.setCurrentTicketThread,
     };
   });
+  const [chatThread, setChatThread] = useState<THREAD.ThreadResponse>(fromTicketTab ? currentTicketThread : currentThread);
   const [typing, setTyping] = useState(false);
   const [previewContent, setPreviewContent] = useState<string>("");
   const [loadMoreText, setLoadMoreText] = useState(
@@ -193,6 +201,18 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     },
   );
   console.log("fromTicketTab:", fromTicketTab, "ticket:", ticket);
+
+  const fetchTicketThread = async (ticketUid: string) => {
+    const response = await getTicketThread(ticketUid);
+    if (response.code === 200) {
+      setChatThread(response.data.data);
+    }
+  };
+
+  if (fromTicketTab) {
+    fetchTicketThread(ticket?.uid);
+  }
+
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
@@ -249,7 +269,6 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const [toolbarQuickButtons, setToolbarQuickButtons] =
     useState<QuickReplyItemProps[]>(defaultQuickButtons);
   // https://github.com/fkhadra/react-contexify
-  const MENU_ID = "message_list_item";
   const { show } = useContextMenu({ id: MENU_ID });
   const handleContextMenu = (event: any, message: MessageProps) => {
     console.log("handleContextMenu:", event, " item:", message);
@@ -1346,6 +1365,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       />
       <DropUpload onImageSend={handleDropSend}>
         <ChatHeader
+          fromTicketTab={fromTicketTab}
           typing={typing}
           previewContent={previewContent}
           setIsTransferThreadModelOpen={setIsTransferThreadModelOpen}
@@ -1402,6 +1422,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             </PhotoProvider>
             {/* 右键菜单 */}
             <ChatMenu
+              fromTicketTab={fromTicketTab}
               contextMessage={contextMessage}
               handleRightClick={handleRightClick}
             />
@@ -1409,6 +1430,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
         )}
         {/* Model弹窗 */}
         <ChatModels
+          fromTicketTab={fromTicketTab}
           isAutoReplyModelOpen={isAutoReplyModelOpen}
           handleAutoReplyModelOk={handleAutoReplyModelOk}
           handleAutoReplyModelCancel={handleAutoReplyModelCancel}

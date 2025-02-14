@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 12:47:44
+ * @LastEditTime: 2025-02-14 09:27:04
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -96,6 +96,7 @@ export const I18N_PREFIX = "i18n.";
 export const I18N_NEW_MESSAGE = "i18n.new.message";
 // 匿名
 export const ANONYMOUS = "ANONYMOUS";
+export const MENU_ID = "message_list_item";
 // electron
 export const DEEP_LINK_WEIYUIM = "bytedesk";
 // export const OPEN_AT_LOGIN = "openAtLogin";

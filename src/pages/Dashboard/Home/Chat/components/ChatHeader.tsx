@@ -12,6 +12,7 @@ import { useIntl } from "react-intl";
 const { Header } = Layout;
 
 interface ChatHeaderProps {
+  fromTicketTab?: boolean;
   typing: boolean;
   previewContent: string;
   setIsTransferThreadModelOpen: (open: boolean) => void;
@@ -23,6 +24,7 @@ interface ChatHeaderProps {
 }
 
 const ChatHeader = ({
+  fromTicketTab = false,
   typing,
   previewContent,
   setIsTransferThreadModelOpen,
@@ -43,6 +45,7 @@ const ChatHeader = ({
     if (!currentThread?.user) return "";
     return currentThread.user.avatar;
   };
+  console.log("fromTicketTab", fromTicketTab);
 
   // 添加一个获取昵称的辅助函数
   const getNickname = () => {

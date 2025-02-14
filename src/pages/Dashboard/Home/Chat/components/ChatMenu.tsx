@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-13 21:39:32
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 21:44:38
+ * @LastEditTime: 2025-02-14 09:27:27
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -15,7 +15,7 @@
 // 
 
 import { AppContext } from "@/context/AppContext";
-import { MESSAGE_TYPE_TEXT, IS_ELECTRON, MESSAGE_TYPE_IMAGE, IS_DEBUG } from "@/utils/constants";
+import { MESSAGE_TYPE_TEXT, IS_ELECTRON, MESSAGE_TYPE_IMAGE, IS_DEBUG, MENU_ID } from "@/utils/constants";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
 // https://fkhadra.github.io/react-contexify/
@@ -30,16 +30,16 @@ import {
 import { MessageProps } from "@/components/ChatUI";
 
 interface ChatMenuProps {
+  fromTicketTab?: boolean;
   contextMessage: MessageProps;
   handleRightClick: (event: ItemParams) => void;
 }
 
-const ChatMenu = ({ contextMessage, handleRightClick }: ChatMenuProps) => {
+const ChatMenu = ({ fromTicketTab = false, contextMessage, handleRightClick }: ChatMenuProps) => {
   const intl = useIntl();
   const { isDarkMode, hasRoleAgent } = useContext(AppContext);
   // https://github.com/fkhadra/react-contexify
-  const MENU_ID = "message_list_item";
-//   const { show } = useContextMenu({ id: MENU_ID });
+  console.log("fromTicketTab", fromTicketTab);
 
   return (
     <>
