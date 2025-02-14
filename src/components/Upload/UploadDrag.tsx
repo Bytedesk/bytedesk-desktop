@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-26 13:05:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 11:27:06
+ * @LastEditTime: 2025-02-14 15:37:13
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -151,6 +151,19 @@ const UploadDrag = ({
 
   const handleDelete = (uid: string) => {
     console.log("handleDelete", uid);
+    
+    // 1. 找到要删除的upload
+    const uploadToDelete = uploads.find(upload => upload.uid === uid);
+    if (!uploadToDelete) {
+      return;
+    }
+
+    // 2. 从files中找到并删除对应的file
+    // 注意: uploadToDelete.fileName 格式为 "YYYYMMDDHHmmss_原始文件名"
+    const originalFileName = uploadToDelete.fileName.split('_').slice(1).join('_'); 
+    setFiles(prevFiles => prevFiles.filter(file => file.name !== originalFileName));
+
+    // 3. 从uploads中删除
     setUploads(prevUploads => prevUploads.filter(upload => upload.uid !== uid));
   };
 
