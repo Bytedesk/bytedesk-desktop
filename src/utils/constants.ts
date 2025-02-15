@@ -594,3 +594,7 @@ export const TICKET_FILTER_THIS_WEEK = 'THIS_WEEK';
 export const TICKET_FILTER_LAST_WEEK = 'LAST_WEEK';
 export const TICKET_FILTER_THIS_MONTH = 'THIS_MONTH';
 export const TICKET_FILTER_LAST_MONTH = 'LAST_MONTH';
+
+// 
+export const TICKET_PROCESS_KEY_AGENT = 'agentTicketProcess';
+export const TICKET_PROCESS_KEY_GROUP = 'groupTicketProcess';
