@@ -92,11 +92,13 @@ declare namespace TICKET {
     workgroup?: USER.UserProtobuf;
     assignee?: USER.UserProtobuf;
     reporter?: USER.UserProtobuf;
-    
     // 
     attachments?: TICKET.TicketAttachmentResponse[];
     processInstanceId?: string;
     processEntityUid?: string;
+    //
+    createdAt: string;
+    updatedAt: string;
   };
 
   type TicketAttachmentResponse = {
