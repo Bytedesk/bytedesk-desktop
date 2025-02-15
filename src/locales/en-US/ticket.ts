@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 15:20:14
+ * @LastEditTime: 2025-02-15 17:03:02
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -149,4 +149,9 @@ export default {
    // Loading
    'ticket.loading': 'Loading tickets...',
    'ticket.empty': 'No tickets found',
+
+   // Process
+   'ticket.form.process': 'Process',
+   'ticket.form.process.placeholder': 'Select process',
+   'ticket.process.load.error': 'Failed to load processes',
 } 
