@@ -166,5 +166,5 @@ export default {
   "i18n.vip.contactUrl": "https://www.bytedesk.com",
   // 
   "i18n.ticket.process.name.group": "WorkGroup Process",
-  "i18n.ticket.process.name.user": "User Process",
+  "i18n.ticket.process.name.agent": "Agent Process",
 } 
