@@ -164,4 +164,7 @@ export default {
   "i18n.vip.component": "VIP Component, Contact us for more details",
   "i18n.vip.contactUs": "Contact us",
   "i18n.vip.contactUrl": "https://www.bytedesk.com",
+  // 
+  "i18n.ticket.process.name.group": "WorkGroup Process",
+  "i18n.ticket.process.name.user": "User Process",
 } 
