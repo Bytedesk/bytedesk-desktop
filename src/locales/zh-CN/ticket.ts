@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 15:20:28
+ * @LastEditTime: 2025-02-15 17:03:15
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -172,4 +172,9 @@ export default {
   // Loading
   'ticket.loading': '加载工单...',
   'ticket.empty': '暂无工单',
+
+  // Process
+  'ticket.form.process': '流程',
+  'ticket.form.process.placeholder': '选择流程',
+  'ticket.process.load.error': '加载流程失败',
 } 
