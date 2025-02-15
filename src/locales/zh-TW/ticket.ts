@@ -172,4 +172,9 @@ export default {
   // Loading
   'ticket.loading': '加載工單...',
   'ticket.empty': '暫無工單',
+
+  // Process
+  'ticket.form.process': '流程',
+  'ticket.form.process.placeholder': '選擇流程',
+  'ticket.process.load.error': '加載流程失敗',
 } 
