@@ -159,4 +159,7 @@ export default {
   "i18n.vip.component": "VIP组件, 联系我们了解更多详情",
   "i18n.vip.contactUs": "联系我们",
   "i18n.vip.contactUrl": "https://www.weiyuai.cn/contact.html",
+  // 
+  "i18n.ticket.process.name.group": "工作组流程",
+  "i18n.ticket.process.name.agent": "一对一流程",
 } 
