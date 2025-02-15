@@ -51,6 +51,9 @@ declare namespace TICKET {
     // 
     assignmentAll?: boolean;
     uploadUids?: string[];
+    //
+    processInstanceId?: string;
+    processEntityUid?: string;
   };
   //
   type HttpResult = {
