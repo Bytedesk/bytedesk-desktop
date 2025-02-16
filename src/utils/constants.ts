@@ -197,6 +197,8 @@ export const AGENT_STORE = "AGENT_STORE";
 export const CATEGORY_STORE = "CATEGORY_STORE";
 export const WORKGROUP_STORE = "WORKGROUP_STORE";
 export const PROVIDER_STORE = "PROVIDER_STORE";
+export const FLOW_STORE = "FLOW_STORE";
+export const PROCESS_STORE = "PROCESS_STORE";
 //
 export const CONTACT_TYPE_CHANNEL = "channel";
 export const CONTACT_TYPE_MEMBER = "member";
