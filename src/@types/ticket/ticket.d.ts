@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 13:55:55
+ * @LastEditTime: 2025-02-18 14:06:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -122,6 +122,13 @@ declare namespace TICKET {
     content?: string;
     createdAt?: string;
     updatedAt?: string;
+  };
+
+  //
+  type HttpResult = {
+    message?: string;
+    code?: number;
+    data?: TicketResponse;
   };
 
   type TicketHistoryResponse = {
