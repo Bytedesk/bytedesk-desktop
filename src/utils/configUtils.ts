@@ -198,10 +198,10 @@ export function getLogoProperties() {
     }
   }
   // 如果logo为空，则返回默认logo
-  // return "/agent/icons/logo.png";
+  return "/agent/icons/logo.png";
   // return "https://www.weiyuai.cn/logo.png";
   // 自定义logo: 广西全景云客服logo
-  return "/agent/icons/custom/logo_1.jpg";
+  // return "/agent/icons/custom/logo_1.jpg";
 }
 
 export function getTitleProperties() {
