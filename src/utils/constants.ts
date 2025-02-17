@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 09:27:04
+ * @LastEditTime: 2025-02-17 15:00:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -600,3 +600,4 @@ export const TICKET_FILTER_LAST_MONTH = 'LAST_MONTH';
 // 
 export const TICKET_PROCESS_KEY_AGENT = 'agentTicketProcess';
 export const TICKET_PROCESS_KEY_GROUP = 'groupTicketProcess';
+export const TICKET_PROCESS_KEY_GROUP_SIMPLE = 'groupTicketSimpleProcess';

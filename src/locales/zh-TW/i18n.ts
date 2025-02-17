@@ -162,5 +162,6 @@ export default {
   "i18n.vip.contactUrl": "https://www.weiyuai.cn/contact.html",
   // 
   "i18n.ticket.process.name.group": "技能組流程",
+  "i18n.ticket.process.name.group.simple": "技能組簡易流程",
   "i18n.ticket.process.name.agent": "一對一流程",
 } 
