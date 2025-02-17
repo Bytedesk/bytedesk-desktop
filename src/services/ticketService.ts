@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 12:39:01
+ * @LastEditTime: 2025-02-18 13:02:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,7 +13,7 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
-import { queryTicketByServiceThreadTopic, queryTicketsFilter } from '@/apis/ticket/ticket';
+import { queryClaimed, queryCreated, queryTicketByServiceThreadTopic, queryTicketsFilter, queryUnassigned } from '@/apis/ticket/ticket';
 import { useOrgStore } from '@/stores/core/organization';
 import { useTicketStore } from '@/stores/ticket/ticket';
 import { useAgentStore } from '@/stores/service/agent';
@@ -39,6 +39,7 @@ export const ticketService = {
     const { setLoading, setError, setTickets, filters, searchText, pagination } = useTicketStore.getState();
     const { agentInfo } = useAgentStore.getState();
     const { userInfo } = useUserStore.getState();
+    // const { currentOrg } = useOrgStore.getState();
     
     const tryLoad = async (attempt: number) => {
       try {
@@ -118,7 +119,7 @@ export const ticketService = {
 
         // const response = await queryTicketsByOrgUid(params);
         const response = await queryTicketsFilter(params);
-        console.log('queryTicketsByOrgUid response', response);
+        console.log('queryTicketsByOrgUid response', response.data);
         if (response.data.code === 200) {
           setTickets(response.data.data.content);
         } else {
@@ -195,5 +196,68 @@ export const ticketService = {
     });
     
     return this.loadTickets(currentOrg.uid);
+  },
+
+  // 查询当前用户创建的工单列表
+  async fetchCreatedTickets() {
+    const currentOrg = useOrgStore.getState().currentOrg;
+    const userInfo = useUserStore.getState().userInfo;
+    // 查询当前用户创建的工单列表
+    const params: TICKET.TicketRequest = {
+      pageNumber: 0,
+      pageSize: 10,
+      // 当前登录用户
+      reporterUid: userInfo?.uid,
+      orgUid: currentOrg?.uid,
+    } 
+    const response = await queryCreated(params);
+    console.log("queryCreated", response.data);
+    if (response.data.code === 200) {
+      // setTickets(response.data.data.content);
+    } else {
+      // message.error(response.data.message);
+    }
+
+  },
+
+  async fetchClaimedTickets() {
+    const currentOrg = useOrgStore.getState().currentOrg;
+    const userInfo = useUserStore.getState().userInfo;
+    // 查询当前用户认领的工单列表
+    const params: TICKET.TicketRequest = {
+      pageNumber: 0,
+      pageSize: 10,
+      // 当前登录用户
+      assigneeUid: userInfo?.uid,
+      orgUid: currentOrg?.uid,
+    }
+    const response = await queryClaimed(params);
+    console.log("queryClaimed", response.data);
+    if (response.data.code === 200) {
+      // setTickets(response.data.data.content);
+    } else {
+      // message.error(response.data.message);
+    }
+  },
+
+  async fetchUnassignedTickets() {
+    const currentOrg = useOrgStore.getState().currentOrg;
+    const userInfo = useUserStore.getState().userInfo;
+    // 查询当前用户未分配的工单列表
+    const params: TICKET.TicketRequest = {
+      pageNumber: 0,
+      pageSize: 10,
+      // 当前登录用户
+      assigneeUid: userInfo?.uid,
+      orgUid: currentOrg?.uid,
+    }
+    const response = await queryUnassigned(params);
+    console.log("queryUnassigned", response.data);
+    if (response.data.code === 200) {
+      // setTickets(response.data.data.content);
+    } else {
+      // message.error(response.data.message);
+    }
   }
+
 }; 
