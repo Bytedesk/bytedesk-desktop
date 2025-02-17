@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 13:02:05
+ * @LastEditTime: 2025-02-18 13:06:46
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -125,7 +125,7 @@ export const ticketService = {
 
         // const response = await queryTicketsByOrgUid(params);
         const response = await queryTicketsFilter(params);
-        console.log('queryTicketsByOrgUid response', response.data);
+        console.log('queryTicketsFilter response', response.data);
         if (response.data.code === 200) {
           setTickets(response.data.data.content);
         } else {
