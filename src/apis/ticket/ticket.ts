@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 09:35:09
+ * @LastEditTime: 2025-02-18 09:36:12
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -91,7 +91,7 @@ export async function queryCreated(ticket: TICKET.TicketRequest) {
 
 // 查询待我处理的工单
 export async function queryClaimed(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpPageResult>("/api/v1/ticket/query/assignee-uid", {
+  return request<TICKET.HttpPageResult>("/api/v1/ticket/query/claimed", {
     method: "GET",
     params: {
       ...ticket,
@@ -101,8 +101,8 @@ export async function queryClaimed(ticket: TICKET.TicketRequest) {
 }
 
 // 查询待分配的工单
-export async function queryTicketsByAssigneeUid(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpPageResult>("/api/v1/ticket/query/assignee-uid", {
+export async function queryUnassigned(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpPageResult>("/api/v1/ticket/query/unassigned", {
     method: "GET",
     params: {
       ...ticket,
@@ -123,8 +123,8 @@ export async function claimTicket(ticket: TICKET.TicketRequest) {
 }
 
 // 退回工单
-export async function rejectTicket(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpResult>("/api/v1/ticket/reject", {
+export async function unclaimTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/unclaim", {
     method: "POST",
     data: {
       ...ticket,
