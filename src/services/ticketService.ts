@@ -68,6 +68,7 @@ export const ticketService = {
           params.assignmentAll = false;
           params.reporterUid = userInfo?.uid || '';
           params.assigneeUid = '';
+          // 
         } else if (filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = agentInfo?.uid || '';
