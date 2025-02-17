@@ -125,10 +125,10 @@ declare namespace TICKET {
   };
 
   //
-  type HttpResult = {
+  type TicketHistoryResponse = {
     message?: string;
     code?: number;
-    data?: TicketResponse;
+    data?: TicketHistoryResponse[];
   };
 
   type TicketHistoryResponse = {

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 12:37:43
+ * @LastEditTime: 2025-02-18 14:06:16
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -157,7 +157,7 @@ export async function completeTicket(ticket: TICKET.TicketRequest) {
 
 // 查询工单处理历史
 export async function queryTicketHistory(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpPageResult>("/api/v1/ticket/history", {
+  return request<TICKET.TicketHistoryResponse>("/api/v1/ticket/history", {
     method: "GET",
     params: {
       ...ticket,
