@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 18:03:04
+ * @LastEditTime: 2025-02-19 07:38:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -156,9 +156,31 @@ export async function completeTicket(ticket: TICKET.TicketRequest) {
   });
 }
 
-// 查询工单处理历史
-export async function queryTicketHistory(ticket: TICKET.TicketRequest) {
-  return request<TICKET.TicketHistoryResult>("/api/v1/ticket/history", {
+// 查询工单实例处理历史
+export async function queryTicketHistoryProcess(ticket: TICKET.TicketRequest) {
+  return request<TICKET.TicketHistoryProcessResult>("/api/v1/ticket/history/process", {
+    method: "GET",
+    params: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 查询工单任务历史
+export async function queryTicketHistoryTask(ticket: TICKET.TicketRequest) {
+  return request<TICKET.TicketHistoryTaskResult>("/api/v1/ticket/history/task", {
+    method: "GET",
+    params: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 查询工单活动历史
+export async function queryTicketHistoryActivity(ticket: TICKET.TicketRequest) {
+  return request<TICKET.TicketHistoryActivityResult>("/api/v1/ticket/history/activity", {
     method: "GET",
     params: {
       ...ticket,
