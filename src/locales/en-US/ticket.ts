@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-15 17:03:02
+ * @LastEditTime: 2025-02-18 22:37:34
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -179,10 +179,9 @@ export default {
    'ticket.action.pending.todo': 'TODO: Set ticket to pending',
    'ticket.action.resume': 'Resume',
    'ticket.action.resume.todo': 'TODO: Resume ticket',
-   'ticket.action.close': 'Close',
    'ticket.action.close.todo': 'TODO: Close ticket',
-   'ticket.action.reopen': 'Reopen',
    'ticket.action.reopen.todo': 'TODO: Reopen ticket',
    'ticket.action.escalate': 'Escalate',
    'ticket.action.escalate.todo': 'TODO: Escalate ticket',
+   'ticket.action.claim.success': 'Ticket claimed successfully',
 } 

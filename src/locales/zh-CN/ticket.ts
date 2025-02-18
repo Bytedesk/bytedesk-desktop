@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-15 17:03:15
+ * @LastEditTime: 2025-02-18 22:37:47
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -191,10 +191,9 @@ export default {
   'ticket.action.pending.todo': 'TODO: 设置工单为待处理',
   'ticket.action.resume': '继续处理',
   'ticket.action.resume.todo': 'TODO: 继续处理工单',
-  'ticket.action.close': '关闭',
   'ticket.action.close.todo': 'TODO: 关闭工单',
-  'ticket.action.reopen': '重新打开',
   'ticket.action.reopen.todo': 'TODO: 重新打开工单',
   'ticket.action.escalate': '升级',
   'ticket.action.escalate.todo': 'TODO: 升级工单',
+  'ticket.action.claim.success': '工单认领成功',
 } 

@@ -106,7 +106,7 @@ const ChatHeader = ({
         console.log("claimTicket response", params, response.data);
         if (response.data.code === 0) {
           message.destroy();
-          message.success(response.data.message);
+          message.success(intl.formatMessage({ id: 'ticket.action.claim.success' }));
           setCurrentTicket(response.data.data);
         } else {
           message.destroy();
