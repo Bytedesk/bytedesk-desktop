@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-13 14:44:05
+ * @LastEditTime: 2025-02-18 12:39:01
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -13,7 +13,7 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2025 by bytedesk.com, All Rights Reserved. 
  */
-import { queryTicketByServiceThreadTopic, queryTicketsByOrgUid } from '@/apis/ticket/ticket';
+import { queryTicketByServiceThreadTopic, queryTicketsFilter } from '@/apis/ticket/ticket';
 import { useOrgStore } from '@/stores/core/organization';
 import { useTicketStore } from '@/stores/ticket/ticket';
 import { useAgentStore } from '@/stores/service/agent';
@@ -116,7 +116,8 @@ export const ticketService = {
           params.searchText = searchText;
         }
 
-        const response = await queryTicketsByOrgUid(params);
+        // const response = await queryTicketsByOrgUid(params);
+        const response = await queryTicketsFilter(params);
         console.log('queryTicketsByOrgUid response', response);
         if (response.data.code === 200) {
           setTickets(response.data.data.content);
