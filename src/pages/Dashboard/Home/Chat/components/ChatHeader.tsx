@@ -83,7 +83,7 @@ const ChatHeader = ({
         defaultMessage: chatThread.user.nickname,
       });
     }
-    return chatThread.user.nickname;
+    return chatThread.user?.nickname || intl.formatMessage({ id: 'chat.header.user.unnamed' });
   };
 
   // 认领工单
@@ -173,7 +173,7 @@ const ChatHeader = ({
             {intl.formatMessage({ id: 'ticket.action.process' })}
           </Button>,
           <Button key="return" onClick={handleReturnTicket}>
-            {intl.formatMessage({ id: 'ticket.action.return' })}
+            {intl.formatMessage({ id: 'ticket.action.unclaim' })}
           </Button>
         );
         break;
@@ -290,79 +290,51 @@ const ChatHeader = ({
             </div>
           </div>
 
-          {/* 右侧按钮组 */}
-          {isCustomerServiceThread(chatThread) && (
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
+        {isCustomerServiceThread(chatThread) && (
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Button type="text" onClick={() => setIsTransferThreadModelOpen(true)}>
+              {intl.formatMessage({ id: 'chat.header.action.transfer' })}
+            </Button>
+            <Button type="text" onClick={() => setIsTicketCreateModelOpen(true)}>
+              {intl.formatMessage({ id: 'chat.header.action.create.ticket' })}
+            </Button>
+            {chatThread?.state !== THREAD_STATE_CLOSED && (
+              <Button type="text" onClick={showCloseThreadConfirm}>
+                {intl.formatMessage({ id: 'chat.header.action.close' })}
+              </Button>
+            )}
+          </div>
+        )}
+
+        {(isGroupThread(chatThread) || isMemberThread(chatThread) || isRobotThread(chatThread)) && (
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Button
+              icon={<MenuOutlined />}
+              onClick={() => {
+                if (isGroupThread(chatThread)) {
+                  setIsGroupInfoDrawerOpen(true);
+                } else if (isMemberThread(chatThread)) {
+                  setIsMemberInfoDrawerOpen(true);
+                } else if (isRobotThread(chatThread)) {
+                  setIsRobotInfoDrawerOpen(true);
+                } else {
+                  message.warning(intl.formatMessage({ id: 'chat.header.type.not.supported' }));
+                }
               }}
-            >
-              <Button
-                type="text"
-                onClick={() => setIsTransferThreadModelOpen(true)}
-              >
-                {intl.formatMessage({
-                  id: "chat.navbar.transfer",
-                  defaultMessage: "转接",
-                })}
-              </Button>
-              <Button
-                type="text"
-                onClick={() => setIsTicketCreateModelOpen(true)}
-              >
-                {intl.formatMessage({
-                  id: "chat.navbar.ticket",
-                  defaultMessage: "工单",
-                })}
-              </Button>
-              {chatThread?.state !== THREAD_STATE_CLOSED && (
-                <Button type="text" onClick={showCloseThreadConfirm}>
-                  {intl.formatMessage({
-                    id: "chat.navbar.close",
-                    defaultMessage: "结束",
-                  })}
-                </Button>
-              )}
-            </div>
-          )}
-          {(isGroupThread(chatThread) 
-            || isMemberThread(chatThread) 
-            || isRobotThread(chatThread)) && (
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-              }}
-            >
-              <Button
-                icon={<MenuOutlined />}
-                onClick={() => {
-                  // 以drawer方式打开
-                  if (isGroupThread(chatThread)) {
-                    setIsGroupInfoDrawerOpen(true);
-                  } else if (isMemberThread(chatThread)) {
-                    setIsMemberInfoDrawerOpen(true);
-                  } else if (isRobotThread(chatThread)) {
-                    setIsRobotInfoDrawerOpen(true);
-                  } else {
-                    message.warning("当前聊天对象类型不支持");
-                  }
-                }}
-              >
-              </Button>
-            </div>
-          )}
-          {
-            isTicketThread(chatThread) && (
-              <Space>
-                {getTicketActionButtons()}
-              </Space>
-            )
-          }
-        </Header>
-        {contextHolder}
-  </>
+            />
+          </div>
+        )}
+        
+        {
+          isTicketThread(chatThread) && (
+            <Space>
+              {getTicketActionButtons()}
+            </Space>
+          )
+        }
+      </Header>
+      {contextHolder}
+    </>
   );
 };
 

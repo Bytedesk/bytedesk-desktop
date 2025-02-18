@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 22:37:47
+ * @LastEditTime: 2025-02-18 22:59:16
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -195,5 +195,12 @@ export default {
   'ticket.action.reopen.todo': 'TODO: 重新打开工单',
   'ticket.action.escalate': '升级',
   'ticket.action.escalate.todo': 'TODO: 升级工单',
+  'ticket.action.unclaim': '退回',
+  'ticket.action.unclaim.todo': 'TODO: 退回工单',
+  // 
   'ticket.action.claim.success': '工单认领成功',
+  'ticket.action.claim.confirm.title': '认领工单',
+  'ticket.action.claim.confirm.content': '确定要认领该工单吗？',
+  'ticket.action.claim.loading': '认领中...',
+  'ticket.action.claim.error': '工单认领失败',
 } 

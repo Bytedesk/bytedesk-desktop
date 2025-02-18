@@ -111,4 +111,16 @@ export default {
   'chat.group.robots': '機器人',
   'chat.group.qrcode': '二維碼',
   'chat.group.uid.error': '群組ID錯誤',
+
+  // 聊天頭部
+  'chat.header.group.unnamed': '未命名群組',
+  'chat.header.member.unnamed': '未命名成員',
+  'chat.header.robot.unnamed': '未命名機器人',
+  'chat.header.user.unnamed': '未命名用戶',
+  'chat.header.typing': '正在輸入...',
+  'chat.header.no.message': '暫無消息',
+  'chat.header.action.transfer': '轉接',
+  'chat.header.action.create.ticket': '創建工單',
+  'chat.header.action.close': '結束',
+  'chat.header.type.not.supported': '當前聊天類型不支持',
 } 

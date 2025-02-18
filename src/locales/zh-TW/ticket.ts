@@ -195,5 +195,12 @@ export default {
   'ticket.action.reopen.todo': 'TODO: 重新打開工單',
   'ticket.action.escalate': '升級',
   'ticket.action.escalate.todo': 'TODO: 升級工單',
+  'ticket.action.unclaim': '退回',
+  'ticket.action.unclaim.todo': 'TODO: 退回工單',
+  // 
   'ticket.action.claim.success': '工單認領成功',
+  'ticket.action.claim.confirm.title': '認領工單',
+  'ticket.action.claim.confirm.content': '確定要認領該工單嗎？',
+  'ticket.action.claim.loading': '認領中...',
+  'ticket.action.claim.error': '工單認領失敗',
 } 

@@ -98,4 +98,16 @@ export default {
   'chat.group.robots': '机器人',
   'chat.group.qrcode': '二维码',
   'chat.group.uid.error': '群组ID错误',
+
+  // 聊天头部
+  'chat.header.group.unnamed': '未命名群组',
+  'chat.header.member.unnamed': '未命名成员',
+  'chat.header.robot.unnamed': '未命名机器人',
+  'chat.header.user.unnamed': '未命名用户',
+  'chat.header.typing': '正在输入...',
+  'chat.header.no.message': '暂无消息',
+  'chat.header.action.transfer': '转接',
+  'chat.header.action.create.ticket': '创建工单',
+  'chat.header.action.close': '结束',
+  'chat.header.type.not.supported': '当前聊天类型不支持',
 } 

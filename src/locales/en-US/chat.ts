@@ -50,5 +50,16 @@ export default {
   'chat.group.robots': 'Robots',
   'chat.group.qrcode': 'QR Code',
   'chat.group.uid.error': 'Group ID error',
+  // Chat Header
+  'chat.header.group.unnamed': 'Unnamed Group',
+  'chat.header.member.unnamed': 'Unnamed Member',
+  'chat.header.robot.unnamed': 'Unnamed Robot',
+  'chat.header.user.unnamed': 'Unnamed User',
+  'chat.header.typing': 'Typing...',
+  'chat.header.no.message': 'No messages yet',
+  'chat.header.action.transfer': 'Transfer',
+  'chat.header.action.create.ticket': 'Create Ticket',
+  'chat.header.action.close': 'Close',
+  'chat.header.type.not.supported': 'Current chat type not supported',
   // ... 其他聊天相关文案
 } 

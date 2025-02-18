@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 22:37:34
+ * @LastEditTime: 2025-02-18 23:00:40
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -183,5 +183,13 @@ export default {
    'ticket.action.reopen.todo': 'TODO: Reopen ticket',
    'ticket.action.escalate': 'Escalate',
    'ticket.action.escalate.todo': 'TODO: Escalate ticket',
+   'ticket.action.unclaim': 'Unclaim',
+   'ticket.action.unclaim.todo': 'TODO: Unclaim ticket',
+
+   // Ticket Action Messages
+   'ticket.action.claim.confirm.title': 'Claim Ticket',
+   'ticket.action.claim.confirm.content': 'Are you sure you want to claim this ticket?',
+   'ticket.action.claim.loading': 'Claiming ticket...',
    'ticket.action.claim.success': 'Ticket claimed successfully',
+   'ticket.action.claim.error': 'Failed to claim ticket',
 } 
