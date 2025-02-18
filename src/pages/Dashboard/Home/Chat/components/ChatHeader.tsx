@@ -104,7 +104,7 @@ const ChatHeader = ({
         };
         const response = await claimTicket(params);
         console.log("claimTicket response", params, response.data);
-        if (response.data.code === 0) {
+        if (response.data.code === 200) {
           message.destroy();
           message.success(intl.formatMessage({ id: 'ticket.action.claim.success' }));
           setCurrentTicket(response.data.data);
