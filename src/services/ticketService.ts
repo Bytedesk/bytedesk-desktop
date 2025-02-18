@@ -68,15 +68,20 @@ export const ticketService = {
           params.assignmentAll = false;
           params.reporterUid = userInfo?.uid || '';
           params.assigneeUid = '';
-          // 
+          // 测试：查询当前用户创建的工单列表
+          this.fetchCreatedTickets();
         } else if (filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = agentInfo?.uid || '';
           params.reporterUid = '';
+          // 测试：查询当前用户认领的工单列表
+          this.fetchClaimedTickets();
         } else if (filters.assignment === TICKET_FILTER_UNASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = TICKET_FILTER_UNASSIGNED;
           params.reporterUid = '';
+          // 测试：查询当前用户未分配的工单列表
+          this.fetchUnassignedTickets();
         }
 
         // 时间过滤
