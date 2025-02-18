@@ -51,6 +51,8 @@ export default {
   'ticket.status.resolved': '已解决',
   'ticket.status.closed': '已关闭',
   'ticket.status.cancelled': '已取消',
+  'ticket.status.label': '状态',
+  'ticket.status.escalated': '已升级',
   // 工单优先级
   'ticket.priority.all': '全部优先级',
   'ticket.priority.lowest': '最低',
@@ -177,4 +179,22 @@ export default {
   'ticket.form.process': '流程',
   'ticket.form.process.placeholder': '选择流程',
   'ticket.process.load.error': '加载流程失败',
+
+  // Ticket Actions
+  'ticket.action.claim': '认领',
+  'ticket.action.claim.todo': 'TODO: 认领工单',
+  'ticket.action.process': '处理',
+  'ticket.action.process.todo': 'TODO: 处理工单',
+  'ticket.action.resolve': '解决',
+  'ticket.action.resolve.todo': 'TODO: 解决工单',
+  'ticket.action.pending': '待处理',
+  'ticket.action.pending.todo': 'TODO: 设置工单为待处理',
+  'ticket.action.resume': '继续处理',
+  'ticket.action.resume.todo': 'TODO: 继续处理工单',
+  'ticket.action.close': '关闭',
+  'ticket.action.close.todo': 'TODO: 关闭工单',
+  'ticket.action.reopen': '重新打开',
+  'ticket.action.reopen.todo': 'TODO: 重新打开工单',
+  'ticket.action.escalate': '升级',
+  'ticket.action.escalate.todo': 'TODO: 升级工单',
 } 

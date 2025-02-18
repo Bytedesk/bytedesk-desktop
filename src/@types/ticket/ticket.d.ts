@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:36:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 14:07:09
+ * @LastEditTime: 2025-02-18 17:33:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -42,7 +42,8 @@ declare namespace TICKET {
     //
     workgroupUid?: string;
     assigneeUid?: string;
-    reporterUid?: string;
+    // reporterUid?: string;
+    reporter?: string;
     // 
     startDate?: string;
     endDate?: string;
@@ -147,6 +148,10 @@ declare namespace TICKET {
     name?: string;                  // 流程名称
     description?: string;           // 描述
     status?: string;                // 状态
+    // 
+    assignee?: USER.UserProtobuf;    // 处理人
+    priority?: string;              // 优先级
+    categoryUid?: string;           // 分类UID
   };
   
 }

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 14:07:21
+ * @LastEditTime: 2025-02-18 18:03:04
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -80,6 +80,7 @@ export async function deleteTicket(uid: string) {
 
 // 查询工单，并过滤掉没有任务的工单
 export async function queryTicketsFilter(ticket: TICKET.TicketRequest) {
+  // 将 ticket.reporter对象转换为字符串
   return request<TICKET.HttpPageResult>("/api/v1/ticket/query/filter", {
     method: "GET",
     params: {

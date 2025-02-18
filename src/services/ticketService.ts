@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 13:06:46
+ * @LastEditTime: 2025-02-18 18:17:37
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -17,7 +17,7 @@ import { queryClaimed, queryCreated, queryTicketByServiceThreadTopic, queryTicke
 import { useOrgStore } from '@/stores/core/organization';
 import { useTicketStore } from '@/stores/ticket/ticket';
 import { useAgentStore } from '@/stores/service/agent';
-import { useUserStore } from '@/stores/core/user';
+// import { useUserStore } from '@/stores/core/user';
 import moment from 'moment';
 import {
   TICKET_FILTER_LAST_MONTH,
@@ -38,7 +38,7 @@ export const ticketService = {
   async loadTickets(orgUid: string, retryCount = 3) {
     const { setLoading, setError, setTickets, filters, searchText, pagination } = useTicketStore.getState();
     const { agentInfo } = useAgentStore.getState();
-    const { userInfo } = useUserStore.getState();
+    // const { userInfo } = useUserStore.getState();
     // const { currentOrg } = useOrgStore.getState();
     
     const tryLoad = async (attempt: number) => {
@@ -66,20 +66,29 @@ export const ticketService = {
         // 分配状态过滤
         if (filters.assignment === TICKET_FILTER_MY_CREATED) {
           params.assignmentAll = false;
-          params.reporterUid = userInfo?.uid || '';
+          // params.reporterUid = userInfo?.uid || '';
+          params.reporter = JSON.stringify({
+            uid: agentInfo?.uid || '',
+          });
           params.assigneeUid = '';
           // 测试：查询当前用户创建的工单列表
           this.fetchCreatedTickets();
         } else if (filters.assignment === TICKET_FILTER_MY_ASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = agentInfo?.uid || '';
-          params.reporterUid = '';
+          // params.reporterUid = '';
+          params.reporter = JSON.stringify({
+            uid: agentInfo?.uid || '',
+          });
           // 测试：查询当前用户认领的工单列表
           this.fetchClaimedTickets();
         } else if (filters.assignment === TICKET_FILTER_UNASSIGNED) {
           params.assignmentAll = false;
           params.assigneeUid = TICKET_FILTER_UNASSIGNED;
-          params.reporterUid = '';
+          // params.reporterUid = '';
+          params.reporter = JSON.stringify({
+            uid: '',
+          });
           // 测试：查询当前用户未分配的工单列表
           this.fetchUnassignedTickets();
         } else {
@@ -128,7 +137,7 @@ export const ticketService = {
 
         // const response = await queryTicketsByOrgUid(params);
         const response = await queryTicketsFilter(params);
-        console.log('queryTicketsFilter response', response.data);
+        console.log('queryTicketsFilter response', params, response.data);
         if (response.data.code === 200) {
           setTickets(response.data.data.content);
         } else {
@@ -165,9 +174,8 @@ export const ticketService = {
           serviceThreadTopic,
           searchText,
         };
-
         const response = await queryTicketByServiceThreadTopic(params);
-        console.log('queryTicketByServiceThreadTopic response', response);
+        console.log('queryTicketByServiceThreadTopic response', params, response.data);
         if (response.data.code === 200) {
           setHistoryTickets(response.data.data.content);
         } else {
@@ -210,13 +218,17 @@ export const ticketService = {
   // 查询当前用户创建的工单列表
   async fetchCreatedTickets() {
     const currentOrg = useOrgStore.getState().currentOrg;
-    const userInfo = useUserStore.getState().userInfo;
+    // const userInfo = useUserStore.getState().userInfo;
+    const agentInfo = useAgentStore.getState().agentInfo;
     // 查询当前用户创建的工单列表
     const params: TICKET.TicketRequest = {
       pageNumber: 0,
       pageSize: 10,
       // 当前登录用户
-      reporterUid: userInfo?.uid,
+      // reporterUid: userInfo?.uid,
+      reporter: JSON.stringify({
+        uid: agentInfo?.uid || '',
+      }),
       orgUid: currentOrg?.uid,
     } 
     const response = await queryCreated(params);
@@ -231,13 +243,14 @@ export const ticketService = {
 
   async fetchClaimedTickets() {
     const currentOrg = useOrgStore.getState().currentOrg;
-    const userInfo = useUserStore.getState().userInfo;
+    // const userInfo = useUserStore.getState().userInfo;
+    const agentInfo = useAgentStore.getState().agentInfo;
     // 查询当前用户认领的工单列表
     const params: TICKET.TicketRequest = {
       pageNumber: 0,
       pageSize: 10,
       // 当前登录用户
-      assigneeUid: userInfo?.uid,
+      assigneeUid: agentInfo?.uid,
       orgUid: currentOrg?.uid,
     }
     const response = await queryClaimed(params);
@@ -251,13 +264,14 @@ export const ticketService = {
 
   async fetchUnassignedTickets() {
     const currentOrg = useOrgStore.getState().currentOrg;
-    const userInfo = useUserStore.getState().userInfo;
+    // const userInfo = useUserStore.getState().userInfo;
+    const agentInfo = useAgentStore.getState().agentInfo;
     // 查询当前用户未分配的工单列表
     const params: TICKET.TicketRequest = {
       pageNumber: 0,
-      pageSize: 10,
+      pageSize: 100,
       // 当前登录用户
-      assigneeUid: userInfo?.uid,
+      assigneeUid: agentInfo?.uid,
       orgUid: currentOrg?.uid,
     }
     const response = await queryUnassigned(params);

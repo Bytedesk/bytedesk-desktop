@@ -1,12 +1,33 @@
-
-
 import { message } from "@/AntdGlobalComp";
+import { claimTicket } from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
-import { I18N_PREFIX, THREAD_STATE_CLOSED } from "@/utils/constants";
-import { isCustomerServiceThread, isGroupThread, isMemberThread, isRobotThread, isTicketThread } from "@/utils/utils";
+import { useOrgStore } from "@/stores/core/organization";
+import { useAgentStore } from "@/stores/service/agent";
+import { useTicketStore } from "@/stores/ticket/ticket";
+import { 
+  I18N_PREFIX, 
+  THREAD_STATE_CLOSED,
+  TICKET_STATUS_NEW,
+  TICKET_STATUS_ASSIGNED,
+  TICKET_STATUS_IN_PROGRESS,
+  TICKET_STATUS_PENDING,
+  TICKET_STATUS_ON_HOLD,
+  TICKET_STATUS_REOPENED,
+  TICKET_STATUS_RESOLVED,
+  // TICKET_STATUS_ESCALATED,
+  // TICKET_STATUS_CLOSED,
+  // TICKET_STATUS_CANCELLED
+} from "@/utils/constants";
+import { 
+  isCustomerServiceThread, 
+  isGroupThread, 
+  isMemberThread, 
+  isRobotThread, 
+  isTicketThread 
+} from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Layout } from "antd";
+import { Button, Layout, Modal, Space } from "antd";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
@@ -40,6 +61,13 @@ const ChatHeader = ({
   const { headerStyle } = useStyle();
   const { isDarkMode } = useContext(AppContext);
   console.log("ChatHeader fromTicketTab", fromTicketTab);
+  const currentTicket = useTicketStore((state) => state.currentTicket);
+  const setCurrentTicket = useTicketStore((state) => state.setCurrentTicket);
+  console.log("currentTicket", currentTicket);
+  const [modal, contextHolder] = Modal.useModal();
+  const { agentInfo } = useAgentStore.getState();
+  const currentOrg = useOrgStore((state) => state.currentOrg);
+  
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
     if (!chatThread?.user) return "";
@@ -56,6 +84,144 @@ const ChatHeader = ({
       });
     }
     return chatThread.user.nickname;
+  };
+
+  // 认领工单
+  const handleClaimTicket = async () => {
+    // 增加认领确认对话框
+    modal.confirm({
+      title: "认领工单",
+      content: "确定认领该工单吗？",
+      onOk: async () => {
+        // 增加loading
+        message.loading("认领中...", 2);
+        // 调用认领工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          // 设置认领人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
+        };
+        const response = await claimTicket(params);
+        console.log("claimTicket response", params, response.data);
+        if (response.data.code === 0) {
+          message.destroy();
+          message.success(response.data.message);
+          setCurrentTicket(response.data.data);
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
+  };
+
+  // 处理工单
+  const handleProcessTicket = async () => {
+    message.warning("TODO: 处理工单");
+  };
+
+  // 解决工单/完成工单
+  const handleResolveTicket = async () => {
+    message.warning("TODO: 解决工单");
+  };
+
+  // 挂起工单
+  const handlePendingTicket = async () => {
+    message.warning("TODO: 挂起工单");
+  };
+
+  // 退回工单
+  const handleReturnTicket = async () => {
+    message.warning("TODO: 退回工单");
+  };
+
+  // 恢复工单
+  const handleResumeTicket = async () => {
+    message.warning("TODO: 恢复工单");
+  };
+
+  // 关闭工单
+  const handleCloseTicket = async () => {
+    message.warning("TODO: 关闭工单");
+  };
+
+  // 重新打开工单
+  const handleReopenTicket = async () => {
+    message.warning("TODO: 重新打开工单");
+  };
+
+  // 根据工单状态返回可用的操作按钮
+  const getTicketActionButtons = () => {
+    if (!currentTicket) return null;
+    
+    const buttons = [];
+    
+    switch (currentTicket.status) {
+      case TICKET_STATUS_NEW:
+        buttons.push(
+          <Button key="claim" type="primary" onClick={handleClaimTicket}>
+            {intl.formatMessage({ id: 'ticket.action.claim' })}
+          </Button>
+        );
+        break;
+        
+      case TICKET_STATUS_ASSIGNED:
+      case TICKET_STATUS_REOPENED:
+        buttons.push(
+          <Button key="process" type="primary" onClick={handleProcessTicket}>
+            {intl.formatMessage({ id: 'ticket.action.process' })}
+          </Button>,
+          <Button key="return" onClick={handleReturnTicket}>
+            {intl.formatMessage({ id: 'ticket.action.return' })}
+          </Button>
+        );
+        break;
+        
+      case TICKET_STATUS_IN_PROGRESS:
+        buttons.push(
+          <Button key="resolve" type="primary" onClick={handleResolveTicket}>
+            {intl.formatMessage({ id: 'ticket.action.resolve' })}
+          </Button>,
+          <Button key="pending" onClick={handlePendingTicket}>
+            {intl.formatMessage({ id: 'ticket.action.pending' })}
+          </Button>
+        );
+        break;
+        
+      case TICKET_STATUS_PENDING:
+      case TICKET_STATUS_ON_HOLD:
+        buttons.push(
+          <Button key="resume" type="primary" onClick={handleResumeTicket}>
+            {intl.formatMessage({ id: 'ticket.action.resume' })}
+          </Button>
+        );
+        break;
+        
+      case TICKET_STATUS_RESOLVED:
+        buttons.push(
+          <Button key="close" type="primary" onClick={handleCloseTicket}>
+            {intl.formatMessage({ id: 'ticket.action.close' })}
+          </Button>,
+          <Button key="reopen" onClick={handleReopenTicket}>
+            {intl.formatMessage({ id: 'ticket.action.reopen' })}
+          </Button>
+        );
+        break;
+    }
+    
+    // 除了已关闭和已取消状态外,都可以升级
+    // if (![TICKET_STATUS_CLOSED, TICKET_STATUS_CANCELLED].includes(currentTicket.status)) {
+    //   buttons.push(
+    //     <Button key="escalate" danger onClick={() => {
+    //       message.warning(intl.formatMessage({ id: 'ticket.action.escalate.todo' }));
+    //     }}>
+    //       {intl.formatMessage({ id: 'ticket.action.escalate' })}
+    //     </Button>
+    //   );
+    // }
+    
+    return buttons;
   };
 
   return (
@@ -189,16 +355,13 @@ const ChatHeader = ({
           )}
           {
             isTicketThread(chatThread) && (
-              <div>
-                <Button type="text" onClick={() => {
-                  message.warning("TODO: 处理完毕");
-                }}>
-                  处理完毕
-                </Button>
-              </div>
+              <Space>
+                {getTicketActionButtons()}
+              </Space>
             )
           }
         </Header>
+        {contextHolder}
   </>
   );
 };

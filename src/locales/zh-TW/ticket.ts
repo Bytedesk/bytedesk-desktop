@@ -51,6 +51,8 @@ export default {
   'ticket.status.resolved': '已解決',
   'ticket.status.closed': '已關閉',
   'ticket.status.cancelled': '已取消',
+  'ticket.status.label': '狀態',
+  'ticket.status.escalated': '已升級',
   // 工單優先級
   'ticket.priority.all': '全部優先級',
   'ticket.priority.lowest': '最低',
@@ -177,4 +179,22 @@ export default {
   'ticket.form.process': '流程',
   'ticket.form.process.placeholder': '選擇流程',
   'ticket.process.load.error': '加載流程失敗',
+
+  // Ticket Actions
+  'ticket.action.claim': '認領',
+  'ticket.action.claim.todo': 'TODO: 認領工單',
+  'ticket.action.process': '處理',
+  'ticket.action.process.todo': 'TODO: 處理工單',
+  'ticket.action.resolve': '解決',
+  'ticket.action.resolve.todo': 'TODO: 解決工單',
+  'ticket.action.pending': '待處理',
+  'ticket.action.pending.todo': 'TODO: 設置工單為待處理',
+  'ticket.action.resume': '繼續處理',
+  'ticket.action.resume.todo': 'TODO: 繼續處理工單',
+  'ticket.action.close': '關閉',
+  'ticket.action.close.todo': 'TODO: 關閉工單',
+  'ticket.action.reopen': '重新打開',
+  'ticket.action.reopen.todo': 'TODO: 重新打開工單',
+  'ticket.action.escalate': '升級',
+  'ticket.action.escalate.todo': 'TODO: 升級工單',
 } 

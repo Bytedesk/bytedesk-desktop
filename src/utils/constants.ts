@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-17 15:00:17
+ * @LastEditTime: 2025-02-18 15:14:37
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -566,15 +566,16 @@ export const TICKET_PRIORITY_URGENT = 'URGENT';
 export const TICKET_PRIORITY_CRITICAL = 'CRITICAL';
 
 // Ticket Status
-export const TICKET_STATUS_NEW = 'NEW';
-export const TICKET_STATUS_ASSIGNED = 'ASSIGNED';
-export const TICKET_STATUS_IN_PROGRESS = 'IN_PROGRESS';
-export const TICKET_STATUS_PENDING = 'PENDING';
-export const TICKET_STATUS_ON_HOLD = 'ON_HOLD';
-export const TICKET_STATUS_REOPENED = 'REOPENED';
-export const TICKET_STATUS_RESOLVED = 'RESOLVED';
-export const TICKET_STATUS_CLOSED = 'CLOSED';
-export const TICKET_STATUS_CANCELLED = 'CANCELLED';
+export const TICKET_STATUS_NEW = 'NEW'; // 新建
+export const TICKET_STATUS_ASSIGNED = 'ASSIGNED'; // 已分配
+export const TICKET_STATUS_IN_PROGRESS = 'IN_PROGRESS'; // 处理中
+export const TICKET_STATUS_PENDING = 'PENDING'; // 待处理（等待客户响应/等待第三方）
+export const TICKET_STATUS_ON_HOLD = 'ON_HOLD'; // 挂起（暂停处理）
+export const TICKET_STATUS_REOPENED = 'REOPENED'; // 重新打开
+export const TICKET_STATUS_RESOLVED = 'RESOLVED'; // 已解决
+export const TICKET_STATUS_ESCALATED = 'ESCALATED'; // 已升级
+export const TICKET_STATUS_CLOSED = 'CLOSED'; // 已关闭
+export const TICKET_STATUS_CANCELLED = 'CANCELLED'; // 已取消
 
 // 
 export const TICKET_FILTER_STATUS_ALL = 'STATUS_ALL';
