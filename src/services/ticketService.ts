@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 18:17:37
+ * @LastEditTime: 2025-02-18 23:51:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -78,7 +78,7 @@ export const ticketService = {
           params.assigneeUid = agentInfo?.uid || '';
           // params.reporterUid = '';
           params.reporter = JSON.stringify({
-            uid: agentInfo?.uid || '',
+            uid: '',
           });
           // 测试：查询当前用户认领的工单列表
           this.fetchClaimedTickets();
