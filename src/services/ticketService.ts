@@ -82,6 +82,9 @@ export const ticketService = {
           params.reporterUid = '';
           // 测试：查询当前用户未分配的工单列表
           this.fetchUnassignedTickets();
+        } else {
+          // 测试：查询所有工单列表
+          // this.fetchAllTickets();
         }
 
         // 时间过滤
