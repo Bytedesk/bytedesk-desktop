@@ -21,7 +21,7 @@ import HistoryMessageModel from "@/components/Vip/HistoryMessageModel";
 import TransferMessageModel from "@/components/Vip/TransferMessageModel";
 import TransferThreadModel from "@/components/Vip/TransferThreadModel";
 import WebRtcModel from "@/components/Vip/WebRtcModel";
-import TicketCreateDrawer from "@/pages/Vip/Ticket/components/TicketDrawer";
+import TicketDrawer from "@/pages/Vip/Ticket/components/TicketDrawer";
 import EmojiPicker from "@emoji-mart/react";
 import GroupInfoDrawer from "../../RightPanel/GroupInfo";
 import MemberInfoDrawer from "../../RightPanel/MemberInfo";
@@ -150,7 +150,7 @@ const ChatModels = ({
         />
       )}
       {isTicketCreateModelOpen && (
-        <TicketCreateDrawer
+        <TicketDrawer
           open={isTicketCreateModelOpen}
           onSuccess={handleTicketCreateModelSuccess}
           onCancel={handleTicketCreateModelCancel}
