@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:45:39
+ * @LastEditTime: 2025-02-19 17:47:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -84,7 +84,7 @@ export function playAudio() {
 }
 
 export function showNetworkStatusNotification(title: string, body: string) {
-  console.log('showNetworkStatusNotification:', title, body);
+  console.log("showNetworkStatusNotification:", title, body);
   const showNetworkStatusNotification = localStorage.getItem(
     NETWORK_STATUS_NOTIFICATION,
   );
@@ -111,8 +111,7 @@ export function generateAvatar(uid: string) {
     size: 40,
     // ... other options
   }).toDataUriSync();
-} 
-
+}
 
 // 去掉字符串开头 http://或https://
 export function removeProtocol(str: string): string {
@@ -158,7 +157,8 @@ export function truncateString(str: string, length) {
 type CallbackFunction = (result: MESSAGE.HttpUploadResult) => void;
 
 export function handleUpload(file: File, callback: CallbackFunction) {
-  const file_name = moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
+  const file_name =
+    moment(new Date()).format("YYYYMMDDHHmmss") + "_" + file.name;
   //
   const formData = new FormData();
   formData.append("file", file);
@@ -209,9 +209,13 @@ export const isCustomerServiceThread = (thread: THREAD.ThreadResponse) => {
   );
 };
 
-export const isCustomerServiceThreadOrTicketThread = (thread: THREAD.ThreadResponse) => {
+export const isCustomerServiceThreadOrTicketThread = (
+  thread: THREAD.ThreadResponse,
+) => {
   return (
-    thread?.type === THREAD_TYPE_AGENT || thread?.type === THREAD_TYPE_WORKGROUP || thread?.type === THREAD_TYPE_TICKET
+    thread?.type === THREAD_TYPE_AGENT ||
+    thread?.type === THREAD_TYPE_WORKGROUP ||
+    thread?.type === THREAD_TYPE_TICKET
   );
 };
 
@@ -266,14 +270,12 @@ export function shouldSendReceipt(type: string) {
 // TODO: 增加更多类型
 export function isMessageTypeNotification(type: string) {
   return (
-    type === MESSAGE_TYPE_AUTO_CLOSED ||
-    type === MESSAGE_TYPE_AGENT_CLOSED
+    type === MESSAGE_TYPE_AUTO_CLOSED || type === MESSAGE_TYPE_AGENT_CLOSED
   );
 }
 export function isMessageTypeClosed(type: string) {
   return (
-    type === MESSAGE_TYPE_AUTO_CLOSED ||
-    type === MESSAGE_TYPE_AGENT_CLOSED
+    type === MESSAGE_TYPE_AUTO_CLOSED || type === MESSAGE_TYPE_AGENT_CLOSED
   );
 }
 //
@@ -281,13 +283,13 @@ export function isOrgMemberTopic(topic: string) {
   return topic?.startsWith(TOPIC_ORG_MEMBER_PREFIX);
 }
 export function getOrgMemberTopicReverse(topic: string): string {
-  const parts = topic?.split('/');
+  const parts = topic?.split("/");
   if (parts.length !== 4) {
-      throw new Error(`Invalid private topic: ${topic}`);
+    throw new Error(`Invalid private topic: ${topic}`);
   }
   // 交换第3个和第2个元素的位置
   [parts[2], parts[3]] = [parts[3], parts[2]];
-  return parts.join('/');
+  return parts.join("/");
 }
 
 export function isOrgGroupTopic(topic: string) {
@@ -303,7 +305,10 @@ export function isOrgWorkgroupTopic(topic: string) {
   return topic?.startsWith(TOPIC_ORG_WORKGROUP_PREFIX);
 }
 export function isOrgTicketThreadTopic(topic: string) {
-  return topic?.startsWith(TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX) || topic?.startsWith(TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX);
+  return (
+    topic?.startsWith(TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX) ||
+    topic?.startsWith(TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX)
+  );
 }
 
 export function bytedeskBanner() {
@@ -317,73 +322,88 @@ export function bytedeskBanner() {
 
 // 检查消息内容是否为富文本
 export const isRichText = (content: string) => {
-  return content && (
-    content.includes('<p>') || 
-    content.includes('<div>') || 
-    content.includes('<h') ||
-    content.includes('<ul>') ||
-    content.includes('<ol>')
+  return (
+    content &&
+    (content.includes("<p>") ||
+      content.includes("<div>") ||
+      content.includes("<h") ||
+      content.includes("<ul>") ||
+      content.includes("<ol>"))
   );
 };
 
 export function getTicketStatusColor(status: string) {
   switch (status) {
     case TICKET_STATUS_NEW:
-      return 'blue';
+      return "blue";
     case TICKET_STATUS_CLAIMED:
-      return 'purple';
+      return "purple";
     case TICKET_STATUS_PROCESSING:
-      return 'green';
+      return "green";
     case TICKET_STATUS_PENDING:
-      return 'orange';
+      return "orange";
     case TICKET_STATUS_HOLDING:
-      return 'gold';
+      return "gold";
     case TICKET_STATUS_REOPENED:
-      return 'magenta';
+      return "magenta";
     case TICKET_STATUS_RESOLVED:
-      return 'cyan';
+      return "cyan";
     case TICKET_STATUS_CLOSED:
-      return 'default';
+      return "default";
     case TICKET_STATUS_CANCELLED:
-      return 'red';
+      return "red";
     default:
-      return 'default';
+      return "default";
   }
-};
+}
 
 export function getTicketPriorityColor(priority: string) {
   switch (priority) {
     case TICKET_PRIORITY_LOW:
-      return 'blue';
+      return "blue";
     case TICKET_PRIORITY_MEDIUM:
-      return 'purple';
+      return "purple";
     case TICKET_PRIORITY_HIGH:
-      return 'red';
+      return "red";
     case TICKET_PRIORITY_URGENT:
-      return 'orange';
+      return "orange";
     case TICKET_PRIORITY_CRITICAL:
-      return 'default';
+      return "default";
     default:
-      return 'default';
+      return "default";
   }
-};
+}
 
 // 判断当前工单是否是自己的工单
-export const canChat = (fromTicketTab: boolean, ticket: TICKET.TicketResponse, chatThread: THREAD.ThreadResponse, agentInfo: AGENT.AgentResponse) => {
+export const canChat = (
+  fromTicketTab: boolean,
+  ticket: TICKET.TicketResponse,
+  chatThread: THREAD.ThreadResponse,
+  agentInfo: AGENT.AgentResponse,
+) => {
   if (fromTicketTab) {
-    return ticket?.assignee?.uid === agentInfo?.uid || ticket?.reporter?.uid === agentInfo?.uid;
-  } else if () {
-    
+    return (
+      ticket?.assignee?.uid === agentInfo?.uid ||
+      ticket?.reporter?.uid === agentInfo?.uid
+    );
+  } else if (chatThread === null || chatThread === undefined) {
+    return false;
   } else {
-    return true
+    return true;
   }
 };
 
 // 判断是否开始处理工单
-export const isProcessingTicket = (fromTicketTab: boolean, ticket: TICKET.TicketResponse) => {
+export const isProcessingTicket = (
+  fromTicketTab: boolean,
+  ticket: TICKET.TicketResponse,
+) => {
   if (fromTicketTab) {
-    return ticket?.status === TICKET_STATUS_PROCESSING || ticket?.status === TICKET_STATUS_RESUMED;
+    return (
+      ticket?.status === TICKET_STATUS_PROCESSING ||
+      ticket?.status === TICKET_STATUS_RESUMED
+    );
   } else {
-    return true
+    return true;
   }
 };
