@@ -7,6 +7,7 @@ import {
   resumeTicket,
   startProcessingTicket,
   unclaimTicket,
+  verifyTicket,
 } from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
@@ -255,12 +256,12 @@ const ChatHeader = ({
           assigneeUid: agentInfo?.uid,
           orgUid: currentOrg?.uid,
         };
-        const response = await resolveTicket(params);
-        console.log("query resolveTicket response", params, response.data);
+        const response = await verifyTicket(params);
+        console.log("query verifyTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
           message.success(
-            intl.formatMessage({ id: "ticket.action.resolve.success" }),
+            intl.formatMessage({ id: "ticket.action.verify.success" }),
           );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
