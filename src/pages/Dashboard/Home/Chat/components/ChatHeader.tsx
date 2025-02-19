@@ -240,6 +240,39 @@ const ChatHeader = ({
     });
   };
 
+  // 客户验证
+  const handleVerifyTicket = async () => {
+    // 调用解决工单的接口，modal确认
+    modal.confirm({
+      title: "验证工单",
+      content: "确定验证该工单吗？",
+      onOk: async () => {
+        message.loading("解决中...", 2);
+        // 调用解决工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
+        };
+        const response = await resolveTicket(params);
+        console.log("query resolveTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(
+            intl.formatMessage({ id: "ticket.action.resolve.success" }),
+          );
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
+  }
+
   // 挂起工单
   const handleHoldTicket = async () => {
     // 调用挂起工单的接口，modal确认
@@ -517,6 +550,19 @@ const ChatHeader = ({
         );
         break;
       case TICKET_STATUS_RESOLVED:
+        // 只有自己创建的工单，才能执行客户验证
+        if (currentTicket?.reporter.uid)
+        buttons.push(
+          <Button
+            key="reopen"
+            onClick={handleReopenTicket}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
+          >
+            {intl.formatMessage({ id: "ticket.action.reopen" })}
+          </Button>,
+        )
         
         break;
     }
