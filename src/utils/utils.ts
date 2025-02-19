@@ -111,8 +111,6 @@ export function generateAvatar(uid: string) {
     size: 40,
     // ... other options
   }).toDataUriSync();
-}if (chatThread === null || chatThread === undefined) {
-  return false;
 }
 
 // 去掉字符串开头 http://或https://
@@ -384,7 +382,7 @@ export const canChat = (
   agentInfo: AGENT.AgentResponse,
 ) => {
   if (fromTicketTab) {
-
+    
     return (
       ticket?.assignee?.uid === agentInfo?.uid ||
       ticket?.reporter?.uid === agentInfo?.uid
