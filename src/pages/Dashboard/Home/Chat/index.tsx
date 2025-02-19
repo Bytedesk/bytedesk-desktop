@@ -206,9 +206,8 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const fetchTicketThread = async (threadUid?: string) => {
     if (!threadUid) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
-      return;
-    } else {
       // TODO：待认领
+      return;
     }
     message.loading(translateString("i18n.loading"));
     const response = await queryThreadByUid(threadUid);
@@ -228,7 +227,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     if (fromTicketTab && ticket?.threadUid) {
       fetchTicketThread(ticket?.threadUid);
     }
-  }, [ticket, fromTicketTab, currentTicketThread]);
+  }, [ticket, fromTicketTab]);
 
   useEffect(() => {
     console.log("ChatPage currentThread changed:", currentThread);
@@ -236,6 +235,13 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       setChatThread(currentThread);
     }
   }, [currentThread]);
+
+  useEffect(() => {
+    console.log("ChatPage currentTicket changed:", currentTicket);
+    if (currentTicket) {
+      // setChatThread(currentTicket.thread);
+    }
+  }, [currentTicket]);
 
   useEffect(() => {
     console.log("ChatPage currentTicketThread changed:", chatThread);
