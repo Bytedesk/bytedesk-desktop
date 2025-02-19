@@ -20,7 +20,7 @@ import { Action } from "./Action";
 import toggleClass from "../../utils/toggleClass";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import { useAgentStore } from "@/stores/service/agent";
-import { isMyTicket, isProcessingTicket } from "@/utils/utils";
+import { canChat, isProcessingTicket } from "@/utils/utils";
 
 export const CLASS_NAME_FOCUSING = "S--focusing";
 
@@ -111,7 +111,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
         mq.addListener(handleMq);
       }
       return () => {
-        if (mq) {
+        if (mq) { 
           mq.removeListener(handleMq);
         }
       };
@@ -282,7 +282,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     };
 
     if (isWide) {
-      if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
+      if (fromTicketTab && !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)) {
         console.log("不显示composer");
         return <></>;
       }
@@ -310,7 +310,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             <ComposerInput
                invisible={false} 
                {...inputProps} 
-               disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)} 
+               disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)} 
                fromTicketTab={fromTicketTab}
                chatThread={chatThread}
                />
@@ -321,7 +321,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     }
 
     // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-    if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
+    if (fromTicketTab && !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)) {
       console.log("不显示composer");
       return <></>;
     }

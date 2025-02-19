@@ -20,7 +20,7 @@ import getToBottom from "../../utils/getToBottom";
 import { useAgentStore } from "@/stores/service/agent";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import { Empty } from "antd";
-import { isMyTicket } from "@/utils/utils";
+import { canChat } from "@/utils/utils";
 
 const listenerOpts = canUse("passiveListener") ? { passive: true } : false;
 
@@ -217,7 +217,7 @@ export const MessageContainer = React.forwardRef<
   ]);
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示
-  if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
+  if (fromTicketTab && !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)) {
     console.log("不显示消息容器");
     return <Empty/>;
   }

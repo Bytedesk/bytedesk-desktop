@@ -25,7 +25,7 @@ import { Mentions } from 'antd';
 import type { MentionsProps } from 'antd';
 import { MentionsOptionProps } from "antd/lib/mentions";
 import { useTicketStore } from "@/stores/ticket/ticket";
-import { isMyTicket } from "@/utils/utils";
+import { canChat } from "@/utils/utils";
 import { useAgentStore } from "@/stores/service/agent";
 
 // https://ant-design.antgroup.com/components/mentions-cn
@@ -147,7 +147,7 @@ export const ComposerInput = ({
         onSelect={onMetionSelect}
         onPaste={onImageSend ? handlePaste : undefined}
         options={metionOptions[metionPrefix]}
-        disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
+        disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
         // options={(MOCK_DATA[prefix] || []).map((value) => ({
         //   key: value,
         //   value,

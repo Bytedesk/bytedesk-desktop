@@ -15,7 +15,7 @@ import {
 } from "../Composer";
 import { isSafari, getIOSMajorVersion } from "../../utils/ua";
 import { Input } from "antd";
-import { isMyTicket, isProcessingTicket } from "@/utils/utils";
+import { canChat, isProcessingTicket } from "@/utils/utils";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import { useAgentStore } from "@/stores/service/agent";
 const { TextArea } = Input;
@@ -231,7 +231,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
         <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
           {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
-          { (isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
+          { (canChat(fromTicketTab, currentTicket, chatThread, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
             <MessageContainer
               ref={messagesRef}
               loadMoreText={loadMoreText}
@@ -250,7 +250,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
           <div className="ChatFooter">
             {renderQuickReplies
               ? renderQuickReplies()
-              : (isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
+              : (canChat(fromTicketTab, currentTicket, chatThread, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
                   <QuickReplies
                     items={quickReplies}
                     visible={quickRepliesVisible}
@@ -278,7 +278,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
                 />
               </div>
             )}
-            {(isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
+            {(canChat(fromTicketTab, currentTicket, chatThread, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
               <Composer
                 wideBreakpoint={wideBreakpoint}
                 ref={composerRef}
