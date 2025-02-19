@@ -228,8 +228,10 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   useEffect(() => {
     console.log("ChatPage ticket changed:", ticket);
-    if (fromTicketTab && ticket?.threadUid) {
+    if (fromTicketTab) {
       fetchTicketThread(ticket?.threadUid);
+    } else if (ticket?.threadUid === undefined || ticket?.threadUid === '') {
+
     }
   }, [ticket, fromTicketTab]);
 
