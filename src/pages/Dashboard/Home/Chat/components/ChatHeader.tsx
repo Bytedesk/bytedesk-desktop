@@ -257,20 +257,20 @@ const ChatHeader = ({
           <OkBtn />
         </>
       )},
-      onOk: async () => {
-        try {
-          const params: TICKET.TicketRequest = {
-            uid: currentTicket?.uid,
-            assigneeUid: agentInfo?.uid,
-            orgUid: currentOrg?.uid,
-            verified: true
-          };
-          await verifyTicket(params);
-          message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
-        } catch (error) {
-          message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
-        }
-      },
+      // onOk: async () => {
+      //   try {
+      //     const params: TICKET.TicketRequest = {
+      //       uid: currentTicket?.uid,
+      //       assigneeUid: agentInfo?.uid,
+      //       orgUid: currentOrg?.uid,
+      //       verified: true
+      //     };
+      //     await verifyTicket(params);
+      //     message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+      //   } catch (error) {
+      //     message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
+      //   }
+      // },
       // onCancel: async () => {
       //   try {
       //     const params: TICKET.TicketRequest = {
