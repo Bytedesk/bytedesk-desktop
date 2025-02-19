@@ -113,7 +113,7 @@ const ChatHeader = ({
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
         : isTicketThread(chatThread)
-          ? "工单编号：#" + 
+          ? "工单编号：#" +
             //内容太长时，截断
             currentTicket?.uid +
             "，" +
@@ -431,14 +431,18 @@ const ChatHeader = ({
             key="process"
             type="primary"
             onClick={handleProcessTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.process" })}
           </Button>,
           <Button
             key="return"
             onClick={handleUnclaimTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.unclaim" })}
           </Button>,
@@ -452,16 +456,30 @@ const ChatHeader = ({
             key="resolve"
             type="primary"
             onClick={handleResolveTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.resolve" })}
           </Button>,
           <Button
             key="hold"
             onClick={handleHoldTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.hold" })}
+          </Button>,
+          <Button
+            key="close"
+            type="primary"
+            onClick={handleCloseTicket}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
+          >
+            {intl.formatMessage({ id: "ticket.action.close" })}
           </Button>,
         );
         break;
@@ -473,7 +491,9 @@ const ChatHeader = ({
             key="resume"
             type="primary"
             onClick={handleResumeTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.resume" })}
           </Button>,
@@ -483,17 +503,11 @@ const ChatHeader = ({
       case TICKET_STATUS_RESOLVED:
         buttons.push(
           <Button
-            key="close"
-            type="primary"
-            onClick={handleCloseTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
-          >
-            {intl.formatMessage({ id: "ticket.action.close" })}
-          </Button>,
-          <Button
             key="reopen"
             onClick={handleReopenTicket}
-            disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+            disabled={
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
           >
             {intl.formatMessage({ id: "ticket.action.reopen" })}
           </Button>,
@@ -519,7 +533,9 @@ const ChatHeader = ({
           key="invite"
           type="primary"
           onClick={handleInviteTicket}
-          disabled={!canChat(fromTicketTab, currentTicket, chatThread, agentInfo)}
+          disabled={
+            !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+          }
         >
           {intl.formatMessage({ id: "ticket.action.invite" })}
         </Button>,
