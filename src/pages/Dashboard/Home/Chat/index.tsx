@@ -231,8 +231,12 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     if (fromTicketTab) {
       fetchTicketThread(ticket?.threadUid);
     } 
-     if (ticket?.threadUid === null || ticket?.threadUid === undefined) {
+    if (ticket?.threadUid === null || ticket?.threadUid === undefined) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
+      // 待认领状态，设置当前会话为空，清空聊天记录
+      // resetList();
+      // setChatThread(null);
+      // setCurrentTicketThread(null);
     }
   }, [ticket, fromTicketTab]);
 
