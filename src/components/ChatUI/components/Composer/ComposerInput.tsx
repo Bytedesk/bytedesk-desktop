@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:28:56
+ * @LastEditTime: 2025-02-19 17:34:12
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -24,6 +24,9 @@ import canUse from "../../utils/canUse";
 import { Mentions } from 'antd';
 import type { MentionsProps } from 'antd';
 import { MentionsOptionProps } from "antd/lib/mentions";
+import { useTicketStore } from "@/stores/ticket/ticket";
+import { isMyTicket } from "@/utils/utils";
+import { useAgentStore } from "@/stores/service/agent";
 
 // https://ant-design.antgroup.com/components/mentions-cn
 // const MOCK_DATA = {
@@ -64,6 +67,8 @@ export const ComposerInput = ({
     onChange,
   } = rest;
   console.log('ComposerInput', fromTicketTab, chatThread);
+  const currentTicket = useTicketStore((state) => state.currentTicket);
+  const { agentInfo } = useAgentStore.getState();
 
   const handlePaste = useCallback((e: React.ClipboardEvent<any>) => {
     // console.log('handlePaste', e)
@@ -142,6 +147,7 @@ export const ComposerInput = ({
         onSelect={onMetionSelect}
         onPaste={onImageSend ? handlePaste : undefined}
         options={metionOptions[metionPrefix]}
+        disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
         // options={(MOCK_DATA[prefix] || []).map((value) => ({
         //   key: value,
         //   value,

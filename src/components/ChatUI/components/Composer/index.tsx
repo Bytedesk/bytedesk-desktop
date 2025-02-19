@@ -310,8 +310,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             <ComposerInput
                invisible={false} 
                {...inputProps} 
-               disabled={!isProcessingTicket(fromTicketTab, currentTicket)} 
-
+               disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)} 
+               fromTicketTab={fromTicketTab}
                chatThread={chatThread}
                />
           </div>
@@ -339,7 +339,13 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             />
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={!isInputText} {...inputProps} disabled={!isProcessingTicket(fromTicketTab, currentTicket)} />
+            <ComposerInput
+              invisible={!isInputText}
+              {...inputProps}
+              disabled={!isProcessingTicket(fromTicketTab, currentTicket)}
+              fromTicketTab={fromTicketTab}
+              chatThread={chatThread}
+            />
             {!isInputText && <Recorder {...recorder} />}
           </div>
           {!text && rightAction && <Action {...rightAction} />}
