@@ -264,6 +264,9 @@ const ChatHeader = ({
           if (response.data.code === 200) {
             message.destroy();
             message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+            setCurrentTicket(response.data.data);
+            // 刷新工单列表
+            ticketService.refreshTickets();
           } else {
             message.destroy();
             message.error(response.data.message);
@@ -287,6 +290,9 @@ const ChatHeader = ({
           if (response.data.code === 200) {
             message.destroy();
             message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
+            setCurrentTicket(response.data.data);
+            // 刷新工单列表
+            ticketService.refreshTickets();
           } else {
             message.destroy();
             message.error(response.data.message);
