@@ -258,8 +258,13 @@ const ChatHeader = ({
             orgUid: currentOrg?.uid,
             verified: true
           };
-          await verifyTicket(params);
-          message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+          const response = await verifyTicket(params);
+          console.log("query verifyTicket response", params, response.data);
+          if (response.data.code === 200) {
+            message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+          } else {
+            message.error(response.data.message);
+          }
         } catch (error) {
           message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
         }
