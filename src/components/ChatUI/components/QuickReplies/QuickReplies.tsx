@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-24 11:19:18
+ * @LastEditTime: 2025-02-19 12:49:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -21,6 +21,8 @@ export interface QuickRepliesProps {
   visible?: boolean;
   onClick: (item: QuickReplyItemProps, index: number) => void;
   onScroll?: (event: React.UIEvent<HTMLDivElement, UIEvent>) => void;
+  fromTicketTab?: boolean;
+  chatThread: THREAD.ThreadResponse;  
 }
 
 const QuickReplies = (props: QuickRepliesProps) => {
@@ -28,10 +30,13 @@ const QuickReplies = (props: QuickRepliesProps) => {
     items = [], // 设置默认参数
     visible = true, // 设置默认参数
     onClick,
-    onScroll
+    onScroll,
+    fromTicketTab = false,
+    chatThread,
   } = props;
   const scroller = useRef<ScrollViewHandle>(null);
   const [scrollEvent, setScrollEvent] = useState(!!onScroll);
+  console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
 
   useLayoutEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -65,6 +70,8 @@ const QuickReplies = (props: QuickRepliesProps) => {
           index={index}
           onClick={onClick}
           key={item.name}
+          fromTicketTab={fromTicketTab}
+          chatThread={chatThread}
         />
       )}
     />

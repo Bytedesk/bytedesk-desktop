@@ -30,6 +30,8 @@ export interface MessageContainerProps {
   renderBeforeMessageList?: () => React.ReactNode;
   onBackBottomShow?: () => void;
   onBackBottomClick?: () => void;
+  fromTicketTab?: boolean;
+  chatThread: THREAD.ThreadResponse;
 }
 
 export interface MessageContainerHandle {
@@ -56,15 +58,18 @@ export const MessageContainer = React.forwardRef<
     renderMessageContent,
     onBackBottomShow,
     onBackBottomClick,
+    fromTicketTab,
+    chatThread,
   } = props;
 
   const [showBackBottom, setShowBackBottom] = useState(false);
   const [newCount, setNewCount] = useState(0);
-  const showBackBottomtRef = useRef(showBackBottom);
+  const showBackBottomRef = useRef(showBackBottom);
   const newCountRef = useRef(newCount);
   const messagesRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<PullToRefreshHandle>(null);
   const lastMessage = messages[messages.length - 1];
+  console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
 
   const clearBackBottom = () => {
     setNewCount(0);
@@ -73,9 +78,9 @@ export const MessageContainer = React.forwardRef<
 
   const scrollToEnd = useCallback((opts?: ScrollToEndOptions) => {
     if (scrollerRef.current) {
-      if (!showBackBottomtRef.current || (opts && opts.force)) {
+      if (!showBackBottomRef.current || (opts && opts.force)) {
         scrollerRef.current.scrollToEnd(opts);
-        if (showBackBottomtRef.current) {
+        if (showBackBottomRef.current) {
           clearBackBottom();
         }
       }
@@ -125,7 +130,7 @@ export const MessageContainer = React.forwardRef<
   }, [newCount]);
 
   useEffect(() => {
-    showBackBottomtRef.current = showBackBottom;
+    showBackBottomRef.current = showBackBottom;
   }, [showBackBottom]);
 
   useEffect(() => {

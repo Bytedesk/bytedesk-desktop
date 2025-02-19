@@ -239,6 +239,8 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
             onScroll={onScroll}
             onBackBottomShow={onBackBottomShow}
             onBackBottomClick={onBackBottomClick}
+            fromTicketTab={fromTicketTab}
+            chatThread={chatThread}
           />
           <div className="ChatFooter">
             {renderQuickReplies ? (
@@ -249,6 +251,8 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
                 visible={quickRepliesVisible}
                 onClick={onQuickReplyClick}
                 onScroll={onQuickReplyScroll}
+                fromTicketTab={fromTicketTab}
+                chatThread={chatThread}
               />
             )}
             {/* TODO: 翻译输入框 */}
