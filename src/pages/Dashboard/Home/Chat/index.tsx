@@ -205,7 +205,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   const fetchTicketThread = async (threadUid?: string) => {
     console.log('ChatPage fetchTicketThread')
-    if (!threadUid) {
+    if (threadUid === undefined || th) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
       // 待认领状态，设置当前会话为空，清空聊天记录
       // resetList();
@@ -380,7 +380,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const handleTranslate = async (msgUid: string, content: string) => {
     // console.log("handleTranslate", msgUid, content);
     const response = await getTranslation(msgUid, content);
-    console.log("handleTranslate", response.data);
+    console.log("ChatPage handleTranslate", response.data);
     if (response.data.code === 200) {
       const msgUid = response?.data?.data.msgUid;
       const result = response?.data?.data.result;
@@ -651,7 +651,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   // 在输入框 ctrl + v 粘贴图片
   const handleImageSend = (file: File): Promise<any> => {
-    console.log("handleImageSend", file);
+    console.log("ChatPage handleImageSend", file);
     handleUpload(file, (result: MESSAGE.HttpUploadResult) => {
       handleDropSend(result.data.fileUrl, MESSAGE_TYPE_IMAGE);
     });
