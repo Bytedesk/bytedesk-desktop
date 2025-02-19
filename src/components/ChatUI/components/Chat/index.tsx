@@ -15,8 +15,9 @@ import {
 } from "../Composer";
 import { isSafari, getIOSMajorVersion } from "../../utils/ua";
 import { Input } from "antd";
-import { isProcessingTicket } from "@/utils/utils";
+import { isMyTicket, isProcessingTicket } from "@/utils/utils";
 import { useTicketStore } from "@/stores/ticket/ticket";
+import { useAgentStore } from "@/stores/service/agent";
 const { TextArea } = Input;
 
 export type ChatProps = Omit<ComposerProps, "onFocus" | "onChange" | "onBlur"> &
@@ -202,6 +203,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
     } = props;
     console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
     const currentTicket = useTicketStore((state) => state.currentTicket);
+    const { agentInfo } = useAgentStore.getState();
 
     function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
       if (messagesRef && messagesRef.current) {
@@ -229,7 +231,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
         <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
           {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
-          {isProcessingTicket(currentTicket) && (
+          { (isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
             <MessageContainer
               ref={messagesRef}
               loadMoreText={loadMoreText}
