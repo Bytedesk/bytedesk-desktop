@@ -250,7 +250,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
           <div className="ChatFooter">
             {renderQuickReplies
               ? renderQuickReplies()
-              : isProcessingTicket(currentTicket) && (
+              : (isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
                   <QuickReplies
                     items={quickReplies}
                     visible={quickRepliesVisible}
@@ -278,7 +278,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
                 />
               </div>
             )}
-            {isProcessingTicket(currentTicket) && (
+            {(isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
               <Composer
                 wideBreakpoint={wideBreakpoint}
                 ref={composerRef}

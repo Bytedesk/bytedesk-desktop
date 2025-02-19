@@ -20,6 +20,7 @@ import getToBottom from "../../utils/getToBottom";
 import { useAgentStore } from "@/stores/service/agent";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import { Empty } from "antd";
+import { isMyTicket } from "@/utils/utils";
 
 const listenerOpts = canUse("passiveListener") ? { passive: true } : false;
 
@@ -85,10 +86,6 @@ export const MessageContainer = React.forwardRef<
     fromTicketTab,
   );
   console.log("chatThread", chatThread);
-  // 判断当前工单是否是自己的工单
-  const isMyTicket = () => {
-    return currentTicket?.assignee?.uid === agentInfo?.uid;
-  };
 
   const clearBackBottom = () => {
     setNewCount(0);
@@ -220,7 +217,7 @@ export const MessageContainer = React.forwardRef<
   ]);
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示
-  if (fromTicketTab && !isMyTicket()) {
+  if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
     console.log("不显示消息容器");
     return <Empty/>;
   }
