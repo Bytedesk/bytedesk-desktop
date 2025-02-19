@@ -93,14 +93,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     //
     const currentTicket = useTicketStore((state) => state.currentTicket);
     const { agentInfo } = useAgentStore.getState();
-    console.log(
-      "currentTicket",
-      currentTicket,
-      "agentInfo",
-      agentInfo,
-      "fromTicketTab",
-      fromTicketTab,
-    );
     console.log("chatThread", chatThread);
 
     useEffect(() => {

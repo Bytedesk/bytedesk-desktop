@@ -235,6 +235,20 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
   }, [currentThread]);
 
+  useEffect(() => {
+    console.log("ChatPage currentTicket changed:", currentTicket);
+    if (currentTicket) {
+      // setChatThread(currentTicket.thread);
+    }
+  }, [currentTicket]);
+
+  useEffect(() => {
+    console.log("ChatPage currentTicketThread changed:", chatThread);
+    if (currentTicketThread) {
+      setChatThread(currentTicketThread);
+    }
+  }, [currentTicketThread]);
+
   // 默认快捷短语，可选
   // https://chatui.io/components/icon
   let defaultQuickButtons: QuickReplyItemProps[] = [
