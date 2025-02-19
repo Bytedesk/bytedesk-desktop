@@ -19,6 +19,7 @@ import throttle from "../../utils/throttle";
 import getToBottom from "../../utils/getToBottom";
 import { useAgentStore } from "@/stores/service/agent";
 import { useTicketStore } from "@/stores/ticket/ticket";
+import { Empty } from "antd";
 
 const listenerOpts = canUse("passiveListener") ? { passive: true } : false;
 
@@ -219,9 +220,9 @@ export const MessageContainer = React.forwardRef<
   ]);
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示
-  if (!isMyTicket()) {
+  if (fromTicketTab && !isMyTicket()) {
     console.log("不显示消息容器");
-    return <></>;
+    return <Empty description="暂无消息" />;
   }
 
   return (

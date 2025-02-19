@@ -293,7 +293,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     };
 
     if (isWide) {
-      if (!isMyTicket()) {
+      if (fromTicketTab && !isMyTicket()) {
         console.log("不显示composer");
         return <></>;
       }
@@ -326,7 +326,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     }
 
     // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-    if (!isMyTicket()) {
+    if (fromTicketTab && !isMyTicket()) {
       console.log("不显示composer");
       return <></>;
     }

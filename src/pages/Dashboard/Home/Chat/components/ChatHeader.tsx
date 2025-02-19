@@ -70,21 +70,36 @@ const ChatHeader = ({
 
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
-    if (!chatThread?.user) return "";
-    return chatThread.user.avatar;
+    if (!fromTicketTab) {
+      if (!chatThread?.user) return "";
+      return chatThread.user.avatar;
+    }
   };
 
   // 添加一个获取昵称的辅助函数
   const getNickname = () => {
-    if (!chatThread?.user) return "";
-    if (chatThread.user.nickname?.startsWith(I18N_PREFIX)) {
-      return intl.formatMessage({
-        id: chatThread.user.nickname,
-        defaultMessage: chatThread.user.nickname,
-      });
+    if (!fromTicketTab) {
+      if (!chatThread?.user) return "";
+      if (chatThread.user.nickname?.startsWith(I18N_PREFIX)) {
+        return intl.formatMessage({
+          id: chatThread.user.nickname,
+          defaultMessage: chatThread.user.nickname,
+        });
+      }
+      return chatThread.user?.nickname || intl.formatMessage({ id: 'chat.header.user.unnamed' });
+    } else {
+      return currentTicket?.title
     }
-    return chatThread.user?.nickname || intl.formatMessage({ id: 'chat.header.user.unnamed' });
   };
+
+  // 
+  const getDescription = () => {
+    if (!fromTicketTab) {
+      return typing ? previewContent || intl.formatMessage({ id: "i18n.typing "}) : "客服会话编号：#" + chatThread?.uid
+    } else {
+      return currentTicket?.description
+    }
+  }
 
   // 判断当前工单是否是自己的工单
   const isMyTicket = () => {
@@ -196,7 +211,7 @@ const ChatHeader = ({
       case TICKET_STATUS_NEW:
       case TICKET_STATUS_UNCLAIMED:
         buttons.push(
-          <Button key="claim" type="primary" onClick={handleClaimTicket} disabled={!isMyTicket()}>
+          <Button key="claim" type="primary" onClick={handleClaimTicket}>
             {intl.formatMessage({ id: 'ticket.action.claim' })}
           </Button>
         );
@@ -326,16 +341,12 @@ const ChatHeader = ({
                   minHeight: "16px",
                 }}
               >
-                {
-                  typing
-                  ? previewContent || intl.formatMessage({ id: "i18n.typing" })
-                  : (isTicketThread(chatThread) ? '工单' : '客服') + "会话编号：#" + chatThread?.uid
-                }
+                {getDescription()}
               </span>
             </div>
           </div>
 
-        {isCustomerServiceThread(chatThread) && (
+        {!fromTicketTab && isCustomerServiceThread(chatThread) && (
           <div style={{ display: 'flex', gap: '8px' }}>
             <Button type="text" onClick={() => setIsTransferThreadModelOpen(true)}>
               {intl.formatMessage({ id: 'chat.header.action.transfer' })}
@@ -351,7 +362,7 @@ const ChatHeader = ({
           </div>
         )}
 
-        {(isGroupThread(chatThread) || isMemberThread(chatThread) || isRobotThread(chatThread)) && (
+        {!fromTicketTab && (isGroupThread(chatThread) || isMemberThread(chatThread) || isRobotThread(chatThread)) && (
           <div style={{ display: 'flex', gap: '8px' }}>
             <Button
               icon={<MenuOutlined />}
@@ -371,7 +382,7 @@ const ChatHeader = ({
         )}
         
         {
-          isTicketThread(chatThread) && (
+          fromTicketTab && (
             <Space>
               {getTicketActionButtons()}
             </Space>
