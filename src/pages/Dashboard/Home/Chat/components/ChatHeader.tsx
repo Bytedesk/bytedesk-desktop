@@ -130,11 +130,6 @@ const ChatHeader = ({
     }
   };
 
-  // 判断当前工单是否是自己的工单
-  const isMyTicket = () => {
-    return currentTicket?.assignee?.uid === agentInfo?.uid;
-  };
-
   // 认领工单
   const handleClaimTicket = async () => {
     // 增加认领确认对话框
