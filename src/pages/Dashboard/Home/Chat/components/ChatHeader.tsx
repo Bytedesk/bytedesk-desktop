@@ -17,9 +17,6 @@ import {
   TICKET_STATUS_RESOLVED,
   TICKET_STATUS_UNCLAIMED,
   IS_DEBUG,
-  // TICKET_STATUS_ESCALATED,
-  // TICKET_STATUS_CLOSED,
-  // TICKET_STATUS_CANCELLED
 } from "@/utils/constants";
 import { 
   isCustomerServiceThread, 
@@ -263,7 +260,7 @@ const ChatHeader = ({
     // 添加邀请会话按钮
     if (IS_DEBUG && isTicketThread(chatThread)) {
       buttons.push(
-        <Button key="invite" type="primary" onClick={handleInviteTicket}>
+        <Button key="invite" type="primary" onClick={handleInviteTicket} disabled={!isMyTicket()}>
           {intl.formatMessage({ id: 'ticket.action.invite' })}
         </Button>
       );
