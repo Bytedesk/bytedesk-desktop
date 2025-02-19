@@ -382,7 +382,10 @@ export const canChat = (
   agentInfo: AGENT.AgentResponse,
 ) => {
   if (fromTicketTab) {
-    
+    // 
+    if (chatThread === null || chatThread === undefined) {
+      return false;
+    }
     return (
       ticket?.assignee?.uid === agentInfo?.uid ||
       ticket?.reporter?.uid === agentInfo?.uid
