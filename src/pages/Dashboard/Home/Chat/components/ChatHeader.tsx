@@ -111,7 +111,7 @@ const ChatHeader = ({
   };
 
   // 获取描述
-  const getDescription = () => {      
+  const getDescription = () => {          
     if (!fromTicketTab) { 
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
@@ -251,6 +251,7 @@ const ChatHeader = ({
       okButtonProps: { type: 'primary' },
       cancelButtonProps: { danger: true },
       onOk: async () => {
+        message.loading("验证中...", 2);
         try {
           const params: TICKET.TicketRequest = {
             uid: currentTicket?.uid,
@@ -261,15 +262,19 @@ const ChatHeader = ({
           const response = await verifyTicket(params);
           console.log("query verifyTicket response", params, response.data);
           if (response.data.code === 200) {
+            message.destroy();
             message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
           } else {
+            message.destroy();
             message.error(response.data.message);
           }
         } catch (error) {
+          message.destroy();
           message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
         }
       },
       onCancel: async () => {
+        message.loading("验证中...", 2);
         try {
           const params: TICKET.TicketRequest = {
             uid: currentTicket?.uid,
@@ -280,11 +285,14 @@ const ChatHeader = ({
           const response = await verifyTicket(params);
           console.log("query verifyTicket response", params, response.data);
           if (response.data.code === 200) {
+            message.destroy();
             message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
           } else {
+            message.destroy();
             message.error(response.data.message);
           }
         } catch (error) {
+          message.destroy();
           message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
         }
       },
