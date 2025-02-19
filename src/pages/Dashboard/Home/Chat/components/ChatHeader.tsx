@@ -536,37 +536,38 @@ const ChatHeader = ({
       case TICKET_STATUS_PROCESSING:
       case TICKET_STATUS_RESUMED:
         if (isAssigneeTicket(currentTicket, agentInfo)) {
-        buttons.push(
-          <Button
-            key="resolve"
-            type="primary"
-            onClick={handleResolveTicket}
-            disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
-            {intl.formatMessage({ id: "ticket.action.resolve" })}
-          </Button>,
-          <Button
-            key="hold"
-            onClick={handleHoldTicket}
-            disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
-            {intl.formatMessage({ id: "ticket.action.hold" })}
-          </Button>,
-          <Button
-            key="close"
-            type="primary"
-            onClick={handleCloseTicket}
-            disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
-            {intl.formatMessage({ id: "ticket.action.close" })}
-          </Button>,
-        );}
+          buttons.push(
+            <Button
+              key="resolve"
+              type="primary"
+              onClick={handleResolveTicket}
+              disabled={
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
+              {intl.formatMessage({ id: "ticket.action.resolve" })}
+            </Button>,
+            <Button
+              key="hold"
+              onClick={handleHoldTicket}
+              disabled={
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
+              {intl.formatMessage({ id: "ticket.action.hold" })}
+            </Button>,
+            <Button
+              key="close"
+              type="primary"
+              onClick={handleCloseTicket}
+              disabled={
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
+              {intl.formatMessage({ id: "ticket.action.close" })}
+            </Button>,
+          );
+        }
         break;
 
       case TICKET_STATUS_PENDING:
