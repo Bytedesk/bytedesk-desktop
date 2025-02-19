@@ -285,7 +285,7 @@ const ChatHeader = ({
       //     message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
       //   }
       // }
-    }); 
+    })}; 
   };
 
   // 挂起工单
