@@ -261,7 +261,7 @@ const ChatHeader = ({
             uid: currentTicket?.uid,
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
-            verifyResult: true
+            verified: true
           };
           await verifyTicket(params);
           message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
@@ -275,7 +275,7 @@ const ChatHeader = ({
             uid: currentTicket?.uid,
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
-            verifyResult: false
+            verified: false
           };
           await verifyTicket(params);
           message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
