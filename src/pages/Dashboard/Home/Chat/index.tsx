@@ -208,7 +208,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
       return;
     } else {
-      // 
+      // TODO：待认领
     }
     message.loading(translateString("i18n.loading"));
     const response = await queryThreadByUid(threadUid);
