@@ -115,7 +115,7 @@ const ChatHeader = ({
   const getDescription = () => {
     if (!fromTicketTab) {
       return typing
-        ? previewContent || intl.formatMessage({ id: "i18n.typing " })
+        ? previewContent || intl.formatMessage({ id: "i18n.typing" })
         : isTicketThread(chatThread)
           ? "工单编号：#" +
             //内容太长时，截断
