@@ -369,7 +369,7 @@ export function getTicketPriorityColor(priority: string) {
 
 // 判断当前工单是否是自己的工单
 export const isMyTicket = (ticket: TICKET.TicketResponse, agentInfo: AGENT.AgentResponse) => {
-  return ticket?.assignee?.uid === agentInfo?.uid || ;
+  return ticket?.assignee?.uid === agentInfo?.uid || ticket?.assignee?.uid === "";
 };
 
 // 判断是否开始处理工单
