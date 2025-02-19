@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-27 13:38:28
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-04 14:23:34
+ * @LastEditTime: 2025-02-20 07:30:55
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -41,8 +41,12 @@ const NoticeMsg = ({ content }: NoticeProps) => {
 
   useEffect(() => {
     // 假设你的数据被保存在一个名为data的变量中
-    const parsedData = JSON.parse(content);
-    setData(parsedData);
+    try {
+      const parsedData = JSON.parse(content);
+      setData(parsedData);
+    } catch (error) {
+      console.error('Failed to parse content:', error);
+    }
   }, [content]);
 
   return (
