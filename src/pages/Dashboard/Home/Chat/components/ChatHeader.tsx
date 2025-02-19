@@ -243,7 +243,7 @@ const ChatHeader = ({
 
   // 客户验证
   const handleVerifyTicket = () => {
-    Modal.confirm({
+    modal.confirm({
       title: intl.formatMessage({ id: 'ticket.verify.title' }),
       content: intl.formatMessage({ id: 'ticket.verify.content' }),
       okText: intl.formatMessage({ id: 'ticket.verify.pass' }),
@@ -285,7 +285,7 @@ const ChatHeader = ({
       //     message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
       //   }
       // }
-    })}; 
+    ); 
   };
 
   // 挂起工单
