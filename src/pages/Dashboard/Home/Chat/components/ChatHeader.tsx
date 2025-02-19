@@ -330,7 +330,6 @@ const ChatHeader = ({
 
   // 关闭工单
   const handleCloseTicket = async () => {
-    message.warning("TODO: 关闭工单");
     // 调用关闭工单的接口，modal确认
     modal.confirm({
       title: "关闭工单",
