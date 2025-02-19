@@ -111,7 +111,7 @@ import RateBubble from "@/components/Bubbles/Rate";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import LeaveMsg from "@/components/Bubbles/LeaveMsg";
-import RobotQa from "@/components/Bubbles/RobotQa";
+import RobotQa from "@/components/Bubbles/obotQa";
 import "./chatpage.css";
 import { FaqQa } from "@/components/Bubbles/FaqQa";
 import TransferBubble from "@/components/Bubbles/TransferBubble";
@@ -242,7 +242,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   useEffect(() => {
     console.log("ChatPage currentThread changed:", currentThread);
-    if (currentThread) {
+    if (f currentThread) {
       setChatThread(currentThread);
     }
   }, [currentThread]);
@@ -506,7 +506,6 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
     isLoadingMessage.current = false;
   };
-
   //
   useEffect(() => {
     setPageNumber(0);
