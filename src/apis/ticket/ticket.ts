@@ -167,6 +167,39 @@ export async function transferTicket(ticket: TICKET.TicketRequest) {
   });
 }
 
+// 挂起工单
+export async function suspendTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/suspend", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 重新打开工单
+export async function reopenTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/reopen", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 升级工单
+export async function escalateTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/escalate", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
 // 完成工单
 export async function resolveTicket(ticket: TICKET.TicketRequest) {
   return request<TICKET.HttpResult>("/api/v1/ticket/resolve", {

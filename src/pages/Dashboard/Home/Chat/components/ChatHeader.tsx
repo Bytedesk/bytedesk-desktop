@@ -12,7 +12,7 @@ import {
   TICKET_STATUS_CLAIMED,
   TICKET_STATUS_PROCESSING,
   TICKET_STATUS_PENDING,
-  TICKET_STATUS_ON_HOLD,
+  TICKET_STATUS_HOLDING,
   TICKET_STATUS_REOPENED,
   TICKET_STATUS_RESOLVED,
   TICKET_STATUS_UNCLAIMED,
@@ -218,7 +218,7 @@ const ChatHeader = ({
         break;
         
       case TICKET_STATUS_PENDING:
-      case TICKET_STATUS_ON_HOLD:
+      case TICKET_STATUS_HOLDING:
         buttons.push(
           <Button key="resume" type="primary" onClick={handleResumeTicket}>
             {intl.formatMessage({ id: 'ticket.action.resume' })}

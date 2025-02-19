@@ -50,7 +50,7 @@ import {
   TICKET_STATUS_CLOSED,
   TICKET_STATUS_PROCESSING,
   TICKET_STATUS_NEW,
-  TICKET_STATUS_ON_HOLD,
+  TICKET_STATUS_HOLDING,
   TICKET_STATUS_PENDING,
   TICKET_STATUS_REOPENED,
   TICKET_STATUS_RESOLVED,
@@ -334,7 +334,7 @@ export function getTicketStatusColor(status: string) {
       return 'green';
     case TICKET_STATUS_PENDING:
       return 'orange';
-    case TICKET_STATUS_ON_HOLD:
+    case TICKET_STATUS_HOLDING:
       return 'gold';
     case TICKET_STATUS_REOPENED:
       return 'magenta';
