@@ -178,9 +178,20 @@ export async function holdTicket(ticket: TICKET.TicketRequest) {
   });
 }
 
+// 恢复工单
+export async function resumeTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/resume", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
 // 待回应工单
-export async function pendingTicket(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpResult>("/api/v1/ticket/pending", {
+export async function pendTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/pend", {
     method: "POST",
     data: {
       ...ticket,

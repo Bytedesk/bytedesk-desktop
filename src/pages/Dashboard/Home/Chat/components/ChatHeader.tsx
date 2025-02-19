@@ -1,5 +1,5 @@
 import { message } from "@/AntdGlobalComp";
-import { claimTicket, holdTicket, resolveTicket, startProcessingTicket, unclaimTicket } from "@/apis/ticket/ticket";
+import { claimTicket, closeTicket, holdTicket, resolveTicket, resumeTicket, startProcessingTicket, unclaimTicket } from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useOrgStore } from "@/stores/core/organization";
@@ -259,16 +259,72 @@ const ChatHeader = ({
   // 关闭工单
   const handleCloseTicket = async () => {
     message.warning("TODO: 关闭工单");
+    // 调用关闭工单的接口，modal确认
+    modal.confirm({
+      title: "关闭工单",
+      content: "确定关闭该工单吗？",
+      onOk: async () => {
+        message.loading("关闭中...", 2);
+        // 调用关闭工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+        };
+        const response = await closeTicket(params);
+        console.log("query closeTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(intl.formatMessage({ id: 'ticket.action.close.success' }));
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 重新打开工单
   const handleReopenTicket = async () => {
     message.warning("TODO: 重新打开工单");
+    // 调用重新打开工单的接口，modal确认
+    modal.confirm({
+      title: "重新打开工单",
+      content: "确定重新打开该工单吗？",
+      onOk: async () => {
+        message.loading("重新打开中...", 2);
+        // 调用重新打开工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+        };
+        const response = await resumeTicket(params);
+        console.log("query resumeTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(intl.formatMessage({ id: 'ticket.action.resume.success' }));
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 邀请会话
   const handleInviteTicket = async () => {
     message.warning("TODO: 邀请会话");
+    // 调用邀请会话的接口，modal确认
+    modal.confirm({
+      title: "邀请会话",
+      content: "确定邀请该会话吗？",
+      onOk: async () => {
+        console.log("handleInviteTicket");
+      }
+    });
   };
 
   // 根据工单状态返回可用的操作按钮
