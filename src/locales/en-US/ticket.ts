@@ -173,8 +173,8 @@ export default {
    // Ticket Actions
    'ticket.action.claim': 'Claim',
    'ticket.action.claim.todo': 'TODO: Claim ticket',
-   'ticket.action.process': 'Process',
-   'ticket.action.process.todo': 'TODO: Process ticket',
+   'ticket.action.process': 'Start Process',
+   'ticket.action.process.todo': 'TODO: Start process ticket',
    'ticket.action.resolve': 'Resolve',
    'ticket.action.resolve.todo': 'TODO: Resolve ticket',
    'ticket.action.pending': 'Pending',

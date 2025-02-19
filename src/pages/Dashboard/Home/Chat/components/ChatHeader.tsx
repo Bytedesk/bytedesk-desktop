@@ -10,7 +10,7 @@ import {
   THREAD_STATE_CLOSED,
   TICKET_STATUS_NEW,
   TICKET_STATUS_CLAIMED,
-  TICKET_STATUS_IN_PROGRESS,
+  TICKET_STATUS_PROCESSING,
   TICKET_STATUS_PENDING,
   TICKET_STATUS_ON_HOLD,
   TICKET_STATUS_REOPENED,
@@ -115,6 +115,9 @@ const ChatHeader = ({
         } else {
           message.destroy();
           message.error(response.data.message);
+          setCurrentTicket(undefined);
+          // 刷新工单列表
+          ticketService.refreshTickets();
         }
       },
     });
@@ -154,6 +157,9 @@ const ChatHeader = ({
       ticketService.refreshTickets();
     } else {
       message.error(response.data.message);
+      setCurrentTicket(undefined);
+      // 刷新工单列表
+      ticketService.refreshTickets();
     }
   };
 
@@ -200,7 +206,7 @@ const ChatHeader = ({
         );
         break;
         
-      case TICKET_STATUS_IN_PROGRESS:
+      case TICKET_STATUS_PROCESSING:
         buttons.push(
           <Button key="resolve" type="primary" onClick={handleResolveTicket}>
             {intl.formatMessage({ id: 'ticket.action.resolve' })}

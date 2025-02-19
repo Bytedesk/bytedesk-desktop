@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 11:06:56
+ * @LastEditTime: 2025-02-19 11:53:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -185,8 +185,8 @@ export default {
   // Ticket Actions
   'ticket.action.claim': '認領',
   'ticket.action.claim.todo': 'TODO: 認領工單',
-  'ticket.action.process': '處理',
-  'ticket.action.process.todo': 'TODO: 處理工單',
+  'ticket.action.process': '開始處理',
+  'ticket.action.process.todo': 'TODO: 開始處理工單',
   'ticket.action.resolve': '解決',
   'ticket.action.resolve.todo': 'TODO: 解決工單',
   'ticket.action.pending': '待處理',

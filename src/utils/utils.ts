@@ -48,7 +48,7 @@ import {
   TICKET_STATUS_CLAIMED,
   TICKET_STATUS_CANCELLED,
   TICKET_STATUS_CLOSED,
-  TICKET_STATUS_IN_PROGRESS,
+  TICKET_STATUS_PROCESSING,
   TICKET_STATUS_NEW,
   TICKET_STATUS_ON_HOLD,
   TICKET_STATUS_PENDING,
@@ -330,7 +330,7 @@ export function getTicketStatusColor(status: string) {
       return 'blue';
     case TICKET_STATUS_CLAIMED:
       return 'purple';
-    case TICKET_STATUS_IN_PROGRESS:
+    case TICKET_STATUS_PROCESSING:
       return 'green';
     case TICKET_STATUS_PENDING:
       return 'orange';

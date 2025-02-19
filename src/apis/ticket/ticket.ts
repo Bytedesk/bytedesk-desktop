@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 07:38:17
+ * @LastEditTime: 2025-02-19 12:10:19
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -134,6 +134,17 @@ export async function claimTicket(ticket: TICKET.TicketRequest) {
   });
 }
 
+// 开始处理工单
+export async function startProcessingTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/start-processing", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
 // 退回工单
 export async function unclaimTicket(ticket: TICKET.TicketRequest) {
   return request<TICKET.HttpResult>("/api/v1/ticket/unclaim", {
@@ -145,12 +156,45 @@ export async function unclaimTicket(ticket: TICKET.TicketRequest) {
   });
 }
 
-// 完成工单
-export async function completeTicket(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpResult>("/api/v1/ticket/complete", {
+// 转派工单
+export async function transferTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/transfer", {
     method: "POST",
     data: {
       ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 完成工单
+export async function resolveTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/resolve", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 关闭工单
+export async function closeTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/close", {
+    method: "POST",
+    data: {
+      ...ticket,
+      client: HTTP_CLIENT,
+    },
+  });
+}
+
+// 取消工单
+export async function cancelTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/cancel", {
+    method: "POST",
+    data: {
+      ...ticket,  
       client: HTTP_CLIENT,
     },
   });

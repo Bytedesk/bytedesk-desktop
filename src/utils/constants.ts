@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 11:04:42
+ * @LastEditTime: 2025-02-19 11:55:36
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -569,7 +569,7 @@ export const TICKET_PRIORITY_CRITICAL = 'CRITICAL';
 export const TICKET_STATUS_NEW = 'NEW'; // 新建
 export const TICKET_STATUS_CLAIMED = 'CLAIMED'; // 已认领
 export const TICKET_STATUS_UNCLAIMED = 'UNCLAIMED'; // 被退回
-export const TICKET_STATUS_IN_PROGRESS = 'IN_PROGRESS'; // 处理中
+export const TICKET_STATUS_PROCESSING = 'PROCESSING'; // 处理中
 export const TICKET_STATUS_PENDING = 'PENDING'; // 待处理（等待客户响应/等待第三方）
 export const TICKET_STATUS_ON_HOLD = 'ON_HOLD'; // 挂起（暂停处理）
 export const TICKET_STATUS_REOPENED = 'REOPENED'; // 重新打开
