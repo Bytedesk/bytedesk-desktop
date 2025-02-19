@@ -111,7 +111,7 @@ const ChatHeader = ({
 
   // 获取描述
   const getDescription = () => {
-    if (!fromTicketTab) {
+    if (!fromTicketTab) { 
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
         : isTicketThread(chatThread)
@@ -551,19 +551,19 @@ const ChatHeader = ({
         break;
       case TICKET_STATUS_RESOLVED:
         // 只有自己创建的工单，才能执行客户验证
-        if (currentTicket?.reporter.uid)
-        buttons.push(
-          <Button
-            key="verify"
-            onClick={handleVerifyTicket}
-            disabled={
+        if (currentTicket?.reporter.uid === agentInfo?.uid) {
+          buttons.push(
+            <Button
+              key="verify"
+              onClick={handleVerifyTicket}
+              disabled={
               !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
             }
           >
-            {intl.formatMessage({ id: "ticket.action.verify" })}
-          </Button>,
-        )
-        
+              {intl.formatMessage({ id: "ticket.action.verify" })}
+            </Button>,
+          );
+        }
         break;
     }
 
