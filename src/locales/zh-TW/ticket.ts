@@ -74,6 +74,7 @@ export default {
   'ticket.messages.load.error': '工單消息加載失敗',
   'ticket.message.send.error': '消息發送失敗',
   'ticket.category.load.error': '分類加載失敗',
+  'ticket.submitting': '提交工单中...',
   // 工單列表
   'ticket.list.title': '工單列表',
   'ticket.list.empty': '暫無工單',

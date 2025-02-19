@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 13:09:32
+ * @LastEditTime: 2025-02-19 14:21:42
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -56,6 +56,7 @@ export default {
    'ticket.message.send.error': 'Failed to send message',
    'ticket.workgroup.load.error': 'Failed to load workgroups',
    'ticket.category.load.error': 'Failed to load categories',
+   'ticket.submitting': 'Ticket Submitting',
    // Ticket List
    'ticket.list.title': 'Tickets',
    'ticket.list.empty': 'No tickets found',
