@@ -499,8 +499,14 @@ const ChatHeader = ({
           </Button>,
         );
         break;
-      
 
+      case TICKET_STATUS_CLOSED:
+        buttons.push(
+          <Button
+            key="reopen"
+            onClick={handleReopenTicket}
+            disabled={
+      
       case TICKET_STATUS_RESOLVED:
         buttons.push(
           <Button
