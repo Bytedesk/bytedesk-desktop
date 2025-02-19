@@ -250,7 +250,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   useEffect(() => {
     console.log("ChatPage currentTicketThread changed:", chatThread);
     if (currentTicketThread && fromTicketTab) {
-      setChatThread(currentTicketThread);
+      // setChatThread(currentTicketThread);
     }
   }, [currentTicketThread]);
 
