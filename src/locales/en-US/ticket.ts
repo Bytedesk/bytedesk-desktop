@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 23:00:40
+ * @LastEditTime: 2025-02-19 11:06:46
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -102,7 +102,8 @@ export default {
    // Filter translations
    'ticket.filter.status_all': 'All Status',
    'ticket.filter.status_new': 'New',
-   'ticket.filter.status_assigned': 'Assigned',
+   'ticket.filter.status_claimed': 'Assigned',
+   'ticket.filter.status_unclaimed': 'Unclaimed',
    'ticket.filter.status_in_progress': 'In Progress',
    'ticket.filter.status_pending': 'Pending',
    'ticket.filter.status_on_hold': 'On Hold',
@@ -158,7 +159,8 @@ export default {
    // Ticket Status
    'ticket.status.label': 'Status',
    'ticket.status.new': 'New',
-   'ticket.status.assigned': 'Assigned',
+   'ticket.status.claimed': 'Assigned',
+   'ticket.status.unclaimed': 'Unclaimed',
    'ticket.status.in_progress': 'In Progress',
    'ticket.status.pending': 'Pending',
    'ticket.status.on_hold': 'On Hold',

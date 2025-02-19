@@ -1,5 +1,5 @@
 import { message } from "@/AntdGlobalComp";
-import { claimTicket } from "@/apis/ticket/ticket";
+import { claimTicket, unclaimTicket } from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useOrgStore } from "@/stores/core/organization";
@@ -9,12 +9,13 @@ import {
   I18N_PREFIX, 
   THREAD_STATE_CLOSED,
   TICKET_STATUS_NEW,
-  TICKET_STATUS_ASSIGNED,
+  TICKET_STATUS_CLAIMED,
   TICKET_STATUS_IN_PROGRESS,
   TICKET_STATUS_PENDING,
   TICKET_STATUS_ON_HOLD,
   TICKET_STATUS_REOPENED,
   TICKET_STATUS_RESOLVED,
+  TICKET_STATUS_UNCLAIMED,
   // TICKET_STATUS_ESCALATED,
   // TICKET_STATUS_CLOSED,
   // TICKET_STATUS_CANCELLED
@@ -132,8 +133,23 @@ const ChatHeader = ({
   };
 
   // 退回工单
-  const handleReturnTicket = async () => {
+  const handleUnclaimTicket = async () => {
     message.warning("TODO: 退回工单");
+    // 调用退回工单的接口
+    const params: TICKET.TicketRequest = {
+      uid: currentTicket?.uid,
+      // 设置退回认领人
+      assigneeUid: agentInfo?.uid,
+      orgUid: currentOrg?.uid,
+    };
+    const response = await unclaimTicket(params);
+    console.log("unclaimTicket response", params, response.data);
+    if (response.data.code === 200) {
+      message.success(intl.formatMessage({ id: 'ticket.action.unclaim.success' }));
+      setCurrentTicket(response.data.data);
+    } else {
+      message.error(response.data.message);
+    }
   };
 
   // 恢复工单
@@ -159,6 +175,7 @@ const ChatHeader = ({
     
     switch (currentTicket.status) {
       case TICKET_STATUS_NEW:
+      case TICKET_STATUS_UNCLAIMED:
         buttons.push(
           <Button key="claim" type="primary" onClick={handleClaimTicket}>
             {intl.formatMessage({ id: 'ticket.action.claim' })}
@@ -166,13 +183,13 @@ const ChatHeader = ({
         );
         break;
         
-      case TICKET_STATUS_ASSIGNED:
+      case TICKET_STATUS_CLAIMED:
       case TICKET_STATUS_REOPENED:
         buttons.push(
           <Button key="process" type="primary" onClick={handleProcessTicket}>
             {intl.formatMessage({ id: 'ticket.action.process' })}
           </Button>,
-          <Button key="return" onClick={handleReturnTicket}>
+          <Button key="return" onClick={handleUnclaimTicket}>
             {intl.formatMessage({ id: 'ticket.action.unclaim' })}
           </Button>
         );

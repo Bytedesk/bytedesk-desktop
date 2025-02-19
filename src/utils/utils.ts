@@ -45,7 +45,7 @@ import {
   MESSAGE_TYPE_AGENT_CLOSED,
   THREAD_STATE_CLOSED,
   THREAD_TYPE_LLM,
-  TICKET_STATUS_ASSIGNED,
+  TICKET_STATUS_CLAIMED,
   TICKET_STATUS_CANCELLED,
   TICKET_STATUS_CLOSED,
   TICKET_STATUS_IN_PROGRESS,
@@ -328,7 +328,7 @@ export function getTicketStatusColor(status: string) {
   switch (status) {
     case TICKET_STATUS_NEW:
       return 'blue';
-    case TICKET_STATUS_ASSIGNED:
+    case TICKET_STATUS_CLAIMED:
       return 'purple';
     case TICKET_STATUS_IN_PROGRESS:
       return 'green';
