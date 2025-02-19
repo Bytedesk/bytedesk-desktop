@@ -499,6 +499,7 @@ const ChatHeader = ({
           </Button>,
         );
         break;
+      
 
       case TICKET_STATUS_RESOLVED:
         buttons.push(
