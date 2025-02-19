@@ -257,12 +257,7 @@ const ChatHeader = ({
             {intl.formatMessage({ id: 'ticket.verify.later' })}
           </Button>
           <CancelBtn onCancel={() => Modal.destroyAll()} />
-          <OkBtn onOk={() => {
-            try {
-              const params: TICKET.TicketRequest = {
-                uid: currentTicket?.uid,
-                assigneeUid: agentInfo?.uid,
-          <OkBtn onOk={() => {}} /> 
+          <OkBtn />
         </>
       )},
       // onOk: async () => {
