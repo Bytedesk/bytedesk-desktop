@@ -49,7 +49,10 @@ export const ComposerInput = ({
   invisible,
   onImageSend,
   metionOptions,
+  fromTicketTab = false,
+  chatThread,
   ...rest
+
 }: ComposerInputProps) => {
   const [pastedImage, setPastedImage] = useState<File | null>(null);
   const {
@@ -60,6 +63,7 @@ export const ComposerInput = ({
     onKeyDown,
     onChange,
   } = rest;
+  console.log('ComposerInput', fromTicketTab, chatThread);
 
   const handlePaste = useCallback((e: React.ClipboardEvent<any>) => {
     // console.log('handlePaste', e)
@@ -109,7 +113,7 @@ export const ComposerInput = ({
     onKeyDown(e);
   };
 
-  return (
+  return (  
     <div className={clsx({ "S--invisible": invisible })}>
       {/* <Input
         className="Composer-input"

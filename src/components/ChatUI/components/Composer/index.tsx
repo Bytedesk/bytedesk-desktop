@@ -307,7 +307,13 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             </Popover>
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={false} {...inputProps} disabled={!isProcessingTicket(fromTicketTab, currentTicket)} />
+            <ComposerInput
+               invisible={false} 
+               {...inputProps} 
+               disabled={!isProcessingTicket(fromTicketTab, currentTicket)} 
+
+               chatThread={chatThread}
+               />
           </div>
           <SendButton onClick={handleSendBtnClick} disabled={!text || !isProcessingTicket(fromTicketTab, currentTicket)} />
         </div>
