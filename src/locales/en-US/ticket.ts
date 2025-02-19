@@ -70,6 +70,7 @@ export default {
    'ticket.action.assign': 'Assign',
    'ticket.action.close': 'Close',
    'ticket.action.reopen': 'Reopen',
+   'ticket.action.verify': 'Verify',
    'ticket.delete.confirm': 'Are you sure to delete this ticket?',
    'ticket.action.invite': 'Invite',
    // Ticket Layout
