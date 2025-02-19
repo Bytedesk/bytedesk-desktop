@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:47:17
+ * @LastEditTime: 2025-02-19 17:52:06
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -386,8 +386,6 @@ export const canChat = (
       ticket?.assignee?.uid === agentInfo?.uid ||
       ticket?.reporter?.uid === agentInfo?.uid
     );
-  } else if (chatThread === null || chatThread === undefined) {
-    return false;
   } else {
     return true;
   }
