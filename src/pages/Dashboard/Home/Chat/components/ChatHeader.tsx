@@ -38,7 +38,7 @@ import {
   // isOrgTicketThreadTopic,
   isRobotThread,
   isTicketThread,
-  truncateString,
+  // truncateString,
   isAssigneeTicket,
 } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
