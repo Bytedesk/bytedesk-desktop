@@ -211,4 +211,5 @@ export default {
    'ticket.verify.success': 'Ticket verified successfully',
    'ticket.verify.reject.success': 'Ticket rejected successfully',
    'ticket.verify.error': 'Failed to verify ticket',
+   'ticket.verify.later': 'Decide Later',
 } 

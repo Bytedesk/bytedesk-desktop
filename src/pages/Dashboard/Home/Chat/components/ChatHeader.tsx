@@ -250,13 +250,18 @@ const ChatHeader = ({
       cancelText: intl.formatMessage({ id: 'ticket.verify.reject' }),
       okButtonProps: { type: 'primary' },
       cancelButtonProps: { danger: true },
+      extra: (
+        <Button onClick={() => Modal.destroyAll()}>
+          {intl.formatMessage({ id: 'ticket.verify.later' })}
+        </Button>
+      ),
       onOk: async () => {
         try {
           const params: TICKET.TicketRequest = {
             uid: currentTicket?.uid,
-            // 设置处理人
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
+            verifyResult: true
           };
           await verifyTicket(params);
           message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
@@ -268,9 +273,9 @@ const ChatHeader = ({
         try {
           const params: TICKET.TicketRequest = {
             uid: currentTicket?.uid,
-            // 设置处理人
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
+            verifyResult: false
           };
           await verifyTicket(params);
           message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));

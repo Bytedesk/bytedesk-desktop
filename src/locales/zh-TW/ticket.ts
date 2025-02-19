@@ -219,4 +219,5 @@ export default {
   'ticket.verify.success': '工單驗證通過',
   'ticket.verify.reject.success': '工單驗證未通過',
   'ticket.verify.error': '工單驗證失敗',
+  'ticket.verify.later': '稍後決定',
 } 
