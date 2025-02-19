@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 15:40:46
+ * @LastEditTime: 2025-02-19 18:51:50
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -163,7 +163,7 @@ export default {
 
    // Ticket Status
    'ticket.status.label': 'Status',
-   'ticket.status.new': 'New',
+   'ticket.status.new': 'Un',
    'ticket.status.claimed': 'Assigned',
    'ticket.status.unclaimed': 'Unclaimed',
    'ticket.status.processing': 'In Progress',
