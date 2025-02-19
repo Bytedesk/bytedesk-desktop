@@ -400,13 +400,13 @@ const ChatHeader = ({
   const handleInviteTicket = async () => {
     message.warning("TODO: 邀请会话");
     // 调用邀请会话的接口，modal确认
-    modal.confirm({
-      title: "邀请会话",
-      content: "确定邀请该会话吗？",
-      onOk: async () => {
-        console.log("handleInviteTicket");
-      },
-    });
+    // modal.confirm({
+    //   title: "邀请会话",
+    //   content: "确定邀请该会话吗？",
+    //   onOk: async () => {
+    //     console.log("handleInviteTicket");
+    //   },
+    // });
   };
 
   // 根据工单状态返回可用的操作按钮
