@@ -111,7 +111,7 @@ const ChatHeader = ({
   };
 
   // 获取描述
-  const getDescription = () => {    
+  const getDescription = () => {      
     if (!fromTicketTab) { 
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
@@ -256,8 +256,13 @@ const ChatHeader = ({
           <Button onClick={() => Modal.destroyAll()}>
             {intl.formatMessage({ id: 'ticket.verify.later' })}
           </Button>
-          <CancelBtn  />
-          <OkBtn />
+          <CancelBtn onCancel={() => Modal.destroyAll()} />
+          <OkBtn onOk={() => {
+            try {
+              const params: TICKET.TicketRequest = {
+                uid: currentTicket?.uid,
+                assigneeUid: agentInfo?.uid,
+          <OkBtn onOk={() => {}} /> 
         </>
       )},
       // onOk: async () => {
