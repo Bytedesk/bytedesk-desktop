@@ -535,6 +535,7 @@ const ChatHeader = ({
 
       case TICKET_STATUS_PROCESSING:
       case TICKET_STATUS_RESUMED:
+        if (isAssigneeTicket(currentTicket, agentInfo)) {
         buttons.push(
           <Button
             key="resolve"
