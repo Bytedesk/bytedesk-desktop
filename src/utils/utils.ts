@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:42:46
+ * @LastEditTime: 2025-02-19 17:45:39
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -111,7 +111,7 @@ export function generateAvatar(uid: string) {
     size: 40,
     // ... other options
   }).toDataUriSync();
-}  
+} 
 
 
 // 去掉字符串开头 http://或https://
@@ -372,6 +372,8 @@ export function getTicketPriorityColor(priority: string) {
 export const canChat = (fromTicketTab: boolean, ticket: TICKET.TicketResponse, chatThread: THREAD.ThreadResponse, agentInfo: AGENT.AgentResponse) => {
   if (fromTicketTab) {
     return ticket?.assignee?.uid === agentInfo?.uid || ticket?.reporter?.uid === agentInfo?.uid;
+  } else if () {
+    
   } else {
     return true
   }
