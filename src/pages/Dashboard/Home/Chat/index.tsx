@@ -201,12 +201,14 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       };
     },
   );
-  console.log("ChatPage fromTicketTab:", fromTicketTab, chatThread);
+  // console.log("ChatPage fromTicketTab:", fromTicketTab, chatThread);
 
   const fetchTicketThread = async (threadUid?: string) => {
     if (!threadUid) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
-      // TODO：待认领
+      // 待认领状态，设置当前会话为空，清空聊天记录
+      setChatThread(null);
+      setCurrentTicketThread(null);
       return;
     }
     message.loading(translateString("i18n.loading"));
