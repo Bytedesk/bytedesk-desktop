@@ -22,6 +22,7 @@ import {
   isCustomerServiceThread, 
   isGroupThread, 
   isMemberThread, 
+  // isOrgTicketThreadTopic, 
   isRobotThread, 
   isTicketThread 
 } from "@/utils/utils";
@@ -70,7 +71,7 @@ const ChatHeader = ({
 
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
-    if (!fromTicketTab || !isOrgTicketThreadTopic(chatThread)) {
+    if (!fromTicketTab) {
       if (!chatThread?.user) return "";
       return chatThread.user.avatar;
     }
@@ -95,7 +96,7 @@ const ChatHeader = ({
   // 
   const getDescription = () => {
     if (!fromTicketTab) {
-      return typing ? previewContent || intl.formatMessage({ id: "i18n.typing "}) : "客服会话编号：#" + chatThread?.uid
+      return typing ? previewContent || intl.formatMessage({ id: "i18n.typing "}) : ( isTicketThread(chatThread) ? "工单编号：#" + currentTicket?.uid : "会话编号：#" + chatThread?.uid)
     } else {
       return currentTicket?.description
     }
