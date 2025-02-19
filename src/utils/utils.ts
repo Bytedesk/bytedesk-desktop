@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 15:14:44
+ * @LastEditTime: 2025-02-19 15:41:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -62,6 +62,7 @@ import {
   THREAD_TYPE_TICKET,
   TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX,
   TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX,
+  TICKET_STATUS_RESUMED,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -373,5 +374,5 @@ export const isMyTicket = (ticket: TICKET.TicketResponse, agentInfo: AGENT.Agent
 
 // 判断是否开始处理工单
 export const isProcessingTicket = (ticket: TICKET.TicketResponse) => {
-  return ticket?.status === TICKET_STATUS_PROCESSING;
+  return ticket?.status === TICKET_STATUS_PROCESSING || ticket?.status === TICKET_STATUS_RESUMED;
 };

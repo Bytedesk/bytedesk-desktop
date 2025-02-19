@@ -25,6 +25,7 @@ import {
   TICKET_STATUS_RESOLVED,
   TICKET_STATUS_UNCLAIMED,
   IS_DEBUG,
+  TICKET_STATUS_RESUMED,
 } from "@/utils/constants";
 import {
   isCustomerServiceThread,
@@ -111,7 +112,7 @@ const ChatHeader = ({
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
         : isTicketThread(chatThread)
-          ? "工单编号：#" +
+          ? "工单编号：#" + 
             //内容太长时，截断
             currentTicket?.uid +
             "，" +
@@ -210,7 +211,6 @@ const ChatHeader = ({
 
   // 解决工单/完成工单
   const handleResolveTicket = async () => {
-    message.warning("TODO: 解决工单");
     // 调用解决工单的接口，modal确认
     modal.confirm({
       title: "解决工单",
@@ -277,7 +277,32 @@ const ChatHeader = ({
 
   // 恢复工单
   const handleResumeTicket = async () => {
-    
+    modal.confirm({
+      title: "恢复工单",
+      content: "确定恢复该工单吗？",
+      onOk: async () => {
+        message.loading("恢复中...", 2);
+        // 调用恢复工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
+        };
+        const response = await resumeTicket(params);
+        console.log("query resumeTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.success(
+            intl.formatMessage({ id: "ticket.action.resume.success" }),
+          );
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 退回工单
@@ -426,6 +451,7 @@ const ChatHeader = ({
         break;
 
       case TICKET_STATUS_PROCESSING:
+      case TICKET_STATUS_RESUMED:
         buttons.push(
           <Button
             key="resolve"

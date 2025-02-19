@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 13:09:39
+ * @LastEditTime: 2025-02-19 15:40:15
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -48,6 +48,7 @@ export default {
   'ticket.status.processing': '處理中',
   'ticket.status.pending': '待處理',
   'ticket.status.holding': '掛起',
+  'ticket.status.resumed': '恢復',
   'ticket.status.reopened': '重新打開',
   'ticket.status.resolved': '已解決',
   'ticket.status.closed': '已關閉',
@@ -134,6 +135,7 @@ export default {
   'ticket.filter.status_processing': '處理中',
   'ticket.filter.status_pending': '待處理',
   'ticket.filter.status_holding': '掛起',
+  'ticket.filter.status_resumed': '恢復',
   'ticket.filter.status_reopened': '重新打開',
   'ticket.filter.status_resolved': '已解決',
   'ticket.filter.status_closed': '已關閉',
