@@ -252,7 +252,9 @@ const ChatHeader = ({
       cancelButtonProps: { danger: true },
       footer: (_, { OkBtn, CancelBtn }) => (
         <>
-          <Button>Custom Button</Button>
+          <Button onClick={() => Modal.destroyAll()}>
+            {intl.formatMessage({ id: 'ticket.verify.later' })}
+          </Button>
           <CancelBtn />
           <OkBtn />
         </>
