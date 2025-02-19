@@ -20,6 +20,7 @@ import { Action } from "./Action";
 import toggleClass from "../../utils/toggleClass";
 import { useTicketStore } from "@/stores/ticket/ticket";
 import { useAgentStore } from "@/stores/service/agent";
+import { isMyTicket, isProcessingTicket } from "@/utils/utils";
 
 export const CLASS_NAME_FOCUSING = "S--focusing";
 
@@ -101,10 +102,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
       fromTicketTab,
     );
     console.log("chatThread", chatThread);
-    // 判断当前工单是否是自己的工单
-    const isMyTicket = () => {
-      return currentTicket?.assignee?.uid === agentInfo?.uid;
-    };
 
     useEffect(() => {
       const mq =
@@ -293,7 +290,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     };
 
     if (isWide) {
-      if (fromTicketTab && !isMyTicket()) {
+      if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
         console.log("不显示composer");
         return <></>;
       }
@@ -318,15 +315,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             </Popover>
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={false} {...inputProps} />
+            <ComposerInput invisible={false} {...inputProps} disabled={!isProcessingTicket(currentTicket)} />
           </div>
-          <SendButton onClick={handleSendBtnClick} disabled={!text} />
+          <SendButton onClick={handleSendBtnClick} disabled={!text || !isProcessingTicket(currentTicket)} />
         </div>
       );
     }
 
     // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-    if (fromTicketTab && !isMyTicket()) {
+    if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
       console.log("不显示composer");
       return <></>;
     }
@@ -344,7 +341,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             />
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={!isInputText} {...inputProps} />
+            <ComposerInput invisible={!isInputText} {...inputProps} disabled={!isProcessingTicket(currentTicket)} />
             {!isInputText && <Recorder {...recorder} />}
           </div>
           {!text && rightAction && <Action {...rightAction} />}

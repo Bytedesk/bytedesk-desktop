@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-21 11:19:20
+ * @LastEditTime: 2025-02-19 15:12:09
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -14,7 +15,7 @@
  */
 import React, { useState, useEffect, useCallback } from "react";
 import clsx from "clsx";
-import { Input, InputProps } from "../Input";
+import { InputProps } from "../Input";
 import { SendConfirm } from "../SendConfirm";
 import riseInput from "./riseInput";
 import parseDataTransfer from "../../utils/parseDataTransfer";
@@ -92,15 +93,15 @@ export const ComposerInput = ({
     // console.log('onMentionsChange:', value);
     onChange(value, null);
   };
-  const onMetionsSelect = (option: MentionsOptionProps) => {
+  const onMetionSelect = (option: MentionsOptionProps) => {
     // {value: 'test1', label: 'Test1', key: 'test1'}
-    console.log('onMetionsSelect', option);
+    console.log('onMetionSelect', option);
   };
   // FIXME: 回车选择某一项的时候，会直接将消息发送出去，需要处理一下
-  const onMetionsKeydown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // console.log('onMetionsKeydown', e);
+  const onMetionKeydown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // console.log('onMetionKeydown', e);
     // if (e.key === "Enter") {
-    //   console.log('onMetionsKeydown Enter');
+    //   console.log('onMetionKeydown Enter');
     //   e.preventDefault();
     // }
     onKeyDown(e);
@@ -120,7 +121,7 @@ export const ComposerInput = ({
       <Mentions
         className="Composer-input"
         rows={1}
-        // @ts-ignore
+        // @ts-expect-error 忽略value类型错误
         value={value}
         autoSize
         allowClear
@@ -130,9 +131,9 @@ export const ComposerInput = ({
         enterKeyHint="send"
         onFocus={onFocus}
         onBlur={onBlur}
-        onKeyDown={onMetionsKeydown}
+        onKeyDown={onMetionKeydown}
         onChange={onMentionsChange}
-        onSelect={onMetionsSelect}
+        onSelect={onMetionSelect}
         onPaste={onImageSend ? handlePaste : undefined}
         options={metionOptions[metionPrefix]}
         // options={(MOCK_DATA[prefix] || []).map((value) => ({
@@ -140,7 +141,7 @@ export const ComposerInput = ({
         //   value,
         //   label: value,
         // }))}
-        // @ts-ignore
+        // @ts-expect-error 忽略ref类型错误
         ref={inputRef}
       />
       {pastedImage && (

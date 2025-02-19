@@ -17,6 +17,7 @@ import { ScrollView, ScrollViewHandle } from "../ScrollView/ScrollView";
 import { QuickReply, QuickReplyItemProps } from "./QuickReply";
 import { useAgentStore } from "@/stores/service/agent";
 import { useTicketStore } from "@/stores/ticket/ticket";
+import { isMyTicket } from "@/utils/utils";
 
 export interface QuickRepliesProps {
   items: QuickReplyItemProps[];
@@ -52,9 +53,9 @@ const QuickReplies = (props: QuickRepliesProps) => {
   );
   console.log("chatThread", chatThread);
   // 判断当前工单是否是自己的工单
-  const isMyTicket = () => {
-    return currentTicket?.assignee?.uid === agentInfo?.uid;
-  };
+  // const isMyTicket = () => {
+  //   return currentTicket?.assignee?.uid === agentInfo?.uid;
+  // };
 
   useLayoutEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -75,7 +76,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
   if (!items.length) return null;
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-  if (fromTicketTab && !isMyTicket()) {
+  if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
     console.log("不显示快捷短语");
     return <></>;
   }
