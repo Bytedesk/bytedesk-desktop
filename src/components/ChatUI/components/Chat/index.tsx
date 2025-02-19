@@ -247,14 +247,16 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
             {renderQuickReplies ? (
               renderQuickReplies()
             ) : (
-              {isProcessingTicket(currentTicket) && <QuickReplies
-                items={quickReplies}
-                visible={quickRepliesVisible}
-                onClick={onQuickReplyClick}
-                onScroll={onQuickReplyScroll}
-                fromTicketTab={fromTicketTab}
-                chatThread={chatThread}
-              />}
+              isProcessingTicket(currentTicket) && (
+                <QuickReplies
+                  items={quickReplies}
+                  visible={quickRepliesVisible}
+                  onClick={onQuickReplyClick}
+                  onScroll={onQuickReplyScroll}
+                  fromTicketTab={fromTicketTab}
+                  chatThread={chatThread}
+                />
+              )
             )}
             {/* TODO: 翻译输入框 */}
             {showTransition && (
