@@ -105,7 +105,7 @@ export default {
 
    // Filter translations
    'ticket.filter.status_all': 'All Status',
-   'ticket.filter.status_new': 'New',
+   'ticket.filter.status_new': 'Unassigned',
    'ticket.filter.status_claimed': 'Assigned',
    'ticket.filter.status_unclaimed': 'Unclaimed',
    'ticket.filter.status_processing': 'In Progress',
