@@ -18,6 +18,8 @@ import { ComposerInput } from "./ComposerInput";
 import { SendButton } from "./SendButton";
 import { Action } from "./Action";
 import toggleClass from "../../utils/toggleClass";
+import { useTicketStore } from "@/stores/ticket/ticket";
+import { useAgentStore } from "@/stores/service/agent";
 
 export const CLASS_NAME_FOCUSING = "S--focusing";
 
@@ -42,6 +44,8 @@ export type ComposerProps = {
   onAccessoryToggle?: (isAccessoryOpen: boolean) => void;
   rightAction?: IconButtonProps;
   metionOptions?: any;
+  fromTicketTab?: boolean;
+  chatThread: THREAD.ThreadResponse;
 };
 
 export interface ComposerHandle {
@@ -69,6 +73,8 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
       rightAction,
       inputOptions,
       metionOptions: metionOptions,
+      fromTicketTab = false,
+      chatThread,
     } = props;
 
     const [text, setText] = useState(initialText);
@@ -83,6 +89,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     const popoverTarget = useRef<any>();
     const isMountRef = useRef(false);
     const [isWide, setWide] = useState(false);
+    // 
+    const currentTicket = useTicketStore((state) => state.currentTicket);
+    const { agentInfo } = useAgentStore.getState();
+    console.log("currentTicket", currentTicket, "agentInfo", agentInfo, "fromTicketTab", fromTicketTab);
+    console.log("chatThread", chatThread);
+    // 判断当前工单是否是自己的工单
+    const isMyTicket = () => {
+      return currentTicket?.assignee?.uid === agentInfo?.uid;
+    };
 
     useEffect(() => {
       const mq =
@@ -298,9 +313,17 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
       );
     }
 
-    return (
-      <>
-        <div className="Composer">
+    // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
+    if (!isMyTicket() && fromTicketTab) {
+      console.log("不显示composer");
+      return (
+        <></>
+      );
+    } else {
+      console.log("显示composer");
+      return (
+        <>
+          <div className="Composer">
           {recorder.canRecord && (
             <Action
               className="Composer-inputTypeBtn"
@@ -337,6 +360,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
           </AccessoryWrap>
         )}
       </>
-    );
+      );
+    }
   },
 );

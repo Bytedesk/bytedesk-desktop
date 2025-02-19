@@ -144,6 +144,8 @@ export type ChatProps = Omit<ComposerProps, "onFocus" | "onChange" | "onBlur"> &
      * 输入组件
      */
     Composer?: React.ElementType; // FIXME
+    fromTicketTab?: boolean;
+    chatThread: THREAD.ThreadResponse;
   };
 
 export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
@@ -193,7 +195,10 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       rightAction,
       metionOptions: metionOptions,
       Composer = DComposer,
+      fromTicketTab = false,
+      chatThread,
     } = props;
+    console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
 
     function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
       if (messagesRef && messagesRef.current) {
@@ -277,6 +282,8 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
               onImageSend={onImageSend}
               rightAction={rightAction}
               metionOptions={metionOptions}
+              fromTicketTab={fromTicketTab}
+              chatThread={chatThread}
             />
           </div>
         </div>

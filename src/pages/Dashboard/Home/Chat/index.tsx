@@ -1442,6 +1442,9 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
                 wideBreakpoint="600px" // 屏幕宽度小于600px的时候，左侧按钮显示为右侧加号plus按钮
                 recorder={{ canRecord: false }}
                 metionOptions={mentionOptions}
+                // 工单tab页面专用
+                fromTicketTab={fromTicketTab}
+                chatThread={chatThread}
                 // toolbar={initialToolbars}
                 // onToolbarClick={handleToolbarClick}
                 // rightAction={rightActions}
