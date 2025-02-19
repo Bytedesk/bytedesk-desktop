@@ -31,8 +31,7 @@ function useTranslate() {
                 defaultMessage: value,
             });
         }
-        // 现在显示长度为10
-        return truncateString(value, 8);
+        return value;
     };
 
     const translateStringTranct = (content: string) => {
