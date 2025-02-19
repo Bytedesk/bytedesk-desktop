@@ -39,6 +39,7 @@ import {
   isRobotThread,
   isTicketThread,
   truncateString,
+  isAssigneeTicket,
 } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Layout, Modal, Space } from "antd";
@@ -111,8 +112,8 @@ const ChatHeader = ({
   };
 
   // 获取描述
-  const getDescription = () => {          
-    if (!fromTicketTab) { 
+  const getDescription = () => {
+    if (!fromTicketTab) {
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
         : isTicketThread(chatThread)
@@ -244,11 +245,11 @@ const ChatHeader = ({
   // 客户验证
   const handleVerifyTicket = () => {
     modal.confirm({
-      title: intl.formatMessage({ id: 'ticket.verify.title' }),
-      content: intl.formatMessage({ id: 'ticket.verify.content' }),
-      okText: intl.formatMessage({ id: 'ticket.verify.pass' }),
-      cancelText: intl.formatMessage({ id: 'ticket.verify.reject' }),
-      okButtonProps: { type: 'primary' },
+      title: intl.formatMessage({ id: "ticket.verify.title" }),
+      content: intl.formatMessage({ id: "ticket.verify.content" }),
+      okText: intl.formatMessage({ id: "ticket.verify.pass" }),
+      cancelText: intl.formatMessage({ id: "ticket.verify.reject" }),
+      okButtonProps: { type: "primary" },
       cancelButtonProps: { danger: true },
       onOk: async () => {
         message.loading("验证中...", 2);
@@ -257,13 +258,15 @@ const ChatHeader = ({
             uid: currentTicket?.uid,
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
-            verified: true
+            verified: true,
           };
           const response = await verifyTicket(params);
           console.log("query verifyTicket response", params, response.data);
           if (response.data.code === 200) {
             message.destroy();
-            message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+            message.success(
+              intl.formatMessage({ id: "ticket.verify.success" }),
+            );
             setCurrentTicket(response.data.data);
             // 刷新工单列表
             ticketService.refreshTickets();
@@ -273,7 +276,7 @@ const ChatHeader = ({
           }
         } catch (error) {
           message.destroy();
-          message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
+          message.error(intl.formatMessage({ id: "ticket.verify.error" }));
         }
       },
       onCancel: async () => {
@@ -283,13 +286,15 @@ const ChatHeader = ({
             uid: currentTicket?.uid,
             assigneeUid: agentInfo?.uid,
             orgUid: currentOrg?.uid,
-            verified: false
+            verified: false,
           };
           const response = await verifyTicket(params);
           console.log("query verifyTicket response", params, response.data);
           if (response.data.code === 200) {
             message.destroy();
-            message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
+            message.success(
+              intl.formatMessage({ id: "ticket.verify.reject.success" }),
+            );
             setCurrentTicket(response.data.data);
             // 刷新工单列表
             ticketService.refreshTickets();
@@ -299,19 +304,19 @@ const ChatHeader = ({
           }
         } catch (error) {
           message.destroy();
-          message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
+          message.error(intl.formatMessage({ id: "ticket.verify.error" }));
         }
       },
       footer: (_, { OkBtn, CancelBtn }) => (
         <>
           <Button onClick={() => Modal.destroyAll()}>
-            {intl.formatMessage({ id: 'ticket.verify.later' })}
+            {intl.formatMessage({ id: "ticket.verify.later" })}
           </Button>
-          <CancelBtn  />
+          <CancelBtn />
           <OkBtn />
         </>
-      )},
-    ); 
+      ),
+    });
   };
 
   // 挂起工单
@@ -502,27 +507,29 @@ const ChatHeader = ({
 
       case TICKET_STATUS_CLAIMED:
       case TICKET_STATUS_REOPENED:
-        buttons.push(
-          <Button
-            key="process"
-            type="primary"
-            onClick={handleProcessTicket}
-            disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
-            {intl.formatMessage({ id: "ticket.action.process" })}
-          </Button>,
-          <Button
-            key="return"
-            onClick={handleUnclaimTicket}
-            disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
-            {intl.formatMessage({ id: "ticket.action.unclaim" })}
-          </Button>,
-        );
+        if (isAssigneeTicket(currentTicket, agentInfo)) {
+          buttons.push(
+            <Button
+              key="process"
+              type="primary"
+              onClick={handleProcessTicket}
+              disabled={
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
+              {intl.formatMessage({ id: "ticket.action.process" })}
+            </Button>,
+            <Button
+              key="return"
+              onClick={handleUnclaimTicket}
+              disabled={
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
+              {intl.formatMessage({ id: "ticket.action.unclaim" })}
+            </Button>,
+          );
+        }
         break;
 
       case TICKET_STATUS_PROCESSING:
@@ -590,7 +597,7 @@ const ChatHeader = ({
           </Button>,
         );
         break;
-        
+
       case TICKET_STATUS_RESOLVED:
         // 只有自己创建的工单，才能执行客户验证
         if (currentTicket?.reporter.uid === agentInfo?.uid) {
@@ -599,9 +606,9 @@ const ChatHeader = ({
               key="verify"
               onClick={handleVerifyTicket}
               disabled={
-              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
-            }
-          >
+                !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+              }
+            >
               {intl.formatMessage({ id: "ticket.action.verify" })}
             </Button>,
           );
