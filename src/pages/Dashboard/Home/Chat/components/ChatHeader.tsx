@@ -1,12 +1,20 @@
 import { message } from "@/AntdGlobalComp";
-import { claimTicket, closeTicket, holdTicket, resolveTicket, resumeTicket, startProcessingTicket, unclaimTicket } from "@/apis/ticket/ticket";
+import {
+  claimTicket,
+  closeTicket,
+  holdTicket,
+  resolveTicket,
+  resumeTicket,
+  startProcessingTicket,
+  unclaimTicket,
+} from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useOrgStore } from "@/stores/core/organization";
 import { useAgentStore } from "@/stores/service/agent";
 import { useTicketStore } from "@/stores/ticket/ticket";
-import { 
-  I18N_PREFIX, 
+import {
+  I18N_PREFIX,
   THREAD_STATE_CLOSED,
   TICKET_STATUS_NEW,
   TICKET_STATUS_CLAIMED,
@@ -18,20 +26,20 @@ import {
   TICKET_STATUS_UNCLAIMED,
   IS_DEBUG,
 } from "@/utils/constants";
-import { 
-  isCustomerServiceThread, 
-  isGroupThread, 
-  isMemberThread, 
-  // isOrgTicketThreadTopic, 
-  isRobotThread, 
-  isTicketThread 
+import {
+  isCustomerServiceThread,
+  isGroupThread,
+  isMemberThread,
+  // isOrgTicketThreadTopic,
+  isRobotThread,
+  isTicketThread,
 } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Layout, Modal, Space } from "antd";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
-import { ticketService } from '@/services/ticketService';
+import { ticketService } from "@/services/ticketService";
 
 interface ChatHeaderProps {
   fromTicketTab?: boolean;
@@ -87,20 +95,32 @@ const ChatHeader = ({
           defaultMessage: chatThread.user.nickname,
         });
       }
-      return chatThread.user?.nickname || intl.formatMessage({ id: 'chat.header.user.unnamed' });
+      return (
+        chatThread.user?.nickname ||
+        intl.formatMessage({ id: "chat.header.user.unnamed" })
+      );
     } else {
-      return currentTicket?.title
+      return currentTicket?.title;
     }
   };
 
-  // 
+  //
   const getDescription = () => {
     if (!fromTicketTab) {
-      return typing ? previewContent || intl.formatMessage({ id: "i18n.typing "}) : ( isTicketThread(chatThread) ? "工单编号：#" + currentTicket?.uid : "会话编号：#" + chatThread?.uid)
+      return typing
+        ? previewContent || intl.formatMessage({ id: "i18n.typing " })
+        : isTicketThread(chatThread)
+          ? "工单编号：#" + currentTicket?.uid
+          : "会话编号：#" + chatThread?.uid;
     } else {
-      return currentTicket?.description
+      return (
+        " 工单编号：#" +
+        currentTicket?.uid +
+        " " +
+        currentTicket?.description
+      );
     }
-  }
+  };
 
   // 判断当前工单是否是自己的工单
   const isMyTicket = () => {
@@ -127,7 +147,9 @@ const ChatHeader = ({
         console.log("query claimTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.claim.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.claim.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -157,10 +179,16 @@ const ChatHeader = ({
           status: TICKET_STATUS_PROCESSING,
         };
         const response = await startProcessingTicket(params);
-        console.log("query startProcessingTicket response", params, response.data);
+        console.log(
+          "query startProcessingTicket response",
+          params,
+          response.data,
+        );
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.process.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.process.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -190,7 +218,9 @@ const ChatHeader = ({
         console.log("query resolveTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.resolve.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.resolve.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -220,7 +250,9 @@ const ChatHeader = ({
         console.log("query holdTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.hold.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.hold.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -245,7 +277,9 @@ const ChatHeader = ({
     const response = await unclaimTicket(params);
     console.log("query unclaimTicket response", params, response.data);
     if (response.data.code === 200) {
-      message.success(intl.formatMessage({ id: 'ticket.action.unclaim.success' }));
+      message.success(
+        intl.formatMessage({ id: "ticket.action.unclaim.success" }),
+      );
       setCurrentTicket(response.data.data);
       // 刷新工单列表
       ticketService.refreshTickets();
@@ -274,7 +308,9 @@ const ChatHeader = ({
         console.log("query closeTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.close.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.close.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -303,7 +339,9 @@ const ChatHeader = ({
         console.log("query resumeTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
-          message.success(intl.formatMessage({ id: 'ticket.action.resume.success' }));
+          message.success(
+            intl.formatMessage({ id: "ticket.action.resume.success" }),
+          );
           setCurrentTicket(response.data.data);
           // 刷新工单列表
           ticketService.refreshTickets();
@@ -324,70 +362,102 @@ const ChatHeader = ({
       content: "确定邀请该会话吗？",
       onOk: async () => {
         console.log("handleInviteTicket");
-      }
+      },
     });
   };
 
   // 根据工单状态返回可用的操作按钮
   const getTicketActionButtons = () => {
     if (!currentTicket) return null;
-    
+
     const buttons = [];
-    
+
     switch (currentTicket.status) {
       case TICKET_STATUS_NEW:
       case TICKET_STATUS_UNCLAIMED:
         buttons.push(
           <Button key="claim" type="primary" onClick={handleClaimTicket}>
-            {intl.formatMessage({ id: 'ticket.action.claim' })}
-          </Button>
+            {intl.formatMessage({ id: "ticket.action.claim" })}
+          </Button>,
         );
         break;
-        
+
       case TICKET_STATUS_CLAIMED:
       case TICKET_STATUS_REOPENED:
         buttons.push(
-          <Button key="process" type="primary" onClick={handleProcessTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.process' })}
+          <Button
+            key="process"
+            type="primary"
+            onClick={handleProcessTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.process" })}
           </Button>,
-          <Button key="return" onClick={handleUnclaimTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.unclaim' })}
-          </Button>
+          <Button
+            key="return"
+            onClick={handleUnclaimTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.unclaim" })}
+          </Button>,
         );
         break;
-        
+
       case TICKET_STATUS_PROCESSING:
         buttons.push(
-          <Button key="resolve" type="primary" onClick={handleResolveTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.resolve' })}
+          <Button
+            key="resolve"
+            type="primary"
+            onClick={handleResolveTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.resolve" })}
           </Button>,
-          <Button key="pending" onClick={handleHoldTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.pending' })}
-          </Button>
+          <Button
+            key="pending"
+            onClick={handleHoldTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.pending" })}
+          </Button>,
         );
         break;
-        
+
       case TICKET_STATUS_PENDING:
       case TICKET_STATUS_HOLDING:
         buttons.push(
-          <Button key="resume" type="primary" onClick={handleReopenTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.resume' })}
-          </Button>
+          <Button
+            key="resume"
+            type="primary"
+            onClick={handleReopenTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.resume" })}
+          </Button>,
         );
         break;
-        
+
       case TICKET_STATUS_RESOLVED:
         buttons.push(
-          <Button key="close" type="primary" onClick={handleCloseTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.close' })}
+          <Button
+            key="close"
+            type="primary"
+            onClick={handleCloseTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.close" })}
           </Button>,
-          <Button key="reopen" onClick={handleReopenTicket} disabled={!isMyTicket()}>
-            {intl.formatMessage({ id: 'ticket.action.reopen' })}
-          </Button>
+          <Button
+            key="reopen"
+            onClick={handleReopenTicket}
+            disabled={!isMyTicket()}
+          >
+            {intl.formatMessage({ id: "ticket.action.reopen" })}
+          </Button>,
         );
         break;
     }
-    
+
     // 除了已关闭和已取消状态外,都可以升级
     // if (IS_DEBUG && ![TICKET_STATUS_CLOSED, TICKET_STATUS_CANCELLED].includes(currentTicket.status)) {
     //   buttons.push(
@@ -402,12 +472,17 @@ const ChatHeader = ({
     // 添加邀请会话按钮
     if (IS_DEBUG && isTicketThread(chatThread)) {
       buttons.push(
-        <Button key="invite" type="primary" onClick={handleInviteTicket} disabled={!isMyTicket()}>
-          {intl.formatMessage({ id: 'ticket.action.invite' })}
-        </Button>
+        <Button
+          key="invite"
+          type="primary"
+          onClick={handleInviteTicket}
+          disabled={!isMyTicket()}
+        >
+          {intl.formatMessage({ id: "ticket.action.invite" })}
+        </Button>,
       );
     }
-    
+
     return buttons;
   };
 
@@ -416,105 +491,114 @@ const ChatHeader = ({
       <Header
         style={{
           ...headerStyle,
-            padding: "0 16px",
+          padding: "0 16px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: 60,
+        }}
+      >
+        {/* 左侧昵称和头像 */}
+        <div
+          style={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: 60,
+            alignItems: "flex-start",
+            gap: "8px",
           }}
         >
-          {/* 左侧昵称和头像 */}
+          {getAvatar() && (
+            <img
+              src={getAvatar()}
+              alt="avatar"
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          )}
           <div
             style={{
               display: "flex",
-              alignItems: "flex-start",
-              gap: "8px",
+              flexDirection: "column",
+              gap: "0",
             }}
           >
-            {getAvatar() && (
-              <img
-                src={getAvatar()}
-                alt="avatar"
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-              />
-            )}
-            <div
+            <span
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0",
+                fontSize: "16px",
+                fontWeight: 500,
+                color: isDarkMode ? "#fff" : "#000",
+                lineHeight: "20px",
               }}
             >
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 500,
-                  color: isDarkMode ? "#fff" : "#000",
-                  lineHeight: "20px",
-                }}
-              >
-                {getNickname()}
-              </span>
-              <span
-                style={{
-                  fontSize: "12px",
-                  color: isDarkMode ? "#fff" : "#000",
-                  lineHeight: "16px",
-                  minHeight: "16px",
-                }}
-              >
-                {getDescription()}
-              </span>
-            </div>
+              {getNickname()}
+            </span>
+            <span
+              style={{
+                fontSize: "12px",
+                color: isDarkMode ? "#fff" : "#000",
+                lineHeight: "16px",
+                minHeight: "16px",
+              }}
+            >
+              {getDescription()}
+            </span>
           </div>
+        </div>
 
         {!fromTicketTab && isCustomerServiceThread(chatThread) && (
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Button type="text" onClick={() => setIsTransferThreadModelOpen(true)}>
-              {intl.formatMessage({ id: 'chat.header.action.transfer' })}
+          <div style={{ display: "flex", gap: "8px" }}>
+            <Button
+              type="text"
+              onClick={() => setIsTransferThreadModelOpen(true)}
+            >
+              {intl.formatMessage({ id: "chat.header.action.transfer" })}
             </Button>
-            <Button type="text" onClick={() => setIsTicketCreateModelOpen(true)}>
-              {intl.formatMessage({ id: 'chat.header.action.create.ticket' })}
+            <Button
+              type="text"
+              onClick={() => setIsTicketCreateModelOpen(true)}
+            >
+              {intl.formatMessage({ id: "chat.header.action.create.ticket" })}
             </Button>
             {chatThread?.state !== THREAD_STATE_CLOSED && (
               <Button type="text" onClick={showCloseThreadConfirm}>
-                {intl.formatMessage({ id: 'chat.header.action.close' })}
+                {intl.formatMessage({ id: "chat.header.action.close" })}
               </Button>
             )}
           </div>
         )}
 
-        {!fromTicketTab && (isGroupThread(chatThread) || isMemberThread(chatThread) || isRobotThread(chatThread)) && (
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Button
-              icon={<MenuOutlined />}
-              onClick={() => {
-                if (isGroupThread(chatThread)) {
-                  setIsGroupInfoDrawerOpen(true);
-                } else if (isMemberThread(chatThread)) {
-                  setIsMemberInfoDrawerOpen(true);
-                } else if (isRobotThread(chatThread)) {
-                  setIsRobotInfoDrawerOpen(true);
-                } else {
-                  message.warning(intl.formatMessage({ id: 'chat.header.type.not.supported' }));
-                }
-              }}
-            />
-          </div>
+        {!fromTicketTab &&
+          (isGroupThread(chatThread) ||
+            isMemberThread(chatThread) ||
+            isRobotThread(chatThread)) && (
+            <div style={{ display: "flex", gap: "8px" }}>
+              <Button
+                icon={<MenuOutlined />}
+                onClick={() => {
+                  if (isGroupThread(chatThread)) {
+                    setIsGroupInfoDrawerOpen(true);
+                  } else if (isMemberThread(chatThread)) {
+                    setIsMemberInfoDrawerOpen(true);
+                  } else if (isRobotThread(chatThread)) {
+                    setIsRobotInfoDrawerOpen(true);
+                  } else {
+                    message.warning(
+                      intl.formatMessage({
+                        id: "chat.header.type.not.supported",
+                      }),
+                    );
+                  }
+                }}
+              />
+            </div>
+          )}
+
+        {(fromTicketTab || isTicketThread(chatThread)) && (
+          <Space>{getTicketActionButtons()}</Space>
         )}
-        
-        {
-          fromTicketTab && (
-            <Space>
-              {getTicketActionButtons()}
-            </Space>
-          )
-        }
       </Header>
       {contextHolder}
     </>
