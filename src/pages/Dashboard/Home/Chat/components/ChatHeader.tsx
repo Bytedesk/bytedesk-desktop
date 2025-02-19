@@ -242,39 +242,32 @@ const ChatHeader = ({
   };
 
   // 客户验证
-  const handleVerifyTicket = async () => {
-    // 调用解决工单的接口，modal确认
-    // TODO: 增加选择：验证通过、未验证失败
-    
-    modal.confirm({
-      title: "验证工单",
-      content: "确定验证该工单吗？",
+  const handleVerifyTicket = () => {
+    Modal.confirm({
+      title: intl.formatMessage({ id: 'ticket.verify.title' }),
+      content: intl.formatMessage({ id: 'ticket.verify.content' }),
+      okText: intl.formatMessage({ id: 'ticket.verify.pass' }),
+      cancelText: intl.formatMessage({ id: 'ticket.verify.reject' }),
+      okButtonProps: { type: 'primary' },
+      cancelButtonProps: { danger: true },
       onOk: async () => {
-        message.loading("验证中...", 2);
-        // 调用验证工单的接口
-        const params: TICKET.TicketRequest = {
-          uid: currentTicket?.uid,
-          // 设置处理人
-          assigneeUid: agentInfo?.uid,
-          orgUid: currentOrg?.uid,
-        };
-        const response = await verifyTicket(params);
-        console.log("query verifyTicket response", params, response.data);
-        if (response.data.code === 200) {
-          message.destroy();
-          message.success(
-            intl.formatMessage({ id: "ticket.action.verify.success" }),
-          );
-          setCurrentTicket(response.data.data);
-          // 刷新工单列表
-          ticketService.refreshTickets();
-        } else {
-          message.destroy();
-          message.error(response.data.message);
+        try {
+          await verifyTicket(currentTicket.uid, true);
+          message.success(intl.formatMessage({ id: 'ticket.verify.success' }));
+        } catch (error) {
+          message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
         }
       },
+      onCancel: async () => {
+        try {
+          await verifyTicket(currentTicket.uid, false);
+          message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
+        } catch (error) {
+          message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
+        }
+      }
     });
-  }
+  };
 
   // 挂起工单
   const handleHoldTicket = async () => {

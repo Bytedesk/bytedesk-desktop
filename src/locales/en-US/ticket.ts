@@ -202,4 +202,13 @@ export default {
    'ticket.action.claim.loading': 'Claiming ticket...',
    'ticket.action.claim.success': 'Ticket claimed successfully',
    'ticket.action.claim.error': 'Failed to claim ticket',
+
+   // Verify ticket translations
+   'ticket.verify.title': 'Verify Ticket',
+   'ticket.verify.content': 'Please verify this ticket',
+   'ticket.verify.pass': 'Pass',
+   'ticket.verify.reject': 'Reject',
+   'ticket.verify.success': 'Ticket verified successfully',
+   'ticket.verify.reject.success': 'Ticket rejected successfully',
+   'ticket.verify.error': 'Failed to verify ticket',
 } 

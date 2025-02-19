@@ -211,4 +211,11 @@ export default {
   'ticket.action.claim.confirm.content': '确定要认领该工单吗？',
   'ticket.action.claim.loading': '认领中...',
   'ticket.action.claim.error': '工单认领失败',
+  'ticket.verify.title': '验证工单',
+  'ticket.verify.content': '请验证此工单',
+  'ticket.verify.pass': '通过',
+  'ticket.verify.reject': '不通过',
+  'ticket.verify.success': '工单验证通过',
+  'ticket.verify.reject.success': '工单验证未通过',
+  'ticket.verify.error': '工单验证失败',
 } 
