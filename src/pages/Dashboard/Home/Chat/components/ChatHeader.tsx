@@ -38,7 +38,7 @@ import {
   // isOrgTicketThreadTopic,
   isRobotThread,
   isTicketThread,
-  // truncateString,
+  truncateString,
   isAssigneeTicket,
 } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
@@ -113,30 +113,26 @@ const ChatHeader = ({
 
   // 获取描述
   const getDescription = () => {
-    if (typing) {
-      return intl.formatMessage({ id: 'chat.header.typing' });
+    if (!fromTicketTab) {
+      return typing
+        ? previewContent || intl.formatMessage({ id: "i18n.typing " })
+        : isTicketThread(chatThread)
+          ? "工单编号：#" +
+            //内容太长时，截断
+            currentTicket?.uid +
+            "，" +
+            //内容太长时，截断
+            truncateString(currentTicket?.title, 100)
+          : "会话编号：#" + chatThread?.uid;
+    } else {
+      return (
+        " 工单编号：#" +
+        currentTicket?.uid +
+        "，" +
+        //内容太长时，截断
+        truncateString(currentTicket?.description, 100)
+      );
     }
-
-    if (!previewContent) {
-      return intl.formatMessage({ id: 'chat.header.no.message' });
-    }
-
-    return (
-      <div 
-        style={{ 
-          fontSize: "12px",
-          color: isDarkMode ? "#fff" : "#000",
-          lineHeight: "16px",
-          minHeight: "16px",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          maxWidth: "100%"
-        }}
-      >
-        {previewContent}
-      </div>
-    );
   };
 
   // 认领工单
