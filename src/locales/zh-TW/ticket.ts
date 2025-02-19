@@ -88,7 +88,7 @@ export default {
   'ticket.action.assign': '分配',
   'ticket.action.close': '關閉',
   'ticket.action.reopen': '重新打開',
-  
+  'ticket.action.verify': '驗證',
   'ticket.delete.confirm': '確定要刪除此工單嗎？',
   'ticket.action.invite': '邀請',
   // 工單布局
