@@ -123,6 +123,7 @@ import StreamQa from "@/components/Bubbles/StreamQa";
 import ChatHeader from "./components/ChatHeader";
 import ChatModels from "./components/ChatModels";
 import ChatMenu from "./components/ChatMenu";
+import { useTicketStore } from "@/stores/ticket/ticket";
 
 interface ChatPageProps {
   fromTicketTab?: boolean;
@@ -189,6 +190,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   const [isGroupInfoDrawerOpen, setIsGroupInfoDrawerOpen] = useState(false);
   const [isMemberInfoDrawerOpen, setIsMemberInfoDrawerOpen] = useState(false);
   const [isRobotInfoDrawerOpen, setIsRobotInfoDrawerOpen] = useState(false);
+  const currentTicket = useTicketStore((state) => state.currentTicket);
   //
   const { messageList, addMessageList, updateMessage } = useMessageStore(
     (state) => {
@@ -1358,6 +1360,11 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       { value: "test2", label: "Test2" },
     ],
   };
+
+  // 如果 fromTicketTab = true, 且 currentTicket 为空，则显示空页面
+  if (fromTicketTab && !currentTicket) {
+    return <Empty style={{ marginTop: 200 }} description={false} />;
+  }
 
   return (
     <>

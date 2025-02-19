@@ -22,7 +22,7 @@ interface ThreadContextMenuProps {
   onFilterChange: (id: string) => void;
   onSetCurrentThread: (thread: THREAD.ThreadResponse) => void;
   onOpenBlockModal: () => void;
-//   onOpenTicketModal: () => void;
+  //   onOpenTicketModal: () => void;
 }
 
 const MENU_ID = "thread_list_item";
@@ -49,34 +49,41 @@ const ThreadContextMenu = ({
       ...currentThread,
       top: !currentThread?.top,
     };
+    // 判断uid是否为空
+    if (newThread?.uid == null) {
+      return;
+    }
     const response = await updateThread(newThread);
     if (response.data.code === 200) {
       onSetCurrentThread(response.data.data);
       message.success(intl.formatMessage({ id: "thread.set.success" }));
     } else {
-      message.error(intl.formatMessage({ id: "thread.set.error" }));
+      message.error(response.data.message);
     }
   };
 
   const handleStarThreadClick = async (star: number) => {
-    const newThread: THREAD.ThreadRequest = { 
-      ...currentThread, 
+    const newThread: THREAD.ThreadRequest = {
+      ...currentThread,
       star,
       // 如果取消星标且当前是置顶状态，保持置顶
-      top: star === 0 ? currentThread?.top : currentThread?.top 
+      top: star === 0 ? currentThread?.top : currentThread?.top,
     };
-    
+    // 判断uid是否为空
+    if (newThread?.uid == null) {
+      return;
+    }
     const response = await updateThread(newThread);
     if (response.data.code === 200) {
       // 更新当前线程状态
       onSetCurrentThread(response.data.data);
-      
+
       // 如果是取消星标，需要触发重新排序
       if (star === 0) {
         const { refreshThreads } = useThreadStore.getState();
         await refreshThreads();
       }
-      
+
       message.success(intl.formatMessage({ id: "thread.set.success" }));
     } else {
       message.error(response.data.message);
@@ -88,6 +95,10 @@ const ThreadContextMenu = ({
       ...currentThread,
       mute: !currentThread?.mute,
     };
+    // 判断uid是否为空
+    if (newThread?.uid == null) {
+      return;
+    }
     const response = await updateThread(newThread);
     if (response.data.code === 200) {
       onSetCurrentThread(response.data.data);
@@ -102,6 +113,10 @@ const ThreadContextMenu = ({
       ...currentThread,
       unread: !currentThread?.unread,
     };
+    // 判断uid是否为空
+    if (newThread?.uid == null) {
+      return;
+    }
     const response = await updateThread(newThread);
     if (response.data.code === 200) {
       onSetCurrentThread(response.data.data);
@@ -111,22 +126,22 @@ const ThreadContextMenu = ({
     }
   };
 
-//   const handleHideThreadClick = async () => {
-//     const newThread: THREAD.ThreadRequest = {
-//       ...currentThread,
-//     //   hide: !currentThread?.hide,
-//     hide: true,
-//     };
-//     const response = await updateThread(newThread);
-//     if (response.data.code === 200) {
-//     //   onSetCurrentThread(response.data.data);
-//     // 隐藏后，将此thread从列表中删除
+  //   const handleHideThreadClick = async () => {
+  //     const newThread: THREAD.ThreadRequest = {
+  //       ...currentThread,
+  //     //   hide: !currentThread?.hide,
+  //     hide: true,
+  //     };
+  //     const response = await updateThread(newThread);
+  //     if (response.data.code === 200) {
+  //     //   onSetCurrentThread(response.data.data);
+  //     // 隐藏后，将此thread从列表中删除
 
-//       message.success(intl.formatMessage({ id: "thread.set.success" }));
-//     } else {
-//       message.error(response.data.message);
-//     }
-//   };
+  //       message.success(intl.formatMessage({ id: "thread.set.success" }));
+  //     } else {
+  //       message.error(response.data.message);
+  //     }
+  //   };
 
   const handleRightClick = ({ id }: ItemParams) => {
     switch (id) {
@@ -154,8 +169,8 @@ const ThreadContextMenu = ({
       case "unread":
         handleUnreadThreadClick();
         break;
-    //   case "hide":
-    //     handleHideThreadClick();
+        //   case "hide":
+        //     handleHideThreadClick();
         break;
       case "black":
         onOpenBlockModal();

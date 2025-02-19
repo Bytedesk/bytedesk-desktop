@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 10:22:35
+ * @LastEditTime: 2025-02-19 10:24:58
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -207,6 +207,10 @@ const ThreadList = () => {
   const handleUpdateThreadUnreadCount = async (unreadCount: number) => {
     console.log("handleUpdateThreadUnreadCount", unreadCount);
     const newThread: THREAD.ThreadRequest = { ...currentThread, unreadCount };
+    // 判断uid是否为空
+    if (newThread?.uid == null) {
+      return;
+    }
     await updateThread(newThread);
   };
 
