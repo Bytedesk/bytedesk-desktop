@@ -33,6 +33,7 @@ import {
   // isOrgTicketThreadTopic,
   isRobotThread,
   isTicketThread,
+  truncateString,
 } from "@/utils/utils";
 import { MenuOutlined } from "@ant-design/icons";
 import { Button, Layout, Modal, Space } from "antd";
@@ -104,20 +105,26 @@ const ChatHeader = ({
     }
   };
 
-  //
+  // 获取描述
   const getDescription = () => {
     if (!fromTicketTab) {
       return typing
         ? previewContent || intl.formatMessage({ id: "i18n.typing " })
         : isTicketThread(chatThread)
-          ? "工单编号：#" + currentTicket?.uid
+          ? "工单编号：#" +
+            //内容太长时，截断
+            currentTicket?.uid +
+              "，" +
+            //内容太长时，截断
+            truncateString(currentTicket?.title, 100)
           : "会话编号：#" + chatThread?.uid;
     } else {
       return (
         " 工单编号：#" +
         currentTicket?.uid +
-        " " +
-        currentTicket?.description
+        "，" +
+        //内容太长时，截断
+        truncateString(currentTicket?.description, 100)
       );
     }
   };
@@ -166,7 +173,6 @@ const ChatHeader = ({
 
   // 处理工单
   const handleProcessTicket = async () => {
-    message.warning("TODO: 处理工单");
     // 调用处理工单的接口，modal确认
     modal.confirm({
       title: "处理工单",
