@@ -277,7 +277,6 @@ const ChatHeader = ({
 
   // 恢复工单
   const handleResumeTicket = async () => {
-    message.warning("TODO: 恢复工单");
     // 调用恢复工单的接口
     const params: TICKET.TicketRequest = {
       uid: currentTicket?.uid,
