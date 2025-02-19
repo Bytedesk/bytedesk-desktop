@@ -566,7 +566,7 @@ const ChatHeader = ({
           >
             {intl.formatMessage({ id: "ticket.action.close" })}
           </Button>,
-        );)
+        );}
         break;
 
       case TICKET_STATUS_PENDING:
