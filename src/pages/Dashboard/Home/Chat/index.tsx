@@ -205,12 +205,14 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   const fetchTicketThread = async (threadUid?: string) => {
     if (!threadUid) {
-      console.log("fetchTicketThread: threadUid is undefined");
+      console.log("ChatPage fetchTicketThread: threadUid is undefined");
       return;
+    } else {
+      // 
     }
     message.loading(translateString("i18n.loading"));
     const response = await queryThreadByUid(threadUid);
-    console.log("fetchTicketThread:", threadUid, response.data);
+    console.log("ChatPage fetchTicketThread:", threadUid, response.data);
     if (response.data.code === 200) {
       const thread = response.data.data;
       setChatThread(thread);
@@ -224,9 +226,9 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   useEffect(() => {
     console.log("ChatPage ticket changed:", ticket);
     if (fromTicketTab && ticket?.threadUid) {
-      fetchTicketThread(ticket.threadUid);
+      fetchTicketThread(ticket?.threadUid);
     }
-  }, [ticket, fromTicketTab]);
+  }, [ticket, fromTicketTab, currentTicketThread]);
 
   useEffect(() => {
     console.log("ChatPage currentThread changed:", currentThread);
@@ -234,13 +236,6 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       setChatThread(currentThread);
     }
   }, [currentThread]);
-
-  useEffect(() => {
-    console.log("ChatPage currentTicket changed:", currentTicket);
-    if (currentTicket) {
-      // setChatThread(currentTicket.thread);
-    }
-  }, [currentTicket]);
 
   useEffect(() => {
     console.log("ChatPage currentTicketThread changed:", chatThread);
@@ -500,7 +495,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     setPageNumber(0);
     setLoadMoreText(translateString("i18n.load.more"));
     // resetList();
-    // console.log("useEffect 1: ", chatThread.user.nickname, messages.length);
+    console.log("ChatPage useEffect 1: ", chatThread.user.nickname, messageList.length);
     if (messageList.length === 0) {
       getHistoryMessages();
     }
