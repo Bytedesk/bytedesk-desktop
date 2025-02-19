@@ -282,7 +282,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     };
 
     if (isWide) {
-      if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
+      if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
         console.log("不显示composer");
         return <></>;
       }
@@ -307,15 +307,15 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             </Popover>
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={false} {...inputProps} disabled={!isProcessingTicket(currentTicket)} />
+            <ComposerInput invisible={false} {...inputProps} disabled={!isProcessingTicket(fromTicketTab, currentTicket)} />
           </div>
-          <SendButton onClick={handleSendBtnClick} disabled={!text || !isProcessingTicket(currentTicket)} />
+          <SendButton onClick={handleSendBtnClick} disabled={!text || !isProcessingTicket(fromTicketTab, currentTicket)} />
         </div>
       );
     }
 
     // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-    if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
+    if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
       console.log("不显示composer");
       return <></>;
     }
@@ -333,7 +333,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
             />
           )}
           <div className="Composer-inputWrap">
-            <ComposerInput invisible={!isInputText} {...inputProps} disabled={!isProcessingTicket(currentTicket)} />
+            <ComposerInput invisible={!isInputText} {...inputProps} disabled={!isProcessingTicket(fromTicketTab, currentTicket)} />
             {!isInputText && <Recorder {...recorder} />}
           </div>
           {!text && rightAction && <Action {...rightAction} />}

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 15:17:54
+ * @LastEditTime: 2025-02-19 17:02:18
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -37,7 +37,7 @@ export interface QuickReplyProps {
 }
 
 export const QuickReply = (props: QuickReplyProps) => {
-  const { item, index, onClick} = props;
+  const { item, index, onClick, fromTicketTab} = props;
   const currentTicket = useTicketStore((state) => state.currentTicket);
 
   function handleClick() {
@@ -54,7 +54,7 @@ export const QuickReply = (props: QuickReplyProps) => {
       data-code={item.code}
       aria-label={`快捷短语: ${item.name}，双击发送`}
       onClick={handleClick}
-      disabled={!isProcessingTicket(currentTicket)}
+      disabled={!isProcessingTicket(fromTicketTab, currentTicket)}
     >
       <div className="QuickReply-inner">
         {item.icon && <Icon type={item.icon} />}

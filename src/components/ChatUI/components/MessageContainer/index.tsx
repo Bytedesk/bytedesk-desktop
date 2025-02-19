@@ -217,7 +217,7 @@ export const MessageContainer = React.forwardRef<
   ]);
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示
-  if (fromTicketTab && !isMyTicket(currentTicket, agentInfo)) {
+  if (fromTicketTab && !isMyTicket(fromTicketTab, currentTicket, agentInfo)) {
     console.log("不显示消息容器");
     return <Empty/>;
   }

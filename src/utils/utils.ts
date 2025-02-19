@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 16:25:04
+ * @LastEditTime: 2025-02-19 17:02:01
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -111,7 +111,7 @@ export function generateAvatar(uid: string) {
     size: 40,
     // ... other options
   }).toDataUriSync();
-} 
+}   
 
 
 // 去掉字符串开头 http://或https://
@@ -369,11 +369,19 @@ export function getTicketPriorityColor(priority: string) {
 };
 
 // 判断当前工单是否是自己的工单
-export const isMyTicket = (ticket: TICKET.TicketResponse, agentInfo: AGENT.AgentResponse) => {
-  return ticket?.assignee?.uid === agentInfo?.uid || ticket?.reporter?.uid === agentInfo?.uid;
+export const isMyTicket = (fromTicketTab: boolean, ticket: TICKET.TicketResponse, agentInfo: AGENT.AgentResponse) => {
+  if (fromTicketTab) {
+    return ticket?.assignee?.uid === agentInfo?.uid || ticket?.reporter?.uid === agentInfo?.uid;
+  } else {
+    return true
+  }
 };
 
 // 判断是否开始处理工单
-export const isProcessingTicket = (ticket: TICKET.TicketResponse) => {
-  return ticket?.status === TICKET_STATUS_PROCESSING || ticket?.status === TICKET_STATUS_RESUMED;
+export const isProcessingTicket = (fromTicketTab: boolean, ticket: TICKET.TicketResponse) => {
+  if (fromTicketTab) {
+    return ticket?.status === TICKET_STATUS_PROCESSING || ticket?.status === TICKET_STATUS_RESUMED;
+  } else {
+    return true
+  }
 };

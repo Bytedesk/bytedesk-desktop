@@ -231,7 +231,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
         <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
           {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
-          { (isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
+          { (isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
             <MessageContainer
               ref={messagesRef}
               loadMoreText={loadMoreText}
@@ -250,7 +250,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
           <div className="ChatFooter">
             {renderQuickReplies
               ? renderQuickReplies()
-              : (isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
+              : (isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
                   <QuickReplies
                     items={quickReplies}
                     visible={quickRepliesVisible}
@@ -278,7 +278,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
                 />
               </div>
             )}
-            {(isMyTicket(currentTicket, agentInfo) || isProcessingTicket(currentTicket)) && (
+            {(isMyTicket(fromTicketTab, currentTicket, agentInfo) || isProcessingTicket(fromTicketTab, currentTicket)) && (
               <Composer
                 wideBreakpoint={wideBreakpoint}
                 ref={composerRef}

@@ -84,7 +84,7 @@ const ChatHeader = ({
   const getAvatar = () => {
     if (!fromTicketTab) {
       if (!chatThread?.user) return "";
-      return chatThread.user.avatar;
+      return chatThread?.user?.avatar;
     }
   };
 
@@ -92,14 +92,14 @@ const ChatHeader = ({
   const getNickname = () => {
     if (!fromTicketTab) {
       if (!chatThread?.user) return "";
-      if (chatThread.user.nickname?.startsWith(I18N_PREFIX)) {
+      if (chatThread?.user?.nickname?.startsWith(I18N_PREFIX)) {
         return intl.formatMessage({
-          id: chatThread.user.nickname,
-          defaultMessage: chatThread.user.nickname,
+          id: chatThread?.user?.nickname,
+          defaultMessage: chatThread?.user?.nickname,
         });
       }
       return (
-        chatThread.user?.nickname ||
+        chatThread?.user?.nickname ||
         intl.formatMessage({ id: "chat.header.user.unnamed" })
       );
     } else {
@@ -432,14 +432,14 @@ const ChatHeader = ({
             key="process"
             type="primary"
             onClick={handleProcessTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.process" })}
           </Button>,
           <Button
             key="return"
             onClick={handleUnclaimTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.unclaim" })}
           </Button>,
@@ -453,14 +453,14 @@ const ChatHeader = ({
             key="resolve"
             type="primary"
             onClick={handleResolveTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.resolve" })}
           </Button>,
           <Button
             key="hold"
             onClick={handleHoldTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.hold" })}
           </Button>,
@@ -474,7 +474,7 @@ const ChatHeader = ({
             key="resume"
             type="primary"
             onClick={handleResumeTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.resume" })}
           </Button>,
@@ -487,14 +487,14 @@ const ChatHeader = ({
             key="close"
             type="primary"
             onClick={handleCloseTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.close" })}
           </Button>,
           <Button
             key="reopen"
             onClick={handleReopenTicket}
-            disabled={!isMyTicket(currentTicket, agentInfo)}
+            disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
           >
             {intl.formatMessage({ id: "ticket.action.reopen" })}
           </Button>,
@@ -520,7 +520,7 @@ const ChatHeader = ({
           key="invite"
           type="primary"
           onClick={handleInviteTicket}
-          disabled={!isMyTicket(currentTicket, agentInfo)}
+          disabled={!isMyTicket(fromTicketTab, currentTicket, agentInfo)}
         >
           {intl.formatMessage({ id: "ticket.action.invite" })}
         </Button>,
