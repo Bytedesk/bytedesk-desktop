@@ -111,7 +111,8 @@ export function generateAvatar(uid: string) {
     size: 40,
     // ... other options
   }).toDataUriSync();
-}
+} 
+
 
 // 去掉字符串开头 http://或https://
 export function removeProtocol(str: string): string {
@@ -369,7 +370,7 @@ export function getTicketPriorityColor(priority: string) {
 
 // 判断当前工单是否是自己的工单
 export const isMyTicket = (ticket: TICKET.TicketResponse, agentInfo: AGENT.AgentResponse) => {
-  return ticket?.assignee?.uid === agentInfo?.uid || ticket?.assignee?.uid === "";
+  return ticket?.assignee?.uid === agentInfo?.uid || ticket?.reporter?.uid === agentInfo?.uid;
 };
 
 // 判断是否开始处理工单
