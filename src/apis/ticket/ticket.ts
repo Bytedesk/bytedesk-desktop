@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-06 11:07:09
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 12:20:45
+ * @LastEditTime: 2025-02-19 14:35:59
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -168,8 +168,8 @@ export async function transferTicket(ticket: TICKET.TicketRequest) {
 }
 
 // 挂起工单
-export async function suspendTicket(ticket: TICKET.TicketRequest) {
-  return request<TICKET.HttpResult>("/api/v1/ticket/suspend", {
+export async function holdTicket(ticket: TICKET.TicketRequest) {
+  return request<TICKET.HttpResult>("/api/v1/ticket/hold", {
     method: "POST",
     data: {
       ...ticket,

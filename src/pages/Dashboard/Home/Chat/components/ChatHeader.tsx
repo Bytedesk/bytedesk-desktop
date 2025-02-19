@@ -1,5 +1,5 @@
 import { message } from "@/AntdGlobalComp";
-import { claimTicket, unclaimTicket } from "@/apis/ticket/ticket";
+import { claimTicket, holdTicket, resolveTicket, startProcessingTicket, unclaimTicket } from "@/apis/ticket/ticket";
 import { AppContext } from "@/context/AppContext";
 import useStyle from "@/hooks/useStyle";
 import { useOrgStore } from "@/stores/core/organization";
@@ -144,16 +144,91 @@ const ChatHeader = ({
   // 处理工单
   const handleProcessTicket = async () => {
     message.warning("TODO: 处理工单");
+    // 调用处理工单的接口，modal确认
+    modal.confirm({
+      title: "处理工单",
+      content: "确定处理该工单吗？",
+      onOk: async () => {
+        message.loading("处理中...", 2);
+        // 调用处理工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          status: TICKET_STATUS_PROCESSING,
+        };
+        const response = await startProcessingTicket(params);
+        console.log("query startProcessingTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(intl.formatMessage({ id: 'ticket.action.process.success' }));
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 解决工单/完成工单
   const handleResolveTicket = async () => {
     message.warning("TODO: 解决工单");
+    // 调用解决工单的接口，modal确认
+    modal.confirm({
+      title: "解决工单",
+      content: "确定解决该工单吗？",
+      onOk: async () => {
+        message.loading("解决中...", 2);
+        // 调用解决工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          status: TICKET_STATUS_RESOLVED,
+        };
+        const response = await resolveTicket(params);
+        console.log("query resolveTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(intl.formatMessage({ id: 'ticket.action.resolve.success' }));
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 挂起工单
-  const handlePendingTicket = async () => {
+  const handleHoldTicket = async () => {
     message.warning("TODO: 挂起工单");
+    // 调用挂起工单的接口，modal确认
+    modal.confirm({
+      title: "挂起工单",
+      content: "确定挂起该工单吗？",
+      onOk: async () => {
+        message.loading("挂起中...", 2);
+        // 调用挂起工单的接口
+        const params: TICKET.TicketRequest = {
+          uid: currentTicket?.uid,
+          status: TICKET_STATUS_PENDING,
+        };
+        const response = await holdTicket(params);
+        console.log("query holdTicket response", params, response.data);
+        if (response.data.code === 200) {
+          message.destroy();
+          message.success(intl.formatMessage({ id: 'ticket.action.hold.success' }));
+          setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
+        } else {
+          message.destroy();
+          message.error(response.data.message);
+        }
+      },
+    });
   };
 
   // 退回工单
@@ -179,11 +254,6 @@ const ChatHeader = ({
       // 刷新工单列表
       ticketService.refreshTickets();
     }
-  };
-
-  // 恢复工单
-  const handleResumeTicket = async () => {
-    message.warning("TODO: 恢复工单");
   };
 
   // 关闭工单
@@ -234,7 +304,7 @@ const ChatHeader = ({
           <Button key="resolve" type="primary" onClick={handleResolveTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.resolve' })}
           </Button>,
-          <Button key="pending" onClick={handlePendingTicket} disabled={!isMyTicket()}>
+          <Button key="pending" onClick={handleHoldTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.pending' })}
           </Button>
         );
@@ -243,7 +313,7 @@ const ChatHeader = ({
       case TICKET_STATUS_PENDING:
       case TICKET_STATUS_HOLDING:
         buttons.push(
-          <Button key="resume" type="primary" onClick={handleResumeTicket} disabled={!isMyTicket()}>
+          <Button key="resume" type="primary" onClick={handleReopenTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.resume' })}
           </Button>
         );
