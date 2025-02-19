@@ -474,7 +474,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       threadTopic: chatThread?.topic,
     };
     const response = await queryMessagesByThreadTopic(messageRequest);
-    console.log("ChatPage queryMessages: ", response.data, messageRequest);
+    console.log("ChatPage getHistoryMessages: ", response.data, messageRequest);
     message.destroy();
     if (response.data.code === 200) {
       addMessageList(response.data.data.content);
