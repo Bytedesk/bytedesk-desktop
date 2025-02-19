@@ -16,6 +16,7 @@ import {
   TICKET_STATUS_REOPENED,
   TICKET_STATUS_RESOLVED,
   TICKET_STATUS_UNCLAIMED,
+  IS_DEBUG,
   // TICKET_STATUS_ESCALATED,
   // TICKET_STATUS_CLOSED,
   // TICKET_STATUS_CANCELLED
@@ -183,6 +184,11 @@ const ChatHeader = ({
     message.warning("TODO: 重新打开工单");
   };
 
+  // 邀请会话
+  const handleInviteTicket = async () => {
+    message.warning("TODO: 邀请会话");
+  };
+
   // 根据工单状态返回可用的操作按钮
   const getTicketActionButtons = () => {
     if (!currentTicket) return null;
@@ -244,7 +250,7 @@ const ChatHeader = ({
     }
     
     // 除了已关闭和已取消状态外,都可以升级
-    // if (![TICKET_STATUS_CLOSED, TICKET_STATUS_CANCELLED].includes(currentTicket.status)) {
+    // if (IS_DEBUG && ![TICKET_STATUS_CLOSED, TICKET_STATUS_CANCELLED].includes(currentTicket.status)) {
     //   buttons.push(
     //     <Button key="escalate" danger onClick={() => {
     //       message.warning(intl.formatMessage({ id: 'ticket.action.escalate.todo' }));
@@ -253,6 +259,15 @@ const ChatHeader = ({
     //     </Button>
     //   );
     // }
+
+    // 添加邀请会话按钮
+    if (IS_DEBUG && isTicketThread(chatThread)) {
+      buttons.push(
+        <Button key="invite" type="primary" onClick={handleInviteTicket}>
+          {intl.formatMessage({ id: 'ticket.action.invite' })}
+        </Button>
+      );
+    }
     
     return buttons;
   };

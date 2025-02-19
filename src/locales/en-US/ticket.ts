@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 11:06:46
+ * @LastEditTime: 2025-02-19 13:09:32
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -70,6 +70,7 @@ export default {
    'ticket.action.close': 'Close',
    'ticket.action.reopen': 'Reopen',
    'ticket.delete.confirm': 'Are you sure to delete this ticket?',
+   'ticket.action.invite': 'Invite',
    // Ticket Layout
    'ticket.conversation.title': 'Conversation',
    'ticket.conversation.empty': 'Select a ticket to view conversation',

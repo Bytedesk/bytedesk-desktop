@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 11:53:21
+ * @LastEditTime: 2025-02-19 13:09:36
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -88,7 +88,7 @@ export default {
   'ticket.action.reopen': '重新打开',
   'ticket.delete.confirm': '确定要删除此工单吗？',
   'ticket.category.load.error': '加载工单分类失败',
-  
+  'ticket.action.invite': '邀请',
   // 工单布局
   'ticket.conversation.title': '工单对话',
   'ticket.conversation.empty': '请选择工单查看对话',
