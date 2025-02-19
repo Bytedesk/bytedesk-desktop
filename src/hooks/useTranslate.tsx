@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-28 14:51:16
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-20 07:29:10
+ * @LastEditTime: 2025-02-20 07:31:21
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -32,7 +32,7 @@ function useTranslate() {
             });
         }
         // 现在显示长度为10
-        return truncateString(value, 10);
+        return truncateString(value, 8);
     };
 
     const translateStringTranct = (content: string) => {
@@ -48,7 +48,7 @@ function useTranslate() {
                 10,
             )
         }
-        return truncateString(content, 6);
+        return truncateString(content, 8);
     }
 
 
