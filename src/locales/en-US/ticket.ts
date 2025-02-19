@@ -163,7 +163,7 @@ export default {
 
    // Ticket Status
    'ticket.status.label': 'Status',
-   'ticket.status.new': 'Unclaimed',
+   'ticket.status.new': 'Unassigned',
    'ticket.status.claimed': 'Assigned',
    'ticket.status.unclaimed': 'Unclaimed',
    'ticket.status.processing': 'In Progress',
