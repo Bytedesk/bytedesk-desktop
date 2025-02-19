@@ -266,7 +266,13 @@ const ChatHeader = ({
       },
       onCancel: async () => {
         try {
-          await verifyTicket(currentTicket.uid, false);
+          const params: TICKET.TicketRequest = {
+            uid: currentTicket?.uid,
+            // 设置处理人
+            assigneeUid: agentInfo?.uid,
+            orgUid: currentOrg?.uid,
+          };
+          await verifyTicket(params);
           message.success(intl.formatMessage({ id: 'ticket.verify.reject.success' }));
         } catch (error) {
           message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
