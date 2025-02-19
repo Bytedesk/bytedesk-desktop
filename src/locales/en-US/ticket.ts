@@ -71,7 +71,7 @@ export default {
    'ticket.action.close': 'Close',
    'ticket.action.reopen': 'Reopen',
    'ticket.action.verify': 'Verify',
-   'ticket.action.verify.success': 
+   'ticket.action.verify.success': 'Verify successfully',
    'ticket.delete.confirm': 'Are you sure to delete this ticket?',
    'ticket.action.invite': 'Invite',
    // Ticket Layout
@@ -111,7 +111,7 @@ export default {
    'ticket.filter.status_processing': 'In Progress',
    'ticket.filter.status_pending': 'Pending',
    'ticket.filter.status_holding': 'On Hold',
-   'ticket.filter.status_resumed': 'Resumed',
+   'ticket.filter.status_resumed': 'Resumed  ',
    'ticket.filter.status_reopened': 'Reopened',
    'ticket.filter.status_resolved': 'Resolved',
    'ticket.filter.status_closed': 'Closed',  

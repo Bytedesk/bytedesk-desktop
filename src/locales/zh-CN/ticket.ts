@@ -89,6 +89,7 @@ export default {
   'ticket.action.close': '关闭',
   'ticket.action.reopen': '重新打开',
   'ticket.action.verify': '验证',
+  'ticket.action.verify.success': '验证成功',
   'ticket.delete.confirm': '确定要删除此工单吗？',
   'ticket.category.load.error': '加载工单分类失败',
   'ticket.action.invite': '邀请',
