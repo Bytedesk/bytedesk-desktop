@@ -554,13 +554,13 @@ const ChatHeader = ({
         if (currentTicket?.reporter.uid)
         buttons.push(
           <Button
-            key="reopen"
-            onClick={handleReopenTicket}
+            key="verify"
+            onClick={handleVerifyTicket}
             disabled={
               !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
             }
           >
-            {intl.formatMessage({ id: "ticket.action.reopen" })}
+            {intl.formatMessage({ id: "ticket.action.verify" })}
           </Button>,
         )
         
