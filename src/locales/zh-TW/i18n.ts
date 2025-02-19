@@ -3,6 +3,7 @@ export default {
   'i18n.lang.zh-CN': '简体中文',
   'i18n.lang.zh-TW': '繁體中文',
   //
+  "i18n.all": "全部",
   "i18n.queue.tip": "排隊隊列",
   "i18n.queue.message.template": "當前排隊人數：{0}，大約等待時間：{1} 分鐘",
   "i18n.queue.empty": "隊列為空",

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2023-10-11 16:16:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-11-19 15:24:05
+ * @LastEditTime: 2025-02-20 06:57:16
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -56,19 +56,19 @@ export const useCategoryStore = create<CategoryState>()(
           uid: "",
         },
         setCategoryResult(categoryResult) {
-          let selectOptions = transformToSelectOption(categoryResult);
+          const selectOptions = transformToSelectOption(categoryResult);
           //
-          let categoryAll: CATEGORY.CategoryResponse = {
+          const categoryAll: CATEGORY.CategoryResponse = {
             uid: "all",
-            name: "All",
+            name: "i18n.all",
           };
-          let categoryResultAll: CATEGORY.HttpPageResult = {
+          const categoryResultAll: CATEGORY.HttpPageResult = {
             ...categoryResult,
             data: {
               content: [categoryAll, ...categoryResult.data.content],
             },
           };
-          let treeOptions = transformToTreeOption(categoryResultAll);
+          const treeOptions = transformToTreeOption(categoryResultAll);
           set({
             categoryResult: categoryResultAll,
             categoryTreeOptions: treeOptions,

@@ -3,6 +3,7 @@ export default {
   'i18n.lang.zh-CN': '简体中文',
   'i18n.lang.zh-TW': '繁體中文',
   //
+  'i18n.all': 'All',
   "i18n.queue.tip": "Queue",
   "i18n.queue.message.template": "Current Queuing: {0} people, Wait {1} minutes",
   "i18n.queue.empty": "Queue empty",
@@ -110,7 +111,7 @@ export default {
     "If it's convenient, please provide your contact number so that I can communicate with you via phone for a more intuitive conversation.",
   "i18n.contact.content":
     "If it's convenient, please provide your contact number so that I can communicate with you via phone for a more intuitive conversation.",
-  "i18n.thanks.title":
+  "i18n.thanks.title":  
     "Thank you for visiting, we look forward to seeing you again.",
   "i18n.thanks.content":
     "Thank you for visiting, we look forward to seeing you again.",

@@ -3,6 +3,7 @@ export default {
   'i18n.lang.zh-CN': '简体中文',
   'i18n.lang.zh-TW': '繁体中文',
   //
+  "i18n.all": "全部",
   "i18n.queue.tip": "排队队列",
   "i18n.queue.message.template": "当前排队人数：{0}，大约等待时间：{1} 分钟",
   "i18n.queue.empty": "暂无排队用户",
