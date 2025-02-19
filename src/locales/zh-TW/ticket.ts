@@ -131,7 +131,7 @@ export default {
 
   // 狀態篩選
   'ticket.filter.status_all': '全部狀態',
-  'ticket.filter.status_new': '待分配',
+  'ticket.filter.status_new': '待认领',
   'ticket.filter.status_claimed': '已分配',
   'ticket.filter.status_unclaimed': '被退回',
   'ticket.filter.status_processing': '處理中',
