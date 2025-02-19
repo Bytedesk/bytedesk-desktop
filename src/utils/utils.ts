@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:09:32
+ * @LastEditTime: 2025-02-19 17:20:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -278,10 +278,10 @@ export function isMessageTypeClosed(type: string) {
 }
 //
 export function isOrgMemberTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_MEMBER_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_MEMBER_PREFIX);
 }
 export function getOrgMemberTopicReverse(topic: string): string {
-  const parts = topic.split('/');
+  const parts = topic?.split('/');
   if (parts.length !== 4) {
       throw new Error(`Invalid private topic: ${topic}`);
   }
@@ -291,19 +291,19 @@ export function getOrgMemberTopicReverse(topic: string): string {
 }
 
 export function isOrgGroupTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_GROUP_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_GROUP_PREFIX);
 }
 export function isOrgRobotTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_ROBOT_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_ROBOT_PREFIX);
 }
 export function isOrgAgentTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_AGENT_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_AGENT_PREFIX);
 }
 export function isOrgWorkgroupTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_WORKGROUP_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_WORKGROUP_PREFIX);
 }
 export function isOrgTicketThreadTopic(topic: string) {
-  return topic.startsWith(TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX) || topic.startsWith(TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX);
+  return topic?.startsWith(TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX) || topic?.startsWith(TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX);
 }
 
 export function bytedeskBanner() {
