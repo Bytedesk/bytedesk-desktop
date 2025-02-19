@@ -256,7 +256,7 @@ const ChatHeader = ({
           <Button onClick={() => Modal.destroyAll()}>
             {intl.formatMessage({ id: 'ticket.verify.later' })}
           </Button>
-          <CancelBtn onCancel={() => Modal.destroyAll()} />
+          <CancelBtn onClick={() => Modal.destroyAll()} />
           <OkBtn />
         </>
       )},
