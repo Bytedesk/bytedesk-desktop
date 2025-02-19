@@ -237,28 +237,27 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
               isTyping={isTyping}
               renderBeforeMessageList={renderBeforeMessageList}
               renderMessageContent={renderMessageContent}
-            onRefresh={onRefresh}
-            onScroll={onScroll}
-            onBackBottomShow={onBackBottomShow}
-            onBackBottomClick={onBackBottomClick}
-            fromTicketTab={fromTicketTab}
-            chatThread={chatThread}
-          />}
+              onRefresh={onRefresh}
+              onScroll={onScroll}
+              onBackBottomShow={onBackBottomShow}
+              onBackBottomClick={onBackBottomClick}
+              fromTicketTab={fromTicketTab}
+              chatThread={chatThread}
+            />
+          )}
           <div className="ChatFooter">
-            {renderQuickReplies ? (
-              renderQuickReplies()
-            ) : (
-              isProcessingTicket(currentTicket) && (
-                <QuickReplies
-                  items={quickReplies}
-                  visible={quickRepliesVisible}
-                  onClick={onQuickReplyClick}
-                  onScroll={onQuickReplyScroll}
-                  fromTicketTab={fromTicketTab}
-                  chatThread={chatThread}
-                />
-              )
-            )}
+            {renderQuickReplies
+              ? renderQuickReplies()
+              : isProcessingTicket(currentTicket) && (
+                  <QuickReplies
+                    items={quickReplies}
+                    visible={quickRepliesVisible}
+                    onClick={onQuickReplyClick}
+                    onScroll={onQuickReplyScroll}
+                    fromTicketTab={fromTicketTab}
+                    chatThread={chatThread}
+                  />
+                )}
             {/* TODO: 翻译输入框 */}
             {showTransition && (
               <div
