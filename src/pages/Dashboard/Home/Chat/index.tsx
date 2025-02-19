@@ -230,7 +230,8 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     console.log("ChatPage fetchTicketThread ticket changed:", ticket);
     if (fromTicketTab) {
       fetchTicketThread(ticket?.threadUid);
-    } else if (ticket?.threadUid === null || ticket?.threadUid === undefined) {
+    } 
+     if (ticket?.threadUid === null || ticket?.threadUid === undefined) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
     }
   }, [ticket, fromTicketTab]);
