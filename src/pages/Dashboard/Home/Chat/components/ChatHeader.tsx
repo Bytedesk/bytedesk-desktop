@@ -31,6 +31,7 @@ import {
   isCustomerServiceThread,
   isGroupThread,
   isMemberThread,
+  isMyTicket,
   // isOrgTicketThreadTopic,
   isRobotThread,
   isTicketThread,
