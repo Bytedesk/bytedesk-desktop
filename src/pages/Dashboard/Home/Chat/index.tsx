@@ -205,7 +205,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   const fetchTicketThread = async (threadUid?: string) => {
     console.log('ChatPage fetchTicketThread', threadUid);
-    if (threadUid === null || threadUid === '') {
+    if (threadUid === null || threadUid === undefined) {
       // console.log("ChatPage fetchTicketThread: threadUid is undefined");
       // 待认领状态，设置当前会话为空，清空聊天记录
       // resetList();
@@ -230,7 +230,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     console.log("ChatPage fetchTicketThread ticket changed:", ticket);
     if (fromTicketTab) {
       fetchTicketThread(ticket?.threadUid);
-    } else if (ticket?.threadUid === null || ticket?.threadUid === '') {
+    } else if (ticket?.threadUid === null || ticket?.threadUid === undefined) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
     }
   }, [ticket, fromTicketTab]);
