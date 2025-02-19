@@ -70,7 +70,7 @@ const ChatHeader = ({
 
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
-    if (!fromTicketTab || !isTicketThread(chatThread)) {
+    if (!fromTicketTab || !isOrgTicketThreadTopic(chatThread)) {
       if (!chatThread?.user) return "";
       return chatThread.user.avatar;
     }
