@@ -277,25 +277,7 @@ const ChatHeader = ({
 
   // 恢复工单
   const handleResumeTicket = async () => {
-    // 调用恢复工单的接口
-    const params: TICKET.TicketRequest = {
-      uid: currentTicket?.uid,
-      // 设置处理人
-      assigneeUid: agentInfo?.uid,
-      orgUid: currentOrg?.uid,
-    };
-    const response = await resumeTicket(params);
-    console.log("query resumeTicket response", params, response.data);
-    if (response.data.code === 200) {
-      message.success(
-        intl.formatMessage({ id: "ticket.action.resume.success" }),
-      );
-      setCurrentTicket(response.data.data);
-      // 刷新工单列表
-      ticketService.refreshTickets();
-    } else {
-      message.error(response.data.message);
-    }
+    
   };
 
   // 退回工单
