@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 14:22:11
+ * @LastEditTime: 2025-02-19 15:34:35
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -45,7 +45,7 @@ export default {
   'ticket.status.new': '新建',
   'ticket.status.claimed': '已分配',
   'ticket.status.unclaimed': '被退回',
-  'ticket.status.in_progress': '处理中',
+  'ticket.status.processing': '处理中',
   'ticket.status.pending': '待处理',
   'ticket.status.holding': '挂起',
   'ticket.status.reopened': '重新打开',
@@ -131,7 +131,7 @@ export default {
   'ticket.filter.status_new': '新建',
   'ticket.filter.status_claimed': '已分配',
   'ticket.filter.status_unclaimed': '被退回',
-  'ticket.filter.status_in_progress': '处理中',
+  'ticket.filter.status_processing': '处理中',
   'ticket.filter.status_pending': '待处理',
   'ticket.filter.status_holding': '挂起',
   'ticket.filter.status_reopened': '重新打开',
@@ -192,6 +192,7 @@ export default {
   'ticket.action.resolve.todo': 'TODO: 解决工单',
   'ticket.action.pending': '待处理',
   'ticket.action.pending.todo': 'TODO: 设置工单为待处理',
+  'ticket.action.hold': '挂起',
   'ticket.action.resume': '继续处理',
   'ticket.action.resume.todo': 'TODO: 继续处理工单',
   'ticket.action.close.todo': 'TODO: 关闭工单',

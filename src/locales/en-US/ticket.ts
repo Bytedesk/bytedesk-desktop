@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 22:56:05
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 14:21:42
+ * @LastEditTime: 2025-02-19 15:30:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -106,12 +106,12 @@ export default {
    'ticket.filter.status_new': 'New',
    'ticket.filter.status_claimed': 'Assigned',
    'ticket.filter.status_unclaimed': 'Unclaimed',
-   'ticket.filter.status_in_progress': 'In Progress',
+   'ticket.filter.status_processing': 'In Progress',
    'ticket.filter.status_pending': 'Pending',
    'ticket.filter.status_holding': 'On Hold',
    'ticket.filter.status_reopened': 'Reopened',
    'ticket.filter.status_resolved': 'Resolved',
-   'ticket.filter.status_closed': 'Closed',
+   'ticket.filter.status_closed': 'Closed',  
    'ticket.filter.status_cancelled': 'Cancelled',
 
    // 
@@ -163,7 +163,7 @@ export default {
    'ticket.status.new': 'New',
    'ticket.status.claimed': 'Assigned',
    'ticket.status.unclaimed': 'Unclaimed',
-   'ticket.status.in_progress': 'In Progress',
+   'ticket.status.processing': 'In Progress',
    'ticket.status.pending': 'Pending',
    'ticket.status.holding': 'On Hold',
    'ticket.status.reopened': 'Reopened', 
@@ -181,6 +181,8 @@ export default {
    'ticket.action.resolve.todo': 'TODO: Resolve ticket',
    'ticket.action.pending': 'Pending',
    'ticket.action.pending.todo': 'TODO: Set ticket to pending',
+   'ticket.action.hold': 'Hold',
+   'ticket.action.hold.todo': 'TODO: Set ticket to hold',
    'ticket.action.resume': 'Resume',
    'ticket.action.resume.todo': 'TODO: Resume ticket',
    'ticket.action.close.todo': 'TODO: Close ticket',

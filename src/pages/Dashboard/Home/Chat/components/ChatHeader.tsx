@@ -114,7 +114,7 @@ const ChatHeader = ({
           ? "工单编号：#" +
             //内容太长时，截断
             currentTicket?.uid +
-              "，" +
+            "，" +
             //内容太长时，截断
             truncateString(currentTicket?.title, 100)
           : "会话编号：#" + chatThread?.uid;
@@ -182,7 +182,9 @@ const ChatHeader = ({
         // 调用处理工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
-          status: TICKET_STATUS_PROCESSING,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
         };
         const response = await startProcessingTicket(params);
         console.log(
@@ -218,7 +220,9 @@ const ChatHeader = ({
         // 调用解决工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
-          status: TICKET_STATUS_RESOLVED,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
         };
         const response = await resolveTicket(params);
         console.log("query resolveTicket response", params, response.data);
@@ -240,7 +244,6 @@ const ChatHeader = ({
 
   // 挂起工单
   const handleHoldTicket = async () => {
-    message.warning("TODO: 挂起工单");
     // 调用挂起工单的接口，modal确认
     modal.confirm({
       title: "挂起工单",
@@ -250,7 +253,9 @@ const ChatHeader = ({
         // 调用挂起工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
-          status: TICKET_STATUS_PENDING,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
         };
         const response = await holdTicket(params);
         console.log("query holdTicket response", params, response.data);
@@ -268,6 +273,30 @@ const ChatHeader = ({
         }
       },
     });
+  };
+
+  // 恢复工单
+  const handleResumeTicket = async () => {
+    message.warning("TODO: 恢复工单");
+    // 调用恢复工单的接口
+    const params: TICKET.TicketRequest = {
+      uid: currentTicket?.uid,
+      // 设置处理人
+      assigneeUid: agentInfo?.uid,
+      orgUid: currentOrg?.uid,
+    };
+    const response = await resumeTicket(params);
+    console.log("query resumeTicket response", params, response.data);
+    if (response.data.code === 200) {
+      message.success(
+        intl.formatMessage({ id: "ticket.action.resume.success" }),
+      );
+      setCurrentTicket(response.data.data);
+      // 刷新工单列表
+      ticketService.refreshTickets();
+    } else {
+      message.error(response.data.message);
+    }
   };
 
   // 退回工单
@@ -309,6 +338,9 @@ const ChatHeader = ({
         // 调用关闭工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
         };
         const response = await closeTicket(params);
         console.log("query closeTicket response", params, response.data);
@@ -340,6 +372,9 @@ const ChatHeader = ({
         // 调用重新打开工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
+          // 设置处理人
+          assigneeUid: agentInfo?.uid,
+          orgUid: currentOrg?.uid,
         };
         const response = await resumeTicket(params);
         console.log("query resumeTicket response", params, response.data);
@@ -420,11 +455,11 @@ const ChatHeader = ({
             {intl.formatMessage({ id: "ticket.action.resolve" })}
           </Button>,
           <Button
-            key="pending"
+            key="hold"
             onClick={handleHoldTicket}
             disabled={!isMyTicket()}
           >
-            {intl.formatMessage({ id: "ticket.action.pending" })}
+            {intl.formatMessage({ id: "ticket.action.hold" })}
           </Button>,
         );
         break;
@@ -435,7 +470,7 @@ const ChatHeader = ({
           <Button
             key="resume"
             type="primary"
-            onClick={handleReopenTicket}
+            onClick={handleResumeTicket}
             disabled={!isMyTicket()}
           >
             {intl.formatMessage({ id: "ticket.action.resume" })}

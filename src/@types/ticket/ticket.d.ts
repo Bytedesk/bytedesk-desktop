@@ -16,7 +16,7 @@
 declare namespace TICKET {
 
   // 工单状态枚举
-  // type TicketStatus = 'NEW' | 'ASSIGNED' | 'IN_PROGRESS' | 'PENDING' | 
+  // type TicketStatus = 'NEW' | 'ASSIGNED' | 'processing' | 'PENDING' | 
   //                    'HOLDING' | 'REOPENED' | 'RESOLVED' | 'CLOSED' | 'CANCELLED';
   
   // 工单优先级枚举  
