@@ -201,7 +201,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       };
     },
   );
-  console.log("ChatPage fromTicketTab:", fromTicketTab);
+  console.log("ChatPage fromTicketTab:", fromTicketTab, chatThread);
 
   const fetchTicketThread = async (threadUid?: string) => {
     if (!threadUid) {
