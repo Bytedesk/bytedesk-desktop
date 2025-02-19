@@ -207,6 +207,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     if (!threadUid) {
       console.log("ChatPage fetchTicketThread: threadUid is undefined");
       // 待认领状态，设置当前会话为空，清空聊天记录
+      resetList();
       setChatThread(null);
       setCurrentTicketThread(null);
       return;
@@ -502,7 +503,6 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
   useEffect(() => {
     setPageNumber(0);
     setLoadMoreText(translateString("i18n.load.more"));
-    // resetList();
     console.log("ChatPage useEffect 1: ", chatThread.user.nickname, messageList.length);
     if (messageList.length === 0) {
       getHistoryMessages();
