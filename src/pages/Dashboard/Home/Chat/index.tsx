@@ -111,7 +111,7 @@ import RateBubble from "@/components/Bubbles/Rate";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import LeaveMsg from "@/components/Bubbles/LeaveMsg";
-import RobotQa from "@/components/Bubbles/obotQa";
+import RobotQa from "@/components/Bubbles/RobotQa";
 import "./chatpage.css";
 import { FaqQa } from "@/components/Bubbles/FaqQa";
 import TransferBubble from "@/components/Bubbles/TransferBubble";
