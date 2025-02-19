@@ -236,7 +236,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       // 待认领状态，设置当前会话为空，清空聊天记录
       resetList();
       setChatThread(null);
-      // setCurrentTicketThread(null);
+      setCurrentTicketThread(null);
     }
   }, [ticket, fromTicketTab]);
 
