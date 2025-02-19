@@ -15,6 +15,8 @@ import {
 } from "../Composer";
 import { isSafari, getIOSMajorVersion } from "../../utils/ua";
 import { Input } from "antd";
+import { isProcessingTicket } from "@/utils/utils";
+import { useTicketStore } from "@/stores/ticket/ticket";
 const { TextArea } = Input;
 
 export type ChatProps = Omit<ComposerProps, "onFocus" | "onChange" | "onBlur"> &
@@ -135,9 +137,9 @@ export type ChatProps = Omit<ComposerProps, "onFocus" | "onChange" | "onBlur"> &
     /**
      * 点击附加内容回调
      */
-  // onAccessoryToggle?: () => void;
+    // onAccessoryToggle?: () => void;
     showTransition?: boolean;
-  translationValue?: string;
+    translationValue?: string;
     translationPlaceholder?: string;
     translationOnChange?: (value: string) => void;
     /**
@@ -199,6 +201,7 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       chatThread,
     } = props;
     console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
+    const currentTicket = useTicketStore((state) => state.currentTicket);
 
     function handleInputFocus(e: React.FocusEvent<HTMLTextAreaElement>) {
       if (messagesRef && messagesRef.current) {
@@ -221,8 +224,6 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
         rootEl.dataset.oldIos = "";
       }
     }, []);
-
-    
 
     return (
       <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
@@ -257,7 +258,14 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
             )}
             {/* TODO: 翻译输入框 */}
             {showTransition && (
-              <div style={{ float: "left", marginLeft: 10, marginTop: 5, minWidth: 200 }}>
+              <div
+                style={{
+                  float: "left",
+                  marginLeft: 10,
+                  marginTop: 5,
+                  minWidth: 200,
+                }}
+              >
                 <TextArea
                   value={translationValue}
                   onChange={(e) => translationOnChange(e.target.value)}
@@ -266,29 +274,31 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
                 />
               </div>
             )}
-            <Composer
-              wideBreakpoint={wideBreakpoint}
-              ref={composerRef}
-              inputType={inputType}
-              text={text}
-              textOnce={textOnce}
-              inputOptions={inputOptions}
-              placeholder={placeholder}
-              onAccessoryToggle={onAccessoryToggle}
-              recorder={recorder}
-              toolbar={toolbar}
-              onToolbarClick={onToolbarClick}
-              onInputTypeChange={onInputTypeChange}
-              onFocus={handleInputFocus}
-              onChange={onInputChange}
-              onBlur={onInputBlur}
-              onSend={onSend}
-              onImageSend={onImageSend}
-              rightAction={rightAction}
-              metionOptions={metionOptions}
-              fromTicketTab={fromTicketTab}
-              chatThread={chatThread}
-            />
+            {isProcessingTicket(currentTicket) && (
+              <Composer
+                wideBreakpoint={wideBreakpoint}
+                ref={composerRef}
+                inputType={inputType}
+                text={text}
+                textOnce={textOnce}
+                inputOptions={inputOptions}
+                placeholder={placeholder}
+                onAccessoryToggle={onAccessoryToggle}
+                recorder={recorder}
+                toolbar={toolbar}
+                onToolbarClick={onToolbarClick}
+                onInputTypeChange={onInputTypeChange}
+                onFocus={handleInputFocus}
+                onChange={onInputChange}
+                onBlur={onInputBlur}
+                onSend={onSend}
+                onImageSend={onImageSend}
+                rightAction={rightAction}
+                metionOptions={metionOptions}
+                fromTicketTab={fromTicketTab}
+                chatThread={chatThread}
+              />
+            )}
           </div>
         </div>
       </ConfigProvider>
