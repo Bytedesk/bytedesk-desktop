@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-04 10:27:02
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 10:27:06
+ * @LastEditTime: 2025-02-20 07:01:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -24,4 +24,5 @@ export default {
   'robot.list.chat': '對話',
   'robot.list.edit': '編輯',
   'robot.list.delete': '刪除',
+  'robot.list.create': '創建',
 };

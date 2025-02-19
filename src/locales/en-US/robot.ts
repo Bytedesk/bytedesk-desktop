@@ -4,4 +4,5 @@ export default {
   'robot.list.chat': 'Chat',
   'robot.list.edit': 'Edit',
   'robot.list.delete': 'Delete',
+  'robot.list.create': 'Create',
 };
