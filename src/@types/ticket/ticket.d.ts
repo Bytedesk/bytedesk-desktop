@@ -54,6 +54,7 @@ declare namespace TICKET {
     //
     processInstanceId?: string;
     processEntityUid?: string;
+    verified?: boolean;
     //
     orgUid?: string;
   };
