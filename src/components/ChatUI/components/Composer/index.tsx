@@ -315,7 +315,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
                chatThread={chatThread}
                />
           </div>
-          <SendButton onClick={handleSendBtnClick} disabled={!text || !isProcessingTicket(fromTicketTab, currentTicket)} />
+          <SendButton onClick={handleSendBtnClick} disabled={!text || !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)} />
         </div>
       );
     }
