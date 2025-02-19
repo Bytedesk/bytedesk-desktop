@@ -244,12 +244,13 @@ const ChatHeader = ({
   // 客户验证
   const handleVerifyTicket = async () => {
     // 调用解决工单的接口，modal确认
+    // 增加选择：解决
     modal.confirm({
       title: "验证工单",
       content: "确定验证该工单吗？",
       onOk: async () => {
-        message.loading("解决中...", 2);
-        // 调用解决工单的接口
+        message.loading("验证中...", 2);
+        // 调用验证工单的接口
         const params: TICKET.TicketRequest = {
           uid: currentTicket?.uid,
           // 设置处理人
