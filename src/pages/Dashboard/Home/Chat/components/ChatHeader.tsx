@@ -250,7 +250,7 @@ const ChatHeader = ({
       cancelText: intl.formatMessage({ id: 'ticket.verify.reject' }),
       okButtonProps: { type: 'primary' },
       cancelButtonProps: { danger: true },
-      footer={(_, { OkBtn, CancelBtn }) => (
+      footer: (_, { OkBtn, CancelBtn }) => (
         <>
           <Button>Custom Button</Button>
           <CancelBtn />
@@ -285,7 +285,7 @@ const ChatHeader = ({
       //     message.error(intl.formatMessage({ id: 'ticket.verify.error' }));
       //   }
       // }
-    });
+    }); 
   };
 
   // 挂起工单
