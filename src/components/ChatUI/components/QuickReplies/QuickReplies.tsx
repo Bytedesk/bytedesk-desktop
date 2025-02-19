@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 17:02:11
+ * @LastEditTime: 2025-02-19 17:44:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -76,7 +76,7 @@ const QuickReplies = (props: QuickRepliesProps) => {
   if (!items.length) return null;
 
   // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-  if (fromTicketTab && !canChat(fromTicketTab, currentTicket, agentInfo)) {
+  if (fromTicketTab && !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)) {
     console.log("不显示快捷短语");
     return <></>;
   }
