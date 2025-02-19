@@ -72,10 +72,10 @@ const ChatHeader = ({
   const intl = useIntl();
   const { headerStyle } = useStyle();
   const { isDarkMode } = useContext(AppContext);
-  console.log("ChatHeader fromTicketTab", fromTicketTab);
+  // console.log("ChatHeader fromTicketTab", fromTicketTab);
   const currentTicket = useTicketStore((state) => state.currentTicket);
   const setCurrentTicket = useTicketStore((state) => state.setCurrentTicket);
-  console.log("currentTicket", currentTicket);
+  // console.log("currentTicket", currentTicket);
   const [modal, contextHolder] = Modal.useModal();
   const { agentInfo } = useAgentStore.getState();
   const currentOrg = useOrgStore((state) => state.currentOrg);
