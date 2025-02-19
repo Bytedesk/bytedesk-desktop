@@ -229,20 +229,21 @@ export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(
       <ConfigProvider locale={locale} locales={locales} elderMode={elderMode}>
         <div className="ChatApp" data-elder-mode={elderMode} ref={ref}>
           {renderNavbar ? renderNavbar() : navbar && <Navbar {...navbar} />}
-          <MessageContainer
-            ref={messagesRef}
-            loadMoreText={loadMoreText}
-            messages={messages}
-            isTyping={isTyping}
-            renderBeforeMessageList={renderBeforeMessageList}
-            renderMessageContent={renderMessageContent}
+          {isProcessingTicket(currentTicket) && (
+            <MessageContainer
+              ref={messagesRef}
+              loadMoreText={loadMoreText}
+              messages={messages}
+              isTyping={isTyping}
+              renderBeforeMessageList={renderBeforeMessageList}
+              renderMessageContent={renderMessageContent}
             onRefresh={onRefresh}
             onScroll={onScroll}
             onBackBottomShow={onBackBottomShow}
             onBackBottomClick={onBackBottomClick}
             fromTicketTab={fromTicketTab}
             chatThread={chatThread}
-          />
+          />}
           <div className="ChatFooter">
             {renderQuickReplies ? (
               renderQuickReplies()
