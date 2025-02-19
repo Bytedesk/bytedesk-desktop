@@ -242,7 +242,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
 
   useEffect(() => {
     console.log("ChatPage currentThread changed:", currentThread);
-    if ( currentThread) {
+    if (!fromTicketTab && currentThread) {
       setChatThread(currentThread);
     }
   }, [currentThread]);
