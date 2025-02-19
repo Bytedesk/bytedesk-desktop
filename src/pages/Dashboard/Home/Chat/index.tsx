@@ -474,7 +474,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       threadTopic: chatThread?.topic,
     };
     const response = await queryMessagesByThreadTopic(messageRequest);
-    console.log("queryMessages: ", response.data, messageRequest);
+    console.log("ChatPage queryMessages: ", response.data, messageRequest);
     message.destroy();
     if (response.data.code === 200) {
       addMessageList(response.data.data.content);
@@ -494,6 +494,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
     isLoadingMessage.current = false;
   };
+
   //
   useEffect(() => {
     setPageNumber(0);
