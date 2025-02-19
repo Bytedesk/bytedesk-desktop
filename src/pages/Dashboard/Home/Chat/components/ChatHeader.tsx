@@ -244,7 +244,8 @@ const ChatHeader = ({
   // 客户验证
   const handleVerifyTicket = async () => {
     // 调用解决工单的接口，modal确认
-    // 增加选择：解决
+    // 增加选择：解决、未解决
+    
     modal.confirm({
       title: "验证工单",
       content: "确定验证该工单吗？",
