@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:22
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 18:16:02
+ * @LastEditTime: 2025-02-19 18:51:38
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -42,7 +42,7 @@ export default {
   'ticket.workgroup.load.error': '加載技能組失敗',
   // 工單狀態
   'ticket.status.all': '全部狀態',
-  'ticket.status.new': '新建',
+  'ticket.status.new': '待认领',
   'ticket.status.claimed': '已分配',
   'ticket.status.unclaimed': '被退回',
   'ticket.status.processing': '處理中',

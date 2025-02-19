@@ -42,7 +42,7 @@ export default {
   'ticket.workgroup.load.error': '加载技能组失败',
   // 工单状态
   'ticket.status.all': '全部状态',
-  'ticket.status.new': '新建',
+  'ticket.status.new': '待认领',
   'ticket.status.claimed': '已分配',
   'ticket.status.unclaimed': '被退回',
   'ticket.status.processing': '处理中',
