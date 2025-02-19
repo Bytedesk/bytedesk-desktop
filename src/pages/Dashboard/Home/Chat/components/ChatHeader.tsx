@@ -32,6 +32,7 @@ import { Button, Layout, Modal, Space } from "antd";
 import { useContext } from "react";
 import { useIntl } from "react-intl";
 const { Header } = Layout;
+import { ticketService } from '@/services/ticketService';
 
 interface ChatHeaderProps {
   fromTicketTab?: boolean;
@@ -68,7 +69,7 @@ const ChatHeader = ({
   const [modal, contextHolder] = Modal.useModal();
   const { agentInfo } = useAgentStore.getState();
   const currentOrg = useOrgStore((state) => state.currentOrg);
-  
+
   // 添加一个获取头像的辅助函数
   const getAvatar = () => {
     if (!chatThread?.user) return "";
@@ -104,11 +105,13 @@ const ChatHeader = ({
           orgUid: currentOrg?.uid,
         };
         const response = await claimTicket(params);
-        console.log("claimTicket response", params, response.data);
+        console.log("query claimTicket response", params, response.data);
         if (response.data.code === 200) {
           message.destroy();
           message.success(intl.formatMessage({ id: 'ticket.action.claim.success' }));
           setCurrentTicket(response.data.data);
+          // 刷新工单列表
+          ticketService.refreshTickets();
         } else {
           message.destroy();
           message.error(response.data.message);
@@ -143,10 +146,12 @@ const ChatHeader = ({
       orgUid: currentOrg?.uid,
     };
     const response = await unclaimTicket(params);
-    console.log("unclaimTicket response", params, response.data);
+    console.log("query unclaimTicket response", params, response.data);
     if (response.data.code === 200) {
       message.success(intl.formatMessage({ id: 'ticket.action.unclaim.success' }));
       setCurrentTicket(response.data.data);
+      // 刷新工单列表
+      ticketService.refreshTickets();
     } else {
       message.error(response.data.message);
     }
