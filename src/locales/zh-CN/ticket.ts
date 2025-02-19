@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:11:13
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 18:15:55
+ * @LastEditTime: 2025-02-19 18:52:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -131,7 +131,7 @@ export default {
 
   // 状态筛选
   'ticket.filter.status_all': '全部状态',
-  'ticket.filter.status_new': '新建',
+  'ticket.filter.status_new': '待分配',
   'ticket.filter.status_claimed': '已分配',
   'ticket.filter.status_unclaimed': '被退回',
   'ticket.filter.status_processing': '处理中',
