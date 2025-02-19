@@ -26,6 +26,7 @@ import {
   TICKET_STATUS_UNCLAIMED,
   IS_DEBUG,
   TICKET_STATUS_RESUMED,
+  TICKET_STATUS_CLOSED,
 } from "@/utils/constants";
 import {
   isCustomerServiceThread,
@@ -506,7 +507,13 @@ const ChatHeader = ({
             key="reopen"
             onClick={handleReopenTicket}
             disabled={
-      
+              !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
+            }
+          >
+            {intl.formatMessage({ id: "ticket.action.reopen" })}
+          </Button>,
+        );
+        break;
       case TICKET_STATUS_RESOLVED:
         buttons.push(
           <Button
