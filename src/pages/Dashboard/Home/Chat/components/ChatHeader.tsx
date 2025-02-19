@@ -513,6 +513,7 @@ const ChatHeader = ({
               key="process"
               type="primary"
               onClick={handleProcessTicket}
+              danger
               disabled={
                 !canChat(fromTicketTab, currentTicket, chatThread, agentInfo)
               }
