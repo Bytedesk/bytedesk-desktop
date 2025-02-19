@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-18 20:11:33
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 12:49:05
+ * @LastEditTime: 2025-02-19 12:53:20
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -15,6 +15,8 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
 import { ScrollView, ScrollViewHandle } from "../ScrollView/ScrollView";
 import { QuickReply, QuickReplyItemProps } from "./QuickReply";
+import { useAgentStore } from "@/stores/service/agent";
+import { useTicketStore } from "@/stores/ticket/ticket";
 
 export interface QuickRepliesProps {
   items: QuickReplyItemProps[];
@@ -37,6 +39,22 @@ const QuickReplies = (props: QuickRepliesProps) => {
   const scroller = useRef<ScrollViewHandle>(null);
   const [scrollEvent, setScrollEvent] = useState(!!onScroll);
   console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
+  //
+  const currentTicket = useTicketStore((state) => state.currentTicket);
+  const { agentInfo } = useAgentStore.getState();
+  console.log(
+    "currentTicket",
+    currentTicket,
+    "agentInfo",
+    agentInfo,
+    "fromTicketTab",
+    fromTicketTab,
+  );
+  console.log("chatThread", chatThread);
+  // 判断当前工单是否是自己的工单
+  const isMyTicket = () => {
+    return currentTicket?.assignee?.uid === agentInfo?.uid;
+  };
 
   useLayoutEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -55,6 +73,12 @@ const QuickReplies = (props: QuickRepliesProps) => {
   }, [items]);
 
   if (!items.length) return null;
+
+  // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
+  if (!isMyTicket()) {
+    console.log("不显示快捷短语");
+    return <></>;
+  }
 
   return (
     <ScrollView

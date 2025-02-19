@@ -17,6 +17,8 @@ import { BackBottom } from "../BackBottom";
 import canUse from "../../utils/canUse";
 import throttle from "../../utils/throttle";
 import getToBottom from "../../utils/getToBottom";
+import { useAgentStore } from "@/stores/service/agent";
+import { useTicketStore } from "@/stores/ticket/ticket";
 
 const listenerOpts = canUse("passiveListener") ? { passive: true } : false;
 
@@ -70,6 +72,22 @@ export const MessageContainer = React.forwardRef<
   const scrollerRef = useRef<PullToRefreshHandle>(null);
   const lastMessage = messages[messages.length - 1];
   console.log("fromTicketTab", fromTicketTab, "chatThread", chatThread);
+  //
+  const currentTicket = useTicketStore((state) => state.currentTicket);
+  const { agentInfo } = useAgentStore.getState();
+  console.log(
+    "currentTicket",
+    currentTicket,
+    "agentInfo",
+    agentInfo,
+    "fromTicketTab",
+    fromTicketTab,
+  );
+  console.log("chatThread", chatThread);
+  // 判断当前工单是否是自己的工单
+  const isMyTicket = () => {
+    return currentTicket?.assignee?.uid === agentInfo?.uid;
+  };
 
   const clearBackBottom = () => {
     setNewCount(0);
@@ -183,22 +201,28 @@ export const MessageContainer = React.forwardRef<
       }
     }
 
-    wrapper.addEventListener("touchstart", touchStart, listenerOpts);
-    wrapper.addEventListener("touchmove", touchMove, listenerOpts);
-    wrapper.addEventListener("touchend", reset);
-    wrapper.addEventListener("touchcancel", reset);
+    wrapper?.addEventListener("touchstart", touchStart, listenerOpts);
+    wrapper?.addEventListener("touchmove", touchMove, listenerOpts);
+    wrapper?.addEventListener("touchend", reset);
+    wrapper?.addEventListener("touchcancel", reset);
 
     return () => {
-      wrapper.removeEventListener("touchstart", touchStart);
-      wrapper.removeEventListener("touchmove", touchMove);
-      wrapper.removeEventListener("touchend", reset);
-      wrapper.removeEventListener("touchcancel", reset);
+      wrapper?.removeEventListener("touchstart", touchStart);
+      wrapper?.removeEventListener("touchmove", touchMove);
+      wrapper?.removeEventListener("touchend", reset);
+      wrapper?.removeEventListener("touchcancel", reset);
     };
   }, []);
 
   useImperativeHandle(ref, () => ({ ref: messagesRef, scrollToEnd }), [
     scrollToEnd,
   ]);
+
+  // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示
+  if (!isMyTicket()) {
+    console.log("不显示消息容器");
+    return <></>;
+  }
 
   return (
     <div className="MessageContainer" ref={messagesRef} tabIndex={-1}>

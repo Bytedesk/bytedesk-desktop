@@ -89,10 +89,17 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     const popoverTarget = useRef<any>();
     const isMountRef = useRef(false);
     const [isWide, setWide] = useState(false);
-    // 
+    //
     const currentTicket = useTicketStore((state) => state.currentTicket);
     const { agentInfo } = useAgentStore.getState();
-    console.log("currentTicket", currentTicket, "agentInfo", agentInfo, "fromTicketTab", fromTicketTab);
+    console.log(
+      "currentTicket",
+      currentTicket,
+      "agentInfo",
+      agentInfo,
+      "fromTicketTab",
+      fromTicketTab,
+    );
     console.log("chatThread", chatThread);
     // 判断当前工单是否是自己的工单
     const isMyTicket = () => {
@@ -286,6 +293,11 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     };
 
     if (isWide) {
+      if (!isMyTicket()) {
+        console.log("不显示composer");
+        return <></>;
+      }
+      // 显示composer
       return (
         <div className="Composer Composer--lg">
           {hasToolbar &&
@@ -314,16 +326,14 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
     }
 
     // 如果当前工单不是自己的工单, 并且是从工单tab页面进入的, 则不显示composer
-    if (!isMyTicket() && fromTicketTab) {
+    if (!isMyTicket()) {
       console.log("不显示composer");
-      return (
-        <></>
-      );
-    } else {
-      console.log("显示composer");
-      return (
-        <>
-          <div className="Composer">
+      return <></>;
+    }
+
+    return (
+      <>
+        <div className="Composer">
           {recorder.canRecord && (
             <Action
               className="Composer-inputTypeBtn"
@@ -360,7 +370,6 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>(
           </AccessoryWrap>
         )}
       </>
-      );
-    }
+    );
   },
 );
