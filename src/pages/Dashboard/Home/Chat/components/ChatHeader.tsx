@@ -88,6 +88,11 @@ const ChatHeader = ({
     return chatThread.user?.nickname || intl.formatMessage({ id: 'chat.header.user.unnamed' });
   };
 
+  // 判断当前工单是否是自己的工单
+  const isMyTicket = () => {
+    return currentTicket?.assignee?.uid === agentInfo?.uid;
+  };
+
   // 认领工单
   const handleClaimTicket = async () => {
     // 增加认领确认对话框
@@ -188,7 +193,7 @@ const ChatHeader = ({
       case TICKET_STATUS_NEW:
       case TICKET_STATUS_UNCLAIMED:
         buttons.push(
-          <Button key="claim" type="primary" onClick={handleClaimTicket}>
+          <Button key="claim" type="primary" onClick={handleClaimTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.claim' })}
           </Button>
         );
@@ -197,10 +202,10 @@ const ChatHeader = ({
       case TICKET_STATUS_CLAIMED:
       case TICKET_STATUS_REOPENED:
         buttons.push(
-          <Button key="process" type="primary" onClick={handleProcessTicket}>
+          <Button key="process" type="primary" onClick={handleProcessTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.process' })}
           </Button>,
-          <Button key="return" onClick={handleUnclaimTicket}>
+          <Button key="return" onClick={handleUnclaimTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.unclaim' })}
           </Button>
         );
@@ -208,10 +213,10 @@ const ChatHeader = ({
         
       case TICKET_STATUS_PROCESSING:
         buttons.push(
-          <Button key="resolve" type="primary" onClick={handleResolveTicket}>
+          <Button key="resolve" type="primary" onClick={handleResolveTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.resolve' })}
           </Button>,
-          <Button key="pending" onClick={handlePendingTicket}>
+          <Button key="pending" onClick={handlePendingTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.pending' })}
           </Button>
         );
@@ -220,7 +225,7 @@ const ChatHeader = ({
       case TICKET_STATUS_PENDING:
       case TICKET_STATUS_HOLDING:
         buttons.push(
-          <Button key="resume" type="primary" onClick={handleResumeTicket}>
+          <Button key="resume" type="primary" onClick={handleResumeTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.resume' })}
           </Button>
         );
@@ -228,10 +233,10 @@ const ChatHeader = ({
         
       case TICKET_STATUS_RESOLVED:
         buttons.push(
-          <Button key="close" type="primary" onClick={handleCloseTicket}>
+          <Button key="close" type="primary" onClick={handleCloseTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.close' })}
           </Button>,
-          <Button key="reopen" onClick={handleReopenTicket}>
+          <Button key="reopen" onClick={handleReopenTicket} disabled={!isMyTicket()}>
             {intl.formatMessage({ id: 'ticket.action.reopen' })}
           </Button>
         );
