@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-12 15:16:25
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-18 23:51:05
+ * @LastEditTime: 2025-02-20 16:39:27
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -36,7 +36,7 @@ import {
 
 export const ticketService = {
   async loadTickets(orgUid: string, retryCount = 3) {
-    const { setLoading, setError, setTickets, filters, searchText, pagination } = useTicketStore.getState();
+    const { setLoading, setError, setTickets, currentTicket, setCurrentTicket, filters, searchText, pagination } = useTicketStore.getState();
     const { agentInfo } = useAgentStore.getState();
     // const { userInfo } = useUserStore.getState();
     // const { currentOrg } = useOrgStore.getState();
@@ -140,6 +140,12 @@ export const ticketService = {
         console.log('queryTicketsFilter response', params, response.data);
         if (response.data.code === 200) {
           setTickets(response.data.data.content);
+          // 如果当前工单列表为不空，则设置当前工单为第一个工单
+          if (response.data.data.content.length > 0 && !currentTicket) {
+            setCurrentTicket(response.data.data.content[0]);
+          } else if (response.data.data.content.length == 0) {
+            setCurrentTicket(undefined);
+          }
         } else {
           throw new Error(response.data.message);
         }
