@@ -35,7 +35,6 @@ import {
   isGroupThread,
   isMemberThread,
   canChat,
-  // isOrgTicketThreadTopic,
   isRobotThread,
   isTicketThread,
   truncateString,
@@ -384,7 +383,6 @@ const ChatHeader = ({
 
   // 退回工单
   const handleUnclaimTicket = async () => {
-    message.warning("TODO: 退回工单");
     // 调用退回工单的接口
     const params: TICKET.TicketRequest = {
       uid: currentTicket?.uid,
@@ -444,7 +442,6 @@ const ChatHeader = ({
 
   // 重新打开工单
   const handleReopenTicket = async () => {
-    message.warning("TODO: 重新打开工单");
     // 调用重新打开工单的接口，modal确认
     modal.confirm({
       title: "重新打开工单",
