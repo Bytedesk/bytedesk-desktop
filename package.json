@@ -29,6 +29,7 @@
     "build": "tsc && vite build --mode prod && electron-builder",
     "build:web": "tsc && vite build --mode web",
     "build:open": "tsc && vite build --mode open",
+    "build:quanjing": "tsc && vite build --mode quanjing",
     "build:mac:mas": "tsc && vite build --mode prod && electron-builder --mac --config electron-builder-mac-mas.yml",
     "build:mac:dmg": "tsc && vite build --mode prod && electron-builder --mac --config electron-builder-mac-dmg.yml",
     "build:win": "tsc && vite build --mode prod && electron-builder --win --config electron-builder-windows.yml",
