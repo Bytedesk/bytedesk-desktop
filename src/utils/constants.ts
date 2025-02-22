@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 14:38:49
+ * @LastEditTime: 2025-02-22 11:21:34
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -15,9 +15,11 @@
 export const SERVER_MODE_DEV = "dev";
 export const SERVER_MODE_OPEN = "open";
 export const SERVER_MODE_PROD = "prod";
+// 定制 - 全景云客服
+export const SERVER_MODE_QUANJING = "quanjing";
 // 获取环境变量
 const configEnv = import.meta.env.VITE_CONFIG_ENV || "prod";
-console.log('Current VITE_CONFIG_ENV:', import.meta.env.VITE_CONFIG_ENV);
+console.log("Current VITE_CONFIG_ENV:", import.meta.env.VITE_CONFIG_ENV);
 // 根据环境变量动态引入配置文件
 let config: MYCONFIG.Consts;
 switch (configEnv) {
@@ -41,6 +43,16 @@ switch (configEnv) {
       CLIENT: "WEB",
     };
     break;
+  case "prod-quanjing":
+    config = {
+      API_URL: "http://127.0.0.1:9003",
+      MQTT_URL: "ws://127.0.0.1:9885/websocket",
+      HTML_URL: "http://127.0.0.1:9003",
+      IS_DEBUG: false,
+      SERVER_MODE: SERVER_MODE_QUANJING,
+      CLIENT: "WEB",
+    };
+    break;
   case "prod-web":
     config = {
       API_URL: "https://api.weiyuai.cn",
@@ -61,7 +73,7 @@ switch (configEnv) {
       CLIENT: "ELECTRON", // TODO: 区分mac/windows/linux
     };
 }
-console.log('config.API_BASE_URL: ', configEnv, config)
+console.log("config.API_BASE_URL: ", configEnv, config);
 // 区分electron和web
 export const IS_ELECTRON =
   navigator.userAgent.toLowerCase().indexOf("electron") > -1;
@@ -85,7 +97,7 @@ export const PRODUCTION = "production";
 //
 export const SERVER_EDITION_COMMUNITY = "community";
 export const SERVER_EDITION_ENTERPRISE = "enterprise";
-// 
+//
 export const LOCALE = "locale";
 export const MODE = "mode";
 export const MODE_TEAM = "team"; // 团队
@@ -100,7 +112,7 @@ export const MENU_ID = "message_list_item";
 // electron
 export const DEEP_LINK_WEIYUIM = "bytedesk";
 // export const OPEN_AT_LOGIN = "openAtLogin";
-export const STORAGE_KEY = 'bytedesk_login_credentials';
+export const STORAGE_KEY = "bytedesk_login_credentials";
 //
 export const THEME_MODE_TYPE = "THEME_MODE_TYPE";
 export const THEME_MODE_TYPE_LIGHT = "light";
@@ -118,7 +130,7 @@ export const CONFIG_ENABLED = "CONFIG_ENABLED_AGENT";
 export const CONFIG_API_URL = "CONFIG_API_URL_AGENT";
 export const CONFIG_WEBSOCKET_URL = "CONFIG_WEBSOCKET_URL_AGENT";
 export const CONFIG_HTML_URL = "CONFIG_HTML_URL_AGENT";
-// 
+//
 export const CONFIG_CUSTOM_ENABLED = "CONFIG_CUSTOM_ENABLED_AGENT";
 export const CONFIG_CUSTOM_API_URL = "CONFIG_CUSTOM_API_URL_AGENT";
 export const CONFIG_CUSTOM_WEBSOCKET_URL = "CONFIG_CUSTOM_WEBSOCKET_URL_AGENT";
@@ -131,7 +143,7 @@ export const ORG_TREE_TYPE_DEPARTMENT = "department";
 export const ORG_TREE_TYPE_MEMBER = "member";
 //
 export const SCREENSHOT_OK = "SCREENSHOT_OK";
-// 
+//
 export const EVENT_BUS_LOGIN_TIMEOUT = "EVENT_BUS_LOGIN_TIMEOUT";
 export const EVENT_BUS_LOGIN_ERROR_400 = "EVENT_BUS_LOGIN_ERROR_400";
 export const EVENT_BUS_SERVER_ERROR_500 = "EVENT_BUS_SERVER_ERROR_500";
@@ -214,7 +226,7 @@ export const AUTH_TYPE_MOBILE_VERIFY = "MOBILE_VERIFY";
 export const AUTH_TYPE_EMAIL_REGISTER = "EMAIL_REGISTER";
 export const AUTH_TYPE_EMAIL_LOGIN = "EMAIL_LOGIN";
 export const AUTH_TYPE_EMAIL_RESET = "EMAIL_RESET";
-export const AUTH_TYPE_EMAIL_VERIFY = "EMAIL_VERIFY"
+export const AUTH_TYPE_EMAIL_VERIFY = "EMAIL_VERIFY";
 //
 export const PUSH_STATUS_PENDING = "PENDING";
 export const PUSH_STATUS_SCANNED = "SCANNED";
@@ -282,7 +294,7 @@ export const USER_TYPE_MONITOR = "MONITOR";
 export const THREAD_TYPE_AGENT = "AGENT"; //   一对一客服会话
 export const THREAD_TYPE_WORKGROUP = "WORKGROUP"; // 工作组客服会话
 export const THREAD_TYPE_ROBOT = "ROBOT"; // 机器人客服会话
-// 
+//
 export const THREAD_TYPE_MEMBER = "MEMBER"; // 同事一对一会话
 export const THREAD_TYPE_GROUP = "GROUP"; // 群组会话
 export const THREAD_TYPE_FEEDBACK = "FEEDBACK"; // 反馈会话
@@ -291,7 +303,7 @@ export const THREAD_TYPE_CHANNEL = "CHANNEL"; // 渠道会话
 export const THREAD_TYPE_LOCAL = "LOCAL"; // 本地会话
 export const THREAD_TYPE_FRIEND = "FRIEND"; // 好友会话
 export const THREAD_TYPE_TICKET = "TICKET"; // 工单会话
-// 
+//
 // export const THREAD_TYPE_KB = "KB"; // 知识库会话
 // export const THREAD_TYPE_KBDOC = "KBDOC"; // 知识库文档会话
 export const THREAD_TYPE_LLM = "LLM"; // 大模型会话
@@ -386,7 +398,7 @@ export const MESSAGE_TYPE_TRANSFER_REJECT = "TRANSFER_REJECT"; // 转接-拒绝
 export const MESSAGE_TYPE_INVITE = "INVITE"; // 邀请
 export const MESSAGE_TYPE_INVITE_ACCEPT = "INVITE_ACCEPT"; // 邀请-接受
 export const MESSAGE_TYPE_INVITE_REJECT = "INVITE_REJECT"; // 邀请-拒绝
-// 
+//
 export const MESSAGE_TYPE_INVITE_VISITOR = "INVITE_VISITOR"; // 邀请访客
 export const MESSAGE_TYPE_INVITE_VISITOR_ACCEPT = "INVITE_VISITOR_ACCEPT"; // 邀请访客-接受
 export const MESSAGE_TYPE_INVITE_VISITOR_REJECT = "INVITE_VISITOR_REJECT"; // 邀请访客-拒绝
@@ -440,7 +452,7 @@ export const TOPIC_ORG_KB_PREFIX = "org/kb/";
 export const TOPIC_ORG_KBDOC_PREFIX = "org/kbdoc/";
 export const TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX = "org/ticket/agent/";
 export const TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX = "org/ticket/workgroup/";
-// 
+//
 export const KB_TYPE_ASSISTANT = "ASSISTANT";
 export const KB_TYPE_HELPCENTER = "HELPCENTER";
 export const KB_TYPE_LLM = "LLM";
@@ -472,7 +484,7 @@ export const AUTO_REPLY_TYPE_LLM = "LLM";
 //
 export const QUICK_REPLY_TYPE_KB = "KB";
 export const QUICK_REPLY_TYPE_CATEGORY = "CATEGORY";
-// 
+//
 export const LAST_PATH = "lastPath";
 
 //
@@ -558,49 +570,49 @@ export const TICKET_TYPE_AGENT = "AGENT";
 export const TICKET_TYPE_WORKGROUP = "WORKGROUP";
 
 // Ticket Priority
-export const TICKET_PRIORITY_LOWEST = 'LOWEST'; 
-export const TICKET_PRIORITY_LOW = 'LOW';
-export const TICKET_PRIORITY_MEDIUM = 'MEDIUM';
-export const TICKET_PRIORITY_HIGH = 'HIGH';
-export const TICKET_PRIORITY_URGENT = 'URGENT';
-export const TICKET_PRIORITY_CRITICAL = 'CRITICAL';
+export const TICKET_PRIORITY_LOWEST = "LOWEST";
+export const TICKET_PRIORITY_LOW = "LOW";
+export const TICKET_PRIORITY_MEDIUM = "MEDIUM";
+export const TICKET_PRIORITY_HIGH = "HIGH";
+export const TICKET_PRIORITY_URGENT = "URGENT";
+export const TICKET_PRIORITY_CRITICAL = "CRITICAL";
 
 // Ticket Status
-export const TICKET_STATUS_NEW = 'NEW'; // 新建
-export const TICKET_STATUS_CLAIMED = 'CLAIMED'; // 已认领
-export const TICKET_STATUS_UNCLAIMED = 'UNCLAIMED'; // 被退回
-export const TICKET_STATUS_PROCESSING = 'PROCESSING'; // 处理中
-export const TICKET_STATUS_PENDING = 'PENDING'; // 待处理（等待客户响应/等待第三方）
-export const TICKET_STATUS_HOLDING = 'HOLDING'; // 挂起（暂停处理）
-export const TICKET_STATUS_RESUMED = 'RESUMED'; // 恢复处理
-export const TICKET_STATUS_REOPENED = 'REOPENED'; // 重新打开
-export const TICKET_STATUS_RESOLVED = 'RESOLVED'; // 已解决
-export const TICKET_STATUS_ESCALATED = 'ESCALATED'; // 已升级
-export const TICKET_STATUS_CLOSED = 'CLOSED'; // 已关闭
-export const TICKET_STATUS_CANCELLED = 'CANCELLED'; // 已取消
+export const TICKET_STATUS_NEW = "NEW"; // 新建
+export const TICKET_STATUS_CLAIMED = "CLAIMED"; // 已认领
+export const TICKET_STATUS_UNCLAIMED = "UNCLAIMED"; // 被退回
+export const TICKET_STATUS_PROCESSING = "PROCESSING"; // 处理中
+export const TICKET_STATUS_PENDING = "PENDING"; // 待处理（等待客户响应/等待第三方）
+export const TICKET_STATUS_HOLDING = "HOLDING"; // 挂起（暂停处理）
+export const TICKET_STATUS_RESUMED = "RESUMED"; // 恢复处理
+export const TICKET_STATUS_REOPENED = "REOPENED"; // 重新打开
+export const TICKET_STATUS_RESOLVED = "RESOLVED"; // 已解决
+export const TICKET_STATUS_ESCALATED = "ESCALATED"; // 已升级
+export const TICKET_STATUS_CLOSED = "CLOSED"; // 已关闭
+export const TICKET_STATUS_CANCELLED = "CANCELLED"; // 已取消
 
-// 
-export const TICKET_FILTER_STATUS_ALL = 'STATUS_ALL';
-export const TICKET_FILTER_PRIORITY_ALL = 'PRIORITY_ALL';
-export const TICKET_FILTER_ASSIGNMENT_ALL = 'ASSIGNMENT_ALL';
-export const TICKET_FILTER_TIME_ALL = 'TIME_ALL';
+//
+export const TICKET_FILTER_STATUS_ALL = "STATUS_ALL";
+export const TICKET_FILTER_PRIORITY_ALL = "PRIORITY_ALL";
+export const TICKET_FILTER_ASSIGNMENT_ALL = "ASSIGNMENT_ALL";
+export const TICKET_FILTER_TIME_ALL = "TIME_ALL";
 
-// 
-export const TICKET_FILTER_MY_TICKETS = 'MY_TICKETS';
-export const TICKET_FILTER_UNASSIGNED = 'UNASSIGNED';
-export const TICKET_FILTER_MY_WORKGROUP = 'MY_WORKGROUP';
-export const TICKET_FILTER_MY_CREATED = 'MY_CREATED';
-export const TICKET_FILTER_MY_ASSIGNED = 'MY_ASSIGNED';
+//
+export const TICKET_FILTER_MY_TICKETS = "MY_TICKETS";
+export const TICKET_FILTER_UNASSIGNED = "UNASSIGNED";
+export const TICKET_FILTER_MY_WORKGROUP = "MY_WORKGROUP";
+export const TICKET_FILTER_MY_CREATED = "MY_CREATED";
+export const TICKET_FILTER_MY_ASSIGNED = "MY_ASSIGNED";
 
-// 
-export const TICKET_FILTER_TODAY = 'TODAY';
-export const TICKET_FILTER_YESTERDAY = 'YESTERDAY';
-export const TICKET_FILTER_THIS_WEEK = 'THIS_WEEK';
-export const TICKET_FILTER_LAST_WEEK = 'LAST_WEEK';
-export const TICKET_FILTER_THIS_MONTH = 'THIS_MONTH';
-export const TICKET_FILTER_LAST_MONTH = 'LAST_MONTH';
+//
+export const TICKET_FILTER_TODAY = "TODAY";
+export const TICKET_FILTER_YESTERDAY = "YESTERDAY";
+export const TICKET_FILTER_THIS_WEEK = "THIS_WEEK";
+export const TICKET_FILTER_LAST_WEEK = "LAST_WEEK";
+export const TICKET_FILTER_THIS_MONTH = "THIS_MONTH";
+export const TICKET_FILTER_LAST_MONTH = "LAST_MONTH";
 
-// 
-export const TICKET_PROCESS_KEY_AGENT = 'agentTicketProcess';
-export const TICKET_PROCESS_KEY_GROUP = 'groupTicketProcess';
-export const TICKET_PROCESS_KEY_GROUP_SIMPLE = 'groupTicketSimpleProcess';
+//
+export const TICKET_PROCESS_KEY_AGENT = "agentTicketProcess";
+export const TICKET_PROCESS_KEY_GROUP = "groupTicketProcess";
+export const TICKET_PROCESS_KEY_GROUP_SIMPLE = "groupTicketSimpleProcess";
