@@ -46,7 +46,7 @@ export type ComposerProps = {
   rightAction?: IconButtonProps;
   metionOptions?: any;
   fromTicketTab?: boolean;
-  chatThread: THREAD.ThreadResponse;
+  chatThread?: THREAD.ThreadResponse;
 };
 
 export interface ComposerHandle {

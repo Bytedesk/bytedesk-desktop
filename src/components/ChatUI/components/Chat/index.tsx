@@ -148,7 +148,7 @@ export type ChatProps = Omit<ComposerProps, "onFocus" | "onChange" | "onBlur"> &
      */
     Composer?: React.ElementType; // FIXME
     fromTicketTab?: boolean;
-    chatThread: THREAD.ThreadResponse;
+    chatThread?: THREAD.ThreadResponse;
   };
 
 export const Chat = React.forwardRef<HTMLDivElement, ChatProps>(

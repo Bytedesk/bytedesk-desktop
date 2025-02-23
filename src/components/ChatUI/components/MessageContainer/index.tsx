@@ -35,7 +35,7 @@ export interface MessageContainerProps {
   onBackBottomShow?: () => void;
   onBackBottomClick?: () => void;
   fromTicketTab?: boolean;
-  chatThread: THREAD.ThreadResponse;
+  chatThread?: THREAD.ThreadResponse;
 }
 
 export interface MessageContainerHandle {
