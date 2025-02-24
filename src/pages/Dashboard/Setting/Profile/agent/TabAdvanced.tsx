@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-27 15:10:40
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-12-27 15:46:03
+ * @LastEditTime: 2025-02-24 22:34:30
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -22,7 +22,7 @@ import TabRate from "@/components/Advanced/TabRate";
 import TabFaqQuick from "@/components/Advanced/TabFaqQuick";
 import TabFaqGuess from "@/components/Advanced/TabFaqGuess";
 // import TabBlack from "@/components/Advanced/TabBlack";
-import TabAutoreply from "@/components/Advanced/TabAutoreply";
+// import TabAutoreply from "@/components/Advanced/TabAutoreply";
 import { FormattedMessage } from "react-intl";
 import TabCaptcha from "@/components/Advanced/TabCaptcha";
 import TabHistory from "@/components/Advanced/TabHistory";
@@ -106,11 +106,11 @@ const TabAdvanced: React.FC = () => {
           label: <FormattedMessage id="pages.advanced.rate" />,
           children: <TabRate />,
         },
-        {
-          key: "autoreply",
-          label: <FormattedMessage id="pages.advanced.autoreply" />,
-          children: <TabAutoreply />,
-        },
+        // {
+        //   key: "autoreply",
+        //   label: <FormattedMessage id="pages.advanced.autoreply" />,
+        //   children: <TabAutoreply />,
+        // },
         {
           key: "leaveMsg",
           label: <FormattedMessage id="pages.advanced.leaveMsg" />,
