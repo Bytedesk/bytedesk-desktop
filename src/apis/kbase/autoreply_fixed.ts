@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-04 08:38:31
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-24 20:37:31
+ * @LastEditTime: 2025-02-24 20:37:47
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -16,9 +16,9 @@ import { HTTP_CLIENT } from "@/utils/constants";
 import request from "@/apis/request";
 
 //
-export async function queryFaqsByOrg(params: FAQ.FaqRequest) {
+export async function queryAutoReplyFixedByOrg(params: AUTOREPLY_FIXED.AutoReplyFixedRequest) {
   //
-  return request<FAQ.HttpPageResult>("/api/v1/faq/query/org", {
+  return request<AUTOREPLY_FIXED.HttpPageResult>("/api/v1/autoreply/fixed/query/org", {
     method: "GET",
     params: {
       ...params,
@@ -28,19 +28,19 @@ export async function queryFaqsByOrg(params: FAQ.FaqRequest) {
 }
 
 // 创建
-export async function createFaq(faq: FAQ.FaqRequest) {
-  return request<FAQ.HttpResult>("/api/v1/faq/create", {
+export async function createAutoReplyFixed(autoreply: AUTOREPLY_FIXED.AutoReplyFixedRequest) {
+  return request<AUTOREPLY_FIXED.HttpResult>("/api/v1/autoreply/fixed/create", {
     method: "POST",
     data: {
-      ...faq,
+      ...autoreply,
       client: HTTP_CLIENT,
     },
   });
 }
 
 // 更新
-export async function updateFaq(workGroup: FAQ.FaqRequest) {
-  return request<FAQ.HttpResult>("/api/v1/faq/update", {
+export async function updateAutoReplyFixed(workGroup: AUTOREPLY_FIXED.AutoReplyFixedRequest) {
+  return request<AUTOREPLY_FIXED.HttpResult>("/api/v1/autoreply/fixed/update", {
     method: "POST",
     data: {
       ...workGroup,
@@ -50,11 +50,11 @@ export async function updateFaq(workGroup: FAQ.FaqRequest) {
 }
 
 // 删除
-export async function deleteFaq(faq: FAQ.FaqRequest) {
-  return request<FAQ.HttpResult>("/api/v1/faq/delete", {
+export async function deleteAutoReplyFixed(autoreply: AUTOREPLY_FIXED.AutoReplyFixedRequest) {
+  return request<AUTOREPLY_FIXED.HttpResult>("/api/v1/autoreply/fixed/delete", {
     method: "POST",
     data: {
-      ...faq,
+      ...autoreply,
       client: HTTP_CLIENT,
     },
   });

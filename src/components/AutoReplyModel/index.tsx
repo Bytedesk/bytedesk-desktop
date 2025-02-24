@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-13 15:24:12
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-13 17:01:32
+ * @LastEditTime: 2025-02-24 20:44:59
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -13,8 +14,7 @@
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
 import { message } from "@/AntdGlobalComp";
-import { updateAgentAutoReply } from "@/apis/service/agent";
-import { queryAutoRepliesByUser } from "@/apis/kbase/autoreply";
+import { updateAgent, updateAgentAutoReply } from "@/apis/service/agent";
 import { queryKbasesByOrg } from "@/apis/kbase/kbase";
 import useTranslate from "@/hooks/useTranslate";
 import { useAgentStore } from "@/stores/service/agent";
@@ -24,21 +24,17 @@ import {
   AUTO_REPLY_TYPE_KEYWORD,
   AUTO_REPLY_TYPE_LLM,
   API_BASE_URL,
-  KB_TYPE_KEYWORD,
   KB_TYPE_LLM,
-  MESSAGE_TYPE_AUDIO,
-  MESSAGE_TYPE_FILE,
-  MESSAGE_TYPE_IMAGE,
-  MESSAGE_TYPE_TEXT,
-  MESSAGE_TYPE_VIDEO
+  KB_TYPE_AUTOREPLY,
+  IS_DEBUG
 } from "@/utils/constants";
 import { openUrl } from "@/utils/electronApiUtils";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { ProForm, ProFormSelect, ProFormSwitch, ProFormTextArea } from "@ant-design/pro-components";
+import { ProForm, ProFormSelect, ProFormSwitch } from "@ant-design/pro-components";
 import { Button, Modal } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import { AppContext } from "@/context/AppContext";
+import { queryAutoReplyFixedByOrg } from "@/apis/kbase/autoreply_fixed";
 
 type AutoReplyModelProps = {
   open: boolean;
@@ -50,10 +46,10 @@ type AutoReplyModelProps = {
 const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
   const intl = useIntl();
   const [form] = ProForm.useForm();
-  const { isLoggedIn, hasRoleAgent } = useContext(AppContext);
+  // const { isLoggedIn, hasRoleAgent } = useContext(AppContext);
   const { translateString } = useTranslate();
   const currentOrg = useOrgStore((state) => state.currentOrg);
-  const [autoReplyResult, setAutoReplyResult] = useState<AUTOREPLY.HttpPageResult>();
+  const [autoReplyResult, setAutoReplyResult] = useState<AUTOREPLY_FIXED.HttpPageResult>();
   const [kbaseResult, setKbaseResult] = useState<KBASE.HttpPageResult>();
   const [autoReplyType, setAutoReplyType] = useState(AUTO_REPLY_TYPE_FIXED);
   const { agentInfo, setAgentInfo } = useAgentStore((state) => {
@@ -63,99 +59,102 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
     }
   })
   // 
-  const getAutoReplies = async () => {
-    // 未登录或当前组织为空或无agent权限，则不获取工作组
-    if (!isLoggedIn || currentOrg?.uid === "" || !hasRoleAgent) {
-      return;
+  // Memoize API calls
+  const getAutoReplyFixed = useCallback(async () => {
+    try {
+      message.loading(intl.formatMessage({ id: "loading" }));
+      const pageParam: AUTOREPLY_FIXED.AutoReplyFixedRequest = {
+        pageNumber: 0,
+        pageSize: 50,
+        orgUid: currentOrg?.uid,
+        type: autoReplyType,
+      };
+      const response = await queryAutoReplyFixedByOrg(pageParam);
+      console.log("getAutoReplyFixed response:", response);
+      if (response.data.code === 200) {
+        setAutoReplyResult(response.data);
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching auto replies:", error);
+      message.error(intl.formatMessage({ id: "error.fetch.failed" }));
+    } finally {
+      message.destroy();
     }
-    message.loading(
-      intl.formatMessage({ id: "loading", defaultMessage: "Loading" }),
-    );
-    const pageParam: AUTOREPLY.AutoReplyRequest = {
-      pageNumber: 0,
-      pageSize: 50,
-      orgUid: currentOrg.uid,
-    };
-    const response = await queryAutoRepliesByUser(pageParam);
-    console.log("getAutoReplies response:", pageParam, response);
-    message.destroy();
-    if (response.data.code === 200) {
-      setAutoReplyResult(response.data);
-    } else {
-      message.error(response.data.message);
+  }, [currentOrg?.uid]);
+
+  const getKeywordBase = useCallback(async (type: string) => {
+    try {
+      message.loading(intl.formatMessage({ id: "loading" }));
+      const pageParam: KBASE.KbaseRequest = {
+        pageNumber: 0,
+        pageSize: 50,
+        type: type,
+        orgUid: currentOrg?.uid,
+      };
+      const response = await queryKbasesByOrg(pageParam);
+      console.log("getKeywordBase response:", response);
+      if (response.data.code === 200) {
+        setKbaseResult(response.data);
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching knowledge base:", error);
+      message.error(intl.formatMessage({ id: "error.fetch.failed" }));
+    } finally {
+      message.destroy();
     }
-  };
+  }, [autoReplyType, currentOrg?.uid]);
+
+  // Setup effects
   useEffect(() => {
-    getAutoReplies();
-    // 
-    if (form) {
+    getAutoReplyFixed();
+    getKeywordBase(KB_TYPE_AUTOREPLY);
+    // getKeywordBase(KB_TYPE_LLM);
+  }, []);
+
+  useEffect(() => {
+    if (autoReplyType === AUTO_REPLY_TYPE_KEYWORD) {
+      getKeywordBase(KB_TYPE_AUTOREPLY);
+    } else if (autoReplyType === AUTO_REPLY_TYPE_LLM) {
+      getKeywordBase(KB_TYPE_LLM);
+    }
+  }, [autoReplyType]);
+
+  // Initialize form values
+  useEffect(() => {
+    if (agentInfo?.autoReplySettings) {
       form.setFieldsValue({
-        enabled: agentInfo.autoReplySettings?.autoReplyEnabled,
-        autoReplyType: agentInfo.autoReplySettings?.autoReplyType || "",
-        autoReplyUid: agentInfo.autoReplySettings?.autoReplyUid || "",
-        autoReplyContent: agentInfo.autoReplySettings?.autoReplyContent || "",
-        autoReplyContentType:
-          agentInfo.autoReplySettings?.autoReplyContentType || "",
-        kbUid: agentInfo.autoReplySettings?.kbUid || "",
+        kbUid: agentInfo?.autoReplySettings?.kbUid,
+        autoReplyEnabled: agentInfo?.autoReplySettings?.autoReplyEnabled,
+        autoReplyType: agentInfo?.autoReplySettings?.autoReplyType,
+        autoReplyUid: agentInfo?.autoReplySettings?.autoReplyUid,
+        autoReplyContent: agentInfo?.autoReplySettings?.autoReplyContent,
       });
     }
-  }, [form]);
-  // 
-  const getKeywordBase = async () => {
-    // 未登录或当前组织为空或无agent权限，则不获取工作组
-    if (!isLoggedIn || currentOrg?.uid === "" || !hasRoleAgent) {
-      return;
-    }
-    // 
-    message.loading(
-      intl.formatMessage({ id: "loading", defaultMessage: "Loading" }),
-    );
-    const pageParam: KBASE.KbaseRequest = {
-      pageNumber: 0,
-      pageSize: 50,
-      type:
-        autoReplyType === AUTO_REPLY_TYPE_KEYWORD
-          ? KB_TYPE_KEYWORD
-          : KB_TYPE_LLM,
-      orgUid: currentOrg.uid,
-    };
-    const response = await queryKbasesByOrg(pageParam);
-    console.log("getKeywordBase response:", pageParam, response);
-    message.destroy();
-    if (response.data.code === 200) {
-      setKbaseResult(response.data);
-    } else {
-      message.error(response.data.message);
-    }
-  };
-  useEffect(() => {
-    getKeywordBase();
-  }, [autoReplyType]);
-  // 
-  const handleAutoReplyEnabledChange = async (checked: boolean) => {
-    console.log('handleAutoReplyEnabledChange:', checked)
-  }
-  const handleAutoReplyTypeChange = (value: string, options) => {
+  }, [agentInfo?.autoReplySettings, form]);
+
+  const handleAutoReplyTypeChange = (value: any, options: any) => {
     console.log("handleAutoReplyTypeChange:", value, options);
     setAutoReplyType(value);
-  };
+  }
   //
-  const handleAutoReplySelectChange = (value: string, options) => {
+  const handleAutoReplySelectChange = (value: any, options: any) => {
     console.log("handleAutoReplySelectChange:", value, options);
-    autoReplyResult?.data.content?.forEach(
-      (item: AUTOREPLY.AutoReplyResponse) => {
-        if (item.uid === value) {
-          form.setFieldsValue({
-            autoReplyContentType: item.type,
-            autoReplyContent: item.content,
-          });
-        }
-      },
-    );
-  };
+    autoReplyResult?.data.content?.forEach((item: AUTOREPLY_FIXED.AutoReplyFixedResponse) => {
+      if (item.uid === value) {
+        form.setFieldsValue({
+          autoReplyContentType: item.type,
+          autoReplyContent: item.content
+        })
+      }
+    });
+  }
   // 
-  const handleUpdateAutoReply = async () => {
-    console.log('handleUpdateAutoReply:')
+  const handleAutoReplySubmit = async () => {
+    console.log('handleAutoReplySubmit:')
     message.loading(intl.formatMessage({
       id: 'autoreply.save.loading',
       defaultMessage: '正在保存，请稍后...'
@@ -187,6 +186,46 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
     }
   }
 
+  const handleAutoReplyEnabledChange = async (checked: boolean) => {
+    console.log('handleAutoReplyEnabledChange:', checked)
+      const agentObject: AGENT.AgentRequest = {
+        ...agentInfo,
+        serviceSettings: {
+          ...agentInfo?.serviceSettings,
+          quickFaqUids: agentInfo?.serviceSettings?.quickFaqs?.map((button) => button.uid),
+          faqUids: agentInfo?.serviceSettings?.faqs?.map((item) => item.uid),
+          guessFaqUids: agentInfo?.serviceSettings?.guessFaqs?.map((item) => item.uid),
+          hotFaqUids: agentInfo?.serviceSettings?.hotFaqs?.map((item) => item.uid),
+          shortcutFaqUids: agentInfo?.serviceSettings?.shortcutFaqs?.map((item) => item.uid),
+        },
+        robotSettings: {
+          ...agentInfo?.robotSettings,
+          robotUid: agentInfo?.robotSettings?.robot?.uid,
+        },
+        leaveMsgSettings: {
+          ...agentInfo?.leaveMsgSettings,
+          worktimeUids: agentInfo?.leaveMsgSettings?.worktimes?.map((worktime) => worktime.uid),
+        },
+        autoReplySettings: {
+          ...agentInfo?.autoReplySettings,
+          autoReplyEnabled: checked
+        }
+      }
+      console.log("agentObject:", agentObject);
+      //
+      const response = await updateAgent(agentObject);
+      console.log("updateAgent response:", response);
+      if (response.data.code === 200) {
+        message.destroy();
+        message.success(intl.formatMessage({ id: 'update.success' }));
+        setAgentInfo(response.data.data);
+      } else {
+      message.destroy();
+      message.error(response.data.message);
+    }
+
+  };
+
   const handleCancel = () => {
     onCancel();
   };
@@ -200,7 +239,7 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
         })}
         open={open}
         forceRender
-        onOk={handleUpdateAutoReply}
+        onOk={handleAutoReplySubmit}
         onCancel={handleCancel}
       >
         <ProForm
@@ -238,7 +277,8 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
               },
               { 
                 label: intl.formatMessage({id: 'autoreply.type.llm'}), 
-                value: AUTO_REPLY_TYPE_LLM 
+                value: AUTO_REPLY_TYPE_LLM,
+                disabled: !IS_DEBUG
               },
             ]}
             fieldProps={{
@@ -265,15 +305,15 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
               </ProForm.Item>
               <ProFormSelect
                 width={"md"}
-                name={"autoReplyUid"}
+                name={"autoReplyContent"}
                 label={intl.formatMessage({
                   id: 'autoreply.fixed.select',
                   defaultMessage: '选择固定回复内容'
                 })}
                 options={autoReplyResult?.data?.content.map((item) => {
                   return {
-                    label: translateString(item.content),
-                    value: item.uid,
+                    label: translateString(item?.content),
+                    value: item?.content,
                   };
                 })}
                 fieldProps={{
@@ -281,46 +321,6 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
                     handleAutoReplySelectChange(value as string, option);
                   },
                 }}
-              />
-              <ProFormSelect
-                width={"md"}
-                name={"autoReplyContentType"}
-                label={intl.formatMessage({
-                  id: 'autoreply.fixed.type',
-                  defaultMessage: '固定回复类型'
-                })}
-                options={[
-                  { 
-                    label: intl.formatMessage({id: 'autoreply.content.text'}), 
-                    value: MESSAGE_TYPE_TEXT 
-                  },
-                  { 
-                    label: intl.formatMessage({id: 'autoreply.content.image'}), 
-                    value: MESSAGE_TYPE_IMAGE 
-                  },
-                  { 
-                    label: intl.formatMessage({id: 'autoreply.content.video'}), 
-                    value: MESSAGE_TYPE_VIDEO 
-                  },
-                  { 
-                    label: intl.formatMessage({id: 'autoreply.content.audio'}), 
-                    value: MESSAGE_TYPE_AUDIO 
-                  },
-                  { 
-                    label: intl.formatMessage({id: 'autoreply.content.file'}), 
-                    value: MESSAGE_TYPE_FILE 
-                  },
-                ]}
-                disabled
-              />
-              <ProFormTextArea
-                width={"md"}
-                name={"autoReplyContent"}
-                label={intl.formatMessage({
-                  id: 'autoreply.fixed.content',
-                  defaultMessage: '固定回复内容'
-                })}
-                disabled
               />
             </>
           )}
