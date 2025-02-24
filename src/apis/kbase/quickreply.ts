@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-04 08:38:31
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-11-23 11:01:35
+ * @LastEditTime: 2025-02-24 14:17:41
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -12,8 +12,6 @@
  *  技术/商务联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-//
-/* eslint-disable */
 import { HTTP_CLIENT } from "@/utils/constants";
 import request from "@/apis/request";
 
@@ -30,7 +28,7 @@ export async function queryQuickRepliesByOrg(
 }
 
 export async function queryQuickReplies(params: QUICKREPLY.QuickReplyRequest) {
-  return request<QUICKREPLY.HttpResultAgent>("/api/v1/vip/quickreply/query", {
+  return request<QUICKREPLY.HttpResultAgent>("/api/v1/quickreply/query", {
     method: "GET",
     params: {
       ...params,
