@@ -3,7 +3,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-13 15:24:12
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-24 20:44:59
+ * @LastEditTime: 2025-02-24 20:51:45
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -14,7 +14,7 @@
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
 import { message } from "@/AntdGlobalComp";
-import { updateAgent, updateAgentAutoReply } from "@/apis/service/agent";
+import { queryAgent, updateAgent, updateAgentAutoReply } from "@/apis/service/agent";
 import { queryKbasesByOrg } from "@/apis/kbase/kbase";
 import useTranslate from "@/hooks/useTranslate";
 import { useAgentStore } from "@/stores/service/agent";
@@ -59,6 +59,16 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
     }
   })
   // 
+  const getAgentProfile = async () => {
+    console.log("getAgentProfile:", currentOrg?.uid);
+    const response = await queryAgent(currentOrg?.uid);
+    console.log("getAgentProfile response:", currentOrg?.uid, response.data);
+    if (response.data.code === 200) {
+      setAgentInfo(response.data.data);
+    } else {
+      // message.error(response.data.message);
+    }
+  };
   // Memoize API calls
   const getAutoReplyFixed = useCallback(async () => {
     try {
@@ -134,7 +144,7 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
         autoReplyContent: agentInfo?.autoReplySettings?.autoReplyContent,
       });
     }
-  }, [agentInfo?.autoReplySettings, form]);
+  }, [agentInfo, form]);
 
   const handleAutoReplyTypeChange = (value: any, options: any) => {
     console.log("handleAutoReplyTypeChange:", value, options);
@@ -163,7 +173,7 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
       ...agentInfo,
       autoReplySettings: {
         ...agentInfo.autoReplySettings,
-        autoReplyEnabled: form.getFieldValue("enabled"),
+        autoReplyEnabled: form.getFieldValue("autoReplyEnabled"),
         autoReplyType: form.getFieldValue("autoReplyType"),
         autoReplyUid: form.getFieldValue("autoReplyUid"),
         autoReplyContent: form.getFieldValue("autoReplyContent"),
@@ -230,6 +240,10 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
     onCancel();
   };
 
+  useEffect(() => {
+    getAgentProfile();
+  }, []);
+
   return (
     <>
       <Modal
@@ -250,7 +264,7 @@ const AutoReplyModel = ({ open, onOk, onCancel }: AutoReplyModelProps) => {
         >
           <ProFormSwitch
             width={"md"}
-            name={"enabled"}
+            name={"autoReplyEnabled"}
             label={intl.formatMessage({
               id: 'autoreply.enable.label',
               defaultMessage: '是否启用自动回复'
