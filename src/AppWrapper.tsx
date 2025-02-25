@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-21 10:34:31
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 13:18:13
+ * @LastEditTime: 2025-02-26 00:11:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -26,26 +26,32 @@ import AntdGlobalComp from "./AntdGlobalComp";
 // import emitter from './utils/events';
 import { AppContext } from "./context/AppContext";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { IntlProvider } from 'react-intl'
-import zhCN from './locales/zh-CN';
+import { IntlProvider } from "react-intl";
+import zhCN from "./locales/zh-CN";
 import zhTW from "./locales/zh-TW";
-import en from './locales/en-US';
+import en from "./locales/en-US";
 import { IS_ELECTRON, WINDOWS_SCROLLBAR_CSS } from "./utils/constants";
-import { bytedeskBanner } from "./utils/utils";
+import { bytedeskBanner, getBrowserLanguage } from "./utils/utils";
 // https://github.com/bowser-js/bowser
-import Bowser from "bowser"; 
-import { getApiUrl, getConfigProperties, loadConfig } from "./utils/configUtils";
+import Bowser from "bowser";
+import {
+  getApiUrl,
+  getConfigProperties,
+  loadConfig,
+} from "./utils/configUtils";
 
-const messageMap = {
-  'zh-cn': zhCN,
-  'zh-tw': zhTW,
-  'en': en,
+const messages = {
+  "zh-cn": zhCN,
+  "zh-tw": zhTW,
+  en: en,
 };
 
 //
 const AppWrapper: React.FC = () => {
-  // 
+  //
   const { isDarkMode, locale } = useContext(AppContext);
+  // 确保 locale 存在且有效
+  const currentLocale = locale?.locale || getBrowserLanguage();
   // console.log("locale", locale.locale);
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -67,10 +73,21 @@ const AppWrapper: React.FC = () => {
       setIsNotMac(true);
     }
   };
-  // 
+  const updateDocumentTitle = (title: string) => {
+    document.title = title || messages[currentLocale]["app.title"]; // 使用国际化标题作为默认值
+  };
   const getConfig = async () => {
     console.log("getConfig");
-    await getConfigProperties();
+    const config = await getConfigProperties();
+    console.log("getConfig config: ", config);
+    const customEnabled = config?.customEnabled;
+    const title = config?.name;
+    if (customEnabled && title) {
+      // 更新所有页面的title
+      updateDocumentTitle(title);
+    } else {
+      updateDocumentTitle(messages[currentLocale]["app.title"]);
+    }
     // 线上动态读取配置
     if (!IS_ELECTRON) {
       await loadConfig(); // 修改为同步执行，等待 loadConfig 执行完毕
@@ -81,7 +98,7 @@ const AppWrapper: React.FC = () => {
       console.log("is electron");
     }
   };
-  // 
+  //
   useEffect(() => {
     // 打印banner
     bytedeskBanner();
@@ -89,9 +106,9 @@ const AppWrapper: React.FC = () => {
     getBrowserInfo();
     // web生产环境调用
     getConfig();
-    // 
+    //
   }, []);
-  // 
+  //
   return (
     <ConfigProvider
       locale={locale}
@@ -103,7 +120,7 @@ const AppWrapper: React.FC = () => {
         <HelmetProvider>
           <Suspense fallback={<div>loading...</div>}>
             <IntlProvider
-              messages={messageMap[locale.locale]}
+              messages={messages[locale.locale]}
               locale={locale.locale}
               defaultLocale="zh-cn"
             >

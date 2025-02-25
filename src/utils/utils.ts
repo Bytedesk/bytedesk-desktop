@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 18:45:45
+ * @LastEditTime: 2025-02-26 00:10:14
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -418,4 +418,20 @@ export const isProcessingTicket = (
   } else {
     return true;
   }
+};
+
+export const getBrowserLanguage = () => {
+  // 获取浏览器语言
+  const browserLang = navigator.language.toLowerCase();
+  console.log("AppWrapper getBrowserLanguage browserLang: ", browserLang);
+  // 支持的语言列表
+  const supportedLangs = ['en', 'zh-cn', 'zh-tw', 'ja', 'ko'];
+  // 处理中文特殊情况
+  if (browserLang.startsWith('zh')) {
+    return browserLang.includes('tw') ? 'zh-tw' : 'zh-cn';
+  }
+  // 对于其他语言，只取主要语言代码
+  const mainLang = browserLang.split('-')[0];
+  // 如果支持该语言则使用，否则默认使用英语
+  return supportedLangs.includes(mainLang) ? mainLang : 'en';
 };
