@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-19 10:24:58
+ * @LastEditTime: 2025-02-26 08:33:09
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -24,7 +24,7 @@ import {
   Spin,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import {updateThread } from "@/apis/core/thread";
+import { updateUnread } from "@/apis/core/thread";
 import { useThreadStore } from "@/stores/core/thread";
 import "./threadList.css";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
@@ -192,26 +192,33 @@ const ThreadList = () => {
   }, [isNetworkOnline, currentOrg?.uid]);
 
   const handleSelectThreadClick = async (thread: THREAD.ThreadResponse) => {
-    console.log("handleSelectThreadClick", thread.uid);
+    console.log("handleSelectThreadClick", thread);
     if (thread.uid === currentThread?.uid) {
       console.log("handleSelectThreadClick 当前聊天窗口，无需操作");
       return;
     }
-    setCurrentThread(thread);
     // 清空未读消息数 unreadCount = 0
     if (thread.unreadCount > 0) {
-      handleUpdateThreadUnreadCount(0);
+      handleClearThreadUnreadCount(thread);
+    } else {
+      setCurrentThread(thread);
     }
   };
 
-  const handleUpdateThreadUnreadCount = async (unreadCount: number) => {
-    console.log("handleUpdateThreadUnreadCount", unreadCount);
-    const newThread: THREAD.ThreadRequest = { ...currentThread, unreadCount };
+  const handleClearThreadUnreadCount = async (thread: THREAD.ThreadResponse) => {
+    const newThread: THREAD.ThreadRequest = { ...thread, unreadCount: 0 };
     // 判断uid是否为空
     if (newThread?.uid == null) {
       return;
     }
-    await updateThread(newThread);
+    console.log("handleUpdateThreadUnreadCount", newThread);
+    const response = await updateUnread(newThread);
+    console.log("handleUpdateThreadUnreadCount response:", response.data);
+    if (response.data.code === 200) {
+      setCurrentThread(response.data.data);
+    } else {
+      console.log("handleUpdateThreadUnreadCount error:", response);
+    }
   };
 
   // https://github.com/fkhadra/react-contexify
