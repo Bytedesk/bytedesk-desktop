@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-23 11:17:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 09:22:41
+ * @LastEditTime: 2025-02-26 11:40:47
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -12,13 +12,17 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-import { 
-  MESSAGE_TYPE_QUEUE, 
-  THREAD_STATE_CLOSED, 
-  THREAD_STATE_QUEUING, 
-  THREAD_STORE 
+import {
+  MESSAGE_TYPE_QUEUE,
+  THREAD_STATE_CLOSED,
+  THREAD_STATE_QUEUING,
+  THREAD_STORE,
 } from "@/utils/constants";
-import { isMessageTypeClosed, isMessageTypeNotification } from "@/utils/utils";
+import {
+  isMessageTypeClosed,
+  isMessageTypeNotification,
+  isSystemThread,
+} from "@/utils/utils";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -37,10 +41,19 @@ interface ThreadState {
   showRightPanel: boolean;
   //
   addThread: (thread: THREAD.ThreadResponse) => number;
-  addThreadWithMessage: (thread: THREAD.ThreadResponse, message: MESSAGE.MessageResponse) => void;
+  addThreadWithMessage: (
+    thread: THREAD.ThreadResponse,
+    message: MESSAGE.MessageResponse,
+  ) => void;
   addQueuingThread: (thread: THREAD.ThreadResponse) => void;
-  updateThreadContent: (threadUid: string, content: string,) => THREAD.ThreadResponse | null;
-  updateThreadStatus: (threadUid: string, status: string,) => THREAD.ThreadResponse | null;
+  updateThreadContent: (
+    threadUid: string,
+    content: string,
+  ) => THREAD.ThreadResponse | null;
+  updateThreadStatus: (
+    threadUid: string,
+    status: string,
+  ) => THREAD.ThreadResponse | null;
   removeThread: (thread: THREAD.ThreadResponse) => void;
   closeThread: (threadUid: string) => void;
   addThreads: (threads: THREAD.ThreadResponse[]) => void;
@@ -136,11 +149,11 @@ export const useThreadStore = create<ThreadState>()(
         showRightPanel: false,
         loading: false,
         error: null,
-        searchText: '',
+        searchText: "",
         pagination: {
           pageNumber: 0,
           pageSize: 100,
-          total: 0
+          total: 0,
         },
         filters: {},
         addThread(thread) {
@@ -200,20 +213,29 @@ export const useThreadStore = create<ThreadState>()(
           }
         },
         addThreadWithMessage(thread, message) {
+          // 处理排队消息
           if (message.type === MESSAGE_TYPE_QUEUE) {
             get().addQueuingThread(thread);
             return 0;
           }
-          const contains = get().threads.some((item) => {
-            return item.uid === thread.uid;
-          });
+
           const shouldIncreaseUnreadCount = !isMessageTypeNotification(message.type);
           const shouldCloseThread = isMessageTypeClosed(message.type);
+          
           if (shouldCloseThread) {
             thread.state = THREAD_STATE_CLOSED;
           }
+
+          // 系统线程和普通线程的处理逻辑
+          const isSystem = isSystemThread(thread);
+          const identifier = isSystem ? 'topic' : 'uid';
+          
+          // 检查线程是否存在
+          const contains = get().threads.some(item => item[identifier] === thread[identifier]);
+          const isCurrentThread = get().currentThread[identifier] === thread[identifier];
+
+          // 新线程处理
           if (!contains) {
-            // 新增会话，未读数==1
             if (shouldIncreaseUnreadCount) {
               thread.unreadCount = 1;
             }
@@ -221,48 +243,34 @@ export const useThreadStore = create<ThreadState>()(
               threads: [thread, ...get().threads],
             });
             return thread.unreadCount;
-          } else if (
-            get().currentThread?.uid === "" ||
-            get().currentThread?.uid !== thread.uid
-          ) {
-            // 在列表中且不是当前会话，增加未读数目
-            for (let i = 0; i < get().threads.length; i++) {
-              const element = get().threads[i];
-              if (element.uid === thread.uid) {
-                if (shouldIncreaseUnreadCount) {
-                  thread.unreadCount = element.unreadCount + 1;
-                }
-                // 保留原先thread元素的top、mute、unread字段不变
-                thread.top = element.top;
-                thread.mute = element.mute;
-                thread.unread = element.unread;
-                thread.agent = element.agent;
-              }
+          }
+
+          // 非当前线程处理
+          if (!isCurrentThread) {
+            const existingThread = get().threads.find(item => item[identifier] === thread[identifier]);
+            if (existingThread) {
+              thread = handleThreadUpdate(thread, existingThread, shouldIncreaseUnreadCount);
             }
+            
             set({
               threads: [
                 thread,
-                ...get().threads.filter((item) => item.uid !== thread.uid),
+                ...get().threads.filter(item => item[identifier] !== thread[identifier]),
               ],
             });
             return thread.unreadCount;
-          } else {
-            // 如果是当前会话
-            const updatedThreads = get().threads.map((t) => {
-              if (t.uid === thread.uid) {
-                // 保留原先thread元素的top、mute、unread字段不变
-                thread.top = t.top;
-                thread.mute = t.mute;
-                thread.unread = t.unread;
-                thread.agent = t.agent;
-                // 替换为最新
-                return thread;
-              }
-              return t;
-            });
-            set({ threads: updatedThreads });
-            return 0;
           }
+
+          // 当前线程处理
+          const updatedThreads = get().threads.map(t => {
+            if (t[identifier] === thread[identifier]) {
+              return updateThreadFields(thread, t);
+            }
+            return t;
+          });
+          
+          set({ threads: updatedThreads });
+          return 0;
         },
         addQueuingThread(thread) {
           const contains = get().queuingThreads.some((item) => {
@@ -274,7 +282,10 @@ export const useThreadStore = create<ThreadState>()(
             });
           }
         },
-        updateThreadContent(threadUid: string, content: string): THREAD.ThreadResponse | null {
+        updateThreadContent(
+          threadUid: string,
+          content: string,
+        ): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
           const updatedThreads = get().threads.map((t) => {
             if (t.uid === threadUid) {
@@ -291,7 +302,10 @@ export const useThreadStore = create<ThreadState>()(
           set({ threads: updatedThreads });
           return updatedThread;
         },
-        updateThreadStatus(threadUid: string, status: string): THREAD.ThreadResponse | null {
+        updateThreadStatus(
+          threadUid: string,
+          status: string,
+        ): THREAD.ThreadResponse | null {
           let updatedThread: THREAD.ThreadResponse | null = null;
           const updatedThreads = get().threads.map((t) => {
             if (t.uid === threadUid) {
@@ -330,7 +344,7 @@ export const useThreadStore = create<ThreadState>()(
             if (thread.state === THREAD_STATE_QUEUING) {
               get().addQueuingThread(thread);
               continue;
-            } 
+            }
             const contains = get().threads.some((item) => {
               return item.uid === thread.uid;
             });
@@ -389,9 +403,9 @@ export const useThreadStore = create<ThreadState>()(
           });
         },
         setCurrentQueuingThread(thread) {
-            set((state) => {
-              state.currentQueuingThread = thread;
-            });
+          set((state) => {
+            state.currentQueuingThread = thread;
+          });
         },
         setCurrentTicketThread(thread) {
           set((state) => {
@@ -471,14 +485,15 @@ export const useThreadStore = create<ThreadState>()(
         setLoading: (loading) => set({ loading }),
         setError: (error) => set({ error }),
         setSearchText: (text) => set({ searchText: text }),
-        setFilter: (key, value) => set((state) => {
-          state.filters[key] = value;
-        }),
+        setFilter: (key, value) =>
+          set((state) => {
+            state.filters[key] = value;
+          }),
         clearFilters: () => set({ filters: {} }),
         refreshThreads: async () => {
           const { currentOrg } = useOrgStore.getState();
           if (currentOrg?.uid) {
-            const { threadService } = await import('@/services/threadService');
+            const { threadService } = await import("@/services/threadService");
             await threadService.loadThreads(currentOrg.uid);
           }
         },
@@ -490,3 +505,22 @@ export const useThreadStore = create<ThreadState>()(
     ),
   ),
 );
+
+const updateThreadFields = (thread: THREAD.ThreadResponse, existingThread: THREAD.ThreadResponse) => {
+  thread.top = existingThread.top;
+  thread.mute = existingThread.mute;
+  thread.unread = existingThread.unread;
+  thread.agent = existingThread.agent;
+  return thread;
+};
+
+const handleThreadUpdate = (
+  thread: THREAD.ThreadResponse,
+  existingThread: THREAD.ThreadResponse,
+  shouldIncreaseUnreadCount: boolean
+) => {
+  if (shouldIncreaseUnreadCount) {
+    thread.unreadCount = existingThread.unreadCount + 1;
+  }
+  return updateThreadFields(thread, existingThread);
+};

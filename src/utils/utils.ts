@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 11:35:15
+ * @LastEditTime: 2025-02-26 11:36:31
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -253,8 +253,9 @@ export const isDeviceThread = (thread: THREAD.ThreadResponse) => {
 
 export const isSystemThread = (thread: THREAD.ThreadResponse) => {
   console.log("isSystemThread", thread);
+  return isSystemNotificationTopic(thread?.topic);
   // return thread?.type === THREAD_TYPE_SYSTEM;
-  return false;
+  // return false;
 };
 
 export function shouldSendReceipt(type: string) {
@@ -291,7 +292,6 @@ export function isSystemNotificationTopic(topic: string) {
   return topic?.startsWith(TOPIC_SYSTEM_NOTIFICATION);
 }
 
-//
 export function isOrgMemberTopic(topic: string) {
   return topic?.startsWith(TOPIC_ORG_MEMBER_PREFIX);
 }

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 10:06:04
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 08:33:09
+ * @LastEditTime: 2025-02-26 11:54:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -84,6 +84,7 @@ import { syncCurrentThreadCount } from "@/apis/service/agent";
 import BlockModel from "@/components/Vip/BlockModel";
 import { threadService } from "@/services/threadService";
 import { useOrgStore } from "@/stores/core/organization";
+import { message } from "@/AntdGlobalComp";
 
 // 添加星标颜色常量
 const STAR_COLORS = {
@@ -209,6 +210,7 @@ const ThreadList = () => {
     const newThread: THREAD.ThreadRequest = { ...thread, unreadCount: 0 };
     // 判断uid是否为空
     if (newThread?.uid == null) {
+      message.error("当前会话uid为空，无法清除未读消息数");
       return;
     }
     console.log("handleUpdateThreadUnreadCount", newThread);
