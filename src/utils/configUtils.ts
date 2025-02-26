@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-09-11 13:31:34
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 10:50:10
+ * @LastEditTime: 2025-02-26 18:40:19
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -216,7 +216,7 @@ export function getTitleProperties() {
   const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
   if (configProperties) {
     const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
-    if (configPropertiesObj?.custom?.name && configPropertiesObj?.custom?.name?.length > 0) {
+    if (configPropertiesObj?.custom?.enabled && configPropertiesObj?.custom?.name && configPropertiesObj?.custom?.name?.length > 0) {
       return configPropertiesObj?.custom?.name;
     }
   }
@@ -227,7 +227,7 @@ export function getSubTitleProperties() {
   const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
   if (configProperties) {
     const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
-    if (configPropertiesObj?.custom?.description && configPropertiesObj?.custom?.description?.length > 0) {
+    if (configPropertiesObj?.custom?.enabled && configPropertiesObj?.custom?.description && configPropertiesObj?.custom?.description?.length > 0) {
       return configPropertiesObj?.custom?.description;
     }
   }
@@ -239,7 +239,9 @@ export function getShowRightCornerChatProperties() {
   const configProperties = localStorage.getItem(CONFIG_PROPERTIES);
   if (configProperties) {
     const configPropertiesObj: CONFIG_PROPERTIES.ConfigPropertiesResponse = JSON.parse(configProperties);
-    return configPropertiesObj?.custom?.showRightCornerChat;
+    if (configPropertiesObj?.custom?.enabled && configPropertiesObj?.custom?.showRightCornerChat) {
+      return configPropertiesObj?.custom?.showRightCornerChat;
+    }
   }
   return true;
 }
