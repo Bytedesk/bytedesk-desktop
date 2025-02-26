@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-17 20:19:01
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-25 23:03:56
+ * @LastEditTime: 2025-02-26 10:25:54
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -24,16 +24,21 @@ declare namespace CONFIG_PROPERTIES {
   type ConfigPropertiesResponse = {
     debug?: boolean;
     edition?: string;
-    // 是否启用自定义配置：name, logo, description
-    customEnabled?: boolean;
-    name?: string;
-    logo?: string;
-    description?: string;
     version?: string;
+    //
+    custom?: Custom;
     //
     admin?: Admin;
     features?: Features;
   };
+
+  type Custom = {
+    enabled?: boolean;
+    name?: string;
+    logo?: string;
+    description?: string;
+    showRightCornerChat?: boolean;
+  }
 
   type Admin = {
     allowRegister?: boolean;

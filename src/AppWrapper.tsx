@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-03-21 10:34:31
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 00:11:03
+ * @LastEditTime: 2025-02-26 10:35:33
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -80,8 +80,8 @@ const AppWrapper: React.FC = () => {
     console.log("getConfig");
     const config = await getConfigProperties();
     console.log("getConfig config: ", config);
-    const customEnabled = config?.customEnabled;
-    const title = config?.name;
+    const customEnabled = config?.custom?.enabled;
+    const title = config?.custom?.name;
     if (customEnabled && title) {
       // 更新所有页面的title
       updateDocumentTitle(title);
