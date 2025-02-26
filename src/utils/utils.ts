@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-23 22:36:47
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 00:10:14
+ * @LastEditTime: 2025-02-26 11:35:15
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -63,6 +63,8 @@ import {
   TOPIC_ORG_AGENT_TICKET_THREAD_PREFIX,
   TOPIC_ORG_WORKGROUP_TICKET_THREAD_PREFIX,
   TICKET_STATUS_RESUMED,
+  TOPIC_SYSTEM_NOTIFICATION,
+  TOPIC_FILE_ASSISTANT,
 } from "./constants";
 // import axios from "axios";
 import { getUploadUrl } from "./configUtils";
@@ -278,6 +280,17 @@ export function isMessageTypeClosed(type: string) {
     type === MESSAGE_TYPE_AUTO_CLOSED || type === MESSAGE_TYPE_AGENT_CLOSED
   );
 }
+
+// TOPIC_FILE_ASSISTANT
+export function isFileAssistantTopic(topic: string) {
+  return topic?.startsWith(TOPIC_FILE_ASSISTANT);
+}
+
+// TOPIC_SYSTEM_NOTIFICATION
+export function isSystemNotificationTopic(topic: string) {
+  return topic?.startsWith(TOPIC_SYSTEM_NOTIFICATION);
+}
+
 //
 export function isOrgMemberTopic(topic: string) {
   return topic?.startsWith(TOPIC_ORG_MEMBER_PREFIX);
