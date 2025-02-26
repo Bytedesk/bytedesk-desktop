@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 09:56:19
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 00:07:27
+ * @LastEditTime: 2025-02-26 21:18:32
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -304,19 +304,19 @@ const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
   const getConfig = async () => {
     console.log('getConfig')
     const config = await getConfigProperties();
-    if (config?.customEnabled) {
-      if (config?.logo) {
-        setLogo(config?.logo);
+    if (config?.custom?.enabled) {
+      if (config?.custom?.logo) {
+        setLogo(config?.custom?.logo);
       } else {
         setLogo("/agent/icons/logo.png")
       }
-      if (config?.name) {
-        setTitle(config?.name);
+      if (config?.custom?.name) {
+        setTitle(config?.custom?.name);
       } else {
         setTitle(intl.formatMessage({ id: "app.title", }))
       }
-      if (config?.description) {
-        setSubTitle(config?.description);
+      if (config?.custom?.description) {
+        setSubTitle(config?.custom?.description);
       } else {
         setSubTitle(intl.formatMessage({ id: "slogan", }))
       }
