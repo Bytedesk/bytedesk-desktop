@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-27 21:55:59
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-08 16:08:11
+ * @LastEditTime: 2025-02-28 13:16:27
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -86,11 +86,10 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
       prompt: translateString(agent?.llm?.prompt),
       contextMsgCount: agent?.llm?.contextMsgCount,
     });
-    // getLlmModels(agent?.llm?.provider, false);
     // 
   }, [currentThread]);
 
-  const getLlmProviders = async () => {
+  const fetchProviders = async () => {
     console.log("getLlmProviders");
     const pageParams: LLMPROVIDER.LlmProviderRequest = {
       pageNumber: 0,
@@ -109,8 +108,13 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
   };
 
   useEffect(() => {
-    getLlmProviders();
-  }, []);
+    fetchProviders();
+    const defaultProvider: LLMPROVIDER.LlmProviderResponse = {
+      uid: '',
+      name: 'zhipu',
+    }
+    requestModels(defaultProvider);
+  }, [robot]);
 
   const handleUpdateThreadLlm = async (item: ROBOT.RobotResponse) => {
     console.log("llm handleSubmit", item);
@@ -129,6 +133,7 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
     if (response.data.code === 200) {
       message.success("更新成功");
       setCurrentThread(response.data.data);
+      onClose();
     } else {
       message.error(response.data.message);
     }
@@ -167,7 +172,7 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
   const requestOllamaStatus = async () => {
     console.log("pingOllama");
     const response = await getOllamaServerStatus();
-    console.log('getOllamaServerStatus: ', response);
+    console.log('getOllamaServerStatus: ', response.data);
     if (response.data.code === 200 && response.data.data) {
       requestLocalModels();
     } else {
@@ -178,18 +183,30 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
   const requestLocalModels = async () => {
     console.log("requestLocalModels");
     const response = await getOllamaLocalModels();
-    console.log('getOllamaLocalModels: ', response);
+    console.log('getOllamaLocalModels: ', response.data);
     if (response.data.code === 200) {
-      setModels(response.data.data.map(model => ({
+      const modelOptions = response.data.data.map(model => ({
         value: model.name,
         label: model.name
-      })));
-      // 如果modelOptions为空，则清空model选择
-      if (response.data.data.length === 0) {
+      }));
+      setModels(modelOptions);
+
+      if (modelOptions.length === 0) {
         form.setFieldValue('model', undefined);
       } else {
-        form.setFieldValue('model', response.data.data[0].name);
+        // 首先读取 form.getFieldValue('model'), 如果存在，则不需要设置, 否则设置为modelOptions[0].value
+        const currentModel = form.getFieldValue('model');
+        if (!currentModel) {
+          form.setFieldValue('model', modelOptions[0].value);
+        }
       }
+
+      // 如果modelOptions为空，则清空model选择
+      // if (response.data.data.length === 0) {
+      //   form.setFieldValue('model', undefined);
+      // } else {
+      //   form.setFieldValue('model', response.data.data[0].name);
+      // }
     } else {
       message.error(response.data.message);
     }
@@ -207,19 +224,29 @@ const RobotInfoDrawer = ({ open, onClose }: RobotInfoProps) => {
           level: LEVEL_TYPE_ORGANIZATION,
         };
         const response = await queryLlmModelsByOrg(params);
-        console.log('queryLlmModelsByOrg response:', response);
+        console.log('queryLlmModelsByOrg response:', response.data);
         if (response.data.code === 200) {
           const modelOptions = response.data.data.content.map(model => ({
-            value: model.uid,
-            label: model.name
+            value: model.name,
+            label: model.nickname
           }));
           setModels(modelOptions);
-          // 如果modelOptions为空，则清空model选择
+
           if (modelOptions.length === 0) {
             form.setFieldValue('model', undefined);
           } else {
-            form.setFieldValue('model', modelOptions[0].value);
+            // 首先读取 form.getFieldValue('model'), 如果存在，则不需要设置, 否则设置为modelOptions[0].value
+            const currentModel = form.getFieldValue('model');
+            if (!currentModel) {
+              form.setFieldValue('model', modelOptions[0].value);
+            }
           }
+          // 如果modelOptions为空，则清空model选择
+          // if (modelOptions.length === 0) {
+          //   form.setFieldValue('model', undefined);
+          // } else {
+          //   form.setFieldValue('model', modelOptions[0].value);
+          // }
         } else {
           message.error(response.data.message);
         }
