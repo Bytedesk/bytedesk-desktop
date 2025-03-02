@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 09:56:19
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 21:18:32
+ * @LastEditTime: 2025-03-03 07:22:03
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -57,28 +57,6 @@ type LoginType = "mobile" | "account" | "scan";
 interface LoginPageProps {
   isModel?: boolean;
 }
-// const getLogo = () => {
-//   const transId = getLogoProperties();
-//   return <img alt="logo" src={transId} />;
-// };
-// const getTitle = () => {
-//   const title = getTitleProperties();
-//   if (title) {
-//     return title;
-//   }
-//   return (
-//     <FormattedMessage id={"app.title"} defaultMessage="微语" />
-//   );
-// };
-// const getSubTitle = () => {
-//   const subTitle = getSubTitleProperties();
-//   if (subTitle) {
-//     return subTitle;
-//   }
-//   return (
-//     <FormattedMessage id={"slogan"} defaultMessage="Chat As A Service" />
-//   );
-// };
 
 const LoginPage: React.FC<LoginPageProps> = ({ isModel = false }) => {
   const intl = useIntl();
