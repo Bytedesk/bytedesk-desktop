@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ProgressInfo } from "electron-updater";
 import { useCallback, useEffect, useState } from "react";
 import Modal from "@/components/update/Modal";
