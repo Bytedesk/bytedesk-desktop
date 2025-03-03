@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 10:29:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 18:13:23
+ * @LastEditTime: 2025-03-03 10:41:45
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -49,7 +49,7 @@ import Monitor from "@/pages/Vip/Monitor";
 // import Template from "@/pages/Dashboard/Robot/Template";
 import LlmModel from "@/pages/Dashboard/Setting/LlmModel";
 // import { basename } from "path";
-import { IS_ELECTRON } from "@/utils/constants";
+// import { IS_ELECTRON } from "@/utils/constants";
 import Robot from "@/pages/Dashboard/Robot";
 import Certification from "@/pages/Dashboard/Setting/Certification";
 import AgentTab from "@/pages/Dashboard/Setting/Profile/agent";
@@ -255,8 +255,12 @@ const routes = [
   },
 ];
 //
+// 获取当前环境
+const isElectron = process.env.VITE_APP_ENV === 'electron';
 let router;
-if (IS_ELECTRON) {
+// if (IS_ELECTRON) {
+if (isElectron) {
+  console.log("isElectron electron:", isElectron);
   router = createHashRouter(routes, {
     future: {
       v7_normalizeFormMethod: true,
@@ -268,6 +272,7 @@ if (IS_ELECTRON) {
     },
   });
 } else {
+  console.log("isElectron web:", isElectron);
   // 方便/agent/robot页面左侧分类列表中使用锚点定位，所以才切换到createBrowserRouter
  router = createBrowserRouter(routes,
     {
