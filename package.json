@@ -160,33 +160,5 @@
       "productName": "微语",
       "description": "对话即服务"
     }
-  },
-  "build": {
-    "appId": "com.kefux.im",
-    "productName": "ByteDesk",
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "bytedesk",
-        "repo": "bytedesk",
-        "private": false
-      }
-    ],
-    "mac": {
-      "category": "public.app-category.business",
-      "target": ["dmg", "zip"],
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mas.plist",
-      "entitlementsInherit": "build/entitlements.mas.plist"
-    },
-    "win": {
-      "target": ["nsis"],
-      "artifactName": "${productName}-Setup-${version}.${ext}"
-    },
-    "linux": {
-      "target": ["AppImage"],
-      "category": "Network"
-    }
   }
 }
