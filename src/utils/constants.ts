@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 14:56:50
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-24 20:40:28
+ * @LastEditTime: 2025-03-03 10:33:09
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -19,7 +19,9 @@ export const SERVER_MODE_PROD = "prod";
 export const SERVER_MODE_QUANJING = "quanjing";
 // 获取环境变量
 const configEnv = import.meta.env.VITE_CONFIG_ENV || "prod";
-console.log("Current VITE_CONFIG_ENV:", import.meta.env.VITE_CONFIG_ENV);
+console.log("Current VITE_CONFIG_ENV:", import.meta.env.VITE_CONFIG_ENV, "configEnv:", configEnv);
+const appEnv = import.meta.env.VITE_APP_ENV || "app";
+console.log("Current VITE_APP_ENV:", import.meta.env.VITE_APP_ENV, "appEnv:", appEnv);
 // 根据环境变量动态引入配置文件
 let config: MYCONFIG.Consts;
 switch (configEnv) {

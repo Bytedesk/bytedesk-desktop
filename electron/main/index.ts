@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-13 02:39:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-01-06 13:05:40
+ * @LastEditTime: 2025-03-03 10:26:10
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -89,6 +89,8 @@ console.log("app before ready");
   app.whenReady().then(() => {
     console.log("app is ready");
     const locale = getSystemLocale();  // 获取系统语言
+    // 设置环境变量，用于区分 Electron 环境
+    process.env.VITE_APP_ENV = 'electron';
     
     // 根据系统语言设置应用名称
     if (locale.startsWith('zh')) {
