@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-19 10:29:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-03 10:41:45
+ * @LastEditTime: 2025-03-03 11:30:28
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -256,9 +256,9 @@ const routes = [
 ];
 //
 // 获取当前环境
-const isElectron = process.env.VITE_APP_ENV === 'electron';
+const isElectron = import.meta.env.MODE === 'electron' || import.meta.env.VITE_APP_ENV === 'electron';
+console.log("router isElectron:", isElectron);
 let router;
-// if (IS_ELECTRON) {
 if (isElectron) {
   console.log("isElectron electron:", isElectron);
   router = createHashRouter(routes, {
