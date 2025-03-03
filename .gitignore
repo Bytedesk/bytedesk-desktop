@@ -133,6 +133,10 @@ dist
 *.yml
 .env
 .env.build
+.env.quanjing
+.env.web
+.env.open
+.env.electron
 build/
 cicd/
 config/
