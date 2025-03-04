@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-16 23:04:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-07 10:23:23
+ * @LastEditTime: 2025-03-04 13:27:33
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -19,7 +19,7 @@ import {
   EVENT_BUS_MESSAGE_TYPE_TRANSFER,
   EVENT_BUS_MESSAGE_TYPE_TRANSFER_ACCEPT,
   EVENT_BUS_MESSAGE_TYPE_TRANSFER_REJECT,
-  IS_DEBUG,
+  // IS_DEBUG,
   LAST_PATH,
 } from "@/utils/constants";
 import {
@@ -63,7 +63,7 @@ import { Badge } from "antd";
 import { queryAgent } from "@/apis/service/agent";
 import { useAgentStore } from "@/stores/service/agent";
 import Ticket from "../Vip/Ticket";
-import Notebase from "./Notebase";
+// import Notebase from "./Notebase";
 // import { useSettingsStore } from "@/stores/core/setting";
 // import socketio from '@/network/socketio';
 import LanguageMenu from "./FootBar/LanguageMenu";
@@ -147,16 +147,16 @@ const Dashboard = () => {
       },
     ];
 
-    if (IS_DEBUG) {
-      teamRoutes.push(
-        {
-          path: "/notebase",
-          name: intl.formatMessage({ id: "menu.dashboard.kbase" })  ,
-          icon: <BookOutlined />,
-          component: <Notebase />,
-        },
-      );
-    }
+    // if (IS_DEBUG) {
+    //   teamRoutes.push(
+    //     {
+    //       path: "/notebase",
+    //       name: intl.formatMessage({ id: "menu.dashboard.kbase" })  ,
+    //       icon: <BookOutlined />,
+    //       component: <Notebase />,
+    //     },
+    //   );
+    // }
 
     setRouteItems(teamRoutes);
   }, [intl, locale]); // 添加 locale 作为依赖

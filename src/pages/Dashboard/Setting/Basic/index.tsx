@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-25 10:12:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 15:53:51
+ * @LastEditTime: 2025-03-04 14:04:14
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -14,7 +14,7 @@
  */
 /// <reference types="web-bluetooth" />
 import { AppContext } from "@/context/AppContext";
-import { useNetworkStatus } from "@/hooks/useNetworkStatus";
+// import { useNetworkStatus } from "@/hooks/useNetworkStatus";
 import {
   IS_DEBUG,
   IS_ELECTRON,
@@ -47,7 +47,7 @@ import useMqtt from "@/hooks/useMqtt";
 // 基本设置
 const Basic = () => {
   const intl = useIntl();
-  const isNetworkOnline = useNetworkStatus();
+  // const isNetworkOnline = useNetworkStatus();
   const { isMqttConnected } = useMqtt();
   const [isPlayAudio, setIsPlayAudio] = useState(true);
   const [showNetworkStatusNotification, setShowNetworkStatusNotification] =
@@ -119,8 +119,6 @@ const Basic = () => {
     // 获取系统设备信息
     getSystemInfo();
     getIpAddress();
-    // 当前网络
-    console.log("isNetworkOnline:", isNetworkOnline);
     // let networkType = getNetworkType();
     // console.log("networkType:", networkType);
     const playAudio = localStorage.getItem(PLAY_AUDIO);

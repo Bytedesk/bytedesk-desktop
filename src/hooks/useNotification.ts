@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 22:25:16
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-09-11 11:48:16
+ * @LastEditTime: 2025-03-04 14:06:59
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -19,12 +19,12 @@ import {
   showElectronNotification,
 } from "@/utils/electronApiUtils";
 import { useEffect, useState } from "react";
-import { useNetworkStatus } from "./useNetworkStatus";
-import useTranslate from "./useTranslate";
+// import { useNetworkStatus } from "./useNetworkStatus";
+// import useTranslate from "./useTranslate";
 
 function useNotification() {
-  const isNetworkOnline = useNetworkStatus();
-  const { translateString } = useTranslate();
+  // const isNetworkOnline = useNetworkStatus();
+  // const { translateString } = useTranslate();
   const [isNotificationGranted, setIsNotificationGranted] =
     useState<boolean>(false);
   const [isBrowserTabHidden, setIsBrowserTabHidden] = useState(false);
@@ -54,8 +54,13 @@ function useNotification() {
   // http://javascript.ruanyifeng.com/bom/notification.html
   const showWebNotification = (title, content) => {
     // this.notificationGranted(result)
+    const showNetNotification = localStorage.getItem(NETWORK_STATUS_NOTIFICATION);
+    if (showNetNotification != "true") {
+      console.log("showWebNotification not showNetNotification");
+      return;
+    }
     console.log("showWebNotification");
-    var notification = new Notification(title, {
+    const notification = new Notification(title, {
       // dir: 'auto',
       // lang: 'zh-CN',
       body: content,
@@ -128,28 +133,30 @@ function useNotification() {
   }, []);
 
   //
-  useEffect(() => {
-    console.log("useNotification useEffect isNetworkOnline", isNetworkOnline);
-    if (isNetworkOnline) {
-      //
-      const showNetNotif = localStorage.getItem(NETWORK_STATUS_NOTIFICATION);
-      if (showNetNotif == null || showNetNotif === "true") {
-        showNotification(
-          translateString("i18n.tip.title"),
-          translateString("i18n.tip.network.disconnected"),
-        );
-      }
-    } else {
-      //
-      const showNetNotif = localStorage.getItem(NETWORK_STATUS_NOTIFICATION);
-      if (showNetNotif == null || showNetNotif === "true") {
-        showNotification(
-          translateString("i18n.tip.title"),
-          translateString("i18n.tip.network.connected"),
-        );
-      }
-    }
-  }, [isNetworkOnline]);
+  // useEffect(() => {
+  //   console.log("useNotification useEffect isNetworkOnline", isNetworkOnline);
+  //   if (isNetworkOnline) {
+  //     const showNetNotification = localStorage.getItem(NETWORK_STATUS_NOTIFICATION);
+  //     console.log("showNetNotification:", showNetNotification)
+  //     if (showNetNotification === "true") {
+  //       console.log("showNetNotification show online")
+  //       showNotification(
+  //         translateString("i18n.tip.title"),
+  //         translateString("i18n.tip.network.disconnected"),
+  //       );
+  //     }
+  //   } else {
+  //     const showNetNotification = localStorage.getItem(NETWORK_STATUS_NOTIFICATION);
+  //     console.log("showNetNotification:", showNetNotification)
+  //     if (showNetNotification === "true") {
+  //       console.log("showNetNotification show offline")
+  //       showNotification(
+  //         translateString("i18n.tip.title"),
+  //         translateString("i18n.tip.network.connected"),
+  //       );
+  //     }
+  //   }
+  // }, [isNetworkOnline]);
 
   return {
     isNotificationGranted,
