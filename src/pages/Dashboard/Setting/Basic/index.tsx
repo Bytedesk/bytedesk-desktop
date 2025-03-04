@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-25 10:12:49
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-04 14:04:14
+ * @LastEditTime: 2025-03-04 14:57:56
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -18,9 +18,9 @@ import { AppContext } from "@/context/AppContext";
 import {
   IS_DEBUG,
   IS_ELECTRON,
-  MODE_AGENT,
-  MODE_PERSONAL,
-  MODE_TEAM,
+  // MODE_AGENT,
+  // MODE_PERSONAL,
+  // MODE_TEAM,
   NETWORK_STATUS_NOTIFICATION,
   PLAY_AUDIO,
 } from "@/utils/constants";
@@ -142,7 +142,7 @@ const Basic = () => {
   }, []);
 
   // 颜色主题
-  const { themeMode, setThemeMode, mode, changeMode, locale, changeLocale } = useContext(AppContext);
+  const { themeMode, setThemeMode, locale, changeLocale } = useContext(AppContext);
   const onThemeModeChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setThemeMode(e.target.value);
@@ -181,11 +181,11 @@ const Basic = () => {
   //   // changeLocale(e.target.value);
   // };
 
-  const handleModeChange = (e: RadioChangeEvent) => {
-    console.log("mode change", e.target.value);
-    // changeLocale(e.target.value);
-    changeMode(e.target.value);
-  };
+  // const handleModeChange = (e: RadioChangeEvent) => {
+  //   console.log("mode change", e.target.value);
+  //   // changeLocale(e.target.value);
+  //   changeMode(e.target.value);
+  // };
 
   return (
     <div className="profile-container">
@@ -309,7 +309,7 @@ const Basic = () => {
           </Radio>
         </Radio.Group>
       </div>
-      {
+      {/* {
         IS_DEBUG && (
           <div>
             <p>{intl.formatMessage({
@@ -338,7 +338,7 @@ const Basic = () => {
             </Radio.Group>
           </div>
         )
-      }
+      } */}
       {/* TODO: 本地端口设置 */}
 
       {/* https://www.electronjs.org/docs/latest/tutorial/native-file-drag-drop */}

@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:23:06
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-12 17:24:43
+ * @LastEditTime: 2025-03-04 15:07:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -69,8 +69,8 @@ export default {
   'thread.status.empty': '暂无会话',
   'thread.status.error': '加载会话失败',
   'thread.status.queue': '排队({count})',
-  'thread.status.network.offline': '网络已断开',
-  'thread.status.network.online': '网络已连接',
+  'thread.status.network.offline': '网络已断开-234',
+  'thread.status.network.online': '网络已连接-234',
   'thread.status.message.pulling': '消息拉取中...',
   'thread.status.message.empty': '暂无消息',
   'thread.status.message.error': '加载消息失败',

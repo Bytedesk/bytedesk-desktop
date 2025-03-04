@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 22:25:16
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-04 14:06:59
+ * @LastEditTime: 2025-03-04 15:15:58
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -34,18 +34,18 @@ function useNotification() {
       const isActive = await isWindowActive();
       if (!isActive) {
         // 显示桌面通知
-        //  console.log("handleNewMessage not isWindowActive");
+         console.log("showWebNotification handleNewMessage not isWindowActive");
         showElectronNotification(title, content);
       } else {
-        console.log("handleNewMessage isWindowActive");
+        console.log("showWebNotification handleNewMessage isWindowActive");
       }
     } else {
       if (isBrowserTabHidden) {
         // 显示浏览器通知
-        // console.log("handleNewMessage isBrowserTabHidden");
+        console.log("showWebNotification handleNewMessage isBrowserTabHidden");
         showWebNotification(title, content);
       } else {
-        console.log("handleNewMessage not isBrowserTabHidden");
+        console.log("showWebNotification handleNewMessage not isBrowserTabHidden");
       }
     }
   };
@@ -92,6 +92,7 @@ function useNotification() {
 
   useEffect(() => {
     if (!IS_ELECTRON) {
+      console.log('showWebNotification Notification.permission')
       if (window.Notification && Notification.permission !== "granted") {
         //
         Notification.requestPermission(function (status) {
