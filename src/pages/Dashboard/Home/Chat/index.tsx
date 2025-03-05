@@ -923,7 +923,16 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     mqttSendMessage(_id.toString(), type, content, chatThread);
   };
 
-  const handlePhoneClick 
+  const handlePhoneClick = (phone: string) => {
+    console.log("handlePhoneClick", phone);
+    if (phone) {
+      // window.location.href = `tel:${phone}`;
+      // 复制到剪贴板
+      navigator.clipboard.writeText(phone);
+      // 提示复制成功
+      message.success("已复制到剪贴板");
+    }
+  };
 
   const renderMessageContent = (message: MessageProps): React.ReactNode => {
     const { _id, type, content, position, status } = message;
@@ -947,6 +956,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             <Bubble
               content={translateString(content)}
               isRichText={isRichText(content)}
+              on
               onContextMenu={() => handleContextMenu(event, message)}
             ></Bubble>
             {position === "right" && !isGroupThread(chatThread) && (
