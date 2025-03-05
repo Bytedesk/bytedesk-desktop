@@ -941,7 +941,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       // 复制到剪贴板
       navigator.clipboard.writeText(email);
       // 提示复制成功
-      message.success("已复制到剪贴板");
+      message.success(email + "已复制到剪贴板");
     }
   };
 
@@ -968,6 +968,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
               content={translateString(content)}
               isRichText={isRichText(content)}
               onPhoneClick={handlePhoneClick}
+              onEmailClick={handleEmailClick}
               onContextMenu={() => handleContextMenu(event, message)}
             ></Bubble>
             {position === "right" && !isGroupThread(chatThread) && (
