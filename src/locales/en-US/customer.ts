@@ -30,11 +30,6 @@ export default {
   'black.until.required': 'Please select block end time',
   'black.reason': 'Block Reason',
   'black.reason.required': 'Please enter block reason',
-  'black.reason.placeholder': 'Enter reason for blocking',
-  'black.success': 'Block successfully',
+  'black.success': 'Block successfully'
+} 
 
-  'customer.basic.title': 'Basic Information',
-  'customer.basic.edit': 'Edit',
-  'customer.basic.update.success': 'Updated successfully',
-  'customer.basic.update.failed': 'Update failed',
-}
