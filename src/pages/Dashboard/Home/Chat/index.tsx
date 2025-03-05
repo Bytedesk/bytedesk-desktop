@@ -934,7 +934,16 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
   };
 
-  const handleEmailClick 
+  const handleEmailClick = (email: string) => {
+    console.log("handleEmailClick", email);
+    if (email) {
+      // window.location.href = `mailto:${email}`;
+      // 复制到剪贴板
+      navigator.clipboard.writeText(email);
+      // 提示复制成功
+      message.success("已复制到剪贴板");
+    }
+  };
 
   const renderMessageContent = (message: MessageProps): React.ReactNode => {
     const { _id, type, content, position, status } = message;
