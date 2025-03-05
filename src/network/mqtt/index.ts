@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-22 14:37:08
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-14 08:03:50
+ * @LastEditTime: 2025-03-05 21:20:29
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -156,6 +156,7 @@ export const mqttConnect = ({
         case constants.MESSAGE_TYPE_PREVIEW: // 非自己发送的：消息预知
           handlePreviewMessage(messageProtobuf, currentThread, thread);
           return;
+        case constants.MESSAGE_T
         case constants.MESSAGE_TYPE_FAQ_UP:
         case constants.MESSAGE_TYPE_FAQ_DOWN:
         case constants.MESSAGE_TYPE_ROBOT_UP:
