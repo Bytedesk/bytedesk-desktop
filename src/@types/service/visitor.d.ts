@@ -28,10 +28,11 @@ declare namespace VISITOR {
     //
     browser?: string;
     os?: string;
-    device?: string;
     referrer?: string;
     // 
     device?: VisitorDevice;
+    client?: string;
+    status?: string;
   };
 
   type HttpResult = {
