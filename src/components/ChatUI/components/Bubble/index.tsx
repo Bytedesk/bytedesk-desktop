@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-05-24 18:25:45
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-05 21:30:10
+ * @LastEditTime: 2025-03-05 21:49:44
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -38,6 +38,7 @@ export const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
       const cleanPhone = phone.replace(/^\+?86-?/, '');
       // window.open(`tel:${cleanPhone}`);
       console.log(`拨打电话: ${cleanPhone}`);
+      props.onPhoneClick?.(cleanPhone);
     };
 
     const handleEmailClick = (email: string) => {
