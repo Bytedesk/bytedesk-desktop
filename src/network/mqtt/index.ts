@@ -156,7 +156,8 @@ export const mqttConnect = ({
         case constants.MESSAGE_TYPE_PREVIEW: // 非自己发送的：消息预知
           handlePreviewMessage(messageProtobuf, currentThread, thread);
           return;
-        case constants.MESSAGE_T
+        case constants.MESSAGE_TYPE_FAQ:
+          
         case constants.MESSAGE_TYPE_FAQ_UP:
         case constants.MESSAGE_TYPE_FAQ_DOWN:
         case constants.MESSAGE_TYPE_ROBOT_UP:
