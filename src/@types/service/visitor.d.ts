@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-02 17:33:29
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-05 17:39:04
+ * @LastEditTime: 2025-03-05 18:04:40
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -30,6 +30,8 @@ declare namespace VISITOR {
     os?: string;
     device?: string;
     referrer?: string;
+    // 
+    device?: VisitorDevice;
   };
 
   type HttpResult = {
