@@ -46,5 +46,15 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/locales",
+    "public/pairdrop/lang",
+    "release/linux-arm64-unpacked/locales",
+    "release/linux-unpacked/locales",
+    "release/win-arm64-unpacked/locales",
+    "release/win-ia32-unpacked/locales",
+    "release/win-unpacked/locales",
+    "src/components/ChatUI/components/ConfigProvider/locales"
+  ]
 }
