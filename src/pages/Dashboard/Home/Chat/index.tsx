@@ -923,6 +923,8 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     mqttSendMessage(_id.toString(), type, content, chatThread);
   };
 
+  const handlePhoneClick 
+
   const renderMessageContent = (message: MessageProps): React.ReactNode => {
     const { _id, type, content, position, status } = message;
     // TODO: 向服务器发送已读回执，TODO: 限定非己发送的消息，才会发生回执
