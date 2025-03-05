@@ -44,6 +44,7 @@ export const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>(
     const handleEmailClick = (email: string) => {
       // window.open(`mailto:${email}`);
       console.log(`发送邮件: ${email}`);
+      props.onEmailClick?.(email);
     };
 
     const renderContent = () => {
