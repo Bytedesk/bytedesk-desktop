@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-01-22 14:37:08
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-05 21:20:29
+ * @LastEditTime: 2025-03-05 21:21:53
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -157,7 +157,7 @@ export const mqttConnect = ({
           handlePreviewMessage(messageProtobuf, currentThread, thread);
           return;
         case constants.MESSAGE_TYPE_FAQ:
-          // 访客提交FAQ
+          // todo:访客提交FAQ
           // handleFaqMessage(messageProtobuf, currentThread, thread);
           return;
         case constants.MESSAGE_TYPE_FAQ_UP:
