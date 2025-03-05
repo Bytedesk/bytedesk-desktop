@@ -956,7 +956,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
             <Bubble
               content={translateString(content)}
               isRichText={isRichText(content)}
-              on
+              onPhoneClick={handlePhoneClick}
               onContextMenu={() => handleContextMenu(event, message)}
             ></Bubble>
             {position === "right" && !isGroupThread(chatThread) && (
