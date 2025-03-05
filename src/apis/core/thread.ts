@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-02-21 15:21:14
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-26 07:43:28
+ * @LastEditTime: 2025-03-05 18:31:17
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -53,6 +53,16 @@ export async function createThread(thread: THREAD.ThreadRequest) {
 
 export async function updateThread(thread: THREAD.ThreadRequest) {
   return request<THREAD.HttpResult>("/api/v1/thread/update", {
+    method: "POST",
+    data: {
+      ...thread,
+    },
+  });
+}
+
+// update user
+export async function updateUser(thread: THREAD.ThreadRequest) {
+  return request<THREAD.HttpResult>("/api/v1/thread/update/user", {
     method: "POST",
     data: {
       ...thread,
