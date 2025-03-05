@@ -930,7 +930,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       // 复制到剪贴板
       navigator.clipboard.writeText(phone);
       // 提示复制成功
-      message.success("已复制到剪贴板");
+      message.success("电话号码：" + phone + "已复制到剪贴板");
     }
   };
 
@@ -941,7 +941,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
       // 复制到剪贴板
       navigator.clipboard.writeText(email);
       // 提示复制成功
-      message.success(email + "已复制到剪贴板");
+      message.success("邮箱：" + email + "已复制到剪贴板");
     }
   };
 
