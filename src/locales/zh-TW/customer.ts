@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2025-02-03 23:32:41
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 14:35:33
+ * @LastEditTime: 2025-03-05 16:23:51
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license. 
@@ -102,5 +102,20 @@ export default {
   'black.reason': '拉黑原因',
   'black.reason.required': '請輸入拉黑原因',
   'black.reason.placeholder': '請輸入拉黑原因',
-  'black.success': '拉黑成功'
+  'black.success': '拉黑成功',
+
+  // 'customer.info.basic': '基本資訊',
+  'customer.info.browser': '瀏覽器資訊',
+  'customer.info.os': '作業系統資訊',
+  'customer.info.device': '裝置資訊',
+  'customer.info.browse.record': '瀏覽記錄',
+  'customer.info.tag': '標籤資訊',
+  'customer.info.load.error': '載入訪客資訊失敗',
+  'customer.basic.title': '基本資訊',
+  'customer.basic.nickname': '暱稱',
+  'customer.basic.empty': '無',
+  'customer.basic.edit': '編輯',
+  'customer.basic.update.success': '更新成功',
+  'customer.basic.update.failed': '更新失敗',
+  'customer.basic.note': '備註'
 } 

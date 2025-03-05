@@ -34,10 +34,7 @@ export default {
   'black.success': 'Block successfully',
 
   'customer.basic.title': 'Basic Information',
-  'customer.basic.nickname': 'Nickname',
-  'customer.basic.empty': 'N/A',
   'customer.basic.edit': 'Edit',
   'customer.basic.update.success': 'Updated successfully',
   'customer.basic.update.failed': 'Update failed',
-  'customer.basic.note': 'Note'
 }
