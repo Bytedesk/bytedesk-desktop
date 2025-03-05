@@ -934,7 +934,7 @@ const ChatPage = ({ fromTicketTab = false, ticket }: ChatPageProps) => {
     }
   };
 
-  const 
+  const handleEmailClick 
 
   const renderMessageContent = (message: MessageProps): React.ReactNode => {
     const { _id, type, content, position, status } = message;
