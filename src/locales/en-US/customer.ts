@@ -31,25 +31,12 @@ export default {
   'black.reason': 'Block Reason',
   'black.reason.required': 'Please enter block reason',
   'black.reason.placeholder': 'Enter reason for blocking',
-  'black.success': 'Block successfully'
+  'black.success': 'Block successfully',
 }
 
 // 补充或修改缺失的翻译
 const messages = {
-  'customer.info.basic': 'Basic Info',
-  'customer.info.browser': 'Browser Info',
-  'customer.info.os': 'OS Info',
-  'customer.info.device': 'Device Info',
-  'customer.info.browse.record': 'Browse Record',
-  'customer.info.tag': 'Tag Info',
-  'customer.info.load.error': 'Failed to load visitor info',
-  'customer.basic.title': 'Basic Information',
-  'customer.basic.nickname': 'Nickname',
-  'customer.basic.empty': 'N/A',
-  'customer.basic.edit': 'Edit',
-  'customer.basic.update.success': 'Updated successfully',
-  'customer.basic.update.failed': 'Update failed',
-  'customer.basic.note': 'Note'
+  
 };
 
 export default messages;
