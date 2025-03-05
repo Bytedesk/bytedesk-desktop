@@ -12,18 +12,18 @@
  *  技术/商务联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-import { MEMBER_STORE } from "@/utils/constants";
+import { VISITOR_STORE } from "@/utils/constants";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 interface MemberState {
-  currentMember: MEMBER.MemberResponse;
-  memberSelf: MEMBER.MemberResponse;
-  memberResult: MEMBER.HttpPageResult;
-  setCurrentMember: (member: MEMBER.MemberResponse) => void;
-  setMemberSelf: (member: MEMBER.MemberResponse) => void;
-  setMemberResult: (result: MEMBER.HttpPageResult) => void;
+  currentMember: VISITOR.MemberResponse;
+  memberSelf: VISITOR.MemberResponse;
+  memberResult: VISITOR.HttpPageResult;
+  setCurrentMember: (member: VISITOR.MemberResponse) => void;
+  setMemberSelf: (member: VISITOR.MemberResponse) => void;
+  setMemberResult: (result: VISITOR.HttpPageResult) => void;
   resetMembers: () => void;
 }
 
@@ -57,7 +57,7 @@ export const useMemberStore = create<MemberState>()(
         setMemberSelf(member) {
           set({ memberSelf: member });
         },
-        setMemberResult: (result: MEMBER.HttpPageResult) => {
+        setMemberResult: (result: VISITOR.HttpPageResult) => {
           // get().addMembers(result.data.content);
           set({ memberResult: result });
         },
@@ -81,7 +81,7 @@ export const useMemberStore = create<MemberState>()(
           }),
       })),
       {
-        name: MEMBER_STORE,
+        name: VISITOR_STORE,
       },
     ),
   ),
