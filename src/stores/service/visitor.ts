@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-23 17:36:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-03-05 17:16:44
+ * @LastEditTime: 2025-03-05 17:19:05
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -19,11 +19,7 @@ import { immer } from "zustand/middleware/immer";
 
 interface VisitorState {
   currentVisitor: VISITOR.VisitorResponse;
-  memberSelf: VISITOR.VisitorResponse;
-  memberResult: VISITOR.HttpPageResult;
-  setCurrentVisitor: (member: VISITOR.VisitorResponse) => void;
-  setVisitorSelf: (member: VISITOR.VisitorResponse) => void;
-  setVisitorResult: (result: VISITOR.HttpPageResult) => void;
+  setCurrentVisitor: (visitor: VISITOR.VisitorResponse) => void;
   resetVisitors: () => void;
 }
 
@@ -31,7 +27,7 @@ export const useVisitorStore = create<VisitorState>()(
   devtools(
     persist(
       immer((set) => ({
-        // members: [],
+        // visitors: [],
         currentVisitor: {
           nickname: "",
           user: {
@@ -39,35 +35,12 @@ export const useVisitorStore = create<VisitorState>()(
             avatar: "",
           },
         },
-        memberSelf: {
-          nickname: "",
-          user: {
-            uid: "",
-            avatar: "",
-          },
-        },
-        memberResult: {
-          data: {
-            content: [],
-          },
-        },
-        setCurrentVisitor(member) {
-          set({ currentVisitor: member });
-        },
-        setVisitorSelf(member) {
-          set({ memberSelf: member });
-        },
-        setVisitorResult: (result: VISITOR.HttpPageResult) => {
-          // get().addVisitors(result.data.content);
-          set({ memberResult: result });
+        setCurrentVisitor(visitor) {
+          set({ currentVisitor: visitor });
         },
         resetVisitors: () =>
           set({
-            // members: [],
             currentVisitor: {
-              nickname: "",
-            },
-            memberSelf: {
               nickname: "",
             },
           }),
