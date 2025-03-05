@@ -17,22 +17,22 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-interface MemberState {
-  currentMember: VISITOR.MemberResponse;
-  memberSelf: VISITOR.MemberResponse;
+interface VisitorState {
+  currentVisitor: VISITOR.VisitorResponse;
+  memberSelf: VISITOR.VisitorResponse;
   memberResult: VISITOR.HttpPageResult;
-  setCurrentMember: (member: VISITOR.MemberResponse) => void;
-  setMemberSelf: (member: VISITOR.MemberResponse) => void;
-  setMemberResult: (result: VISITOR.HttpPageResult) => void;
-  resetMembers: () => void;
+  setCurrentVisitor: (member: VISITOR.VisitorResponse) => void;
+  setVisitorSelf: (member: VISITOR.VisitorResponse) => void;
+  setVisitorResult: (result: VISITOR.HttpPageResult) => void;
+  resetVisitors: () => void;
 }
 
-export const useMemberStore = create<MemberState>()(
+export const useVisitorStore = create<VisitorState>()(
   devtools(
     persist(
       immer((set) => ({
         // members: [],
-        currentMember: {
+        currentVisitor: {
           nickname: "",
           user: {
             uid: "",
@@ -51,32 +51,24 @@ export const useMemberStore = create<MemberState>()(
             content: [],
           },
         },
-        setCurrentMember(member) {
-          set({ currentMember: member });
+        setCurrentVisitor(member) {
+          set({ currentVisitor: member });
         },
-        setMemberSelf(member) {
+        setVisitorSelf(member) {
           set({ memberSelf: member });
         },
-        setMemberResult: (result: VISITOR.HttpPageResult) => {
-          // get().addMembers(result.data.content);
+        setVisitorResult: (result: VISITOR.HttpPageResult) => {
+          // get().addVisitors(result.data.content);
           set({ memberResult: result });
         },
-        resetMembers: () =>
+        resetVisitors: () =>
           set({
             // members: [],
-            currentMember: {
+            currentVisitor: {
               nickname: "",
-              user: {
-                uid: "",
-                avatar: "",
-              },
             },
             memberSelf: {
               nickname: "",
-              user: {
-                uid: "",
-                avatar: "",
-              },
             },
           }),
       })),
