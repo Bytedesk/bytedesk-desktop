@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-04-23 17:36:43
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-08-05 13:08:23
+ * @LastEditTime: 2025-03-05 17:16:18
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -18,12 +18,9 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 interface MemberState {
-  //
-  // members: MEMBER.MemberResponse[];
   currentMember: MEMBER.MemberResponse;
   memberSelf: MEMBER.MemberResponse;
   memberResult: MEMBER.HttpPageResult;
-  // addMembers: (members: MEMBER.MemberResponse[]) => void;
   setCurrentMember: (member: MEMBER.MemberResponse) => void;
   setMemberSelf: (member: MEMBER.MemberResponse) => void;
   setMemberResult: (result: MEMBER.HttpPageResult) => void;
@@ -33,7 +30,7 @@ interface MemberState {
 export const useMemberStore = create<MemberState>()(
   devtools(
     persist(
-      immer((set, get) => ({
+      immer((set) => ({
         // members: [],
         currentMember: {
           nickname: "",
@@ -54,17 +51,6 @@ export const useMemberStore = create<MemberState>()(
             content: [],
           },
         },
-        // addMembers: (newMembers: MEMBER.MemberResponse[]) => {
-        //   const existingIds = new Set(
-        //     get().members.map((member) => member.uid),
-        //   );
-        //   const uniqueNewMembers = newMembers.filter(
-        //     (member) => !existingIds.has(member.uid),
-        //   );
-        //   set({
-        //     members: [...get().members, ...uniqueNewMembers],
-        //   });
-        // },
         setCurrentMember(member) {
           set({ currentMember: member });
         },
