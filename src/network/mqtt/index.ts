@@ -157,7 +157,9 @@ export const mqttConnect = ({
           handlePreviewMessage(messageProtobuf, currentThread, thread);
           return;
         case constants.MESSAGE_TYPE_FAQ:
-          
+          // 访客提交FAQ
+          handleFaqMessage(messageProtobuf, currentThread, thread);
+          return;
         case constants.MESSAGE_TYPE_FAQ_UP:
         case constants.MESSAGE_TYPE_FAQ_DOWN:
         case constants.MESSAGE_TYPE_ROBOT_UP:
