@@ -33,13 +33,6 @@ export default {
   'black.reason.placeholder': 'Enter reason for blocking',
   'black.success': 'Block successfully',
 
-  'customer.info.basic': 'Basic Info',
-  'customer.info.browser': 'Browser Info',
-  'customer.info.os': 'OS Info',
-  'customer.info.device': 'Device Info',
-  'customer.info.browse.record': 'Browse Record',
-  'customer.info.tag': 'Tag Info',
-  'customer.info.load.error': 'Failed to load visitor info',
   'customer.basic.title': 'Basic Information',
   'customer.basic.nickname': 'Nickname',
   'customer.basic.empty': 'N/A',
