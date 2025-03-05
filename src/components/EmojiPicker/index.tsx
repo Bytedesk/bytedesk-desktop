@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-07-15 11:52:30
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2024-08-01 15:19:08
+ * @LastEditTime: 2025-03-05 14:44:48
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM –
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -12,7 +12,6 @@
  * 联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved.
  */
-// 
 import { Popup } from '@/components/ChatUI';
 import { useState } from 'react';
 import data from '@emoji-mart/data'
