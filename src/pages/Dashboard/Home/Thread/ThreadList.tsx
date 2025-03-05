@@ -24,7 +24,7 @@ import {
   Spin,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { updateUnread } from "@/apis/core/thread";
+import { updateThreadUnread } from "@/apis/core/thread";
 import { useThreadStore } from "@/stores/core/thread";
 import "./threadList.css";
 import { useNetworkStatus } from "@/hooks/useNetworkStatus";
@@ -214,7 +214,7 @@ const ThreadList = () => {
       return;
     }
     console.log("handleUpdateThreadUnreadCount", newThread);
-    const response = await updateUnread(newThread);
+    const response = await updateThreadUnread(newThread);
     console.log("handleUpdateThreadUnreadCount response:", response.data);
     if (response.data.code === 200) {
       setCurrentThread(response.data.data);
