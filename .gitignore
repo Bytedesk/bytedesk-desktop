@@ -144,4 +144,5 @@ dist/
 dist-electron/
 release/
 back/
+src/
 
