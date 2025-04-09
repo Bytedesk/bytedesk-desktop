@@ -36,6 +36,7 @@
     "build:linux": "tsc && vite build --mode electron && electron-builder --linux --config electron-builder-linux.yml",
     "release:web": "sh cicd/scripts/build-upload.sh",
     "release:open": "sh cicd/scripts/build-open.sh",
+    "release:quanjing": "sh cicd/scripts/build-quanjing.sh",
     "release:mac": "sh cicd/scripts/build-upload-mac.sh",
     "release:mas": "sh cicd/scripts/build-mac-mas.sh",
     "release:win": "sh cicd/scripts/build-upload-win.sh",
