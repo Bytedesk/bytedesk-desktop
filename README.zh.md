@@ -2,7 +2,7 @@
  * @Author: jackning 270580156@qq.com
  * @Date: 2024-06-05 09:44:23
  * @LastEditors: jackning 270580156@qq.com
- * @LastEditTime: 2025-02-04 15:24:34
+ * @LastEditTime: 2025-04-16 18:30:57
  * @Description: bytedesk.com https://github.com/Bytedesk/bytedesk
  *   Please be aware of the BSL license restrictions before installing Bytedesk IM – 
  *  selling, reselling, or hosting Bytedesk IM as a service is a breach of the terms and automatically terminates your rights under the license.
@@ -112,17 +112,6 @@ git clone https://github.com/Bytedesk/bytedesk-desktop && cd bytedesk-desktop &&
 - [flutter for 移动客户端(ios&android)](https://github.com/Bytedesk/bytedesk-mobile)
 - [electron for 桌面客户端(windows&mac&linux)](https://github.com/Bytedesk/bytedesk-desktop)
 <!-- - [python for ai](https://github.com/Bytedesk/bytedesk-ai) -->
-
-## 联系
-
-<!-- - [Email](mailto:270580156@qq.com) -->
-<!-- - [微信](./images/wechat.png) -->
-- 微语技术支持群：
-- <img src="./images/wechat_group.jpg" width="200">
-- 服务号
-- <img src="./images/wechat_mp.jpg" width="100">
-- 订阅号
-- <img src="./images/wechatai_mp.jpg" width="100">
 
 ## 版权
 
