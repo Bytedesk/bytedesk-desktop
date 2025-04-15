@@ -11,12 +11,12 @@
  *  联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved. 
 -->
-# 全场景云客服平台 - 对话即服务
+# 微语 - 对话即服务
 
 企业级多租户即时通讯解决方案
 
 :::tip
-全场景云客服平台仍处于早期的快速迭代阶段，文档可能落后于开发，导致功能描述可能不符，以最新发布的软件版本为准
+微语仍处于早期的快速迭代阶段，文档可能落后于开发，导致功能描述可能不符，以最新发布的软件版本为准
 :::
 
 ## 语言
@@ -117,7 +117,7 @@ git clone https://github.com/Bytedesk/bytedesk-desktop && cd bytedesk-desktop &&
 
 <!-- - [Email](mailto:270580156@qq.com) -->
 <!-- - [微信](./images/wechat.png) -->
-- 全场景云客服平台技术支持群：
+- 微语技术支持群：
 - <img src="./images/wechat_group.jpg" width="200">
 - 服务号
 - <img src="./images/wechat_mp.jpg" width="100">
