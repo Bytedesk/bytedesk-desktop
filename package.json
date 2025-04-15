@@ -115,7 +115,6 @@
     "use-debounce": "^10.0.1",
     "uuid": "^9.0.1",
     "vite-plugin-html": "^3.2.2",
-    "winston": "^3.17.0",
     "ws": "^8.16.0",
     "xgplayer": "^3.0.13",
     "zustand": "^4.4.7"
