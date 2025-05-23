@@ -11,7 +11,7 @@
  *  联系：270580156@qq.com
  * Copyright (c) 2024 by bytedesk.com, All Rights Reserved. 
 -->
-# 微语 - 对话即服务
+# 微语 - 重复工作自动化
 
 企业级多租户即时通讯解决方案
 
