@@ -1,6 +1,6 @@
 {
   "name": "desktop",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "main": "dist-electron/main/index.js",
   "description": "重复工作自动化",
   "author": {
