@@ -21,6 +21,6 @@
     },
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "electron", "public/snapdrop", "back/index_back.tsx", "back/back", "config/mac/certifications/script"],
+  "include": ["src", "electron", "public/snapdrop", "back/index_back.tsx", "back/back", "config/mac/certifications/script", "back/CategoryForm.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
