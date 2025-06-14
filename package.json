@@ -105,6 +105,7 @@
     "react-router-dom": "^6.21.2",
     "react-use": "^17.5.0",
     "react-virtuoso": "^4.7.1",
+    "sip.js": "^0.21.2",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "systeminformation": "^5.22.3",
