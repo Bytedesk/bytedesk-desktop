@@ -57,6 +57,7 @@ https://your-domain.com/auth/login?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 
 ## 工作流程
 
+### 验证成功流程
 1. **检测**: 系统检测 URL 中是否存在 `accessToken` 参数
 2. **验证**: 如果存在且用户未登录，调用 API 验证 `accessToken`
 3. **登录**: 验证成功后自动设置用户信息和新的 `accessToken`
@@ -64,11 +65,19 @@ https://your-domain.com/auth/login?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 5. **清理**: 清除 URL 中的 `accessToken` 参数
 6. **通知**: 显示登录成功消息
 
+### 验证失败流程
+1. **检测**: 系统检测 URL 中是否存在 `accessToken` 参数
+2. **验证**: 调用 API 验证 `accessToken`
+3. **失败**: 验证失败，显示错误消息
+4. **清理**: 清除 URL 中的 `accessToken` 参数
+5. **显示**: 显示登录页面，用户可以手动登录
+
 ### 防重复验证机制
 
-- 使用 `hasProcessedToken` 状态确保每个 accessToken 只验证一次
-- 验证失败后不会重复尝试
+- 使用 `tokenValidationState` 状态管理验证流程：`idle` → `validating` → `completed`
+- 验证失败后不会重复尝试，直接显示登录页面
 - 清除旧消息避免重复显示
+- 验证失败时自动清除 URL 中的 accessToken 参数
 - 路由级别和组件级别的处理逻辑协调工作
 
 ## 错误处理
