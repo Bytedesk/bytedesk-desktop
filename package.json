@@ -88,6 +88,7 @@
     "file-saver": "^2.0.5",
     "immer": "^10.1.1",
     "intersection-observer": "^0.12.2",
+    "jssip": "^3.10.1",
     "katex": "^0.16.22",
     "langchain": "^0.2.16",
     "mammoth": "^1.9.1",
