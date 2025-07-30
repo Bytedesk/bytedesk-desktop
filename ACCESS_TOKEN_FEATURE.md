@@ -64,6 +64,13 @@ https://your-domain.com/auth/login?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 5. **清理**: 清除 URL 中的 `accessToken` 参数
 6. **通知**: 显示登录成功消息
 
+### 防重复验证机制
+
+- 使用 `hasProcessedToken` 状态确保每个 accessToken 只验证一次
+- 验证失败后不会重复尝试
+- 清除旧消息避免重复显示
+- 路由级别和组件级别的处理逻辑协调工作
+
 ## 错误处理
 
 - **无效 Token**: 显示错误消息，不进行页面跳转
