@@ -3,10 +3,12 @@
 ## ✅ 已完成的工作
 
 ### 1. Janus 配置文件
+
 - **apps/desktop/src/utils/janusConfig.ts**
 - **apps/visitor/src/utils/janusConfig.ts**
 
 配置了 Janus WebRTC Gateway 服务器连接参数：
+
 - 服务器地址: `https://janus.weiyuai.cn`
 - WebSocket 端点: `wss://janus.weiyuai.cn/janus/`
 - STUN 服务器配置
@@ -14,10 +16,12 @@
 - 房间配置参数
 
 ### 2. Janus 客户端类
+
 - **apps/desktop/src/utils/janusClient.ts**
 - **apps/visitor/src/utils/janusClient.ts**
 
 实现了完整的 WebRTC 通话功能：
+
 - 🎥 视频通话支持 (VideooCall 插件)
 - 🎤 音频通话支持 (AudioBridge 插件)
 - 📱 媒体流管理
@@ -25,7 +29,9 @@
 - 🎛️ 音频/视频开关控制
 
 ### 3. TypeScript 错误修复
+
 所有文件都已通过 TypeScript 编译检查：
+
 - ✅ 类型安全
 - ✅ ESLint 规则兼容
 - ✅ 无编译错误
@@ -113,7 +119,7 @@ janusClient.destroy();
 
 ## 📁 文件结构
 
-```
+```bash
 apps/
 ├── desktop/src/utils/
 │   ├── janusConfig.ts    # Janus 配置
@@ -126,12 +132,14 @@ apps/
 ## 🔧 服务器配置
 
 当前配置使用的 Janus 服务器：
-- **主服务器**: https://janus.weiyuai.cn
+
+- **主服务器**: <https://janus.weiyuai.cn>
 - **WebSocket**: wss://janus.weiyuai.cn/janus/
-- **HTTP API**: https://janus.weiyuai.cn/janus
-- **Admin API**: https://janus.weiyuai.cn/admin
+- **HTTP API**: <https://janus.weiyuai.cn/janus>
+- **Admin API**: <https://janus.weiyuai.cn/admin>
 
 支持的插件：
+
 - `janus.plugin.videocall` - 1对1视频通话
 - `janus.plugin.audiobridge` - 音频会议室
 
