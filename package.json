@@ -130,6 +130,7 @@
     "use-debounce": "^10.0.1",
     "uuid": "^9.0.1",
     "vite-plugin-html": "^3.2.2",
+    "webrtc-adapter": "^9.0.3",
     "ws": "^8.16.0",
     "xgplayer": "^3.0.13",
     "xlsx": "^0.18.5",
