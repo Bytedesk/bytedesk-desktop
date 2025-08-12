@@ -25,6 +25,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host --mode dev",
+    "dev:electron": "vite --host --mode electron",
     "start": "vite --host --mode dev",
     "build": "tsc && vite build --mode web && electron-builder",
     "build:web": "tsc && vite build --mode web",
@@ -90,7 +91,6 @@
     "immer": "^10.1.1",
     "intersection-observer": "^0.12.2",
     "janus-gateway": "1.3.2-2",
-    "jssip": "^3.10.1",
     "katex": "^0.16.22",
     "langchain": "^0.2.16",
     "mammoth": "^1.9.1",
