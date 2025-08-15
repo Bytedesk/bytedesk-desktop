@@ -61,7 +61,7 @@ window.addEventListener('message', (event) => {
   if (event.data.type === 'thread_status_changed') {
     const { thread, action } = event.data.data;
     console.log('会话状态变化:', action);
-    console.log('会话信息:', thread);
+    console.log('会话详情:', thread);
   }
 });
 ```
