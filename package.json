@@ -69,6 +69,7 @@
     "@types/ua-parser-js": "^0.7.39",
     "antd": "^5.23.2",
     "antd-img-crop": "^4.23.0",
+    "avataaars": "^2.0.0",
     "axios": "^1.6.5",
     "bowser": "^2.11.0",
     "cheerio": "^1.0.0",
