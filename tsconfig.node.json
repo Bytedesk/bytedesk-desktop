@@ -3,7 +3,7 @@
     "composite": true,
     "module": "ESNext",
     "strict": false,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
