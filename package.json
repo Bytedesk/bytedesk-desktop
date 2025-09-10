@@ -42,7 +42,6 @@
     "release:mas": "sh cicd/scripts/build-mac-mas.sh",
     "release:win": "sh cicd/scripts/build-upload-win.sh",
     "release:win:bat": "cicd\\scripts\\build-upload-win.bat",
-    "release:win:ps1": "powershell -ExecutionPolicy Bypass -File cicd\\scripts\\build-upload-win.ps1",
     "release:linux": "sh cicd/scripts/build-upload-linux.sh",
     "preview": "vite preview --host",
     "pree2e": "vite build --mode=test",
