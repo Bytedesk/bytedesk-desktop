@@ -73,7 +73,7 @@
     "avataaars": "^2.0.0",
     "axios": "^1.6.5",
     "bowser": "^2.11.0",
-    "bytedesk-web": "^1.6.4",
+    "bytedesk-web": "^1.6.5",
     "cheerio": "^1.0.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.11",
